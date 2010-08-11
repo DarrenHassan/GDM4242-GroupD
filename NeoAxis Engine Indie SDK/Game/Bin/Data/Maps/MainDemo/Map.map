@@ -1,0 +1,4361 @@
+type = GameMap
+uin = 2
+classPrompt = GameMap
+gameMusic = Sounds\Music\Game.ogg
+ambientLight = 0.2 0.2 0.2
+editorCameraPosition = -3.329349 -3.291365 2.91894
+editorCameraDirection = 0.848434 -0.2776618
+shadowColor = 1 1 1
+shadowFarDistance = 40
+fov = 80
+logicSystemManager = 35
+name = GameMap_0
+rootEditorLayer
+{
+	layer
+	{
+		name = ZonesAndPortals
+		visible = False
+		allowEdit = False
+	}
+	layer
+	{
+		name = StaticGeometry
+		allowEdit = False
+	}
+}
+entity
+{
+	type = ShotgunBulletsItem
+	uin = 3
+	classPrompt = BulletItem
+	respawnTime = 10
+	position = 5.682068 -6.329998 0.2044454
+	rotation = 0 0 0.5984482 0.8011615
+}
+entity
+{
+	type = ShotgunBulletsItem
+	uin = 4
+	classPrompt = BulletItem
+	respawnTime = 10
+	position = 6.451393 -5.021652 0.2147579
+	rotation = 0 0 0.9684836 0.2490774
+}
+entity
+{
+	type = Signboard
+	uin = 5
+	classPrompt = GameGuiObject
+	relationships = 204
+	initialControl = Gui\Signboard.gui
+	position = -21.83237 16.37792 3.333283
+	rotation = 0 0 -0.8660254 0.5
+	name = Signboard_34
+	textUserData = 2. TPS Arcade
+	logicClass = 204
+}
+entity
+{
+	type = SpawnPoint
+	uin = 6
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = -27.29605 6.975297 0
+	rotation = 0 0 -0.5 -0.8660253
+	name = SpawnPoint_FromTankDemo
+}
+entity
+{
+	type = Door
+	uin = 7
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -25.03843 10.70328 -0.04550362
+	rotation = 0 0 -0.258819 0.9659258
+	name = Door_7
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 8
+	classPrompt = MapChangeRegion
+	mapName = Maps\TankDemo\Map.map
+	spawnPointName = SpawnPoint_0
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = -31.16837 0.5032911 0
+	rotation = 0 0 -0.8660253 0.5
+	scale = 3.790253 6.267651 5.648521
+	name = MapChangeRegion_2
+	checkType = Bounds
+}
+entity
+{
+	type = Door
+	uin = 9
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -33.11752 -3.338091 -0.04091692
+	rotation = 0 0 -0.258819 0.9659258
+	name = Door_6
+}
+entity
+{
+	type = ShotgunItem
+	uin = 10
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = -5.105412 -7.514822 0.3926494
+	rotation = 0 0 0.9907224 -0.135901
+}
+entity
+{
+	type = Terminal
+	uin = 11
+	classPrompt = GameGuiObject
+	relationships = 53
+	initialControl = Gui\MainDemoTerminal.gui
+	position = 0 -0.8626056 1.6
+	rotation = 0 0 -0.7071068 0.7071068
+	name = Terminal_Main
+	logicClass = 53
+}
+entity
+{
+	type = Door
+	uin = 12
+	classPrompt = AutomaticOpenDoor
+	relationships = 49 493
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -0.2694174 -44.66211 0
+	name = Door_Welcome
+	logicClass = 493
+}
+entity
+{
+	type = SpawnPoint
+	uin = 13
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = -33.98399 28.91684 0
+	rotation = 0 0 -0.8660254 0.5
+	name = SpawnPoint_FromRTSDemo
+}
+entity
+{
+	type = SubmachineGunItem
+	uin = 14
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = 0.957417 -35.06056 0.4939754
+	rotation = 0 0 0.1587373 -0.9873208
+}
+entity
+{
+	type = SpawnPoint
+	uin = 15
+	classPrompt = SpawnPoint
+	defaultPoint = True
+	position = -0.2732683 -59.33192 0.7552027
+	rotation = 0 0 -0.7071068 -0.7071068
+	name = SpawnPoint_0
+}
+entity
+{
+	type = Door
+	uin = 16
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -36.34789 25.10823 9.536743E-06
+	rotation = 0 0 -0.9659258 -0.2588191
+	name = Door_0
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 17
+	classPrompt = MapChangeRegion
+	mapName = Maps\RTSDemo\Map.map
+	spawnPointName = SpawnPoint_0
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = -30.36066 35.43966 0
+	rotation = 0 0 -0.5 -0.8660254
+	scale = 3.773834 6.03004 5.624053
+	name = MapChangeRegion_0
+	checkType = Bounds
+}
+entity
+{
+	type = Door
+	uin = 18
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -28.16727 39.19174 0
+	rotation = 0 0 -0.9659258 -0.2588191
+	name = Door_1
+}
+entity
+{
+	type = Terminal
+	uin = 19
+	classPrompt = GameGuiObject
+	relationships = 37
+	initialControl = Gui\WelcomeTerminal.gui
+	position = 1.925985 -45.7997 1.771804
+	rotation = 0 0 -0.9687401 0.2480777
+	name = Terminal_Welcome1
+	logicClass = 37
+}
+entity
+{
+	type = Terminal
+	uin = 20
+	classPrompt = GameGuiObject
+	relationships = 37 232
+	initialControl = Gui\ExitTerminal.gui
+	position = -2.479199 -43.64718 1.806944
+	rotation = 0 0 0.2072325 0.9782917
+	name = Terminal_Exit
+	logicClass = 232
+}
+entity
+{
+	type = SmallHealthItem
+	uin = 21
+	classPrompt = HealthItem
+	respawnTime = 10
+	position = -9.25885 -0.5955849 0.2035505
+	rotation = 0 0 0.9454226 0.3258468
+}
+entity
+{
+	type = SpawnPoint
+	uin = 22
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = -19.49258 20.54484 0
+	rotation = 0 0 -0.8660254 0.5
+	name = SpawnPoint_FromTPSArcadeDemo
+}
+entity
+{
+	type = Door
+	uin = 23
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -21.64042 16.58072 0
+	rotation = 0 0 -0.9659258 -0.2588191
+	name = Door_4
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 24
+	classPrompt = MapChangeRegion
+	mapName = Maps\TPSArcadeDemo\Map.map
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = -15.66256 27.01331 0
+	rotation = 0 0 -0.5 -0.8660254
+	scale = 4.01166 5.73429 5.978479
+	name = MapChangeRegion_1
+	checkType = Bounds
+}
+entity
+{
+	type = Door
+	uin = 25
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -13.51223 30.64293 0
+	rotation = 0 0 -0.9659258 -0.2588191
+	name = Door_5
+}
+entity
+{
+	type = Signboard
+	uin = 26
+	classPrompt = GameGuiObject
+	relationships = 204
+	initialControl = Gui\Signboard.gui
+	position = -24.83582 10.92672 3.333283
+	rotation = 0 0 -0.5 -0.8660254
+	name = Signboard_33
+	textUserData = 1. Tank Demo
+	logicClass = 204
+}
+entity
+{
+	type = Signboard
+	uin = 27
+	classPrompt = GameGuiObject
+	relationships = 204
+	initialControl = Gui\Signboard.gui
+	position = -36.60837 24.98278 3.333283
+	rotation = 0 0 -0.8660254 0.5
+	name = Signboard_35
+	textUserData = 4. RTS Demo
+	logicClass = 204
+}
+entity
+{
+	type = SubmachineGunBulletsItem
+	uin = 28
+	classPrompt = BulletItem
+	respawnTime = 10
+	position = 7.924893 -2.61013 0.1796668
+	rotation = 0 0 0.2183276 0.9758756
+}
+entity
+{
+	type = SpawnPoint
+	uin = 29
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = -56.67572 23.93994 0
+	rotation = 0 0 -0.4999999 -0.8660253
+	name = SpawnPoint_FromRenderDemo
+}
+entity
+{
+	type = Door
+	uin = 30
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -54.45996 27.66218 0
+	rotation = 0 0 -0.2658807 0.9640058
+	name = Door_8
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 31
+	classPrompt = MapChangeRegion
+	mapName = Maps\RenderDemo\Map.map
+	spawnPointName = SpawnPoint_0
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = -60.50097 17.35008 0
+	rotation = 0 0 -0.8660253 0.4999999
+	scale = 4.053049 6.027036 5.470621
+	name = MapChangeRegion_3
+	checkType = Bounds
+}
+entity
+{
+	type = Door
+	uin = 32
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -62.58821 13.56564 0
+	rotation = 0 0 -0.2588191 0.9659258
+	name = Door_9
+}
+entity
+{
+	type = Signboard
+	uin = 33
+	classPrompt = GameGuiObject
+	relationships = 204
+	initialControl = Gui\Signboard.gui
+	position = -54.25025 27.78979 3.333283
+	rotation = 0 0 -0.4999999 -0.8660253
+	name = Signboard_36
+	textUserData = 5. Render Demo
+	logicClass = 204
+}
+entity
+{
+	type = Signboard
+	uin = 34
+	classPrompt = GameGuiObject
+	relationships = 204
+	initialControl = Gui\Signboard.gui
+	position = 0 -9.275677 4.339582
+	rotation = 0 0 -0.7071068 -0.7071068
+	name = Signboard_Exit
+	textUserData = Exit
+	logicClass = 204
+}
+entity
+{
+	type = LogicSystemManager
+	uin = 35
+	mapClassManager = 36
+	entity
+	{
+		type = LogicClassManager
+		uin = 36
+		entity
+		{
+			type = LogicEntityClass
+			uin = 37
+			relationships = 19 20
+			entityClassName = GameGuiObject
+			className = Terminal_Welcome1
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicDesignerMethod
+				uin = 38
+				actions = 40
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 39
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 39
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+				entity
+				{
+					type = LogicCallThisMethodAction
+					uin = 40
+					entityOwnerProperty = True
+					dotPathAction = 41
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 41
+						propertyName = MainControl
+						dotPathAction = 42
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 42
+							propertyName = Controls
+							dotPathAction = 43
+							entity
+							{
+								type = LogicCallNonStaticMethodAction
+								uin = 43
+								propertyName = Item
+								parameterActions = 44
+								dotPathAction = 45
+								parameterTypeNames
+								{
+									item
+									{
+										value = String
+									}
+								}
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 44
+									valueType = System.String
+									value = Open
+								}
+								entity
+								{
+									type = LogicCallAsIsMethodAction
+									uin = 45
+									asCast = True
+									castTypeName = EButton
+									dotPathAction = 46
+									entity
+									{
+										type = LogicEventAction
+										uin = 46
+										eventName = Click
+										methodName = open_Click
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			entity
+			{
+				type = LogicDesignerMethod
+				uin = 47
+				actions = 49
+				methodName = open_Click
+				returnType = System.Void
+				parameters = 48
+				isEntityEventMethod = False
+				entity
+				{
+					type = LogicParameter
+					uin = 48
+					parameterType = Engine.UISystem.EButton
+					parameterName = sender
+				}
+				entity
+				{
+					type = LogicCallGetEntityMethodAction
+					uin = 49
+					relationships = 12
+					entity = 12
+					dotPathAction = 50
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 50
+						propertyName = Opened
+						dotPathAction = 51
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 51
+							valueAction = 52
+							entity
+							{
+								type = LogicGetConstantValueAction
+								uin = 52
+								valueType = System.Boolean
+								value = True
+							}
+						}
+					}
+				}
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 53
+			relationships = 11
+			entityClassName = GameGuiObject
+			className = Terminal_Main
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicVariable
+				uin = 54
+				variableType = Engine.UISystem.ETabControl
+				variableName = tabControl
+				supportSerialization = False
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 55
+				variableType = Engine.UISystem.EButton
+				variableName = previousButton
+				supportSerialization = False
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 56
+				variableType = Engine.UISystem.EButton
+				variableName = nextButton
+				supportSerialization = False
+			}
+			entity
+			{
+				type = LogicDesignerMethod
+				uin = 57
+				actions = 59 70 77 93 89 84 87 101 108 115 100
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 58
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 58
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+				entity
+				{
+					type = LogicGetVariableAction
+					uin = 59
+					variableName = tabControl
+					dotPathAction = 64
+					entity
+					{
+						type = LogicAssignVariableAction
+						uin = 60
+						valueAction = 61
+						entity
+						{
+							type = LogicCallThisMethodAction
+							uin = 61
+							entityOwnerProperty = True
+							dotPathAction = 62
+							entity
+							{
+								type = LogicCallNonStaticMethodAction
+								uin = 62
+								propertyName = MainControl
+								dotPathAction = 63
+								entity
+								{
+									type = LogicCallNonStaticMethodAction
+									uin = 63
+									propertyName = Controls
+								}
+							}
+						}
+					}
+					entity
+					{
+						type = LogicAssignVariableAction
+						uin = 64
+						valueAction = 65
+						entity
+						{
+							type = LogicCallThisMethodAction
+							uin = 65
+							entityOwnerProperty = True
+							dotPathAction = 66
+							entity
+							{
+								type = LogicCallNonStaticMethodAction
+								uin = 66
+								propertyName = MainControl
+								dotPathAction = 67
+								entity
+								{
+									type = LogicCallNonStaticMethodAction
+									uin = 67
+									propertyName = Controls
+									dotPathAction = 68
+									entity
+									{
+										type = LogicCallNonStaticMethodAction
+										uin = 68
+										propertyName = Item
+										parameterActions = 69
+										parameterTypeNames
+										{
+											item
+											{
+												value = String
+											}
+										}
+										entity
+										{
+											type = LogicGetConstantValueAction
+											uin = 69
+											valueType = System.String
+											value = TabControl
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicGetVariableAction
+					uin = 70
+					variableName = previousButton
+					dotPathAction = 71
+					entity
+					{
+						type = LogicAssignVariableAction
+						uin = 71
+						valueAction = 72
+						entity
+						{
+							type = LogicCallThisMethodAction
+							uin = 72
+							entityOwnerProperty = True
+							dotPathAction = 73
+							entity
+							{
+								type = LogicCallNonStaticMethodAction
+								uin = 73
+								propertyName = MainControl
+								dotPathAction = 74
+								entity
+								{
+									type = LogicCallNonStaticMethodAction
+									uin = 74
+									propertyName = Controls
+									dotPathAction = 75
+									entity
+									{
+										type = LogicCallNonStaticMethodAction
+										uin = 75
+										propertyName = Item
+										parameterActions = 76
+										parameterTypeNames
+										{
+											item
+											{
+												value = String
+											}
+										}
+										entity
+										{
+											type = LogicGetConstantValueAction
+											uin = 76
+											valueType = System.String
+											value = Previous
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicGetVariableAction
+					uin = 77
+					variableName = nextButton
+					dotPathAction = 78
+					entity
+					{
+						type = LogicAssignVariableAction
+						uin = 78
+						valueAction = 79
+						entity
+						{
+							type = LogicCallThisMethodAction
+							uin = 79
+							entityOwnerProperty = True
+							dotPathAction = 80
+							entity
+							{
+								type = LogicCallNonStaticMethodAction
+								uin = 80
+								propertyName = MainControl
+								dotPathAction = 81
+								entity
+								{
+									type = LogicCallNonStaticMethodAction
+									uin = 81
+									propertyName = Controls
+									dotPathAction = 82
+									entity
+									{
+										type = LogicCallNonStaticMethodAction
+										uin = 82
+										propertyName = Item
+										parameterActions = 83
+										parameterTypeNames
+										{
+											item
+											{
+												value = String
+											}
+										}
+										entity
+										{
+											type = LogicGetConstantValueAction
+											uin = 83
+											valueType = System.String
+											value = Next
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicGetVariableAction
+					uin = 84
+					variableName = previousButton
+					dotPathAction = 86
+					entity
+					{
+						type = LogicEventAction
+						uin = 85
+						eventName = Click
+						methodName = Next_Click
+					}
+					entity
+					{
+						type = LogicEventAction
+						uin = 86
+						eventName = Click
+						methodName = Previous_Click
+					}
+				}
+				entity
+				{
+					type = LogicGetVariableAction
+					uin = 87
+					variableName = nextButton
+					dotPathAction = 88
+					entity
+					{
+						type = LogicEventAction
+						uin = 88
+						eventName = Click
+						methodName = Next_Click
+					}
+				}
+				entity
+				{
+					type = LogicGetVariableAction
+					uin = 89
+					variableName = tabControl
+					dotPathAction = 90
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 90
+						propertyName = SelectedIndex
+						dotPathAction = 91
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 91
+							valueAction = 92
+							entity
+							{
+								type = LogicGetConstantValueAction
+								uin = 92
+								valueType = System.Int32
+								value = 0
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicGetVariableAction
+					uin = 93
+					variableName = currentPageText
+					dotPathAction = 94
+					entity
+					{
+						type = LogicAssignVariableAction
+						uin = 94
+						valueAction = 95
+						entity
+						{
+							type = LogicCallThisMethodAction
+							uin = 95
+							entityOwnerProperty = True
+							dotPathAction = 96
+							entity
+							{
+								type = LogicCallNonStaticMethodAction
+								uin = 96
+								propertyName = MainControl
+								dotPathAction = 97
+								entity
+								{
+									type = LogicCallNonStaticMethodAction
+									uin = 97
+									propertyName = Controls
+									dotPathAction = 98
+									entity
+									{
+										type = LogicCallNonStaticMethodAction
+										uin = 98
+										propertyName = Item
+										parameterActions = 99
+										parameterTypeNames
+										{
+											item
+											{
+												value = String
+											}
+										}
+										entity
+										{
+											type = LogicGetConstantValueAction
+											uin = 99
+											valueType = System.String
+											value = CurrentPage
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicCallThisMethodAction
+					uin = 100
+					relationships = 137
+					logicMethod = 137
+					entityOwnerProperty = False
+					parameterActions = 
+					parameterTypeNames
+					{
+					}
+				}
+				entity
+				{
+					type = LogicCallThisMethodAction
+					uin = 101
+					entityOwnerProperty = True
+					dotPathAction = 102
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 102
+						propertyName = MainControl
+						dotPathAction = 103
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 103
+							propertyName = Controls
+							dotPathAction = 104
+							entity
+							{
+								type = LogicCallNonStaticMethodAction
+								uin = 104
+								propertyName = Item
+								parameterActions = 105
+								dotPathAction = 106
+								parameterTypeNames
+								{
+									item
+									{
+										value = String
+									}
+								}
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 105
+									valueType = System.String
+									value = Camera
+								}
+								entity
+								{
+									type = LogicCallAsIsMethodAction
+									uin = 106
+									asCast = True
+									castTypeName = EButton
+									dotPathAction = 107
+									entity
+									{
+										type = LogicEventAction
+										uin = 107
+										eventName = Click
+										methodName = Camera_Click
+									}
+								}
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicCallThisMethodAction
+					uin = 108
+					entityOwnerProperty = True
+					dotPathAction = 109
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 109
+						propertyName = MainControl
+						dotPathAction = 110
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 110
+							propertyName = Controls
+							dotPathAction = 111
+							entity
+							{
+								type = LogicCallNonStaticMethodAction
+								uin = 111
+								propertyName = Item
+								parameterActions = 112
+								dotPathAction = 113
+								parameterTypeNames
+								{
+									item
+									{
+										value = String
+									}
+								}
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 112
+									valueType = System.String
+									value = CameraOptions/Window/Close
+								}
+								entity
+								{
+									type = LogicCallAsIsMethodAction
+									uin = 113
+									asCast = True
+									castTypeName = EButton
+									dotPathAction = 114
+									entity
+									{
+										type = LogicEventAction
+										uin = 114
+										eventName = Click
+										methodName = CameraOptionsClose_Click
+									}
+								}
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicCallThisMethodAction
+					uin = 115
+					relationships = 203
+					logicMethod = 203
+					entityOwnerProperty = False
+					parameterActions = 
+					parameterTypeNames
+					{
+					}
+				}
+			}
+			entity
+			{
+				type = LogicDesignerMethod
+				uin = 116
+				actions = 118 125
+				methodName = Next_Click
+				returnType = System.Void
+				parameters = 117
+				isEntityEventMethod = False
+				entity
+				{
+					type = LogicParameter
+					uin = 117
+					parameterType = Engine.UISystem.EButton
+					parameterName = sender
+				}
+				entity
+				{
+					type = LogicGetVariableAction
+					uin = 118
+					variableName = tabControl
+					dotPathAction = 119
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 119
+						propertyName = SelectedIndex
+						dotPathAction = 120
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 120
+							valueAction = 121
+							entity
+							{
+								type = LogicCallStaticSystemMethodAction
+								uin = 121
+								className = Int32Utils
+								methodName = Addition
+								parameterActions = 123 122
+								parameterTypeNames
+								{
+									item
+									{
+										value = Int32
+									}
+									item
+									{
+										value = Int32
+									}
+								}
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 122
+									valueType = System.Int32
+									value = 1
+								}
+								entity
+								{
+									type = LogicGetVariableAction
+									uin = 123
+									variableName = tabControl
+									dotPathAction = 124
+									entity
+									{
+										type = LogicCallNonStaticMethodAction
+										uin = 124
+										propertyName = SelectedIndex
+									}
+								}
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicCallThisMethodAction
+					uin = 125
+					relationships = 137
+					logicMethod = 137
+					entityOwnerProperty = False
+					parameterActions = 
+					parameterTypeNames
+					{
+					}
+				}
+			}
+			entity
+			{
+				type = LogicDesignerMethod
+				uin = 126
+				actions = 128 135
+				methodName = Previous_Click
+				returnType = System.Void
+				parameters = 127
+				isEntityEventMethod = False
+				entity
+				{
+					type = LogicParameter
+					uin = 127
+					parameterType = Engine.UISystem.EButton
+					parameterName = sender
+				}
+				entity
+				{
+					type = LogicGetVariableAction
+					uin = 128
+					variableName = tabControl
+					dotPathAction = 129
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 129
+						propertyName = SelectedIndex
+						dotPathAction = 130
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 130
+							valueAction = 131
+							entity
+							{
+								type = LogicCallStaticSystemMethodAction
+								uin = 131
+								className = Int32Utils
+								methodName = Subtraction
+								parameterActions = 133 132
+								parameterTypeNames
+								{
+									item
+									{
+										value = Int32
+									}
+									item
+									{
+										value = Int32
+									}
+								}
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 132
+									valueType = System.Int32
+									value = 1
+								}
+								entity
+								{
+									type = LogicGetVariableAction
+									uin = 133
+									variableName = tabControl
+									dotPathAction = 134
+									entity
+									{
+										type = LogicCallNonStaticMethodAction
+										uin = 134
+										propertyName = SelectedIndex
+									}
+								}
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicCallThisMethodAction
+					uin = 135
+					relationships = 137
+					logicMethod = 137
+					entityOwnerProperty = False
+					parameterActions = 
+					parameterTypeNames
+					{
+					}
+				}
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 136
+				variableType = Engine.UISystem.ETextBox
+				variableName = currentPageText
+				supportSerialization = False
+			}
+			entity
+			{
+				type = LogicDesignerMethod
+				uin = 137
+				relationships = 125 135 100
+				actions = 138 154 167
+				methodName = UpdatePageNavigation
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = False
+				entity
+				{
+					type = LogicGetVariableAction
+					uin = 138
+					variableName = currentPageText
+					dotPathAction = 139
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 139
+						propertyName = Text
+						dotPathAction = 140
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 140
+							valueAction = 141
+							entity
+							{
+								type = LogicCallStaticSystemMethodAction
+								uin = 141
+								className = StringUtils
+								methodName = Concatenation
+								parameterActions = 153 142
+								parameterTypeNames
+								{
+									item
+									{
+										value = String
+									}
+									item
+									{
+										value = String
+									}
+								}
+								entity
+								{
+									type = LogicCallStaticSystemMethodAction
+									uin = 142
+									className = StringUtils
+									methodName = Concatenation
+									parameterActions = 143 148
+									parameterTypeNames
+									{
+										item
+										{
+											value = String
+										}
+										item
+										{
+											value = String
+										}
+									}
+									entity
+									{
+										type = LogicCallStaticSystemMethodAction
+										uin = 143
+										className = Int32Utils
+										methodName = Addition
+										parameterActions = 145 147
+										dotPathAction = 144
+										parameterTypeNames
+										{
+											item
+											{
+												value = Int32
+											}
+											item
+											{
+												value = Int32
+											}
+										}
+										entity
+										{
+											type = LogicCallNonStaticMethodAction
+											uin = 144
+											methodName = ToString
+										}
+										entity
+										{
+											type = LogicGetVariableAction
+											uin = 145
+											variableName = tabControl
+											dotPathAction = 146
+											entity
+											{
+												type = LogicCallNonStaticMethodAction
+												uin = 146
+												propertyName = SelectedIndex
+											}
+										}
+										entity
+										{
+											type = LogicGetConstantValueAction
+											uin = 147
+											valueType = System.Int32
+											value = 1
+										}
+									}
+									entity
+									{
+										type = LogicCallStaticSystemMethodAction
+										uin = 148
+										className = StringUtils
+										methodName = Concatenation
+										parameterActions = 149 150
+										parameterTypeNames
+										{
+											item
+											{
+												value = String
+											}
+											item
+											{
+												value = String
+											}
+										}
+										entity
+										{
+											type = LogicGetConstantValueAction
+											uin = 149
+											valueType = System.String
+											value = /
+										}
+										entity
+										{
+											type = LogicGetVariableAction
+											uin = 150
+											variableName = tabControl
+											dotPathAction = 151
+											entity
+											{
+												type = LogicCallNonStaticMethodAction
+												uin = 151
+												propertyName = PageCount
+												dotPathAction = 152
+												entity
+												{
+													type = LogicCallNonStaticMethodAction
+													uin = 152
+													methodName = ToString
+												}
+											}
+										}
+									}
+								}
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 153
+									valueType = System.String
+									value = "Page "
+								}
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicIfThenElseAction
+					uin = 154
+					conditionAction = 155
+					trueActions = 163
+					falseActions = 159
+					entity
+					{
+						type = LogicCallStaticSystemMethodAction
+						uin = 155
+						className = Int32Utils
+						methodName = Greater
+						parameterActions = 156 158
+						parameterTypeNames
+						{
+							item
+							{
+								value = Int32
+							}
+							item
+							{
+								value = Int32
+							}
+						}
+						entity
+						{
+							type = LogicGetVariableAction
+							uin = 156
+							variableName = tabControl
+							dotPathAction = 157
+							entity
+							{
+								type = LogicCallNonStaticMethodAction
+								uin = 157
+								propertyName = SelectedIndex
+							}
+						}
+						entity
+						{
+							type = LogicGetConstantValueAction
+							uin = 158
+							valueType = System.Int32
+							value = 0
+						}
+					}
+					entity
+					{
+						type = LogicGetVariableAction
+						uin = 159
+						variableName = previousButton
+						dotPathAction = 160
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 160
+							propertyName = Enable
+							dotPathAction = 161
+							entity
+							{
+								type = LogicAssignPropertyAction
+								uin = 161
+								valueAction = 162
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 162
+									valueType = System.Boolean
+									value = False
+								}
+							}
+						}
+					}
+					entity
+					{
+						type = LogicGetVariableAction
+						uin = 163
+						variableName = previousButton
+						dotPathAction = 164
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 164
+							propertyName = Enable
+							dotPathAction = 165
+							entity
+							{
+								type = LogicAssignPropertyAction
+								uin = 165
+								valueAction = 166
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 166
+									valueType = System.Boolean
+									value = True
+								}
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicIfThenElseAction
+					uin = 167
+					conditionAction = 168
+					trueActions = 175
+					falseActions = 179
+					entity
+					{
+						type = LogicCallStaticSystemMethodAction
+						uin = 168
+						className = Int32Utils
+						methodName = Less
+						parameterActions = 169 171
+						parameterTypeNames
+						{
+							item
+							{
+								value = Int32
+							}
+							item
+							{
+								value = Int32
+							}
+						}
+						entity
+						{
+							type = LogicGetVariableAction
+							uin = 169
+							variableName = tabControl
+							dotPathAction = 170
+							entity
+							{
+								type = LogicCallNonStaticMethodAction
+								uin = 170
+								propertyName = SelectedIndex
+							}
+						}
+						entity
+						{
+							type = LogicCallStaticSystemMethodAction
+							uin = 171
+							className = Int32Utils
+							methodName = Subtraction
+							parameterActions = 173 172
+							parameterTypeNames
+							{
+								item
+								{
+									value = Int32
+								}
+								item
+								{
+									value = Int32
+								}
+							}
+							entity
+							{
+								type = LogicGetConstantValueAction
+								uin = 172
+								valueType = System.Int32
+								value = 1
+							}
+							entity
+							{
+								type = LogicGetVariableAction
+								uin = 173
+								variableName = tabControl
+								dotPathAction = 174
+								entity
+								{
+									type = LogicCallNonStaticMethodAction
+									uin = 174
+									propertyName = PageCount
+								}
+							}
+						}
+					}
+					entity
+					{
+						type = LogicGetVariableAction
+						uin = 175
+						variableName = nextButton
+						dotPathAction = 176
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 176
+							propertyName = Enable
+							dotPathAction = 177
+							entity
+							{
+								type = LogicAssignPropertyAction
+								uin = 177
+								valueAction = 178
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 178
+									valueType = System.Boolean
+									value = True
+								}
+							}
+						}
+					}
+					entity
+					{
+						type = LogicGetVariableAction
+						uin = 179
+						variableName = nextButton
+						dotPathAction = 180
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 180
+							propertyName = Enable
+							dotPathAction = 181
+							entity
+							{
+								type = LogicAssignPropertyAction
+								uin = 181
+								valueAction = 182
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 182
+									valueType = System.Boolean
+									value = False
+								}
+							}
+						}
+					}
+				}
+			}
+			entity
+			{
+				type = LogicDesignerMethod
+				uin = 183
+				actions = 185
+				methodName = Camera_Click
+				returnType = System.Void
+				parameters = 184
+				isEntityEventMethod = False
+				entity
+				{
+					type = LogicParameter
+					uin = 184
+					parameterType = Engine.UISystem.EButton
+					parameterName = sender
+				}
+				entity
+				{
+					type = LogicCallThisMethodAction
+					uin = 185
+					entityOwnerProperty = True
+					dotPathAction = 186
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 186
+						propertyName = MainControl
+						dotPathAction = 187
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 187
+							propertyName = Controls
+							dotPathAction = 188
+							entity
+							{
+								type = LogicCallNonStaticMethodAction
+								uin = 188
+								propertyName = Item
+								parameterActions = 189
+								dotPathAction = 190
+								parameterTypeNames
+								{
+									item
+									{
+										value = String
+									}
+								}
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 189
+									valueType = System.String
+									value = CameraOptions
+								}
+								entity
+								{
+									type = LogicCallNonStaticMethodAction
+									uin = 190
+									propertyName = Visible
+									dotPathAction = 191
+									entity
+									{
+										type = LogicAssignPropertyAction
+										uin = 191
+										valueAction = 192
+										entity
+										{
+											type = LogicGetConstantValueAction
+											uin = 192
+											valueType = System.Boolean
+											value = True
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			entity
+			{
+				type = LogicDesignerMethod
+				uin = 193
+				actions = 195
+				methodName = CameraOptionsClose_Click
+				returnType = System.Void
+				parameters = 194
+				isEntityEventMethod = False
+				entity
+				{
+					type = LogicParameter
+					uin = 194
+					parameterType = Engine.UISystem.EButton
+					parameterName = sender
+				}
+				entity
+				{
+					type = LogicCallThisMethodAction
+					uin = 195
+					entityOwnerProperty = True
+					dotPathAction = 196
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 196
+						propertyName = MainControl
+						dotPathAction = 197
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 197
+							propertyName = Controls
+							dotPathAction = 198
+							entity
+							{
+								type = LogicCallNonStaticMethodAction
+								uin = 198
+								propertyName = Item
+								parameterActions = 199
+								dotPathAction = 200
+								parameterTypeNames
+								{
+									item
+									{
+										value = String
+									}
+								}
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 199
+									valueType = System.String
+									value = CameraOptions
+								}
+								entity
+								{
+									type = LogicCallNonStaticMethodAction
+									uin = 200
+									propertyName = Visible
+									dotPathAction = 201
+									entity
+									{
+										type = LogicAssignPropertyAction
+										uin = 201
+										valueAction = 202
+										entity
+										{
+											type = LogicGetConstantValueAction
+											uin = 202
+											valueType = System.Boolean
+											value = False
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 203
+				relationships = 115
+				code = "string str = \"\";\r\n\r\nstr += \"Engine Version: \" + EngineVersionInformation.Version + \"\\n\";\r\nstr += \"\\n\";\r\nstr += \"Runtime Framework: \" + RuntimeFramework.GetDisplayName() + \"\\n\";\r\nstr += \"Renderer: \" + RendererWorld.Instance.DriverName + \"\\n\";\r\nstr += \"Active Render System: \" + RenderSystem.Instance.Name + \"\\n\";\r\nstr += \"Active Physics Library: \" + PhysicsWorld.Instance.DriverName + \"\\n\";\r\nstr += \"Active Sound Library: \" + SoundWorld.Instance.DriverName + \"\\n\";\r\n\r\n{\r\n\tstring syntaxes = \"\";\r\n\t\r\n\tforeach(string syntax in GpuProgramManager.Instance.SupportedSyntaxes)\r\n\t{\r\n\t\tif(syntaxes != \"\")\r\n\t\t\tsyntaxes += \" \";\r\n\t\tsyntaxes += syntax;\r\n\t}\r\n\tstr += \"Gpu syntaxes: \" + syntaxes + \"\\n\";\r\n}\r\n\r\n\r\nOwner.MainControl.Controls[\"TabControl/SystemInformation/Information\"].Text = str;"
+				methodName = UpdateSystemInformation
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = False
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 204
+			relationships = 34 5 33 26 27 316 326 340 345 353 365 373 409 424 428 436 453
+			entityClassName = GameGuiObject
+			className = AllSignboards
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicDesignerMethod
+				uin = 205
+				actions = 207
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 206
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 206
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+				entity
+				{
+					type = LogicWhileAction
+					uin = 207
+					conditionAction = 208
+					actions = 209 215 217 227
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 208
+						valueType = System.Boolean
+						value = True
+					}
+					entity
+					{
+						type = LogicCallThisMethodAction
+						uin = 209
+						entityOwnerProperty = True
+						dotPathAction = 210
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 210
+							propertyName = MainControl
+							dotPathAction = 211
+							entity
+							{
+								type = LogicCallNonStaticMethodAction
+								uin = 211
+								propertyName = Text
+								dotPathAction = 212
+								entity
+								{
+									type = LogicAssignPropertyAction
+									uin = 212
+									valueAction = 213
+									entity
+									{
+										type = LogicCallThisMethodAction
+										uin = 213
+										entityOwnerProperty = True
+										dotPathAction = 214
+										entity
+										{
+											type = LogicCallNonStaticMethodAction
+											uin = 214
+											propertyName = TextUserData
+										}
+									}
+								}
+							}
+						}
+					}
+					entity
+					{
+						type = LogicCallStaticSystemMethodAction
+						uin = 215
+						className = LogicUtils
+						methodName = Wait
+						parameterActions = 216
+						parameterTypeNames
+						{
+							item
+							{
+								value = Single
+							}
+						}
+						entity
+						{
+							type = LogicGetConstantValueAction
+							uin = 216
+							valueType = System.Single
+							value = 0.5
+						}
+					}
+					entity
+					{
+						type = LogicCallThisMethodAction
+						uin = 217
+						entityOwnerProperty = True
+						dotPathAction = 218
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 218
+							propertyName = MainControl
+							dotPathAction = 219
+							entity
+							{
+								type = LogicCallNonStaticMethodAction
+								uin = 219
+								propertyName = Text
+								dotPathAction = 220
+								entity
+								{
+									type = LogicAssignPropertyAction
+									uin = 220
+									valueAction = 221
+									entity
+									{
+										type = LogicCallStaticSystemMethodAction
+										uin = 221
+										className = StringUtils
+										methodName = Concatenation
+										parameterActions = 222 223
+										parameterTypeNames
+										{
+											item
+											{
+												value = String
+											}
+											item
+											{
+												value = String
+											}
+										}
+										entity
+										{
+											type = LogicGetConstantValueAction
+											uin = 222
+											valueType = System.String
+											value = "- "
+										}
+										entity
+										{
+											type = LogicCallStaticSystemMethodAction
+											uin = 223
+											className = StringUtils
+											methodName = Concatenation
+											parameterActions = 224 226
+											parameterTypeNames
+											{
+												item
+												{
+													value = String
+												}
+												item
+												{
+													value = String
+												}
+											}
+											entity
+											{
+												type = LogicCallThisMethodAction
+												uin = 224
+												entityOwnerProperty = True
+												dotPathAction = 225
+												entity
+												{
+													type = LogicCallNonStaticMethodAction
+													uin = 225
+													propertyName = TextUserData
+												}
+											}
+											entity
+											{
+												type = LogicGetConstantValueAction
+												uin = 226
+												valueType = System.String
+												value = " -"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					entity
+					{
+						type = LogicCallStaticSystemMethodAction
+						uin = 227
+						className = LogicUtils
+						methodName = Wait
+						parameterActions = 228
+						parameterTypeNames
+						{
+							item
+							{
+								value = Single
+							}
+						}
+						entity
+						{
+							type = LogicGetConstantValueAction
+							uin = 228
+							valueType = System.Single
+							value = 0.5
+						}
+					}
+				}
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 229
+			relationships = 311
+			entityClassName = MapObject
+			className = Placard_0
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 230
+				code = "((GameGuiObject)Owner).MainControl.Controls[\"Version\"].Text = \r\n\t\"Version \" + EngineVersionInformation.Version;\r\n\r\n"
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 231
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 231
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 232
+			relationships = 20
+			entityClassName = GameGuiObject
+			className = Terminal_Exit
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicDesignerMethod
+				uin = 233
+				actions = 235
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 234
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 234
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+				entity
+				{
+					type = LogicCallThisMethodAction
+					uin = 235
+					entityOwnerProperty = True
+					dotPathAction = 236
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 236
+						propertyName = MainControl
+						dotPathAction = 237
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 237
+							propertyName = Controls
+							dotPathAction = 238
+							entity
+							{
+								type = LogicCallNonStaticMethodAction
+								uin = 238
+								propertyName = Item
+								parameterActions = 239
+								dotPathAction = 240
+								parameterTypeNames
+								{
+									item
+									{
+										value = String
+									}
+								}
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 239
+									valueType = System.String
+									value = Exit
+								}
+								entity
+								{
+									type = LogicCallAsIsMethodAction
+									uin = 240
+									asCast = True
+									castTypeName = EButton
+									dotPathAction = 241
+									entity
+									{
+										type = LogicEventAction
+										uin = 241
+										eventName = Click
+										methodName = exit_Click
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 242
+				code = "GameWorld.Instance.NeedWorldDestroy = true;"
+				methodName = exit_Click
+				returnType = System.Void
+				parameters = 243
+				isEntityEventMethod = False
+				entity
+				{
+					type = LogicParameter
+					uin = 243
+					parameterType = Engine.UISystem.EButton
+					parameterName = sender
+				}
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 244
+			relationships = 344
+			entityClassName = MapObject
+			className = HelperPoint_Lamps
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicDesignerMethod
+				uin = 245
+				actions = 309 247
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 246
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 246
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+				entity
+				{
+					type = LogicWhileAction
+					uin = 247
+					conditionAction = 248
+					actions = 249 253 297 261 257 299 265 269 301 273 277 303 281 285 305 289 293 307
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 248
+						valueType = System.Boolean
+						value = True
+					}
+					entity
+					{
+						type = LogicCallGetEntityMethodAction
+						uin = 249
+						relationships = 332
+						entity = 332
+						dotPathAction = 250
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 250
+							propertyName = Visible
+							dotPathAction = 251
+							entity
+							{
+								type = LogicAssignPropertyAction
+								uin = 251
+								valueAction = 252
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 252
+									valueType = System.Boolean
+									value = False
+								}
+							}
+						}
+					}
+					entity
+					{
+						type = LogicCallGetEntityMethodAction
+						uin = 253
+						relationships = 333
+						entity = 333
+						dotPathAction = 254
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 254
+							propertyName = Visible
+							dotPathAction = 255
+							entity
+							{
+								type = LogicAssignPropertyAction
+								uin = 255
+								valueAction = 256
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 256
+									valueType = System.Boolean
+									value = True
+								}
+							}
+						}
+					}
+					entity
+					{
+						type = LogicCallGetEntityMethodAction
+						uin = 257
+						relationships = 328
+						entity = 328
+						dotPathAction = 258
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 258
+							propertyName = Visible
+							dotPathAction = 259
+							entity
+							{
+								type = LogicAssignPropertyAction
+								uin = 259
+								valueAction = 260
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 260
+									valueType = System.Boolean
+									value = True
+								}
+							}
+						}
+					}
+					entity
+					{
+						type = LogicCallGetEntityMethodAction
+						uin = 261
+						relationships = 333
+						entity = 333
+						dotPathAction = 262
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 262
+							propertyName = Visible
+							dotPathAction = 263
+							entity
+							{
+								type = LogicAssignPropertyAction
+								uin = 263
+								valueAction = 264
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 264
+									valueType = System.Boolean
+									value = False
+								}
+							}
+						}
+					}
+					entity
+					{
+						type = LogicCallGetEntityMethodAction
+						uin = 265
+						relationships = 328
+						entity = 328
+						dotPathAction = 266
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 266
+							propertyName = Visible
+							dotPathAction = 267
+							entity
+							{
+								type = LogicAssignPropertyAction
+								uin = 267
+								valueAction = 268
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 268
+									valueType = System.Boolean
+									value = False
+								}
+							}
+						}
+					}
+					entity
+					{
+						type = LogicCallGetEntityMethodAction
+						uin = 269
+						relationships = 329
+						entity = 329
+						dotPathAction = 270
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 270
+							propertyName = Visible
+							dotPathAction = 271
+							entity
+							{
+								type = LogicAssignPropertyAction
+								uin = 271
+								valueAction = 272
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 272
+									valueType = System.Boolean
+									value = True
+								}
+							}
+						}
+					}
+					entity
+					{
+						type = LogicCallGetEntityMethodAction
+						uin = 273
+						relationships = 329
+						entity = 329
+						dotPathAction = 274
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 274
+							propertyName = Visible
+							dotPathAction = 275
+							entity
+							{
+								type = LogicAssignPropertyAction
+								uin = 275
+								valueAction = 276
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 276
+									valueType = System.Boolean
+									value = False
+								}
+							}
+						}
+					}
+					entity
+					{
+						type = LogicCallGetEntityMethodAction
+						uin = 277
+						relationships = 330
+						entity = 330
+						dotPathAction = 278
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 278
+							propertyName = Visible
+							dotPathAction = 279
+							entity
+							{
+								type = LogicAssignPropertyAction
+								uin = 279
+								valueAction = 280
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 280
+									valueType = System.Boolean
+									value = True
+								}
+							}
+						}
+					}
+					entity
+					{
+						type = LogicCallGetEntityMethodAction
+						uin = 281
+						relationships = 330
+						entity = 330
+						dotPathAction = 282
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 282
+							propertyName = Visible
+							dotPathAction = 283
+							entity
+							{
+								type = LogicAssignPropertyAction
+								uin = 283
+								valueAction = 284
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 284
+									valueType = System.Boolean
+									value = False
+								}
+							}
+						}
+					}
+					entity
+					{
+						type = LogicCallGetEntityMethodAction
+						uin = 285
+						relationships = 331
+						entity = 331
+						dotPathAction = 286
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 286
+							propertyName = Visible
+							dotPathAction = 287
+							entity
+							{
+								type = LogicAssignPropertyAction
+								uin = 287
+								valueAction = 288
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 288
+									valueType = System.Boolean
+									value = True
+								}
+							}
+						}
+					}
+					entity
+					{
+						type = LogicCallGetEntityMethodAction
+						uin = 289
+						relationships = 331
+						entity = 331
+						dotPathAction = 290
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 290
+							propertyName = Visible
+							dotPathAction = 291
+							entity
+							{
+								type = LogicAssignPropertyAction
+								uin = 291
+								valueAction = 292
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 292
+									valueType = System.Boolean
+									value = False
+								}
+							}
+						}
+					}
+					entity
+					{
+						type = LogicCallGetEntityMethodAction
+						uin = 293
+						relationships = 332
+						entity = 332
+						dotPathAction = 294
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 294
+							propertyName = Visible
+							dotPathAction = 295
+							entity
+							{
+								type = LogicAssignPropertyAction
+								uin = 295
+								valueAction = 296
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 296
+									valueType = System.Boolean
+									value = True
+								}
+							}
+						}
+					}
+					entity
+					{
+						type = LogicCallStaticSystemMethodAction
+						uin = 297
+						className = LogicUtils
+						methodName = Wait
+						parameterActions = 298
+						parameterTypeNames
+						{
+							item
+							{
+								value = Single
+							}
+						}
+						entity
+						{
+							type = LogicGetVariableAction
+							uin = 298
+							variableName = waitTime
+						}
+					}
+					entity
+					{
+						type = LogicCallStaticSystemMethodAction
+						uin = 299
+						className = LogicUtils
+						methodName = Wait
+						parameterActions = 300
+						parameterTypeNames
+						{
+							item
+							{
+								value = Single
+							}
+						}
+						entity
+						{
+							type = LogicGetVariableAction
+							uin = 300
+							variableName = waitTime
+						}
+					}
+					entity
+					{
+						type = LogicCallStaticSystemMethodAction
+						uin = 301
+						className = LogicUtils
+						methodName = Wait
+						parameterActions = 302
+						parameterTypeNames
+						{
+							item
+							{
+								value = Single
+							}
+						}
+						entity
+						{
+							type = LogicGetVariableAction
+							uin = 302
+							variableName = waitTime
+						}
+					}
+					entity
+					{
+						type = LogicCallStaticSystemMethodAction
+						uin = 303
+						className = LogicUtils
+						methodName = Wait
+						parameterActions = 304
+						parameterTypeNames
+						{
+							item
+							{
+								value = Single
+							}
+						}
+						entity
+						{
+							type = LogicGetVariableAction
+							uin = 304
+							variableName = waitTime
+						}
+					}
+					entity
+					{
+						type = LogicCallStaticSystemMethodAction
+						uin = 305
+						className = LogicUtils
+						methodName = Wait
+						parameterActions = 306
+						parameterTypeNames
+						{
+							item
+							{
+								value = Single
+							}
+						}
+						entity
+						{
+							type = LogicGetVariableAction
+							uin = 306
+							variableName = waitTime
+						}
+					}
+					entity
+					{
+						type = LogicCallStaticSystemMethodAction
+						uin = 307
+						className = LogicUtils
+						methodName = Wait
+						parameterActions = 308
+						parameterTypeNames
+						{
+							item
+							{
+								value = Single
+							}
+						}
+						entity
+						{
+							type = LogicGetVariableAction
+							uin = 308
+							variableName = waitTime
+						}
+					}
+				}
+				entity
+				{
+					type = LogicDeclareLocalVariableAction
+					uin = 309
+					variableTypeName = Single
+					variableName = waitTime
+					valueAction = 310
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 310
+						valueType = System.Single
+						value = 0.3
+					}
+				}
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 493
+			relationships = 12
+			entityClassName = AutomaticOpenDoor
+			className = Door_Welcome
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 494
+				code = "if(EntitySystemWorld.Instance.IsServer())\r\n\tOwner.NoAutomaticOpen = false;"
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 495
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 495
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+			}
+		}
+	}
+}
+entity
+{
+	type = Placard
+	uin = 311
+	classPrompt = GameGuiObject
+	relationships = 229
+	initialControl = Gui/MainDemoPlacard.gui
+	position = -0.01074028 6.698477 2.98941
+	rotation = -0.002556475 -0.002556475 -0.7071021 0.7071021
+	name = Placard_0
+	logicClass = 229
+}
+entity
+{
+	type = SpawnPoint
+	uin = 312
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = -48.81162 37.30469 0
+	rotation = 0 0 -0.8660254 0.5
+	name = SpawnPoint_FromPhysicsDemo
+}
+entity
+{
+	type = Door
+	uin = 313
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -51.05371 33.56552 9.536743E-06
+	rotation = 0 0 -0.9659258 -0.2588191
+	name = Door_3
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 314
+	classPrompt = MapChangeRegion
+	mapName = Maps\PhysicsDemo\Map.map
+	spawnPointName = SpawnPoint_0
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = -45.18829 43.82752 0
+	rotation = 0 0 -0.5 -0.8660254
+	scale = 3.519292 6.027308 5.580084
+	name = MapChangeRegion_4
+	checkType = Bounds
+}
+entity
+{
+	type = Door
+	uin = 315
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -42.94715 47.61554 0
+	rotation = 0 0 -0.9659258 -0.2588191
+	name = Door_10
+}
+entity
+{
+	type = Signboard
+	uin = 316
+	classPrompt = GameGuiObject
+	relationships = 204
+	initialControl = Gui\Signboard.gui
+	position = -51.40268 33.44957 3.333283
+	rotation = 0 0 -0.8660254 0.5
+	name = Signboard_3
+	textUserData = 6. Physics Demo
+	logicClass = 204
+}
+entity
+{
+	type = SmallHealthItem
+	uin = 317
+	classPrompt = HealthItem
+	respawnTime = 10
+	position = -7.964199 -2.434402 0.2035505
+	rotation = 0 0 0.9919015 0.1270099
+}
+entity
+{
+	type = SubmachineGunItem
+	uin = 318
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = -6.101585 -5.673275 0.4867887
+	rotation = 0 0 0.7002321 -0.7139152
+}
+entity
+{
+	type = SubmachineGunBulletsItem
+	uin = 319
+	classPrompt = BulletItem
+	respawnTime = 10
+	position = 8.777638 -1.304558 0.1273193
+	rotation = 0 0 0.9804287 -0.1968746
+}
+entity
+{
+	type = Door
+	uin = 320
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -0.267087 -62.87036 -0.006260395
+	name = Door_11
+}
+entity
+{
+	type = Door
+	uin = 321
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -39.76739 19.20306 -0.04550362
+	rotation = 0 0 -0.258819 0.9659258
+	name = Door_2
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 322
+	classPrompt = MapChangeRegion
+	mapName = Maps\RagdollDemo\Map.map
+	spawnPointName = SpawnPoint_0
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = -75.11796 25.77496 0
+	rotation = 0 0 0.8660254 -0.4999999
+	scale = 3.670879 5.998918 5.470621
+	name = MapChangeRegion_5
+	checkType = Bounds
+}
+entity
+{
+	type = Door
+	uin = 323
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -77.2803 22.03386 0
+	rotation = 0 0 0.2588191 -0.9659258
+	name = Door_13
+}
+entity
+{
+	type = SpawnPoint
+	uin = 324
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = -71.35796 32.43139 0
+	rotation = 0 0 0.4999999 0.8660254
+	name = SpawnPoint_FromRagdollDemo
+}
+entity
+{
+	type = Door
+	uin = 325
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -69.14222 36.15364 0
+	rotation = 0 0 0.2658807 -0.9640058
+	name = Door_14
+}
+entity
+{
+	type = Signboard
+	uin = 326
+	classPrompt = GameGuiObject
+	relationships = 204
+	initialControl = Gui\Signboard.gui
+	position = -68.9703 36.35293 3.29784
+	rotation = 0 0 0.4999999 0.8660254
+	name = Signboard_0
+	textUserData = 7. Ragdoll Demo
+	logicClass = 204
+}
+entity
+{
+	type = Door
+	uin = 327
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -65.74577 42.04463 0
+	rotation = 0 0 -0.9640058 -0.2658807
+	name = Door_12
+}
+entity
+{
+	type = TestLamp
+	uin = 328
+	classPrompt = MapObject
+	relationships = 257 265
+	position = 4.418413 0.0861789 6.479403
+	rotation = 0 -0.9999924 0 0.003897256
+	name = TestLamp_1
+}
+entity
+{
+	type = TestLamp
+	uin = 329
+	classPrompt = MapObject
+	relationships = 269 273
+	position = 2.123018 -3.808556 6.479403
+	rotation = 0 -0.9999924 0 0.003897256
+	name = TestLamp_3
+}
+entity
+{
+	type = TestLamp
+	uin = 330
+	classPrompt = MapObject
+	relationships = 277 281
+	position = -2.066759 -3.655989 6.479403
+	rotation = 0 -0.9999924 0 0.003897256
+	name = TestLamp_5
+}
+entity
+{
+	type = TestLamp
+	uin = 331
+	classPrompt = MapObject
+	relationships = 289 285
+	position = -4.343319 0.01378274 6.479403
+	rotation = 0 -0.9999924 0 0.003897256
+	name = TestLamp_6
+}
+entity
+{
+	type = TestLamp
+	uin = 332
+	classPrompt = MapObject
+	relationships = 249 293
+	position = -2.089635 3.651823 6.479403
+	rotation = 0 -0.9999924 0 0.003897256
+	name = TestLamp_9
+}
+entity
+{
+	type = TestLamp
+	uin = 333
+	classPrompt = MapObject
+	relationships = 253 261
+	position = 1.932414 3.828798 6.479403
+	rotation = 0 -0.9999924 0 0.003897256
+	name = TestLamp_12
+}
+entity
+{
+	type = PipeCorner
+	uin = 334
+	classPrompt = MapObject
+	position = -2.776221 -28.5 0.5
+	rotation = 0 0 -1 -4.371139E-08
+	name = PipeCorner_6
+}
+entity
+{
+	type = PipeCorner
+	uin = 335
+	classPrompt = MapObject
+	position = -2.77622 -27 0.5
+	rotation = 0 0 -1 -4.371139E-08
+	name = PipeCorner_7
+}
+entity
+{
+	type = PipeCorner
+	uin = 336
+	classPrompt = MapObject
+	position = -2.77622 -25.5 0.5
+	rotation = 0 0 -1 -4.371139E-08
+	name = PipeCorner_8
+}
+entity
+{
+	type = PipeCorner
+	uin = 337
+	classPrompt = MapObject
+	position = 2.5 -27 0.5
+	name = PipeCorner_9
+}
+entity
+{
+	type = PipeCorner
+	uin = 338
+	classPrompt = MapObject
+	position = 2.5 -28.5 0.5
+	name = PipeCorner_10
+}
+entity
+{
+	type = PipeCorner
+	uin = 339
+	classPrompt = MapObject
+	position = 2.5 -25.5 0.5
+	name = PipeCorner_11
+}
+entity
+{
+	type = Signboard
+	uin = 340
+	classPrompt = GameGuiObject
+	relationships = 204
+	initialControl = Gui\Signboard.gui
+	position = -39.58232 19.42181 3.333283
+	rotation = 0 0 -0.5 -0.8660254
+	name = Signboard_1
+	textUserData = 3. Turret Demo
+	logicClass = 204
+}
+entity
+{
+	type = SpawnPoint
+	uin = 341
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = -42.04255 15.47039 0
+	rotation = 0 0 -0.5 -0.8660253
+	name = SpawnPoint_FromTurretDemo
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 342
+	classPrompt = MapChangeRegion
+	mapName = Maps\TurretDemo\Map.map
+	spawnPointName = SpawnPoint_0
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = -45.91487 8.998381 0
+	rotation = 0 0 -0.8660253 0.5
+	scale = 3.790253 6.3357 5.648521
+	name = MapChangeRegion_6
+	checkType = Bounds
+}
+entity
+{
+	type = Door
+	uin = 343
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -47.86402 5.156999 -0.04091692
+	rotation = 0 0 -0.258819 0.9659258
+	name = Door_15
+}
+entity
+{
+	type = HelperPoint
+	uin = 344
+	classPrompt = MapObject
+	relationships = 244
+	position = 0 -3.209182 5.417253
+	name = HelperPoint_Lamps
+	logicClass = 244
+}
+entity
+{
+	type = Signboard
+	uin = 345
+	classPrompt = GameGuiObject
+	relationships = 204
+	initialControl = Gui\Signboard.gui
+	position = -65.87571 41.80606 3.333283
+	rotation = 0 0 0.8660253 -0.4999999
+	name = Signboard_2
+	textUserData = 8. Cut Scene Demo
+	logicClass = 204
+}
+entity
+{
+	type = SpawnPoint
+	uin = 346
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = -63.45023 45.65591 0.09117413
+	rotation = 0 0 0.8699199 -0.4931928
+	name = SpawnPoint_FromCutSceneDemo
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 347
+	classPrompt = MapChangeRegion
+	mapName = Maps\CutSceneDemo\Map.map
+	spawnPointName = SpawnPoint_0
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = -59.62499 52.24577 0
+	rotation = 0 0 -0.4999999 -0.8660253
+	scale = 4.053049 6.027036 5.470621
+	name = MapChangeRegion_7
+	checkType = Bounds
+}
+entity
+{
+	type = Door
+	uin = 348
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -57.66194 56.07174 0
+	rotation = 0 0 -0.9659258 -0.2588191
+	name = Door_16
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 349
+	classPrompt = MapChangeRegion
+	mapName = Maps\SkirmishDemo\Map.map
+	spawnPointName = SpawnPoint_0
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = -89.86233 34.25571 0
+	rotation = 0 0 0.8660254 -0.4999999
+	scale = 3.670879 5.998918 5.470621
+	name = MapChangeRegion_8
+	checkType = Bounds
+}
+entity
+{
+	type = Door
+	uin = 350
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -92.02467 30.51461 0
+	rotation = 0 0 0.2588191 -0.9659258
+	name = Door_17
+}
+entity
+{
+	type = SpawnPoint
+	uin = 351
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = -86.10233 40.91215 0
+	rotation = 0 0 0.4999999 0.8660254
+	name = SpawnPoint_FromSkirmishDemo
+}
+entity
+{
+	type = Door
+	uin = 352
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -83.88659 44.6344 0
+	rotation = 0 0 0.2658807 -0.9640058
+	name = Door_18
+}
+entity
+{
+	type = Signboard
+	uin = 353
+	classPrompt = GameGuiObject
+	relationships = 204
+	initialControl = Gui\Signboard.gui
+	position = -83.71467 44.83368 3.29784
+	rotation = 0 0 0.4999999 0.8660254
+	name = Signboard_4
+	textUserData = 9. Skirmish Demo
+	logicClass = 204
+}
+entity
+{
+	type = HangingLamp
+	uin = 354
+	classPrompt = Dynamic
+	position = -0.25 -34.05 3.925186
+	rotation = 0 0 0.7071068 0.7071068
+	name = HangingLamp_0
+}
+entity
+{
+	type = HangingLamp
+	uin = 355
+	classPrompt = Dynamic
+	position = -0.25 -21.28148 3.913333
+	rotation = 0 0 0.7071068 0.7071068
+	name = HangingLamp_1
+}
+entity
+{
+	type = HangingLamp
+	uin = 356
+	classPrompt = Dynamic
+	position = -22.95496 13.35593 3.913333
+	rotation = 0 0 0.9659259 0.258819
+	name = HangingLamp_2
+}
+entity
+{
+	type = HangingLamp
+	uin = 357
+	classPrompt = Dynamic
+	position = -37.77639 22.00104 3.913333
+	rotation = 0 0 0.9659259 0.258819
+	name = HangingLamp_3
+}
+entity
+{
+	type = HangingLamp
+	uin = 358
+	classPrompt = Dynamic
+	position = 38.60697 21.96533 3.913333
+	rotation = 0 0 0.258819 0.9659259
+	name = HangingLamp_4
+}
+entity
+{
+	type = HangingLamp
+	uin = 359
+	classPrompt = Dynamic
+	position = 23.48009 13.33795 3.913333
+	rotation = 0 0 0.258819 0.9659259
+	name = HangingLamp_5
+}
+entity
+{
+	type = Fan
+	uin = 360
+	classPrompt = Fan
+	forceMaximum = 50
+	influenceRegionScale = 20 3 3
+	throttle = 0.5
+	position = -86.79966 50.12952 4.650937
+	rotation = 0 -0.7071068 0 -0.7071068
+	name = Fan_0
+}
+entity
+{
+	type = Fan
+	uin = 361
+	classPrompt = Fan
+	forceMaximum = 50
+	influenceRegionScale = 20 3 3
+	throttle = 0.5
+	position = 85.94184 49.71511 4.670501
+	rotation = 0 -0.7071068 0 -0.7071068
+	name = Fan_1
+}
+entity
+{
+	type = HangingLamp
+	uin = 362
+	classPrompt = Dynamic
+	position = 53.05165 30.29826 3.913333
+	rotation = 0 0 0.258819 0.9659259
+	name = HangingLamp_6
+}
+entity
+{
+	type = HangingLamp
+	uin = 363
+	classPrompt = Dynamic
+	position = -52.71889 30.66086 3.913333
+	rotation = 0 0 0.9659259 0.258819
+	name = HangingLamp_7
+}
+entity
+{
+	type = Door
+	uin = 364
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -80.53988 50.48168 0
+	rotation = 0 0 -0.9640058 -0.2658807
+	name = Door_19
+}
+entity
+{
+	type = Signboard
+	uin = 365
+	classPrompt = GameGuiObject
+	relationships = 204
+	initialControl = Gui\Signboard.gui
+	position = -80.66982 50.24311 3.333283
+	rotation = 0 0 0.8660253 -0.4999999
+	name = Signboard_5
+	textUserData = 10. Sound Demo
+	logicClass = 204
+}
+entity
+{
+	type = SpawnPoint
+	uin = 366
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = -78.24435 54.09297 0.09117413
+	rotation = 0 0 -0.8660254 0.5
+	name = SpawnPoint_FromSoundDemo
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 367
+	classPrompt = MapChangeRegion
+	mapName = Maps\SoundDemo\Map.map
+	spawnPointName = SpawnPoint_0
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = -74.41911 60.68282 0
+	rotation = 0 0 -0.4999999 -0.8660253
+	scale = 4.053049 6.027036 5.470621
+	name = MapChangeRegion_9
+	checkType = Bounds
+}
+entity
+{
+	type = Door
+	uin = 368
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -72.45606 64.5088 0
+	rotation = 0 0 -0.9659258 -0.2588191
+	name = Door_22
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 369
+	classPrompt = MapChangeRegion
+	mapName = Maps\SwitchesDemo\Map.map
+	spawnPointName = SpawnPoint_0
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = 31.18842 0.07345301 0
+	rotation = 0 0 0.5000001 -0.8660253
+	scale = 3.670879 5.998918 5.470621
+	name = MapChangeRegion_10
+	checkType = Bounds
+}
+entity
+{
+	type = Door
+	uin = 370
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 33.34713 -3.669737 0
+	rotation = 0 0 -0.258819 -0.9659258
+	name = Door_21
+}
+entity
+{
+	type = SpawnPoint
+	uin = 371
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = 27.30377 6.657924 0
+	rotation = 0 0 0.8660253 0.5000001
+	name = SpawnPoint_FromSwitchesDemo
+}
+entity
+{
+	type = Door
+	uin = 372
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 25.18808 10.43793 0
+	rotation = 0 0 -0.2588191 -0.9659258
+	name = Door_23
+}
+entity
+{
+	type = Signboard
+	uin = 373
+	classPrompt = GameGuiObject
+	relationships = 204
+	initialControl = Gui\Signboard.gui
+	position = 25.10146 10.68646 3.29784
+	rotation = 0 0 0.8660253 0.5000001
+	name = Signboard_6
+	textUserData = 11. Switches Demo
+	logicClass = 204
+}
+entity
+{
+	type = Zone
+	uin = 374
+	classPrompt = Zone
+	position = -0.05502695 -0.5713956 3.104178
+	scale = 23.39875 22.40379 7.101524
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 375
+	classPrompt = Zone
+	position = 0 -28.20971 2.093773
+	scale = 7.032742 34.60082 5.075708
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 376
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = 0 -11.39422 1.968064
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 0 5.422211 3.901278
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 377
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -0.2370473 -44.65795 1.459873
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 0 2.555005 2.823185
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 378
+	classPrompt = Zone
+	position = 0 -53.71106 2.093773
+	scale = 7.032742 19.06069 5.075708
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 379
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -9.642929 5.701941 1.990086
+	rotation = 0 0 -0.9659259 -0.258819
+	scale = 0 5.347387 4.018202
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 380
+	classPrompt = Zone
+	position = -49.92605 28.95043 2.093773
+	rotation = 0 0 -0.8660254 0.5
+	scale = 7.314024 93.21626 5.075708
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 381
+	classPrompt = Zone
+	position = -17.61661 23.44899 2.093773
+	rotation = 0 0 -0.8660254 0.5
+	scale = 17.51169 5.873983 5.075708
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 382
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -21.63076 16.58593 1.543905
+	rotation = 0 0 -0.8660255 0.5
+	scale = 0 2.674094 2.871306
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 383
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -36.35685 25.08804 1.543905
+	rotation = 0 0 -0.8660255 0.5
+	scale = 0 2.674094 2.871306
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 384
+	classPrompt = Zone
+	position = -32.3427 31.95109 2.093773
+	rotation = 0 0 -0.8660254 0.5
+	scale = 17.51169 5.873983 5.075708
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 385
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -51.02637 33.5575 1.543905
+	rotation = 0 0 -0.8660255 0.5
+	scale = 0 2.674094 2.871306
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 386
+	classPrompt = Zone
+	position = -47.01222 40.42056 2.093773
+	rotation = 0 0 -0.8660254 0.5
+	scale = 17.51169 5.873983 5.075708
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 387
+	classPrompt = Zone
+	position = -29.03263 3.809058 2.093773
+	rotation = 0 0 -0.5 -0.8660254
+	scale = 17.51169 5.873983 5.075708
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 388
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -39.6698 19.1731 1.543905
+	rotation = 0 0 -0.5 -0.8660255
+	scale = 0 2.674094 2.871306
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 389
+	classPrompt = Zone
+	position = -43.70215 12.27852 2.093773
+	rotation = 0 0 -0.5 -0.8660254
+	scale = 17.51169 5.873983 5.075708
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 390
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -54.43571 27.60623 1.543905
+	rotation = 0 0 -0.5 -0.8660255
+	scale = 0 2.674094 2.871306
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 391
+	classPrompt = Zone
+	position = -58.42824 20.78063 2.093773
+	rotation = 0 0 -0.5 -0.8660254
+	scale = 17.51169 5.873983 5.075708
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 392
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -69.15345 36.12198 1.543905
+	rotation = 0 0 -0.5 -0.8660256
+	scale = 0 2.674094 2.871306
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 393
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -83.87762 44.62294 1.543905
+	rotation = 0 0 -0.5 -0.8660256
+	scale = 0 2.674094 2.871306
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 394
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = 25.21736 10.44996 1.543905
+	rotation = 0 0 -0.8660255 -0.5000001
+	scale = 0 2.674094 2.871306
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 395
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -80.57554 50.51905 1.543905
+	rotation = 0 0 0.8660256 -0.5
+	scale = 0 2.674094 2.871306
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 396
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -65.76574 42.0358 1.543905
+	rotation = 0 0 0.8660256 -0.5
+	scale = 0 2.674094 2.871306
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 397
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = 9.805351 5.514671 1.990086
+	rotation = 0 0 -0.2588191 -0.9659259
+	scale = 0 5.347387 4.018202
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 398
+	classPrompt = Zone
+	position = -87.89178 37.7599 2.093773
+	rotation = 0 0 -0.5 -0.8660253
+	scale = 17.51169 5.873983 5.075708
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 399
+	classPrompt = Zone
+	position = 29.15387 3.542083 2.093773
+	rotation = 0 0 -0.8660254 -0.4999999
+	scale = 17.51169 5.873983 5.075708
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 400
+	classPrompt = Zone
+	position = -73.16759 29.25893 2.093773
+	rotation = 0 0 -0.5 -0.8660253
+	scale = 17.51169 5.873983 5.075708
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 401
+	classPrompt = Zone
+	position = -61.75159 48.89885 2.093773
+	rotation = 0 0 0.8660253 -0.5
+	scale = 17.51169 5.873983 5.075708
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 402
+	classPrompt = Zone
+	position = -76.53233 57.43246 2.093773
+	rotation = 0 0 0.8660253 -0.5
+	scale = 17.51169 5.873983 5.075708
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 403
+	classPrompt = Zone
+	position = 49.83541 28.70145 2.093773
+	rotation = 0 0 -0.8660254 -0.4999999
+	scale = 7.032742 92.89674 5.075708
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 404
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -25.03307 10.69296 1.543905
+	rotation = 0 0 -0.5 -0.8660255
+	scale = 0 2.674094 2.871306
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 405
+	classPrompt = MapChangeRegion
+	mapName = Maps\PortalSystemDemo\Map.map
+	spawnPointName = SpawnPoint_0
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = 15.8029 26.70092 0
+	rotation = 0 0 0.8660253 0.5000002
+	scale = 3.670879 5.998918 5.470621
+	name = MapChangeRegion_11
+	checkType = Bounds
+}
+entity
+{
+	type = Door
+	uin = 406
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 13.64419 30.44411 0
+	rotation = 0 0 0.9659258 -0.258819
+	name = Door_20
+}
+entity
+{
+	type = SpawnPoint
+	uin = 407
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = 19.68755 20.11645 0
+	rotation = 0 0 -0.5000002 0.8660253
+	name = SpawnPoint_FromPortalSystemDemo
+}
+entity
+{
+	type = Door
+	uin = 408
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 21.80324 16.33644 0
+	rotation = 0 0 -0.9659258 0.2588191
+	name = Door_24
+}
+entity
+{
+	type = Signboard
+	uin = 409
+	classPrompt = GameGuiObject
+	relationships = 204
+	initialControl = Gui\Signboard.gui
+	position = 21.88986 16.08792 3.29784
+	rotation = 0 0 -0.5000002 0.8660253
+	name = Signboard_7
+	textUserData = 12. Portal System
+	logicClass = 204
+}
+entity
+{
+	type = Portal
+	uin = 410
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = 21.77396 16.32441 1.543905
+	rotation = 0 0 0.5000002 -0.8660255
+	scale = 0 2.674094 2.871306
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 411
+	classPrompt = Zone
+	position = 17.83745 23.2323 2.093773
+	rotation = 0 0 0.4999999 -0.8660254
+	scale = 17.51169 5.873983 5.075708
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = ZombieStatue
+	uin = 412
+	classPrompt = MapObject
+	position = -88.14661 51.02239 0.07276726
+	rotation = 0 0 -0.258819 0.9659258
+	scale = 1.6 1.6 1.6
+	name = ZombieStatue_0
+}
+entity
+{
+	type = ZombieStatue
+	uin = 413
+	classPrompt = MapObject
+	position = 87.73511 50.62601 0.07276726
+	rotation = 0 0 -0.9659258 0.2588191
+	scale = 1.6 1.6 1.6
+	name = ZombieStatue_1
+}
+entity
+{
+	type = HangingLamp
+	uin = 414
+	classPrompt = Dynamic
+	position = -67.40274 39.1386 3.913333
+	rotation = 0 0 0.9659259 0.258819
+	name = HangingLamp_8
+}
+entity
+{
+	type = HangingLamp
+	uin = 415
+	classPrompt = Dynamic
+	position = 67.88965 38.865 3.913333
+	rotation = 0 0 0.258819 0.9659259
+	name = HangingLamp_9
+}
+entity
+{
+	type = HangingLamp
+	uin = 416
+	classPrompt = Dynamic
+	position = 82.67705 47.40249 3.913333
+	rotation = 0 0 0.258819 0.9659259
+	name = HangingLamp_10
+}
+entity
+{
+	type = HangingLamp
+	uin = 417
+	classPrompt = Dynamic
+	position = -82.17484 47.66726 3.913333
+	rotation = 0 0 0.9659259 0.258819
+	name = HangingLamp_11
+}
+entity
+{
+	type = Zone
+	uin = 418
+	classPrompt = Zone
+	position = 32.54279 31.72243 2.093773
+	rotation = 0 0 0.4999999 -0.8660254
+	scale = 17.51169 5.873983 5.075708
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Door
+	uin = 419
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 28.34953 38.93423 0
+	rotation = 0 0 0.9659258 -0.258819
+	name = Door_25
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 420
+	classPrompt = MapChangeRegion
+	mapName = Maps\StaticLightingDemo\Map.map
+	spawnPointName = SpawnPoint_0
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = 45.89376 8.563579 0
+	rotation = 0 0 0.5000001 -0.8660253
+	scale = 3.670879 5.998918 5.470621
+	name = MapChangeRegion_12
+	checkType = Bounds
+}
+entity
+{
+	type = Door
+	uin = 421
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 48.05247 4.820389 0
+	rotation = 0 0 -0.258819 -0.9659258
+	name = Door_26
+}
+entity
+{
+	type = SpawnPoint
+	uin = 422
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = 42.00911 15.14805 0
+	rotation = 0 0 0.8660253 0.5000001
+	name = SpawnPoint_FromStaticLightingDemo
+}
+entity
+{
+	type = Door
+	uin = 423
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 39.89342 18.92805 0
+	rotation = 0 0 -0.2588191 -0.9659258
+	name = Door_27
+}
+entity
+{
+	type = Signboard
+	uin = 424
+	classPrompt = GameGuiObject
+	relationships = 204
+	initialControl = Gui\Signboard.gui
+	position = 39.8068 19.17659 3.29784
+	rotation = 0 0 0.8660253 0.5000001
+	name = Signboard_8
+	textUserData = 13. Static Lighting
+	logicClass = 204
+}
+entity
+{
+	type = Portal
+	uin = 425
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = 39.9227 18.94009 1.543905
+	rotation = 0 0 -0.8660255 -0.5000001
+	scale = 0 2.674094 2.871306
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 426
+	classPrompt = Zone
+	position = 43.85921 12.03221 2.093773
+	rotation = 0 0 -0.8660254 -0.4999999
+	scale = 17.51169 5.873983 5.075708
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Door
+	uin = 427
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 36.50858 24.82656 0
+	rotation = 0 0 -0.9659258 0.2588191
+	name = Door_28
+}
+entity
+{
+	type = Signboard
+	uin = 428
+	classPrompt = GameGuiObject
+	relationships = 204
+	initialControl = Gui\Signboard.gui
+	position = 36.5952 24.57804 3.29784
+	rotation = 0 0 -0.5000002 0.8660253
+	name = Signboard_9
+	textUserData = 14. Constructions
+	logicClass = 204
+}
+entity
+{
+	type = Portal
+	uin = 429
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = 36.4793 24.81454 1.543905
+	rotation = 0 0 0.5000002 -0.8660255
+	scale = 0 2.674094 2.871306
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 430
+	classPrompt = MapChangeRegion
+	mapName = Maps\ConstructionsDemo\Map.map
+	spawnPointName = SpawnPoint_0
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = 30.50824 35.19105 0
+	rotation = 0 0 0.8660253 0.5000002
+	scale = 3.670879 5.998918 5.470621
+	name = MapChangeRegion_13
+	checkType = Bounds
+}
+entity
+{
+	type = SpawnPoint
+	uin = 431
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = 34.39289 28.60658 0
+	rotation = 0 0 -0.5000002 0.8660253
+	name = SpawnPoint_FromConstructionsDemo
+}
+entity
+{
+	type = Door
+	uin = 432
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 69.28229 35.92229 0
+	rotation = 0 0 -0.2588191 -0.9659258
+	name = Door_30
+}
+entity
+{
+	type = Door
+	uin = 433
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 84.00459 44.42219 0
+	rotation = 0 0 -0.2588191 -0.9659258
+	name = Door_31
+}
+entity
+{
+	type = Door
+	uin = 434
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 80.65508 50.30884 0
+	rotation = 0 0 -0.2588191 -0.9659258
+	name = Door_32
+}
+entity
+{
+	type = Door
+	uin = 435
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 65.91029 41.79596 0
+	rotation = 0 0 -0.2588191 -0.9659258
+	name = Door_33
+}
+entity
+{
+	type = Signboard
+	uin = 436
+	classPrompt = GameGuiObject
+	relationships = 204
+	initialControl = Gui\Signboard.gui
+	position = -0.1473151 -47.83514 4.079604
+	rotation = 0 0 -0.7071068 0.7071068
+	name = Signboard_10
+	textUserData = Welcome
+	logicClass = 204
+}
+entity
+{
+	type = Zone
+	uin = 437
+	classPrompt = Zone
+	position = 58.56175 20.52074 2.093773
+	rotation = 0 0 -0.8660254 -0.4999999
+	scale = 17.51169 5.873983 5.075708
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 438
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = 54.62524 27.42862 1.543905
+	rotation = 0 0 -0.8660255 -0.5000001
+	scale = 0 2.674094 2.871306
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = HangingLamp
+	uin = 439
+	classPrompt = Dynamic
+	position = -0.25 -53.84641 3.913333
+	rotation = 0 0 0.7071068 0.7071068
+	name = HangingLamp_13
+}
+entity
+{
+	type = Light
+	uin = 440
+	classPrompt = Light
+	lightType = Spot
+	diffuseColor = 1.392157 1.392157 1.392157
+	specularColor = 0.5882353 0.5882353 0.5882353
+	attenuationRangeAutomatic = False
+	attenuationRange = 17
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0
+	spotlightInnerAngle = 61.622
+	spotlightOuterAngle = 128.108
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	allowDynamicLighting = True
+	position = 0 0 6.223946
+	rotation = 0 -0.7069848 0 -0.7072288
+	name = Light_0
+}
+entity
+{
+	type = Door
+	uin = 441
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 51.18988 33.30283 0
+	rotation = 0 0 -0.9659258 0.2588191
+	name = Door_29
+}
+entity
+{
+	type = Zone
+	uin = 442
+	classPrompt = Zone
+	position = 47.29379 40.23897 2.093773
+	rotation = 0 0 0.4999999 -0.8660254
+	scale = 17.51169 5.873983 5.075708
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 443
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = 51.20115 33.31422 1.543905
+	rotation = 0 0 0.5000002 -0.8660255
+	scale = 0 2.674094 2.871306
+	visible = False
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = StaticMesh
+	uin = 444
+	classPrompt = StaticMesh
+	position = 0 0 0
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Maps\MainDemo\StaticGeometry\Data.mesh
+	splitGeometry = True
+	splitGeometryPieceSize = 15 15 15
+	allowDecals = All
+	castDynamicShadows = True
+}
+entity
+{
+	type = Box
+	uin = 445
+	classPrompt = Dynamic
+	position = 2.171089 -19.55943 0.5490291
+	name = Box_0
+}
+entity
+{
+	type = Box
+	uin = 446
+	classPrompt = Dynamic
+	position = 2.109668 -20.8692 0.5464608
+	rotation = 0 0 0.1502292 0.9886512
+	name = Box_1
+}
+entity
+{
+	type = Box
+	uin = 447
+	classPrompt = Dynamic
+	position = 2.092623 -20.2065 1.550032
+	name = Box_2
+}
+entity
+{
+	type = Ball
+	uin = 448
+	classPrompt = Dynamic
+	position = -1.714552 -25.04027 0.5605949
+	name = Ball_0
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 449
+	classPrompt = MapChangeRegion
+	mapName = Maps\JigsawPuzzleGame\Map.map
+	spawnPointName = SpawnPoint_0
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = 60.59851 17.05338 0
+	rotation = 0 0 0.5000001 -0.8660253
+	scale = 3.670879 5.998918 5.470621
+	name = MapChangeRegion_14
+	checkType = Bounds
+}
+entity
+{
+	type = Door
+	uin = 450
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 62.75722 13.31019 0
+	rotation = 0 0 -0.258819 -0.9659258
+	name = Door_34
+}
+entity
+{
+	type = SpawnPoint
+	uin = 451
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = 56.71386 23.63785 0
+	rotation = 0 0 0.8660253 0.5000001
+	name = SpawnPoint_FromJigsawPuzzleGame
+}
+entity
+{
+	type = Door
+	uin = 452
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 54.59817 27.41785 0
+	rotation = 0 0 -0.2588191 -0.9659258
+	name = Door_35
+}
+entity
+{
+	type = Signboard
+	uin = 453
+	classPrompt = GameGuiObject
+	relationships = 204
+	initialControl = Gui\Signboard.gui
+	position = 54.51155 27.66639 3.29784
+	rotation = 0 0 0.8660253 0.5000001
+	name = Signboard_11
+	textUserData = 15. Jigsaw Puzzle
+	logicClass = 204
+}

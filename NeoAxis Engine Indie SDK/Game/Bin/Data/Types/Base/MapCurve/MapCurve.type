@@ -1,0 +1,16 @@
+type MapCurve
+{
+	class = MapCurve
+	allowEditorCreate = True
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\Base\InvisiblePoint.mesh
+			onlyForEditor = True
+			scale = 1 1 1
+		}
+	}
+
+	pointType = MapCurvePoint
+}

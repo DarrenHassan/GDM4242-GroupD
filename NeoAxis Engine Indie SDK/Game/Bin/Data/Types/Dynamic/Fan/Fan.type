@@ -1,0 +1,27 @@
+type Fan
+{
+	class = Fan
+	physicsModel = Types\Dynamic\Fan\Fan.physics
+	allowEditorCreate = True
+	networkType = Synchronized
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\Dynamic\Fan\Base.mesh
+			castDynamicShadows = True
+			body = staticBody
+		}
+		mesh
+		{
+			meshName = Types\Dynamic\Fan\Fan.mesh
+			castDynamicShadows = True
+			body = blades
+		}
+		particle
+		{
+			particleName = FanParticle
+			ownerRotation = True
+		}
+	}
+}

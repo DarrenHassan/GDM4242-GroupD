@@ -1,0 +1,16 @@
+type ZombieStatue
+{
+	class = MapObject
+	allowEditorCreate = True
+	allowEmptyName = False
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = "Types\\Units\\Zombie\\Zombie.mesh"
+			castShadows = True
+			forceMaterial = Rooms/ConcreteWall
+			toCollision = True
+		}
+	}
+}

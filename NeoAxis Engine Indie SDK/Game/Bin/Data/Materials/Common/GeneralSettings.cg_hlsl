@@ -1,0 +1,35 @@
+// Copyright (C) 2006-2010 NeoAxis Group Ltd.
+
+
+
+
+//First of all remember, shadow maps is must be calibrated for each game.
+//Because the shadow map technology is usually whimsical and has artefacts in some cases,
+//which cannot be eliminated by the common decision.
+//Look ShadowReceiverFunctions.cg_hlsl for calibrating shadows.
+
+
+//settings for low shadow maps
+#ifdef SHADOW_MAP_LOW
+	//simple shadows for cards without shaders 3.0 support
+	//better if you will not change this define, except if you making project without shaders 2.0 support.
+	#define SHADOW_BLUR_SIMPLE
+#endif
+
+
+//settings for medium shadow maps
+#ifdef SHADOW_MAP_MEDIUM
+	//define type of blur
+	//#define SHADOW_BLUR_SIMPLE
+	#define SHADOW_BLUR_PCF_4X4
+	//#define SHADOW_BLUR_PCF_8_TAP_FIXED_DISK_4X
+#endif
+
+
+//settings for high shadow maps
+#ifdef SHADOW_MAP_HIGH
+	//define type of blur
+	//#define SHADOW_BLUR_SIMPLE
+	//#define SHADOW_BLUR_PCF_4X4
+	#define SHADOW_BLUR_PCF_8_TAP_FIXED_DISK_4X
+#endif

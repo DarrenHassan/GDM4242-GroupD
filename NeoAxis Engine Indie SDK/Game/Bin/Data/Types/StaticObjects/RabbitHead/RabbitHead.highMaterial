@@ -1,0 +1,6 @@
+highLevelMaterial RabbitHead
+{
+	template = ShaderBaseMaterial
+	receiveShadows = False
+	diffuseScale = 1 0 0
+}

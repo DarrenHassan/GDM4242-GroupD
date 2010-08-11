@@ -1,0 +1,9 @@
+type FireInfluence
+{
+	class = FireInfluence
+	damagePerSecond = 10
+	defaultParticleName = FireParticle
+	allowSubstance = Flesh
+	allowEmptyName = True
+	networkType = Synchronized
+}

@@ -1,0 +1,14 @@
+highLevelMaterial GirlBody
+{
+	template = ShaderBaseMaterial
+	diffuseScale = 0.3921569 0.3921569 0.3921569
+	emissionScale = 0.5882353 0.5882353 0.5882353
+	diffuse1Map
+	{
+		texture = Types\Units\Girl\GirlBody.dds
+	}
+	emissionMap
+	{
+		texture = Types\Units\Girl\GirlBody.dds
+	}
+}

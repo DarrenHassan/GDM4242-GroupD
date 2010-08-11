@@ -1,0 +1,8 @@
+highLevelMaterial Rooms/ConcreteWall
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Models\Rooms\ConcreteWall.dds
+	}
+}

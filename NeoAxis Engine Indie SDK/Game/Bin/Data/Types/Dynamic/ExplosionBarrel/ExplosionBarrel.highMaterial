@@ -1,0 +1,18 @@
+highLevelMaterial ExplosionBarrel
+{
+	template = ShaderBaseMaterial
+	specularScale = 1.392157 1.392157 1.392157
+	specularShininess = 35.324
+	diffuse1Map
+	{
+		texture = Types\Dynamic\ExplosionBarrel\ExplosionBarrelDiffuse.dds
+	}
+	specularMap
+	{
+		texture = Types\Dynamic\ExplosionBarrel\ExplosionBarrelSpecular.dds
+	}
+	normalMap
+	{
+		texture = Types\Dynamic\ExplosionBarrel\ExplosionBarrelNormal.dds
+	}
+}

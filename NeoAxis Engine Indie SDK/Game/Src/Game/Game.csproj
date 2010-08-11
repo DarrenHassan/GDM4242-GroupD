@@ -1,0 +1,137 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5D197770-2CEF-48B2-ABAB-C5C0152B0151}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Game</RootNamespace>
+    <AssemblyName>Game</AssemblyName>
+    <ApplicationIcon>Logo.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <PlatformTarget>x86</PlatformTarget>
+    <NoWarn>1591</NoWarn>
+    <DocumentationFile>Game.xml</DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <NoWarn>1591</NoWarn>
+    <DocumentationFile>Game.xml</DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DecorativeObjectManager, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="EngineApp, Version=0.8.5.2, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="EntitySystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="FileSystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="GridPathFindSystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="HeightmapTerrain, Version=0.8.5.2, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Log, Version=0.8.5.2, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="MapSystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="MathEx, Version=0.8.5.2, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Networking, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="PhysicsSystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Renderer, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="SoundSystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="UISystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Utils, Version=0.8.5.2, Culture=neutral, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutWindow.cs" />
+    <Compile Include="ActionGameWindow.cs" />
+    <Compile Include="DynamicCreatedMapExample.cs" />
+    <Compile Include="JigsawPuzzleGameWindow.cs" />
+    <Compile Include="TurretDemoGameWindow.cs" />
+    <Compile Include="MultiplayerLobbyWindow.cs" />
+    <Compile Include="MultiplayerLoginWindow.cs" />
+    <Compile Include="WorldLoadSaveWindow.cs" />
+    <Compile Include="ExampleCustomInputDevice.cs" />
+    <Compile Include="ProductLogoWindow.cs" />
+    <Compile Include="PostEffectsWindow.cs" />
+    <Compile Include="DebugDrawOptionsWindow.cs" />
+    <Compile Include="GameEngineApp.cs" />
+    <Compile Include="MapsWindow.cs" />
+    <Compile Include="MenuWindow.cs" />
+    <Compile Include="MessageBoxWindow.cs" />
+    <Compile Include="OptionsWindow.cs" />
+    <Compile Include="GameWindow.cs" />
+    <Compile Include="MainMenuWindow.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="RTSGameWindow.cs" />
+    <Compile Include="EngineLogoWindow.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GameCommon\GameCommon.csproj">
+      <Project>{E4C09433-ECC3-404C-A303-E9A93F241B91}</Project>
+      <Name>GameCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GameEntities\GameEntities.csproj">
+      <Project>{3F0C9CE6-824F-4B8F-A4F3-68A70F7CF63A}</Project>
+      <Name>GameEntities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

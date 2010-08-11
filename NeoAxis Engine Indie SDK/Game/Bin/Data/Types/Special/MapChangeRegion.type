@@ -1,0 +1,15 @@
+type MapChangeRegion
+{
+	class = MapChangeRegion
+	allowEditorCreate = True
+	networkType = ServerOnly
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\Base\InvisiblePoint.mesh
+			useOwnerScale = False
+			onlyForEditor = True
+		}
+	}
+}

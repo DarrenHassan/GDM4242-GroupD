@@ -1,0 +1,38 @@
+type Girl
+{
+	class = GameCharacter
+	optimalAttackDistanceRange = 0 1
+	walkAnimationVelocityMultiplier = 0.5
+	height = 1.9
+	radius = 0.3
+	walkMaxVelocity = 2
+	walkForce = 4000
+	flyControlMaxVelocity = 3
+	flyControlForce = 700
+	initialAI = DefaultGameCharacterAI
+	viewRadius = 40
+	fpsCameraOffset = 0.3 0 0.7
+	lifeMax = 30
+	targetPriority = 1
+	substance = Flesh
+	allowEditorCreate = True
+	networkType = Synchronized
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\Units\Girl\Girl.mesh
+			castDynamicShadows = True
+			position = 0 0 -1.211434
+			scale = 0.63 0.63 0.63
+		}
+	}
+	dieObjects
+	{
+		mapObject
+		{
+			type = GirlDead
+			copyVelocitiesFromParent = True
+		}
+	}
+}

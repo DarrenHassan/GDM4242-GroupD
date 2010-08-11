@@ -1,0 +1,23 @@
+highLevelMaterial Hammer
+{
+	template = ShaderBaseMaterial
+	diffuseScale = 0.5882353 0.5882353 0.5882353
+	emissionScale = 2.745098 2.745098 9.411765
+	diffuse1Map
+	{
+		texture = Models\Rooms\CellingDiffuse.dds
+	}
+	emissionMap
+	{
+		texture = Types\Weapons\Hammer\HammerEmission.png
+		transform
+		{
+			scale = 0.5 0.5
+			rotate = 0.3
+			animation
+			{
+				scrollSpeed = 0.2 0.3
+			}
+		}
+	}
+}

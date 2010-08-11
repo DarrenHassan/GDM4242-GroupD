@@ -1,0 +1,45 @@
+fragment_program Compositor/Grayscale_fp_hlsl hlsl
+{
+	source Materials\PostEffects\Grayscale\Grayscale.cg_hlsl
+	entry_point main_fp
+	target ps_2_0
+}
+
+fragment_program Compositor/Grayscale_fp_cg cg
+{
+	source Materials\PostEffects\Grayscale\Grayscale.cg_hlsl
+	entry_point main_fp
+	profiles arbfp1
+}
+
+fragment_program Compositor/Grayscale_fp unified
+{
+	delegate Compositor/Grayscale_fp_hlsl
+	delegate Compositor/Grayscale_fp_cg
+}
+
+material Compositor/Grayscale
+{
+	technique
+	{
+
+		pass
+		{
+			depth_check off
+
+			vertex_program_ref Compositor/StdQuad_vp
+			{
+			}
+
+			fragment_program_ref Compositor/Grayscale_fp
+			{
+			}
+
+			texture_unit
+			{
+				tex_address_mode clamp
+				filtering none
+			}
+		}
+	}
+}

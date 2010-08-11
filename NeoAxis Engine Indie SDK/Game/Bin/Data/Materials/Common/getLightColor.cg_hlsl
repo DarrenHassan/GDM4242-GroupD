@@ -1,0 +1,25 @@
+// Copyright (C) 2006-2010 NeoAxis Group Ltd.
+
+float3 getLightColor(float3 vertexPosition, float3 vertexNormal, 
+	float4 lightPosition, float3 lightDiffuse, float4 lightAttenuation)
+{
+	float3 lightVector = lightPosition.xyz - vertexPosition.xyz * lightPosition.w;
+	float distance = length(lightVector);
+	float3 direction = lightVector / distance;
+	float3 color = saturate(dot(vertexNormal, direction)) * lightDiffuse.xyz;
+	float attenuation = saturate(1 / (lightAttenuation.y +
+		lightAttenuation.z * distance + lightAttenuation.w * distance * distance));
+	return color * attenuation;
+}
+
+half3 getLightColor(half3 vertexPosition, half3 vertexNormal, 
+	half4 lightPosition, half3 lightDiffuse, half4 lightAttenuation)
+{
+	half3 lightVector = lightPosition.xyz - vertexPosition.xyz * lightPosition.w;
+	half distance = length(lightVector);
+	half3 direction = lightVector / distance;
+	half3 color = saturate(dot(vertexNormal, direction)) * lightDiffuse.xyz;
+	half attenuation = saturate(1 / (lightAttenuation.y +
+		lightAttenuation.z * distance + lightAttenuation.w * distance * distance));
+	return color * attenuation;
+}

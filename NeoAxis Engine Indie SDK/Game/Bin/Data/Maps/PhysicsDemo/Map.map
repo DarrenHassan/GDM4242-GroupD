@@ -1,0 +1,380 @@
+type = GameMap
+uin = 2
+classPrompt = GameMap
+gameMusic = Sounds\Music\Game.ogg
+ambientLight = 0.2 0.2 0.2
+editorCameraPosition = 12.09087 -7.443931 18.26224
+editorCameraDirection = 2.55554 -0.3130994
+shadowColor = 1 1 1
+shadowFarDistance = 100
+logicSystemManager = 13
+name = GameMap_0
+rootEditorLayer
+{
+	layer
+	{
+		name = StaticGeometry
+		allowEdit = False
+	}
+}
+entity
+{
+	type = Fan
+	uin = 3
+	classPrompt = Fan
+	forceMaximum = 2400
+	influenceRegionScale = 20 3 3
+	throttle = 0
+	position = -5 -5 0.000846386
+	rotation = 0 -0.707106 0 0.707106
+	scale = 20 3 3
+	name = Fan_3
+}
+entity
+{
+	type = Fan
+	uin = 4
+	classPrompt = Fan
+	forceMaximum = 2400
+	influenceRegionScale = 20 3 3
+	throttle = 0
+	position = -5 5 0.000846386
+	rotation = 0 -0.707106 0 0.707106
+	scale = 20 3 3
+	name = Fan_2
+}
+entity
+{
+	type = Fan
+	uin = 5
+	classPrompt = Fan
+	forceMaximum = 2400
+	influenceRegionScale = 20 3 3
+	throttle = 0
+	position = 5 -5 0.000846386
+	rotation = 0 -0.707106 0 0.707106
+	scale = 20 3 3
+	name = Fan_1
+}
+entity
+{
+	type = Fan
+	uin = 6
+	classPrompt = Fan
+	forceMaximum = 2400
+	influenceRegionScale = 20 3 3
+	throttle = 0
+	position = 5 5 0.000846386
+	rotation = 0 -0.707106 0 0.707106
+	scale = 20 3 3
+	name = Fan_0
+}
+entity
+{
+	type = SubmachineGunItem
+	uin = 7
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = 18.62023 -14.44777 0.545552
+	rotation = 0 0 0.5506705 0.8347227
+}
+entity
+{
+	type = Terminal
+	uin = 8
+	classPrompt = Terminal
+	relationships = 15
+	initialControl = Gui\PhysicsDemoTerminal.gui
+	position = 17.99189 -11.38136 1.79371
+	rotation = 0 0 -0.7061533 0.708059
+	name = Terminal_0
+	logicClass = 15
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 9
+	classPrompt = MapChangeRegion
+	mapName = Maps\MainDemo\Map.map
+	spawnPointName = SpawnPoint_FromPhysicsDemo
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = 17.53239 -32.04983 0.2692733
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 3 8 6.196311
+	name = MapChangeRegion_0
+	checkType = Bounds
+}
+entity
+{
+	type = SpawnPoint
+	uin = 10
+	classPrompt = SpawnPoint
+	defaultPoint = True
+	position = 17.53239 -24.39407 0.222651
+	rotation = 0 0 -0.7071068 -0.7071068
+	name = SpawnPoint_0
+}
+entity
+{
+	type = Door
+	uin = 11
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 17.61415 -20.05266 0.2205143
+	name = Door_0
+}
+entity
+{
+	type = Door
+	uin = 12
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 17.60123 -36.36777 0.2253547
+	name = Door_2
+}
+entity
+{
+	type = LogicSystemManager
+	uin = 13
+	mapClassManager = 14
+	entity
+	{
+		type = LogicClassManager
+		uin = 14
+		entity
+		{
+			type = LogicEntityClass
+			uin = 15
+			relationships = 8
+			entityClassName = GameGuiObject
+			className = Terminal_0
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 16
+				code = "( (EButton)Owner.MainControl.Controls[ \"Boxes\" ] ).Click += delegate(EButton sender)\r\n{\r\n\tCreateManyObjects( (MapObjectType)EntityTypes.Instance.GetByName( \"Box\" ), true );\r\n};\r\n\r\n( (EButton)Owner.MainControl.Controls[ \"Barrels\" ] ).Click += delegate(EButton sender)\r\n{\r\n\tCreateManyObjects( (MapObjectType)EntityTypes.Instance.GetByName( \"ExplosionBarrel\" ), true );\r\n};\r\n\r\n( (EButton)Owner.MainControl.Controls[ \"Carts\" ] ).Click += delegate(EButton sender)\r\n{\r\n\tCreateManyObjects( (MapObjectType)EntityTypes.Instance.GetByName( \"Cart\" ), false );\r\n};\r\n\r\n( (EButton)Owner.MainControl.Controls[ \"CCDTest\" ] ).Click += delegate(EButton sender)\r\n{\r\n\tccdTestRemainingCount += 10;\r\n};\r\n\r\n( (EButton)Owner.MainControl.Controls[ \"WoodBoxes\" ] ).Click += delegate(EButton sender)\r\n{\r\n\tCreateManyObjects( (MapObjectType)EntityTypes.Instance.GetByName( \"WoodBox\" ), false );\r\n};\r\n\r\n((EScrollBar)Owner.MainControl.Controls[ \"CartsThrottle\" ]).ValueChange += delegate(EScrollBar sender)\r\n{\r\n\tUpdateCartsThrottle();\r\n};\r\n\r\n((EScrollBar)Owner.MainControl.Controls[ \"Fans\" ]).ValueChange += fansScrollBar_ValueChange;\r\n((ECheckBox)Owner.MainControl.Controls[ \"HangingBall\" ]).Checked = hangingBall != null;\r\n((ECheckBox)Owner.MainControl.Controls[ \"HangingBall\" ]).CheckedChange += hangingBallCheckBox_CheckedChange;\r\n\r\n//jumpPadsCheckBox = (ECheckBox)MainControl.Controls[ \"JumpPads\" ];\r\n//jumpPadsCheckBox.CheckedChange += jumpPadsCheckBox_CheckedChange;\r\n\r\n//( (EButton)MainControl.Controls[ \"Run\" ] ).Click += run_Click;\r\n( (EButton)Owner.MainControl.Controls[ \"Clear\" ] ).Click += clear_Click;\r\n\r\n((EScrollBar)Owner.MainControl.Controls[ \"Gravity\" ]).ValueChange += delegate(EScrollBar sender)\r\n{\r\n\tPhysicsWorld.Instance.Gravity = new Vec3(0,0,-sender.Value);\r\n};\r\n\r\nOwner.AddTimer();\r\n\r\nUpdateCartsThrottle();\r\n"
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 17
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 17
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 18
+				variableType = Engine.MapSystem.MapObject
+				variableName = hangingBall
+				supportSerialization = True
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 19
+				code = "foreach( Entity entity in Map.Instance.Children )\r\n{\r\n\tbool delete = false;\r\n\r\n\tstring str = entity.UserData as string;\r\n\tif( str != null && str == \"AllowClear\" )\r\n\t\tdelete = true;\r\n\r\n\tif( entity is Corpse )\r\n\t\tdelete = true;\r\n\r\n\tstring prefix = \"WoodBox\";\r\n\tif( entity.Type.Name.Length > prefix.Length && entity.Type.Name.Substring(0, 7) == prefix )\r\n\t\tdelete = true;\r\n\r\n\tif(entity.Type.Name == \"Ball\")\r\n\t\tdelete = true;\r\n\r\n\tif(delete)\r\n\t\tentity.SetDeleted();\r\n}\r\n"
+				methodName = clear_Click
+				returnType = System.Void
+				parameters = 20
+				isEntityEventMethod = False
+				entity
+				{
+					type = LogicParameter
+					uin = 20
+					parameterType = Engine.UISystem.EButton
+					parameterName = sender
+				}
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 21
+				code = "const float zombieProbability = .01f;\r\n\r\nint step = many ? 5 : 20;\r\n\r\nfor( float y = -10; y < 11; y += step )\r\n{\r\n\tfor( float x = -10; x < 11; x += step )\r\n\t{\r\n\t\tif( x == 0 && y == 0 )\r\n\t\t\tcontinue;\r\n\r\n\t\tVec3 pos = new Vec3( x, y, 10 );\r\n\t\tif(mapObjectType.Name == \"WoodBox\")\r\n\t\t\tpos.Z = 2;\r\n\r\n\t\t//Check busy\r\n\t\tbool busy = false;\r\n\t\tMap.Instance.GetObjects(new Bounds(pos - new Vec3(.75f, .75f, .75f), pos + new Vec3(.75f, .75f, .75f)), \r\n\t\t\tdelegate(MapObject o)\r\n\t\t\t{\r\n\t\t\t\tif(!(o is Region || o is StaticMesh))\r\n\t\t\t\t\tbusy = true;\r\n\t\t\t});\r\n\t\tif(busy)\r\n\t\t\tcontinue;\r\n\r\n\t\tEntityType type;\r\n\r\n\t\tif( World.Instance.Random.NextFloat() < zombieProbability )\r\n\t\t\ttype = EntityTypes.Instance.GetByName( \"Zombie\" );\r\n\t\telse\r\n\t\t\ttype = mapObjectType;\r\n\r\n\t\tMapObject obj = (MapObject)Entities.Instance.Create( type, Map.Instance );\r\n\t\tobj.UserData = \"AllowClear\";\r\n\t\tobj.Position = pos;\r\n\r\n\t\tif( type == mapObjectType )\r\n\t\t{\r\n\t\t\tfloat dir = World.Instance.Random.NextFloat() * MathFunctions.PI;\r\n\t\t\tfloat halfAngle = dir * 0.5f;\r\n\r\n\t\t\tif(mapObjectType.Name == \"WoodBox\")\r\n\t\t\t\tobj.Rotation = new Quat( new Vec3( 0, 0, MathFunctions.Sin( halfAngle ) ), MathFunctions.Cos( halfAngle ) );\r\n\t\t\telse\r\n\t\t\t\tobj.Rotation = new Quat( new Vec3( 0, MathFunctions.Sin( halfAngle ), 0 ), MathFunctions.Cos( halfAngle ) );\r\n\t\t}\r\n\r\n\t\tobj.PostCreate();\r\n\t}\r\n}\r\n\r\nif(mapObjectType.Name == \"Cart\")\r\n\tUpdateCartsThrottle();\r\n"
+				methodName = CreateManyObjects
+				returnType = System.Void
+				parameters = 22 23
+				isEntityEventMethod = False
+				entity
+				{
+					type = LogicParameter
+					uin = 22
+					parameterType = Engine.MapSystem.MapObjectType
+					parameterName = mapObjectType
+				}
+				entity
+				{
+					type = LogicParameter
+					uin = 23
+					parameterType = System.Boolean
+					parameterName = many
+				}
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 24
+				code = "foreach( Entity entity in Map.Instance.Children )\r\n{\r\n\tFan fan = entity as Fan;\r\n\tif( fan != null )\r\n\t\tfan.Throttle = sender.Value;\r\n}"
+				methodName = fansScrollBar_ValueChange
+				returnType = System.Void
+				parameters = 25
+				isEntityEventMethod = False
+				entity
+				{
+					type = LogicParameter
+					uin = 25
+					parameterType = Engine.UISystem.EScrollBar
+					parameterName = sender
+				}
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 26
+				code = "if( sender.Checked )\r\n{\r\n\tEntityType type = EntityTypes.Instance.GetByName( \"HangingBall\" );\r\n\thangingBall = (MapObject)Entities.Instance.Create( type, Map.Instance );\r\n\thangingBall.Position = new Vec3( 0, 0, 13 );\r\n\thangingBall.PostCreate();\r\n}\r\nelse\r\n{\r\n\tif( hangingBall != null )\r\n\t{\r\n\t\thangingBall.SetDeleted();\r\n\t\thangingBall = null;\r\n\t}\r\n}\r\n\r\n/*!!!!!!!\r\nvoid jumpPadsCheckBox_CheckedChange( object sender )\r\n{\r\n\tif(jumpPadsCheckBox.Checked)\r\n\t{\r\n\t\tEntityType type = EntityTypes.Instance.Find(\"JumpPad\");\r\n\r\n\t\tconst float distance = 10;\r\n\t\tconst float posZ = .5f;\r\n\r\n\t\tVec3[] positions = new Vec3[]{\r\n\t\t\tnew Vec3(-distance, -distance, posZ),\r\n\t\t\tnew Vec3(distance, -distance, posZ),\r\n\t\t\tnew Vec3(-distance, distance, posZ),\r\n\t\t\tnew Vec3(distance, distance, posZ)};\r\n\r\n\r\n\t\tfor(int n = 0; n < 4; n++)\r\n\t\t{\r\n\t\t\tJumpPad jumpPad = (JumpPad)Entities.Instance.Create(type, Map.Instance);\r\n\t\t\tjumpPad.Position = positions[n];\r\n\t\t\t//jumpPad.Rotation = rotations[n];\r\n\t\t\tjumpPad.PostCreate();\r\n\t\t}\r\n\t}\r\n\telse\r\n\t{\r\n\t\tforeach( Entity entity in Map.Instance.Children )\r\n\t\t\tif(entity as JumpPad != null)\r\n\t\t\t\tentity.SetDeleted();\r\n\t}\r\n}*/\r\n"
+				methodName = hangingBallCheckBox_CheckedChange
+				returnType = System.Void
+				parameters = 27
+				isEntityEventMethod = False
+				entity
+				{
+					type = LogicParameter
+					uin = 27
+					parameterType = Engine.UISystem.ECheckBox
+					parameterName = sender
+				}
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 28
+				code = "PhysicsWorld.Instance.Gravity = new Vec3(0,0,-9.81f);"
+				methodName = Destroying
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = True
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 29
+				code = "float throttle = ((EScrollBar)Owner.MainControl.Controls[ \"CartsThrottle\" ]).Value;\r\n\r\n\r\nforeach( Entity entity in Map.Instance.Children )\r\n{\r\n\tMapObject obj = entity as MapObject;\r\n\tif(obj == null)\r\n\t\tcontinue;\r\n\r\n\tif(obj.Type.Name != \"Cart\")\r\n\t\tcontinue;\r\n\r\n\tforeach(Motor motor in obj.PhysicsModel.Motors)\r\n\t{\r\n\t\tGearedMotor gearedMotor = motor as GearedMotor;\r\n\t\tif(gearedMotor == null)\r\n\t\t\tcontinue;\r\n\r\n\t\tgearedMotor.Enabled = true;\r\n\t\tgearedMotor.Throttle = throttle;\r\n\t}\r\n}"
+				methodName = UpdateCartsThrottle
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = False
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 30
+				code = "if(camera != RendererWorld.Instance.DefaultCamera)\r\n\treturn;\r\n\r\nbool rayCastTest = ((ECheckBox)Owner.MainControl.Controls[ \"RayCastTest\" ]).Checked;\r\nbool piercingRayCastTest = ((ECheckBox)Owner.MainControl.Controls[ \"PiercingRayCastTest\" ]).Checked;\r\nbool volumeCastTest = ((ECheckBox)Owner.MainControl.Controls[ \"VolumeCastTest\" ]).Checked;\r\n\r\nif(rayCastTest)\r\n{\r\n\tfor(float y = -18; y < 18; y++)\r\n\t{\r\n\t\tRay ray = new Ray(new Vec3(0,y, 20), new Vec3(0,0,-100));\r\n\r\n\t\tRayCastResult result = PhysicsWorld.Instance.RayCast( ray, (int)ContactGroup.CastOnlyContact );\r\n\r\n\t\tif(result.Shape != null)\r\n\t\t{\r\n\t\t\tcamera.DebugGeometry.Color = new ColorValue(1,1,0);\r\n\t\t\tcamera.DebugGeometry.AddLine(ray.Origin, result.Position);\r\n\r\n\t\t\tcamera.DebugGeometry.Color = new ColorValue(1,0,0);\r\n\t\t\tcamera.DebugGeometry.AddSphere(new Sphere(result.Position, .1f), 4);\r\n\r\n\t\t\tcamera.DebugGeometry.Color = new ColorValue(0,1,0);\r\n\t\t\tcamera.DebugGeometry.AddArrow(result.Position, result.Position + result.Normal * .3f);\r\n\t\t}\r\n\t}\r\n}\r\n\r\nif(piercingRayCastTest)\r\n{\r\n\tfor(float y = -18; y < 18; y++)\r\n\t{\r\n\t\tRay ray = new Ray(new Vec3(18,y, .5f), new Vec3(-36,0,0));\r\n\r\n\t\tRayCastResult[] piercingResult = PhysicsWorld.Instance.RayCastPiercing( \r\n\t\t\tray, (int)ContactGroup.CastOnlyContact );\r\n\r\n\t\tcamera.DebugGeometry.Color = new ColorValue(0,0,1);\r\n\t\tcamera.DebugGeometry.AddLine(ray.Origin, ray.Origin + ray.Direction);\r\n\r\n\t\tforeach(RayCastResult result in piercingResult)\r\n\t\t{\r\n\t\t\tcamera.DebugGeometry.Color = new ColorValue(1,0,0);\r\n\t\t\tcamera.DebugGeometry.AddSphere(new Sphere(result.Position, .1f), 4);\r\n\r\n\t\t\tcamera.DebugGeometry.Color = new ColorValue(0,1,0);\r\n\t\t\tcamera.DebugGeometry.AddArrow(result.Position, result.Position + result.Normal * .3f);\r\n\t\t}\r\n\t}\r\n}\r\n\r\nif(volumeCastTest)\r\n{\r\n\tBounds bounds = new Bounds(new Vec3(-10, -10, .2f), new Vec3(10, 10, 10.2f));\r\n\r\n\tcamera.DebugGeometry.Color = new ColorValue(1,1,0);\r\n\tcamera.DebugGeometry.AddBounds(bounds);\r\n\r\n\tBody[] result = PhysicsWorld.Instance.VolumeCast(bounds, (int)ContactGroup.CastOnlyDynamic);\r\n\tforeach(Body body in result)\r\n\t{\r\n\t\tcamera.DebugGeometry.Color = new ColorValue(0,1,0);\r\n\t\tcamera.DebugGeometry.AddSphere(new Sphere(body.Position, 1), 32);\r\n\t}\r\n\r\n/*\r\n\tBox box = new Box();\r\n\tbox.Center = new Vec3(0,0,5);\r\n\tbox.Extents = new Vec3(3,3,7);\r\n\tbox.Axis = new Angles(50, 30, 20).ToQuat().ToMat3();\r\n\r\n\tDebugGeometry.Instance.Color = new ColorValue(1,1,0);\r\n\tDebugGeometry.Instance.AddBox(box);\r\n\r\n\tBody[] result = PhysicsWorld.Instance.VolumeCast(box, (int)ContactGroup.CastOnlyDynamic);\r\n\tforeach(Body body in result)\r\n\t{\r\n\t\tDebugGeometry.Instance.Color = new ColorValue(0,1,0);\r\n\t\tDebugGeometry.Instance.AddSphere(new Sphere(body.Position, 1), 32);\r\n\t}\r\n*/\r\n\r\n/*\r\n\tSphere sphere = new Sphere(new Vec3(0,0,5), 7);\r\n\r\n\tDebugGeometry.Instance.Color = new ColorValue(1,1,0);\r\n\tDebugGeometry.Instance.AddSphere(sphere);\r\n\r\n\tBody[] result = PhysicsWorld.Instance.VolumeCast(sphere, (int)ContactGroup.CastOnlyDynamic);\r\n\tforeach(Body body in result)\r\n\t{\r\n\t\tDebugGeometry.Instance.Color = new ColorValue(0,1,0);\r\n\t\tDebugGeometry.Instance.AddSphere(new Sphere(body.Position, 1), 32);\r\n\t}\r\n*/\r\n\r\n/*\r\n\tCapsule capsule = new Capsule();\r\n\tcapsule.Point1 = new Vec3(-10,0,5);\r\n\tcapsule.Point2 = new Vec3(5,10,2);\r\n\tcapsule.Radius = 4;\r\n\r\n\tDebugGeometry.Instance.Color = new ColorValue(1,1,0);\r\n\tDebugGeometry.Instance.AddSphere(new Sphere(capsule.Point1, .1f));\r\n\tDebugGeometry.Instance.AddSphere(new Sphere(capsule.Point2, .1f));\r\n\tDebugGeometry.Instance.AddCapsule(capsule);\r\n\r\n\tBody[] result = PhysicsWorld.Instance.VolumeCast(capsule, (int)ContactGroup.CastOnlyDynamic);\r\n\tforeach(Body body in result)\r\n\t{\r\n\t\tDebugGeometry.Instance.Color = new ColorValue(0,1,0);\r\n\t\tDebugGeometry.Instance.AddSphere(new Sphere(body.Position, 1), 32);\r\n\t}\r\n*/\r\n\r\n}\r\n"
+				methodName = Render
+				returnType = System.Void
+				parameters = 31
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 31
+					parameterType = Engine.Renderer.Camera
+					parameterName = camera
+				}
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 32
+				code = "\r\n//CCD Test\r\nif( ccdTestRemainingCount > 0 )\r\n{\r\n\tccdTestRemainingTime -= Entity.TickDelta;\r\n\tif(ccdTestRemainingTime <= 0)\r\n\t{\r\n\t\tccdTestRemainingTime = .1f;\r\n\t\tccdTestRemainingCount--;\r\n\t\r\n\t\t//create entity\r\n\t\r\n\t\tMapObject obj = (MapObject)Entities.Instance.Create(\"SmallBox\", Map.Instance);\r\n\t\tobj.Position = new Vec3(0,0,.3f);\r\n\t\tobj.UserData = \"AllowClear\";\r\n\t\tobj.PostCreate();\r\n\r\n\t\tif(obj.PhysicsModel != null)\r\n\t\t{\r\n\t\t\tRadian angle = World.Instance.Random.NextFloat() * MathFunctions.PI * 2;\r\n\r\n\t\t\tVec3 linearVelocity = new Vec3(\r\n\t\t\t\tMathFunctions.Cos(angle) * 100, MathFunctions.Sin(angle) * 100, 60);\r\n\r\n\t\t\tforeach(Body body in obj.PhysicsModel.Bodies)\r\n\t\t\t\tbody.LinearVelocity = linearVelocity;\r\n\t\t}\r\n\r\n\t\t//sound\r\n\t\tDynamic dynamic = obj as Dynamic;\r\n\t\tif(dynamic != null)\r\n\t\t\tdynamic.SoundPlay3D( \"Types\\\\Weapons\\\\SubmachineGun\\\\AlternativeFire.ogg\", 1, false );\r\n\t}\r\n}\r\n"
+				methodName = Tick
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = True
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 33
+				variableType = System.Single
+				variableName = ccdTestRemainingTime
+				supportSerialization = True
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 34
+				variableType = System.Int32
+				variableName = ccdTestRemainingCount
+				supportSerialization = True
+			}
+		}
+	}
+}
+entity
+{
+	type = SmallHealthItem
+	uin = 35
+	classPrompt = HealthItem
+	respawnTime = 10
+	position = 12.79384 -17.93782 0.1004459
+	rotation = 0 0 0.9867585 0.1621963
+}
+entity
+{
+	type = ShotgunItem
+	uin = 36
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = 20.8884 -14.29807 0.4431099
+	rotation = 0 0 0.3813629 0.9244254
+}
+entity
+{
+	type = Light
+	uin = 37
+	classPrompt = Light
+	lightType = Spot
+	diffuseColor = 1.098039 1.098039 1.294118
+	diffusePower = 1
+	specularColor = 1.372549 1.372549 1.392157
+	specularPower = 1
+	attenuationRangeAutomatic = False
+	attenuationRange = 60
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0
+	spotlightInnerAngle = 80
+	spotlightOuterAngle = 120
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	allowDynamicLighting = True
+	position = 0 0 22
+	rotation = 0 -0.7071068 0 -0.7071068
+	name = Light_1
+}
+entity
+{
+	type = StaticMesh
+	uin = 38
+	classPrompt = StaticMesh
+	position = 0 0 0
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Models\Rooms\Rooms.mesh
+	splitGeometry = True
+	splitGeometryPieceSize = 30 30 30
+	allowDecals = All
+	castDynamicShadows = True
+}

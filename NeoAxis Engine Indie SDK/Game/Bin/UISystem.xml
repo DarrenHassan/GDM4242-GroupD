@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UISystem</name>
+    </assembly>
+    <members>
+        <member name="M:OggDecoder.OggFile.ParsePrimaryHeaders">
+            <summary>
+            internal method for parsing the main stream headers
+            </summary>
+        </member>
+        <member name="M:OggDecoder.OggFile.ParseSecondaryHeaders">
+            <summary>
+            internal method to parse all secondary headers
+            </summary>
+        </member>
+        <member name="T:UISystem.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:UISystem.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:UISystem.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="M:Engine.UISystem.ControlDeclarationManager.CreateControl(System.String)">
+            <summary>
+            if returns <b>null</b> - file not exists
+            </summary>
+            <param name="declarationFileName"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Engine.UISystem.ControlsWorld.BaseControlTypes">
+            <summary>
+            Don't modify
+            </summary>
+        </member>
+        <member name="P:Engine.UISystem.ETabControl.Pages">
+            <summary>
+            Don't modify
+            </summary>
+        </member>
+        <member name="P:Engine.UISystem.EListBox.ItemButtons">
+            <summary>
+            Don't modify
+            </summary>
+        </member>
+        <member name="M:OggDecoder.VideoDriver.Blit">
+            <summary>
+            Blit only from main thread
+            </summary>
+        </member>
+    </members>
+</doc>

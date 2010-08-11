@@ -1,0 +1,1353 @@
+type = GameMap
+uin = 2
+classPrompt = GameMap
+gameMusic = Sounds\Music\Game.ogg
+ambientLight = 0.2 0.2 0.2
+editorCameraPosition = -22.4168 -16.02838 10.37702
+editorCameraDirection = 4.512529 -0.574542
+shadowColor = 0.6 0.6 0.6 0.6
+shadow2DTextureSize = 512
+logicSystemManager = 22
+rootEditorLayer
+{
+	layer
+	{
+		name = Zones & Portals
+		visible = False
+		allowEdit = False
+	}
+	layer
+	{
+		name = StaticGeometry
+		allowEdit = False
+	}
+}
+entity
+{
+	type = Door
+	uin = 3
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 13.24685 -0.02185987 -0.1622073
+	rotation = 0 0 -0.7071068 0.7071068
+	name = Door_0
+}
+entity
+{
+	type = Door
+	uin = 4
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 29.42858 -0.001552582 -0.1510966
+	rotation = 0 0 -0.7071068 0.7071068
+	name = Door_1
+}
+entity
+{
+	type = TechDoor
+	uin = 5
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -0.001952887 3.937517 0.2062943
+	name = TechDoor_0
+}
+entity
+{
+	type = TechDoor
+	uin = 6
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -0.001952887 -3.84459 0.2062943
+	name = TechDoor_1
+}
+entity
+{
+	type = TechDoor
+	uin = 7
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -26.00195 -3.84459 0.2062943
+	name = TechDoor_2
+}
+entity
+{
+	type = TechDoor
+	uin = 8
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -26.00195 3.937517 0.2062943
+	name = TechDoor_3
+}
+entity
+{
+	type = Zone
+	uin = 9
+	classPrompt = Zone
+	position = -14.1 0 2.272113
+	scale = 54.79985 7.900363 4.7
+	visible = False
+	editorLayer = Root Layer\Zones & Portals
+}
+entity
+{
+	type = Zone
+	uin = 10
+	classPrompt = Zone
+	position = 0 -16.99018 5.802031
+	scale = 25.96709 26.34742 21.78148
+	visible = False
+	editorLayer = Root Layer\Zones & Portals
+}
+entity
+{
+	type = Zone
+	uin = 11
+	classPrompt = Zone
+	position = -26 -16.99018 5.802031
+	scale = 25.96709 26.34742 21.78148
+	visible = False
+	editorLayer = Root Layer\Zones & Portals
+}
+entity
+{
+	type = Zone
+	uin = 12
+	classPrompt = Zone
+	position = -26 17.00982 5.802031
+	scale = 25.96709 26.34742 21.78148
+	visible = False
+	editorLayer = Root Layer\Zones & Portals
+}
+entity
+{
+	type = Zone
+	uin = 13
+	classPrompt = Zone
+	position = 0 17.00982 5.802031
+	scale = 25.96709 26.34742 21.78148
+	visible = False
+	editorLayer = Root Layer\Zones & Portals
+}
+entity
+{
+	type = Zone
+	uin = 14
+	classPrompt = Zone
+	position = 21.66491 0 2.081932
+	scale = 16.91014 6.865439 4.7
+	visible = False
+	editorLayer = Root Layer\Zones & Portals
+}
+entity
+{
+	type = Portal
+	uin = 15
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = 13.24227 0.02246186 1.455607
+	scale = 0 2.615701 3.053171
+	visible = False
+	editorLayer = Root Layer\Zones & Portals
+}
+entity
+{
+	type = Portal
+	uin = 16
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -0.0004042387 -3.90943 1.771744
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 0 4.269003 3.07923
+	visible = False
+	editorLayer = Root Layer\Zones & Portals
+}
+entity
+{
+	type = Portal
+	uin = 17
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -0.0004042387 3.85592 1.771604
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 0 4.269003 3.07923
+	visible = False
+	editorLayer = Root Layer\Zones & Portals
+}
+entity
+{
+	type = Portal
+	uin = 18
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -26.0004 3.856644 1.80263
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 0 4.269003 3.07923
+	visible = False
+	editorLayer = Root Layer\Zones & Portals
+}
+entity
+{
+	type = Portal
+	uin = 19
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -26.0004 -3.90943 1.761766
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 0 4.269003 3.07923
+	visible = False
+	editorLayer = Root Layer\Zones & Portals
+}
+entity
+{
+	type = SubmachineGunItem
+	uin = 20
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = 7.075868 -2.332194 0.4377776
+	rotation = 0 0 0.2248921 -0.9743837
+}
+entity
+{
+	type = ShotgunItem
+	uin = 21
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = 7.058327 2.665954 0.4138827
+	rotation = 0 0 0.8718772 0.4897245
+}
+entity
+{
+	type = LogicSystemManager
+	uin = 22
+	mapClassManager = 23
+	entity
+	{
+		type = LogicClassManager
+		uin = 23
+		entity
+		{
+			type = LogicEntityClass
+			uin = 24
+			relationships = 87 100 113
+			entityClassName = BooleanSwitch
+			className = BooleanSwitch_Light
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 25
+				code = "Owner.ValueChange += delegate(Switch entity)\r\n{\r\n\t((MapObject)Entities.Instance.GetByName(\"Light_0\")).Visible = Owner.Value;\r\n};\r\n"
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 26
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 26
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 27
+			relationships = 88
+			entityClassName = GameGuiObject
+			className = Terminal_OldTV
+			customScriptCodeCreated = True
+			customScriptCode = "void MeshObject_AddToRenderQueue(MovableObject sender, Camera camera, \r\n\tbool onlyShadowCasters, ref bool allowRender)\r\n{\r\n\t//Check visibility\r\n\tif(camera == RendererWorld.Instance.DefaultCamera)\r\n\t{\r\n\t\tIn3dControlManager controlManager = Owner.ControlManager;\r\n\t\tBox box = new Box( controlManager.Position3D, controlManager.Scale3D * .5f, \r\n\t\t\tcontrolManager.Rotation3D.ToMat3() );\r\n\t\tif( camera.IsIntersectsFast( box.ToBounds() ) )\r\n\t\t{\r\n\t\t\tVec3[] points = new Vec3[ 8 ];\r\n\t\t\tbox.ToPoints( ref points );\r\n\t\t\tPlane plane = Plane.FromPoints( points[ 0 ], points[ 1 ], points[ 2 ] );\r\n\t\t\tif( plane.GetSide( camera.Position ) == Plane.Side.Positive )\r\n\t\t\t\tlastVisibled = true;\r\n\t\t}\r\n\t}\r\n}\r\n"
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 28
+				code = "DestroyCamera();\r\n\r\nint textureSize = 512;\r\n\r\ncameraTexture = TextureManager.Instance.Create(\r\n\tTextureManager.Instance.GetUniqueName( \"TerminalOldTVCameraTexture\" ), Texture.Type.Type2D,\r\n\tnew Vec2i( textureSize, textureSize ), 1, 0, PixelFormat.R8G8B8, Texture.Usage.RenderTarget );\r\n\r\nrenderTexture = cameraTexture.GetBuffer().GetRenderTarget();\r\nrenderTexture.AutoUpdate = true;\r\n\r\nMapCamera mapCameraPositions = (MapCamera)Entities.Instance.GetByName(\"MapCamera_ForOldTV\");\r\n\r\ncamera = SceneManager.Instance.CreateCamera();\r\ncamera.NearClipDistance = .1f;\r\ncamera.FarClipDistance = 1000.0f;\r\ncamera.AspectRatio = 1.333f;\r\nif(mapCameraPositions.Fov != 0)\r\n\tcamera.Fov = mapCameraPositions.Fov;\r\ncamera.Position = mapCameraPositions.Position;\r\ncamera.FixedUp = /*SetFixedUpAxis*/( mapCameraPositions.Rotation * new Vec3(0,0,1) );\r\ncamera.LookAt(mapCameraPositions.Position + mapCameraPositions.Rotation * new Vec3(100,0,0));\r\n\r\nviewport = renderTexture.AddViewport( camera );\r\nviewport.ShadowsEnabled = false;\r\n\r\n//Create compositor for HDR render technique\r\n//if( RendererWorld.Instance.DefaultViewport.GetCompositorItem( \"HDR\" ) != null )\r\n//{\r\n//\tviewport.AddCompositor( \"HDR\", typeof( HDRPostProcessing.CompositorItem ), 0 );\r\n//\tviewport.SetCompositorEnabled( \"HDR\", true );\r\n//}\r\n\r\nforeach(MapObjectAttachedObject attachedObject in Owner.AttachedObjects)\r\n{\r\n\tMapObjectAttachedMesh attachedMesh = attachedObject as MapObjectAttachedMesh;\r\n\tif(attachedMesh != null)\r\n\t{\r\n\t\tattachedMeshObject = attachedMesh.MeshObject;\r\n\t\tbreak;\r\n\t}\r\n}\r\n\r\nif(attachedMeshObject != null)\r\n\tattachedMeshObject.AddToRenderQueue += MeshObject_AddToRenderQueue;\r\n\r\n//add OldTV post effect\r\n{\r\n\tCompositor compositor = CompositorManager.Instance.GetByName( \"OldTV\" );\r\n\tif( compositor != null && compositor.IsSupported() )\r\n\t{\r\n\t\tviewport.AddCompositor( \"OldTV\" );\r\n\t\tviewport.SetCompositorEnabled( \"OldTV\", true );\r\n\t}\r\n}\r\n\r\nOwner.MainControl.BackTexture = cameraTexture;\r\nOwner.MainControl.BackColor = new ColorValue(1,1,1);\r\n\r\nlastVisibled = true;"
+				methodName = CreateCamera
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = False
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 29
+				code = "Owner.MainControl.BackTexture = null;\r\nOwner.MainControl.BackColor = new ColorValue(0,0,0);\r\n\r\nif( cameraTexture != null )\r\n{\r\n\tif(attachedMeshObject != null)\r\n\t{\r\n\t\tattachedMeshObject.AddToRenderQueue -= MeshObject_AddToRenderQueue;\r\n\t\tattachedMeshObject = null;\r\n\t}\r\n\r\n\tviewport.Dispose();\r\n\tviewport = null;\r\n\r\n\tcamera.Dispose();\r\n\tcamera = null;\r\n\r\n\trenderTexture = null;\r\n\r\n\tcameraTexture.Dispose();\r\n\tcameraTexture = null;\r\n}\r\n"
+				methodName = DestroyCamera
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = False
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 30
+				variableType = Engine.Renderer.Camera
+				variableName = camera
+				supportSerialization = False
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 31
+				variableType = Engine.Renderer.Texture
+				variableName = cameraTexture
+				supportSerialization = False
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 32
+				variableType = Engine.Renderer.RenderTexture
+				variableName = renderTexture
+				supportSerialization = False
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 33
+				code = "DestroyCamera();\r\n"
+				methodName = Destroying
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = True
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 34
+				variableType = Engine.Renderer.Viewport
+				variableName = viewport
+				supportSerialization = False
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 35
+				code = "if(renderTexture != null && camera == RendererWorld.Instance.DefaultCamera)\r\n{\r\n\tviewport.MaterialScheme = RendererWorld.Instance.DefaultViewport.MaterialScheme;\r\n\r\n\trenderTexture.AutoUpdate = lastVisibled;\r\n\tlastVisibled = false;\r\n}\r\n"
+				methodName = Render
+				returnType = System.Void
+				parameters = 36
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 36
+					parameterType = Engine.Renderer.Camera
+					parameterName = camera
+				}
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 37
+				variableType = System.Boolean
+				variableName = lastVisibled
+				supportSerialization = False
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 38
+				variableType = Engine.Renderer.MeshObject
+				variableName = attachedMeshObject
+				supportSerialization = False
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 39
+			relationships = 89
+			entityClassName = BooleanSwitch
+			className = BooleanSwitch_OldTV
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 40
+				code = "needUpdateTerminal = true;\r\n\r\nOwner.ValueChange += delegate(Switch entity)\r\n{\r\n\tneedUpdateTerminal = true;\r\n};\r\n"
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 41
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 41
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 42
+				code = "if(needUpdateTerminal)\r\n{\r\n\tEntity terminal = Entities.Instance.GetByName(\"Terminal_OldTV\");\r\n\tTerminal_OldTV logicObject = (Terminal_OldTV)terminal.LogicObject;\r\n\r\n\tif(Owner.Value)\r\n\t\tlogicObject.CreateCamera();\r\n\telse\r\n\t\tlogicObject.DestroyCamera();\r\n\r\n\tneedUpdateTerminal = false;\r\n}\r\n"
+				methodName = Tick
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = True
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 43
+				variableType = System.Boolean
+				variableName = needUpdateTerminal
+				supportSerialization = False
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 44
+			relationships = 99
+			entityClassName = GameGuiObject
+			className = Placard_Reflection
+			customScriptCodeCreated = True
+			customScriptCode = "ReflectionRenderTargetListener renderTargetListener;\r\n\r\n//////////////////////////////\r\n\r\nvoid RenderSystemEvent(RenderSystemEvents name)\r\n{\r\n\tif( name == RenderSystemEvents.DeviceRestored )\r\n\t{\r\n\t\tif(cameraTexture != null)\r\n\t\t{\r\n\t\t\tCreateCamera();\r\n\t\t}\r\n\t}\r\n}\r\n\r\n//////////////////////////////\r\n\r\nclass ReflectionRenderTargetListener : RenderTargetListener\r\n{\r\n\tCamera camera;\r\n\tGameGuiObject owner;\r\n\tRenderTexture renderTexture;\r\n\r\n\tpublic ReflectionRenderTargetListener(Camera camera, GameGuiObject owner, \r\n\t\tRenderTexture renderTexture)\r\n\t{\r\n\t\tthis.camera = camera;\r\n\t\tthis.owner = owner;\r\n\t\tthis.renderTexture = renderTexture;\r\n\t}\r\n\r\n\tprotected override void OnPreRenderTargetUpdate( RenderTargetEvent evt )\r\n\t{\r\n\t\tbase.OnPreRenderTargetUpdate( evt );\r\n\r\n\t\tCamera defaultCamera = RendererWorld.Instance.DefaultCamera;\r\n\r\n\t\t//Update camera\r\n\t\tcamera.Fov = defaultCamera.Fov;\r\n\t\tcamera.Position = defaultCamera.Position;\r\n\t\tcamera.FixedUp = defaultCamera.FixedUp;\r\n\t\tcamera.Direction = defaultCamera.Direction;\r\n\r\n\t\t//Update reflection plane\r\n\t\tVec3 pos;\r\n\t\tQuat rot;\r\n\t\tVec3 scl;\r\n\t\r\n\t\tMapObjectAttachedMesh attachedMesh = (MapObjectAttachedMesh)owner.GetAttachedObjectByAlias(\"ReflectionObject\");\r\n\t\tattachedMesh.GetGlobalInterpolatedTransform(out pos, out rot, out scl);\r\n\t\r\n\t\tPlane p = Plane.FromPoints(pos, pos + rot * new Vec3(0,0,1), pos + rot * new Vec3(0,1,0));\r\n\t\tcamera.DisableReflection();\r\n\t\tcamera.EnableReflection(p);\r\n\r\n\t\tif(RenderSystem.Instance.Capabilities.UserClipPlanes )\r\n\t\t{\r\n\t\t\tPlane clipPlane = new Plane(-p.Normal, -p.Distance);\r\n\t\t\tPlane[] clipPlanes = new Plane[] {clipPlane};\r\n\t\t\tcamera.SetClipPlanesForAllGeometry( clipPlanes );\r\n\t\t}\r\n\r\n\t\t//Hide owner\r\n\t\towner.Visible = false;\r\n\r\n\t\t//Show Eyes_Wall\r\n\t\tMapObject eyesObject = Entities.Instance.GetByName(\"Eyes_Wall\") as MapObject;\r\n\t\tif(eyesObject != null)\r\n\t\t\teyesObject.Visible = true;\r\n\t}\r\n\r\n\tprotected override void OnPostRenderTargetUpdate( RenderTargetEvent evt )\r\n\t{\r\n\t\tbase.OnPostRenderTargetUpdate( evt );\r\n\r\n\t\t//Show owner\r\n\t\towner.Visible = true;\r\n\r\n\t\t//Hide Eyes_Wall\r\n\t\tMapObject eyesObject = Entities.Instance.GetByName(\"Eyes_Wall\") as MapObject;\r\n\t\tif(eyesObject != null)\r\n\t\t\teyesObject.Visible = false;\r\n\t}\r\n\r\n}\r\n\r\n//////////////////////////////\r\n\r\nvoid MeshObject_AddToRenderQueue(MovableObject sender, Camera camera, \r\n\tbool onlyShadowCasters, ref bool allowRender)\r\n{\r\n\t//Check visibility\r\n\tif(camera == RendererWorld.Instance.DefaultCamera)\r\n\t{\r\n\t\tIn3dControlManager controlManager = Owner.ControlManager;\r\n\t\tBox box = new Box( controlManager.Position3D, controlManager.Scale3D * .5f, \r\n\t\t\tcontrolManager.Rotation3D.ToMat3() );\r\n\t\tif( camera.IsIntersectsFast( box.ToBounds() ) )\r\n\t\t{\r\n\t\t\tVec3[] points = new Vec3[ 8 ];\r\n\t\t\tbox.ToPoints( ref points );\r\n\t\t\tPlane plane = Plane.FromPoints( points[ 0 ], points[ 1 ], points[ 2 ] );\r\n\t\t\tif( plane.GetSide( camera.Position ) == Plane.Side.Positive )\r\n\t\t\t\tlastVisibled = true;\r\n\t\t}\r\n\t}\r\n}\r\n"
+			entity
+			{
+				type = LogicVariable
+				uin = 45
+				variableType = Engine.Renderer.Viewport
+				variableName = viewport
+				supportSerialization = False
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 46
+				code = "DestroyCamera();\r\n\r\n//Create plane mesh\r\nstring planeMeshName = MeshManager.Instance.GetUniqueName( \"RenderDemoReflectionPlane\" );\r\n\r\nplaneMesh = MeshManager.Instance.CreatePlane(planeMeshName, new Plane(Vec3.XAxis, 0),\r\n\tnew Vec2(4.8f,3.6f), new Vec2i(1,1), true, 1, new Vec2(1,1), Vec3.ZAxis);\r\n\r\n//Create texture\r\nint textureSize = (EngineApp.Instance.VideoMode.X >= 1024) ? 1024 : 512;\r\n\r\nstring textureName = TextureManager.Instance.GetUniqueName( \"RenderDemoReflectionTexture\" );\r\n\r\ncameraTexture = TextureManager.Instance.Create( textureName, Texture.Type.Type2D,\r\n\tnew Vec2i( textureSize, textureSize ), 1, 0, PixelFormat.R8G8B8, Texture.Usage.RenderTarget );\r\n\r\nrenderTexture = cameraTexture.GetBuffer().GetRenderTarget();\r\nrenderTexture.AutoUpdate = true;\r\n\r\n//Create camera\r\nCamera defaultCamera = RendererWorld.Instance.DefaultCamera;\r\n\r\ncamera = SceneManager.Instance.CreateCamera();\r\ncamera.NearClipDistance = defaultCamera.NearClipDistance;\r\ncamera.FarClipDistance = defaultCamera.FarClipDistance;\r\ncamera.AspectRatio = 1.333f;\r\ncamera.AllowZonesAndPortalsSceneManagement = false;\r\n\r\n//Add viewport\r\nviewport = renderTexture.AddViewport( camera );\r\nviewport.ShadowsEnabled = false;\r\n\r\n//Create material\r\nstring materialName = MaterialManager.Instance.GetUniqueName(\"RenderDemoReflectionMaterial\");\r\n\r\nMaterial material = MaterialManager.Instance.Create(materialName);\r\nTechnique technique = material.CreateTechnique();\r\nPass pass = technique.CreatePass();\r\npass.Lighting = false;\r\nTextureUnitState state = pass.CreateTextureUnitState(textureName);\r\nstate.SetTextureAddressingMode(TextureAddressingMode.Clamp);\r\nstate.SetProjectiveTexturing(camera);\r\n\r\n//Add listener\r\nrenderTargetListener = new ReflectionRenderTargetListener( camera, Owner, renderTexture );\r\nrenderTexture.AddListener( renderTargetListener );\r\n\r\n//Set material to mesh\r\nMapObjectAttachedMesh attachedMesh = new MapObjectAttachedMesh();\r\nattachedMesh.Alias = \"ReflectionObject\";\r\nOwner.Attach(attachedMesh);\r\nattachedMesh.PositionOffset = new Vec3(.1f,0,0);\r\nattachedMesh.Body = Owner.PhysicsModel.GetBody(\"main\");\r\nattachedMesh.MeshName = planeMeshName;\r\n\r\nattachedMesh.MeshObject.SetMaterialNameForAllSubObjects(materialName);\r\n\r\nattachedMesh.MeshObject.AddToRenderQueue += MeshObject_AddToRenderQueue;\r\n\r\nlastVisibled = true;\r\n"
+				methodName = CreateCamera
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = False
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 47
+				code = "//destroy camera\r\nif( cameraTexture != null )\r\n{\r\n\tMapObjectAttachedMesh attachedMesh = (MapObjectAttachedMesh)Owner.\r\n\t\tGetAttachedObjectByAlias(\"ReflectionObject\");\r\n\tattachedMesh.MeshObject.AddToRenderQueue -= MeshObject_AddToRenderQueue;\r\n\tOwner.Detach(attachedMesh);\r\n\r\n\tviewport.Dispose();\r\n\tviewport = null;\r\n\r\n\tcamera.Dispose();\r\n\tcamera = null;\r\n\r\n\trenderTexture.RemoveListener( renderTargetListener );\r\n\trenderTargetListener.Dispose();\r\n\trenderTargetListener = null;\r\n\r\n\trenderTexture = null;\r\n\r\n\tcameraTexture.Dispose();\r\n\tcameraTexture = null;\r\n\r\n\tplaneMesh.Dispose();\r\n\tplaneMesh = null;\r\n}\r\n\r\n"
+				methodName = DestroyCamera
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = False
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 48
+				code = "DestroyCamera();\r\n\r\nRenderSystem.Instance.RenderSystemEvent -= RenderSystemEvent;"
+				methodName = Destroying
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = True
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 49
+				code = "if(renderTexture != null && camera == RendererWorld.Instance.DefaultCamera)\r\n{\r\n\trenderTexture.AutoUpdate = lastVisibled;\r\n\tlastVisibled = false;\r\n}\r\n"
+				methodName = Render
+				returnType = System.Void
+				parameters = 50
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 50
+					parameterType = Engine.Renderer.Camera
+					parameterName = camera
+				}
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 51
+				variableType = Engine.Renderer.Camera
+				variableName = camera
+				supportSerialization = False
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 52
+				variableType = Engine.Renderer.Texture
+				variableName = cameraTexture
+				supportSerialization = False
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 53
+				variableType = Engine.Renderer.Mesh
+				variableName = planeMesh
+				supportSerialization = False
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 54
+				variableType = Engine.Renderer.RenderTexture
+				variableName = renderTexture
+				supportSerialization = False
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 55
+				variableType = System.Boolean
+				variableName = lastVisibled
+				supportSerialization = False
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 56
+				code = "RenderSystem.Instance.RenderSystemEvent += RenderSystemEvent;"
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 57
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 57
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 58
+			relationships = 100 101
+			entityClassName = BooleanSwitch
+			className = BooleanSwitch_Firework
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 59
+				code = "MapObject firework = (MapObject)Entities.Instance.GetByName(\"Firework_0\");\r\nfirework.Visible = Owner.Value;\r\n\r\nOwner.ValueChange += delegate(Switch entity)\r\n{\r\n\tfirework.Visible = Owner.Value;\r\n};\r\n"
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 60
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 60
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 61
+			relationships = 101
+			entityClassName = BooleanSwitch
+			className = BooleanSwitch_Reflection
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 62
+				code = "needUpdatePlacard = true;\r\n\r\nOwner.ValueChange += delegate(Switch entity)\r\n{\r\n\tneedUpdatePlacard = true;\r\n};\r\n"
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 63
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 63
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 64
+				variableType = System.Boolean
+				variableName = needUpdatePlacard
+				supportSerialization = False
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 65
+				code = "if(needUpdatePlacard)\r\n{\r\n\tEntity placard = Entities.Instance.GetByName(\"Placard_Reflection\");\r\n\tPlacard_Reflection logicObject = (Placard_Reflection)placard.LogicObject;\r\n\r\n\tif(Owner.Value)\r\n\t\tlogicObject.CreateCamera();\r\n\telse\r\n\t\tlogicObject.DestroyCamera();\r\n\r\n\tneedUpdatePlacard = false;\r\n}\r\n"
+				methodName = Tick
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = True
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 66
+			relationships = 102
+			entityClassName = MapObject
+			className = Eyes_Wall
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 67
+				code = "Owner.Visible = false;"
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 68
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 68
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 69
+			relationships = 105 85 104 90 107 114
+			entityClassName = MapObject
+			className = OgreHead_MaterialChanger
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 70
+				code = "string materialName = Owner.TextUserData;\r\n\r\nforeach( MapObjectAttachedObject attachedObject in Owner.AttachedObjects )\r\n{\r\n\tMapObjectAttachedMesh attachedMesh = attachedObject as MapObjectAttachedMesh;\r\n\tif( attachedMesh != null )\r\n\t{\r\n\t\tattachedMesh.MeshObject.SubObjects[1].MaterialName = materialName;\r\n\t\tbreak;\r\n\t}\r\n}\r\n"
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 71
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 71
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 72
+			relationships = 113
+			entityClassName = BooleanSwitch
+			className = BooleanSwitch_SpotLight
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 73
+				code = "((MapObject)Entities.Instance.GetByName(\"Light_Spot\")).Visible = Owner.Value;\r\n((MapObject)Entities.Instance.GetByName(\"FlareTest_Spot\")).Visible = Owner.Value;\r\n\r\nOwner.ValueChange += delegate(Switch entity)\r\n{\r\n\t((MapObject)Entities.Instance.GetByName(\"Light_Spot\")).Visible = Owner.Value;\r\n\t((MapObject)Entities.Instance.GetByName(\"FlareTest_Spot\")).Visible = Owner.Value;\r\n};\r\n"
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 74
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 74
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 75
+				code = "time += Entity.TickDelta;\r\n\r\nQuat rot = new Angles(0, 0, time * 12).ToQuat();\r\nrot *= new Angles(0, -40, 0).ToQuat();\r\n\r\n((MapObject)Entities.Instance.GetByName(\"Light_Spot\")).Rotation = rot;\r\n\r\n"
+				methodName = Tick
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = True
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 76
+				variableType = System.Single
+				variableName = time
+				supportSerialization = False
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 77
+			relationships = 85
+			entityClassName = MapObject
+			className = OgreHead_DynamicDiffuseScale
+			customScriptCodeCreated = True
+			customScriptCode = "void MeshObject_AddToRenderQueue(MovableObject sender, Camera camera, \r\n\tbool onlyShadowCasters, ref bool allowRender)\r\n{\r\n\tMeshObject meshObject = (MeshObject)sender;\r\n\tMeshObject.SubObject subObject = meshObject.SubObjects[ 1 ];\r\n\r\n\tfloat v = (MathFunctions.Sin( EngineApp.Instance.Time ) + 1) / 2;\r\n\tfloat z = (MathFunctions.Cos( EngineApp.Instance.Time * 1.3f ) + 1) / 2;\r\n\r\n\tsubObject.SetCustomGpuParameter(\r\n\t\t(int)ShaderBaseMaterial.GpuParameters.dynamicDiffuseScale, new Vec4(v * 10, z * 10, 1 - v, 1));\r\n}\r\n"
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 78
+				code = "string materialName = Owner.TextUserData;\r\n\r\nforeach( MapObjectAttachedObject attachedObject in Owner.AttachedObjects )\r\n{\r\n\tMapObjectAttachedMesh attachedMesh = attachedObject as MapObjectAttachedMesh;\r\n\tif( attachedMesh != null )\r\n\t{\r\n\t\tattachedMesh.MeshObject.SubObjects[1].MaterialName = materialName;\r\n\t\tmeshObject = attachedMesh.MeshObject;\r\n\t\tbreak;\r\n\t}\r\n}\r\n\r\nif(meshObject != null)\r\n\tmeshObject.AddToRenderQueue += MeshObject_AddToRenderQueue;\r\n"
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 79
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 79
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 80
+				code = "if(meshObject != null)\r\n{\r\n\tmeshObject.AddToRenderQueue -= MeshObject_AddToRenderQueue;\r\n\tmeshObject = null;\r\n}\r\n"
+				methodName = Destroying
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = True
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 81
+				variableType = Engine.Renderer.MeshObject
+				variableName = meshObject
+				supportSerialization = False
+			}
+		}
+	}
+}
+entity
+{
+	type = SpawnPoint
+	uin = 82
+	classPrompt = SpawnPoint
+	defaultPoint = True
+	position = 17.24851 0.02966946 -0.08922863
+	rotation = 0 0 -1 0
+	name = SpawnPoint_0
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 83
+	classPrompt = MapChangeRegion
+	mapName = Maps\MainDemo\Map.map
+	spawnPointName = SpawnPoint_FromRenderDemo
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = 24.67474 0.02967137 -0.08922863
+	scale = 3 6.163065 6.219346
+	name = MapChangeRegion_0
+	checkType = Bounds
+}
+entity
+{
+	type = Firework
+	uin = 84
+	classPrompt = Firework
+	position = 0 -16.80696 -0.160151
+	name = Firework_0
+}
+entity
+{
+	type = OgreHead
+	uin = 85
+	classPrompt = MapObject
+	relationships = 69 77
+	position = -32.7421 24.68435 1.36064
+	rotation = 0 0 -0.5535851 0.8327927
+	scale = 2.554973 2.554973 2.554973
+	name = OgreHead_DynamicDiffuseScale
+	textUserData = OgreHeadDynamicDiffuseScale
+	logicClass = 77
+}
+entity
+{
+	type = OgreHead
+	uin = 86
+	classPrompt = MapObject
+	position = 8.780662 25.1019 1.36064
+	rotation = 0 0 -0.8484597 0.52926
+	scale = 2.554973 2.554973 2.554973
+	name = OgreHead_0
+}
+entity
+{
+	type = BooleanSwitch
+	uin = 87
+	classPrompt = BooleanSwitch
+	relationships = 24
+	value = True
+	position = 1.223491 -16.01535 -0.08046627
+	rotation = 0.5 -0.5 0.5 0.5
+	name = BooleanSwitch_Light
+	logicClass = 24
+}
+entity
+{
+	type = Terminal
+	uin = 88
+	classPrompt = Terminal
+	relationships = 27
+	initialControl = Gui\RenderDemoOldTVTerminal.gui
+	position = -10.39413 -16.42127 1.514991
+	rotation = 0 0 0.006718862 -0.9999774
+	name = Terminal_OldTV
+	logicClass = 27
+}
+entity
+{
+	type = BooleanSwitch
+	uin = 89
+	classPrompt = BooleanSwitch
+	relationships = 39
+	value = False
+	position = -10.22348 -15.07012 1.034771
+	rotation = 0 0 0.006719249 -0.9999774
+	name = BooleanSwitch_OldTV
+	logicClass = 39
+}
+entity
+{
+	type = OgreHead
+	uin = 90
+	classPrompt = MapObject
+	relationships = 69
+	position = -18.30749 24.74342 1.36064
+	rotation = 0 0 -0.8156574 0.5785353
+	scale = 2.554973 2.554973 2.554973
+	name = OgreHead_3
+	textUserData = OgreHeadTransparentExample
+	logicClass = 69
+}
+entity
+{
+	type = TestLamp
+	uin = 91
+	classPrompt = Dynamic
+	position = 4 -4 0.08466271
+	name = TestLamp_0
+}
+entity
+{
+	type = TestLamp
+	uin = 92
+	classPrompt = Dynamic
+	position = -4 4 0.1103999
+	name = TestLamp_1
+}
+entity
+{
+	type = TestLamp
+	uin = 93
+	classPrompt = Dynamic
+	position = 4 4 0.1989129
+	name = TestLamp_2
+}
+entity
+{
+	type = TestLamp
+	uin = 94
+	classPrompt = Dynamic
+	position = -4 -4 0.08633552
+	name = TestLamp_3
+}
+entity
+{
+	type = GreenyNimbus
+	uin = 95
+	classPrompt = MapObject
+	position = -37.08604 -28.2308 -0.1863637
+	name = GreenyNimbus_0
+}
+entity
+{
+	type = GreenyNimbus
+	uin = 96
+	classPrompt = MapObject
+	position = -36.99485 27.82482 -0.1863637
+	name = GreenyNimbus_1
+}
+entity
+{
+	type = GreenyNimbus
+	uin = 97
+	classPrompt = MapObject
+	position = 11.02656 -28.13469 -0.1863637
+	name = GreenyNimbus_2
+}
+entity
+{
+	type = GreenyNimbus
+	uin = 98
+	classPrompt = MapObject
+	position = 10.76771 27.98936 -0.1863637
+	name = GreenyNimbus_3
+}
+entity
+{
+	type = Placard
+	uin = 99
+	classPrompt = GameGuiObject
+	relationships = 44
+	initialControl = Gui\RenderDemoReflectionPlacard.gui
+	position = 0 24.43447 1.913006
+	rotation = 0 0 -0.7005848 0.7135691
+	name = Placard_Reflection
+	logicClass = 44
+}
+entity
+{
+	type = BooleanSwitch
+	uin = 100
+	classPrompt = BooleanSwitch
+	relationships = 24 58
+	value = False
+	position = -0.01587367 -16.01535 -0.08046627
+	rotation = 0.5 -0.5 0.5 0.5
+	name = BooleanSwitch_Firework
+	logicClass = 58
+}
+entity
+{
+	type = BooleanSwitch
+	uin = 101
+	classPrompt = BooleanSwitch
+	relationships = 58 61
+	value = False
+	position = 3.526768 24.50487 0.8961469
+	rotation = 0 0 -0.7071068 0.7071068
+	name = BooleanSwitch_Reflection
+	logicClass = 61
+}
+entity
+{
+	type = Eyes
+	uin = 102
+	classPrompt = MapObject
+	relationships = 66
+	position = -0.07153869 4.616617 8.897478
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 11.71685 13.64662 8.871065
+	name = Eyes_Wall
+	logicClass = 66
+}
+entity
+{
+	type = MapCamera
+	uin = 103
+	classPrompt = MapCamera
+	fov = 80
+	position = 9.660472 -8.618127 10.88399
+	rotation = 0.2023323 0.1056225 -0.9000921 0.3711332
+	name = MapCamera_ForOldTV
+}
+entity
+{
+	type = OgreHead
+	uin = 104
+	classPrompt = MapObject
+	relationships = 69
+	position = -8.351197 25.1019 1.36064
+	rotation = 0 0 -0.5715684 0.8205544
+	scale = 2.554973 2.554973 2.554973
+	name = OgreHead_4
+	textUserData = BumpMappingExample
+	logicClass = 69
+}
+entity
+{
+	type = OgreHead
+	uin = 105
+	classPrompt = MapObject
+	relationships = 69
+	position = -8.247194 -24.97006 1.36064
+	rotation = 0 0 0.543751 0.8392464
+	scale = 2.554973 2.554973 2.554973
+	name = OgreHead_5
+	textUserData = StaticBox
+	logicClass = 69
+}
+entity
+{
+	type = StaticBox
+	uin = 106
+	classPrompt = MapObject
+	position = 0.0125851 -16.796 -1.346484
+	rotation = 0 0 -1 -4.371139E-08
+	scale = 4.608798 4.608798 2.450075
+	name = StaticBox_0
+}
+entity
+{
+	type = OgreHead
+	uin = 107
+	classPrompt = MapObject
+	relationships = 69
+	position = 8.655577 -25.0499 1.36064
+	rotation = 0 0 0.8299798 0.5577933
+	scale = 2.554973 2.554973 2.554973
+	name = OgreHead_1
+	textUserData = PerPixelLightingExample
+	logicClass = 69
+}
+entity
+{
+	type = YellowBlinkGridObject
+	uin = 108
+	classPrompt = MapObject
+	position = 0 29.65332 6.728323
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 1.600024 1.955376 2.036158
+	name = BlueBlinkGridObject_0
+}
+entity
+{
+	type = CubemapZone
+	uin = 109
+	classPrompt = CubemapZone
+	textureSize = Size256x256
+	globalZone = True
+	nearFarClipDistance = 1 1000
+	position = -0.2232666 -17.26453 4.762182
+	scale = 1.567497 1.567497 1.567497
+	name = CubemapZone_0
+}
+entity
+{
+	type = CubemapReflectedBall
+	uin = 110
+	classPrompt = Dynamic
+	position = 0 15.98086 0.8071082
+	name = CubemapReflectedBall_0
+}
+entity
+{
+	type = Light
+	uin = 111
+	classPrompt = Light
+	lightType = Spot
+	diffuseColor = 1 1 1
+	diffusePower = 1
+	specularColor = 1 1 1
+	specularPower = 1
+	attenuationRangeAutomatic = False
+	attenuationRange = 20
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0
+	spotlightInnerAngle = 30
+	spotlightOuterAngle = 40
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	allowDynamicLighting = True
+	position = 3.907943 -20.63348 6.922253
+	rotation = 0.0001787317 0.3515784 -0.002872511 0.9361539
+	name = Light_Spot
+}
+entity
+{
+	type = FlareTest
+	uin = 112
+	classPrompt = MapObject
+	position = 3.907943 -20.63348 6.922253
+	rotation = 0 0.1479224 0 0.9889989
+	name = FlareTest_Spot
+}
+entity
+{
+	type = BooleanSwitch
+	uin = 113
+	classPrompt = BooleanSwitch
+	relationships = 24 72
+	value = False
+	position = -1.223012 -16.01535 -0.08046627
+	rotation = 0.5 -0.5 0.5 0.5
+	name = BooleanSwitch_SpotLight
+	logicClass = 72
+}
+entity
+{
+	type = OgreHead
+	uin = 114
+	classPrompt = MapObject
+	relationships = 69
+	position = -36.03994 0.0240781 1.36064
+	scale = 2.554973 2.554973 2.554973
+	name = OgreHead_6
+	textUserData = OgreHeadAnimated
+	logicClass = 69
+}
+entity
+{
+	type = EngineLogoPlacard
+	uin = 115
+	classPrompt = MapObject
+	position = -0.03931642 -29.66241 3.259057
+	rotation = 0 0 -0.7071068 -0.7071068
+	name = EngineLogoPlacard_0
+}
+entity
+{
+	type = Light
+	uin = 116
+	classPrompt = Light
+	lightType = Spot
+	diffuseColor = 0.4313726 0.4313726 0.5490196
+	diffusePower = 1
+	specularColor = 0.7843138 0.7843138 0.9019608
+	specularPower = 1
+	attenuationRangeAutomatic = False
+	attenuationRange = 68
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0
+	spotlightInnerAngle = 66.486
+	spotlightOuterAngle = 71.351
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	allowDynamicLighting = True
+	position = -10.9147 0.3069702 52.34478
+	rotation = 0 0.7022102 0 0.7119697
+	name = Light_0
+}
+entity
+{
+	type = LightBall
+	uin = 117
+	classPrompt = Dynamic
+	position = -25.96478 16.91498 0.4260082
+	name = LightBall_0
+}
+entity
+{
+	type = Ball
+	uin = 118
+	classPrompt = Dynamic
+	position = 6.954772 16.77623 0.331312
+	name = Ball_0
+}
+entity
+{
+	type = Ball
+	uin = 119
+	classPrompt = Dynamic
+	position = -7.065076 16.88519 0.332366
+	name = Ball_1
+}
+entity
+{
+	type = StaticMesh
+	uin = 120
+	classPrompt = StaticMesh
+	position = 0 0 0
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Maps\RenderDemo\Meshes\Corridor.mesh
+	splitGeometry = True
+	splitGeometryPieceSize = 15 15 15
+	allowDecals = All
+}
+entity
+{
+	type = StaticMesh
+	uin = 121
+	classPrompt = StaticMesh
+	position = -26 0 0
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Maps\RenderDemo\Meshes\Corridor.mesh
+	splitGeometry = True
+	splitGeometryPieceSize = 15 15 15
+	allowDecals = All
+}
+entity
+{
+	type = StaticMesh
+	uin = 122
+	classPrompt = StaticMesh
+	position = -38.99751 0 0
+	rotation = 0 0 -2.433593E-08 -1
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Maps\RenderDemo\Meshes\CorridorEnd.mesh
+	splitGeometryPieceSize = 15 15 15
+	allowDecals = All
+}
+entity
+{
+	type = StaticMesh
+	uin = 123
+	classPrompt = StaticMesh
+	position = 0 16 0
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Maps\RenderDemo\Meshes\Room.mesh
+	splitGeometry = True
+	splitGeometryPieceSize = 15 15 15
+	allowDecals = All
+}
+entity
+{
+	type = StaticMesh
+	uin = 124
+	classPrompt = StaticMesh
+	position = -26 16 0
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Maps\RenderDemo\Meshes\Room.mesh
+	splitGeometry = True
+	splitGeometryPieceSize = 15 15 15
+	allowDecals = All
+}
+entity
+{
+	type = StaticMesh
+	uin = 125
+	classPrompt = StaticMesh
+	position = 0 -16 0
+	rotation = 0 0 -1 1.216796E-08
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Maps\RenderDemo\Meshes\Room.mesh
+	splitGeometry = True
+	splitGeometryPieceSize = 15 15 15
+	allowDecals = All
+}
+entity
+{
+	type = StaticMesh
+	uin = 126
+	classPrompt = StaticMesh
+	position = -26 -16 0
+	rotation = 0 0 -1 1.216796E-08
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Maps\RenderDemo\Meshes\Room.mesh
+	splitGeometry = True
+	splitGeometryPieceSize = 15 15 15
+	allowDecals = All
+}
+entity
+{
+	type = StaticMesh
+	uin = 127
+	classPrompt = StaticMesh
+	position = 20.9429 0 -0.09306674
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Models\CorridorExit\CorridorExit.mesh
+	splitGeometryPieceSize = 15 15 15
+	allowDecals = All
+	castDynamicShadows = True
+}
+entity
+{
+	type = StaticMesh
+	uin = 128
+	classPrompt = StaticMesh
+	position = 13.49217 -3.27565 2.303497
+	rotation = -0.7071068 0 0 0.7071068
+	scale = 1 5.022102 1
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Models\DefaultBox\DefaultBox.mesh
+	forceMaterial = "Rooms/PassageWall"
+	splitGeometryPieceSize = 15 15 15
+	allowDecals = All
+	castDynamicShadows = True
+}
+entity
+{
+	type = StaticMesh
+	uin = 129
+	classPrompt = StaticMesh
+	position = 13.49217 3.449024 2.303497
+	rotation = -0.7071068 0 0 0.7071068
+	scale = 1 5.022102 1
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Models\DefaultBox\DefaultBox.mesh
+	forceMaterial = "Rooms/PassageWall"
+	splitGeometryPieceSize = 15 15 15
+	allowDecals = All
+	castDynamicShadows = True
+}
+entity
+{
+	type = StaticMesh
+	uin = 130
+	classPrompt = StaticMesh
+	position = 13.62329 0.04527754 4.459463
+	rotation = -0.7071068 0 0 0.7071068
+	scale = 1 1.039396 5.84258
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Models\DefaultBox\DefaultBox.mesh
+	forceMaterial = "Rooms/PassageWall"
+	splitGeometryPieceSize = 15 15 15
+	allowDecals = All
+	castDynamicShadows = True
+}
+entity
+{
+	type = StaticMesh
+	uin = 131
+	classPrompt = StaticMesh
+	position = 13.62662 -2.564373 3.827374
+	rotation = -0.3829411 0 0 0.9237728
+	scale = 1 0.7214497 1.046547
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Models\DefaultBox\DefaultBox.mesh
+	forceMaterial = "Rooms/PassageWall"
+	splitGeometryPieceSize = 15 15 15
+	allowDecals = All
+	castDynamicShadows = True
+}
+entity
+{
+	type = StaticMesh
+	uin = 132
+	classPrompt = StaticMesh
+	position = 13.62662 2.717066 3.827374
+	rotation = -0.9153185 0 0 0.402731
+	scale = 1 0.7214497 1.046547
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Models\DefaultBox\DefaultBox.mesh
+	forceMaterial = "Rooms/PassageWall"
+	splitGeometryPieceSize = 15 15 15
+	allowDecals = All
+	castDynamicShadows = True
+}

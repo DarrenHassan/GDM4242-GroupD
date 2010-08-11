@@ -1,0 +1,7 @@
+type SmokeInfluence
+{
+	class = SmokeInfluence
+	defaultParticleName = SmokeParticle
+	allowEmptyName = True
+	networkType = Synchronized
+}

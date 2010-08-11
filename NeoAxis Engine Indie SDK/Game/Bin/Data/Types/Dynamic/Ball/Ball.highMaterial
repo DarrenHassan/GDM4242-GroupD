@@ -1,0 +1,14 @@
+highLevelMaterial Ball
+{
+	template = ShaderBaseMaterial
+	specularScale = 1 1 1
+	specularShininess = 21.595
+	diffuse1Map
+	{
+		texture = Types\Dynamic\Ball\Ball.dds
+	}
+	normalMap
+	{
+		texture = Maps\RenderDemo\Textures\FloorNormals.dds
+	}
+}

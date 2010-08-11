@@ -1,0 +1,14 @@
+type MapCamera
+{
+	class = MapCamera
+	allowEditorCreate = True
+	allowEmptyName = False
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\Base\MapCamera\MapCamera.mesh
+			onlyForEditor = True
+		}
+	}
+}

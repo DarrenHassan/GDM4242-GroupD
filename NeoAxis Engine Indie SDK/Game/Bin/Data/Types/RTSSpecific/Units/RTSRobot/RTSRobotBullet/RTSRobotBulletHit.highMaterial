@@ -1,0 +1,11 @@
+highLevelMaterial RTSRobotBulletHit
+{
+	template = ShaderBaseMaterial
+	blending = AlphaAdd
+	lighting = False
+	diffuseVertexColor = True
+	diffuse1Map
+	{
+		texture = Types\RTSSpecific\Units\RTSRobot\RTSRobotBullet\RTSRobotBulletHit.tga
+	}
+}

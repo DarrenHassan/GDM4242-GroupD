@@ -1,0 +1,31 @@
+type Placard
+{
+	class = GameGuiObject
+	physicsModel = Types\Dynamic\Placard\Placard.physics
+	allowEditorCreate = True
+	networkType = Synchronized
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\Dynamic\Placard\PlacardHolders.mesh
+			castDynamicShadows = True
+			body = bodyHolders
+			position = 0 0 -2.3
+		}
+		mesh
+		{
+			meshName = Types\Dynamic\Placard\Placard.mesh
+			castDynamicShadows = True
+			alias = mainMesh
+			body = main
+		}
+		gui
+		{
+			body = main
+			position = 0.1 0 0
+			rotation = 0.5016785 0.5065598 0.4940843 0.4975907
+			scale = 4.8 3.6 0
+		}
+	}
+}

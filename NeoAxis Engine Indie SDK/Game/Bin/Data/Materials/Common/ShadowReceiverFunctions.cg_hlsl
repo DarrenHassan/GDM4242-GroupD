@@ -1,0 +1,442 @@
+// Copyright (C) 2006-2010 NeoAxis Group Ltd.
+
+#include "Materials/Common/GeneralSettings.cg_hlsl"
+
+#ifdef SHADOW_PSSM
+void getShadowUV(float4x4 textureViewProjMatrix0, float4x4 textureViewProjMatrix1, 
+	float4x4 textureViewProjMatrix2, float3 lightPosition, float3 lightDirection, 
+	float3 worldPosition, float4 spotLightParams, float3 shadowTextureSizes,
+	out float4 shadowUV0, out float4 shadowUV1, out float4 shadowUV2,
+	float4 shadowDirectionalLightSplitDistances, float pssmDistance )
+#else
+void getShadowUV(float4x4 textureViewProjMatrix0, float3 lightPosition, float3 lightDirection, 
+	float3 worldPosition, float4 spotLightParams, float3 shadowFarDistance, float3 shadowTextureSizes,
+	out float4 shadowUV0 )
+#endif
+{
+	//half3 shadowFarDistance:
+	//x: far distance
+	//y: shadowFarDistance - shadowFadeMinDistance * 2
+	//z: 1 / (shadowFarDistance - shadowFadeMinDistance)
+
+	float3 worldPositionMinusLightPosition = worldPosition - lightPosition;
+
+	float3 vertexToLightDirection;
+	#ifndef LIGHTTYPE_DIRECTIONAL
+		vertexToLightDirection = normalize(worldPositionMinusLightPosition);
+	#else
+		vertexToLightDirection = lightDirection;
+	#endif
+
+	float shadowTexturePixelSize;
+	{
+		#ifdef LIGHTTYPE_DIRECTIONAL
+			#ifdef SHADOW_PSSM
+				if(pssmDistance <= shadowDirectionalLightSplitDistances.y)
+				{
+					float d = shadowDirectionalLightSplitDistances[1] - 
+						shadowDirectionalLightSplitDistances[0];
+					shadowTexturePixelSize = d * 2.0f / shadowTextureSizes.y;
+				}
+				else if(pssmDistance <= shadowDirectionalLightSplitDistances.z)
+				{
+					float d = shadowDirectionalLightSplitDistances[2] - 
+						shadowDirectionalLightSplitDistances[1];
+					shadowTexturePixelSize = d * 2.0f / (shadowTextureSizes.y / 2);
+				}
+				else
+				{
+					float d = shadowDirectionalLightSplitDistances[3] - 
+						shadowDirectionalLightSplitDistances[2];
+					shadowTexturePixelSize = d * 2.0f / (shadowTextureSizes.y / 4);
+				}
+			#else
+				shadowTexturePixelSize = shadowFarDistance.x * 2.0f / shadowTextureSizes.y;
+			#endif
+		#endif
+
+		#ifdef LIGHTTYPE_SPOT
+			float distance = length(worldPositionMinusLightPosition);
+			float cosHalfOuter = spotLightParams.y;
+			float length = distance * cosHalfOuter * 2.0f * 3.14159f;
+			shadowTexturePixelSize = length / shadowTextureSizes.z;
+		#endif
+
+		#ifdef LIGHTTYPE_POINT
+			float distance = length(worldPositionMinusLightPosition);
+			float length = distance * 3.14159f;
+			shadowTexturePixelSize = length / shadowTextureSizes.x;
+		#endif
+
+		//error multiplier
+		shadowTexturePixelSize *= 1.3f;
+	}
+
+	float depthOffset = 0;
+	#ifdef SHADOW_BLUR_SIMPLE
+		depthOffset = .05f + shadowTexturePixelSize * 2;
+	#endif
+
+	#ifdef SHADOW_BLUR_PCF_4X4
+		depthOffset = .15f + shadowTexturePixelSize * 3;
+	#endif
+
+	#ifdef SHADOW_BLUR_PCF_8_TAP_FIXED_DISK_4X
+		depthOffset = .25f + shadowTexturePixelSize * 3;
+	#endif
+
+	float3 worldPositionWithOffset = worldPosition - vertexToLightDirection * depthOffset;
+	float4 position4 = float4(worldPositionWithOffset, 1);
+	shadowUV0 = mul(textureViewProjMatrix0, position4);
+#ifdef SHADOW_PSSM
+	shadowUV1 = mul(textureViewProjMatrix1, position4);
+	shadowUV2 = mul(textureViewProjMatrix2, position4);
+#endif
+}
+
+half getShadowValueSimple(sampler2D shadowMap, float4 shadowUV, float lightShadowFarClipDistance,
+	float shadowTextureSize, half disableFetch4ForBrokenDrivers)
+{
+	float compareDepth = shadowUV.z / lightShadowFarClipDistance;
+	
+#if defined(ATI_HARDWARE_SHADOWS)
+
+	float2 shadowUVScaled = shadowUV.xy / shadowUV.w;
+
+	float2 lerps = frac( shadowUVScaled.xy * shadowTextureSize );
+	//fetch4
+	float4 depths = tex2Dproj( shadowMap, shadowUV );
+
+	float4 depthFlags = step( depths, compareDepth );
+
+	//for Radeon 5xxx Series
+	if(disableFetch4ForBrokenDrivers > 0)
+		lerps = float2(1,0);
+		
+	return lerp(
+		lerp( depthFlags[3], depthFlags[0], lerps.x ), 
+		lerp( depthFlags[1], depthFlags[2], lerps.x ), 
+		lerps.y );
+
+#elif defined(NVIDIA_HARDWARE_SHADOWS)
+
+	return 1.0f - tex2Dproj( shadowMap, shadowUV ).r;
+	
+#else
+
+	float depth = tex2Dproj( shadowMap, shadowUV ).r;
+	float depthFlag = step( depth, compareDepth );
+	return (half)depthFlag;
+	
+#endif
+
+}
+
+#ifdef SHADOW_BLUR_PCF_4X4
+half getShadowValuePCF4x4(sampler2D shadowMap, float4 shadowUV, float lightShadowFarClipDistance, 
+	float shadowTextureSize, half disableFetch4ForBrokenDrivers)
+{
+	float compareDepth = shadowUV.z / lightShadowFarClipDistance;
+	float2 shadowUVScaled = shadowUV.xy / shadowUV.w;
+
+#if defined(ATI_HARDWARE_SHADOWS)
+
+	const float scale = .5f / shadowTextureSize;
+
+	const float2 offsets[4] =
+	{
+		float2( -1, -1 ),
+		float2(  1, -1 ),
+		float2( -1,  1 ),
+		float2(  1,  1 )
+	};
+
+	half shadow = 0;
+	for(int n = 0; n < 4; n++)
+	{
+		float2 texCoord = shadowUVScaled.xy + offsets[n] * scale;
+
+		float2 lerps = frac(texCoord * shadowTextureSize);
+
+		float4 depths = tex2D(shadowMap, texCoord);
+		float4 depthFlags = step(depths, compareDepth);
+
+		//for Radeon 5xxx Series
+		if(disableFetch4ForBrokenDrivers > 0)
+			lerps = float2(1,0);
+		
+		shadow += lerp(
+			lerp(depthFlags[3], depthFlags[0], lerps.x), 
+			lerp(depthFlags[1], depthFlags[2], lerps.x), 
+			lerps.y);
+
+	}
+	return shadow * (1.0h / 4.0h);
+
+
+#elif defined(NVIDIA_HARDWARE_SHADOWS)
+
+	float scale = .5f / shadowTextureSize;
+
+	const float2 offsets[4] =
+	{
+		float2( -1, -1 ),
+		float2(  1, -1 ),
+		float2( -1,  1 ),
+		float2(  1,  1 )
+	};
+	
+	half shadow = 0;
+	for(int n = 0; n < 4; n++)
+	{
+		float4 texCoord = shadowUV;
+		texCoord.xy += offsets[n] * ( scale * shadowUV.w );
+		
+		shadow += tex2Dproj( shadowMap, texCoord ).r;
+	}
+	return 1.0h - shadow * (1.0h / 4.0h);
+	
+
+#else
+
+	//2x2 filter
+	
+	//transform to texel space
+	float2 texelPos = shadowTextureSize * shadowUVScaled.xy;
+	//determine the lerp amounts
+	float2 lerps = frac( texelPos );
+	
+	float pixelOffset = ( 1.0f / shadowTextureSize ) * .99f;
+
+	float4 depths;
+	depths.x = tex2D( shadowMap, shadowUVScaled.xy ).r;
+	depths.y = tex2D( shadowMap, shadowUVScaled.xy + float2(pixelOffset, 0) ).r;
+	depths.z = tex2D( shadowMap, shadowUVScaled.xy + float2(0, pixelOffset) ).r;
+	depths.w = tex2D( shadowMap, shadowUVScaled.xy + float2(pixelOffset, pixelOffset) ).r;
+
+	float4 depthFlags = step( depths, compareDepth );
+
+	return lerp( 
+		lerp( depthFlags.x, depthFlags.y, lerps.x ),
+		lerp( depthFlags.z, depthFlags.w, lerps.x ),
+		lerps.y );
+
+#endif
+
+}
+#endif
+
+#ifdef SHADOW_BLUR_PCF_8_TAP_FIXED_DISK_4X
+half getShadowValuePCF8TapFixedDisk4x(sampler2D shadowMap, 
+	float4 shadowUV, float lightShadowFarClipDistance, float shadowTextureSize,
+	half disableFetch4ForBrokenDrivers)
+{
+	float compareDepth = shadowUV.z / lightShadowFarClipDistance;
+	float2 shadowUVScaled = shadowUV.xy / shadowUV.w;
+
+	const float scale = 1.5f / shadowTextureSize;
+	
+	const float2 poisson[8] =
+	{
+		half2( 0.0, 0.0),
+		half2( 0.527837, -0.085868),
+		half2(-0.040088, 0.536087),
+		half2(-0.670445, -0.179949),
+		half2(-0.419418, -0.619039),
+		half2( 0.440453, -0.639399),
+		half2(-0.757088, 0.349334),
+		half2( 0.574619, 0.685879),
+	};
+
+#if defined(ATI_HARDWARE_SHADOWS)
+
+	//8 tap filter + fetch4
+
+	half shadow = 0;
+	for(int n = 0; n < 8; n++)
+	{
+		float2 texCoord = shadowUVScaled.xy + poisson[n] * scale;
+
+		float2 lerps = frac(texCoord * shadowTextureSize);
+
+		float4 depths = tex2D(shadowMap, texCoord);
+		float4 depthFlags = step(depths, compareDepth);
+
+		//for Radeon 5xxx Series
+		if(disableFetch4ForBrokenDrivers > 0)
+			lerps = float2(1,0);
+		
+		shadow += lerp(
+			lerp(depthFlags[3], depthFlags[0], lerps.x), 
+			lerp(depthFlags[1], depthFlags[2], lerps.x), 
+			lerps.y);
+
+	}
+	return shadow * (1.0h / 8.0h);
+	
+#elif defined(NVIDIA_HARDWARE_SHADOWS)
+
+	//8 tap filter + nvidia hardware pcf
+
+	half shadow = 0;
+	for(int n = 0; n < 8; n++)
+	{
+		float4 texCoord = shadowUV;
+		texCoord.xy += poisson[n] * ( scale * shadowUV.w );
+		
+		shadow += tex2Dproj( shadowMap, texCoord ).r;
+	}
+	return 1.0h - shadow * (1.0h / 8.0h);
+
+#else
+
+	//8 tap filter
+
+	half shadow = 0;
+	for(int n = 0; n < 8; n++)
+	{
+		float2 texCoord = shadowUVScaled.xy + poisson[n] * scale;
+
+		float depth = tex2D( shadowMap, texCoord ).r;
+		float depthFlag = step( depth, compareDepth );
+		
+		shadow += depthFlag;
+	}
+	return shadow * (1.0h / 8.0h);
+
+#endif
+
+}
+#endif
+
+
+
+
+#ifdef SHADOW_PSSM
+half getShadowmapReceiveValue(float4 shadowUV0, float4 shadowUV1, float4 shadowUV2, 
+	sampler2D shadowMap0, sampler2D shadowMap1, sampler2D shadowMap2, half lightCastShadows, 
+	float lightShadowFarClipDistance, float3 shadowTextureSizes, half shadowColorIntensity,
+	float4 shadowDirectionalLightSplitDistances, float pssmDistance
+	)
+#else
+half getShadowmapReceiveValue(float4 shadowUV0, sampler2D shadowMap0, half cameraDistance, 
+	half lightCastShadows, float lightShadowFarClipDistance, half3 shadowFarDistance, 
+	float3 shadowTextureSizes, half shadowColorIntensity, half disableFetch4ForBrokenDrivers)
+#endif
+{
+	//float3 shadowFarDistance:
+	//x: far distance
+	//y: shadowFarDistance - shadowFadeMinDistance * 2
+	//z: 1 / (shadowFarDistance - shadowFadeMinDistance)
+
+	half shadowTextureSize = 0;
+	#ifdef LIGHTTYPE_DIRECTIONAL
+		shadowTextureSize = shadowTextureSizes.y;
+	#endif
+	#ifdef LIGHTTYPE_SPOT
+		shadowTextureSize = shadowTextureSizes.z;
+	#endif
+	#ifdef LIGHTTYPE_POINT
+		shadowTextureSize = shadowTextureSizes.x;
+	#endif
+
+	half final;
+
+	#ifdef SHADOW_BLUR_SIMPLE
+	{
+		#ifdef SHADOW_PSSM
+
+			//!!!!disableFetch4ForBrokenDrivers
+
+			if(pssmDistance <= shadowDirectionalLightSplitDistances.y)
+			{
+				final = getShadowValueSimple(shadowMap0, shadowUV0, lightShadowFarClipDistance,
+					shadowTextureSize );
+			}
+			else if(pssmDistance <= shadowDirectionalLightSplitDistances.z)
+			{
+				final = getShadowValueSimple(shadowMap1, shadowUV1, lightShadowFarClipDistance,
+					shadowTextureSize / 2 );
+			}
+			else
+			{
+				final = getShadowValueSimple(shadowMap2, shadowUV2, lightShadowFarClipDistance,
+					shadowTextureSize / 4);
+			}
+		#else
+			final = getShadowValueSimple(shadowMap0, shadowUV0, lightShadowFarClipDistance,
+				shadowTextureSize, disableFetch4ForBrokenDrivers);
+		#endif
+	}
+	#endif
+
+	#ifdef SHADOW_BLUR_PCF_4X4
+	{
+		#ifdef SHADOW_PSSM
+			if(pssmDistance <= shadowDirectionalLightSplitDistances.y)
+			{
+				final = getShadowValuePCF4x4(shadowMap0, shadowUV0, 
+					lightShadowFarClipDistance, shadowTextureSize);
+			}
+			else if(pssmDistance <= shadowDirectionalLightSplitDistances.z)
+			{
+				//!!!!!?
+				final = getShadowValuePCF4x4(shadowMap1, shadowUV1, 
+					lightShadowFarClipDistance, shadowTextureSize / 2);
+			}
+			else
+			{
+				//!!!!!?
+				final = getShadowValueSimple(shadowMap2, shadowUV2, 
+					lightShadowFarClipDistance, shadowTextureSize / 4);
+			}
+		#else
+			final = getShadowValuePCF4x4(shadowMap0, shadowUV0, 
+				lightShadowFarClipDistance, shadowTextureSize, disableFetch4ForBrokenDrivers);
+		#endif
+	}
+	#endif
+
+	#ifdef SHADOW_BLUR_PCF_8_TAP_FIXED_DISK_4X
+	{
+		#ifdef SHADOW_PSSM
+			if(pssmDistance <= shadowDirectionalLightSplitDistances.y)
+			{
+				final = getShadowValuePCF8TapFixedDisk4x(shadowMap0, shadowUV0, 
+					lightShadowFarClipDistance, shadowTextureSize);
+			}
+			else if(pssmDistance <= shadowDirectionalLightSplitDistances.z)
+			{
+				//!!!!!?
+				final = getShadowValuePCF4x4(shadowMap1, shadowUV1, 
+					lightShadowFarClipDistance, shadowTextureSize / 2);
+			}
+			else
+			{
+				//!!!!!?
+				final = getShadowValueSimple(shadowMap2, shadowUV2, 
+					lightShadowFarClipDistance, shadowTextureSize / 4);
+			}
+		#else
+			final = getShadowValuePCF8TapFixedDisk4x(shadowMap0, shadowUV0, 
+				lightShadowFarClipDistance, shadowTextureSize, disableFetch4ForBrokenDrivers);
+		#endif
+	}
+	#endif
+
+	//shadow intensity
+	final = 1 - final * shadowColorIntensity;
+
+	//fading by distance
+	#ifndef SHADOW_PSSM
+		final += saturate( ( cameraDistance + shadowFarDistance.y ) * shadowFarDistance.z );
+		if(final > 1)
+			final = 1;
+	#endif
+
+	//check light cast shadows flag
+	if(lightCastShadows < 0)
+		final = 1;
+
+	return final;
+}

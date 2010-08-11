@@ -1,0 +1,23 @@
+highLevelMaterial RenderDemoRoomFloor
+{
+	template = ShaderBaseMaterial
+	reflectionColor = 0.3921569 0.3921569 0.3921569
+	specularColor = 1 1 1
+	specularShininess = 23.883
+	diffuse1Map
+	{
+		texture = Maps\RenderDemo\Textures\RoomFloorDiffuse.dds
+	}
+	reflectionMap
+	{
+		texture = Maps\RenderDemo\Textures\RoomFloorReflection.dds
+	}
+	specularMap
+	{
+		texture = Maps\RenderDemo\Textures\RoomFloorSpecular.dds
+	}
+	normalMap
+	{
+		texture = Maps\RenderDemo\Textures\RoomFloorNormals.dds
+	}
+}

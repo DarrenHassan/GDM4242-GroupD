@@ -1,0 +1,8 @@
+highLevelMaterial FpsDemoHouse/Celling
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Maps\PortalSystemDemo\StaticGeometry\House\Celling.dds
+	}
+}

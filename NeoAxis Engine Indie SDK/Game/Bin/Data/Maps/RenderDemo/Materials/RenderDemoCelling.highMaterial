@@ -1,0 +1,19 @@
+highLevelMaterial RenderDemoCelling
+{
+	template = ShaderBaseMaterial
+	emissionScale = 2.745098 2.745098 2.745098
+	specularScale = 0.7882354 0.7882354 0.7882354
+	specularShininess = 81.09
+	diffuse1Map
+	{
+		texture = Maps\RenderDemo\Textures\CellingDiffuse.dds
+	}
+	emissionMap
+	{
+		texture = Maps\RenderDemo\Textures\CellingEmissive.dds
+	}
+	normalMap
+	{
+		texture = Maps\RenderDemo\Textures\CellingNormal.dds
+	}
+}

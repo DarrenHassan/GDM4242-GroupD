@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HeightmapTerrain</name>
+    </assembly>
+    <members>
+        <member name="T:Engine.MapSystem.HeightmapTerrainType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.HeightmapTerrain"/> entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.HeightmapTerrain">
+            <summary>
+            Defines a heightmap terrain on a map.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.HeightmapTerrain.GetHeight(Engine.MathEx.Vec2,System.Boolean)">
+            <summary>
+            </summary>
+            <param name="pos"></param>
+            <param name="considerHoles"></param>
+            <returns>if hole, Single.MinValue will be returned.</returns>
+        </member>
+        <member name="P:Engine.MapSystem.HeightmapTerrain.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.HeightmapTerrain.CollisionMaterialName">
+            <summary>
+            Gets or sets a name of a physical material.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.HeightmapTerrain.BottomClipHeight">
+            <summary>
+            Gets or sets the bottom clip height. 
+            Tiles below the given height will not be drawn. 
+            It is used for optimization of rendering.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,22 @@
+type LightBall
+{
+	class = Dynamic
+	physicsModel = Types\Dynamic\LightBall\LightBall.physics
+	allowEditorCreate = True
+	networkType = Synchronized
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\Dynamic\LightBall\LightBall.mesh
+			body = main
+		}
+		light
+		{
+			diffuseColor = 0.3921569 1.960784 1.960784
+			specularColor = 0.3921569 1.960784 1.960784
+			attenuationQuadric = 1
+			castShadows = False
+		}
+	}
+}

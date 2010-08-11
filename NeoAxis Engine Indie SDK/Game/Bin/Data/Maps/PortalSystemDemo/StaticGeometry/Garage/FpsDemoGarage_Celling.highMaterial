@@ -1,0 +1,8 @@
+highLevelMaterial FpsDemoGarage/Celling
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Maps\PortalSystemDemo\StaticGeometry\Garage\Celling.dds
+	}
+}

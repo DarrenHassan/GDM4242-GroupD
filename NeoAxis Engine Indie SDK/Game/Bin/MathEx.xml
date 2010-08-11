@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MathEx</name>
+    </assembly>
+    <members>
+        <member name="P:Engine.MathEx.Curve.Times">
+            <summary>
+            <b>Don't modify</b>.
+            </summary>
+        </member>
+        <member name="P:Engine.MathEx.Curve.Values">
+            <summary>
+            <b>Don't modify</b>.
+            </summary>
+        </member>
+        <member name="M:Engine.MathEx.Frustum.IsIntersectsFast(Engine.MathEx.Vec3@)">
+            <summary>
+            Fast culling. Not cull everything outside the frustum.
+            </summary>
+            <param name="point"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Engine.MathEx.Frustum.IsIntersectsFast(Engine.MathEx.Vec3)">
+            <summary>
+            Fast culling. Not cull everything outside the frustum.
+            </summary>
+            <param name="point"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Engine.MathEx.Frustum.IsIntersectsFast(Engine.MathEx.Bounds@)">
+            <summary>
+            Fast culling. Not cull everything outside the frustum.
+            </summary>
+            <param name="bounds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Engine.MathEx.Frustum.IsIntersectsFast(Engine.MathEx.Bounds)">
+            <summary>
+            Fast culling. Not cull everything outside the frustum.
+            </summary>
+            <param name="bounds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Engine.MathEx.Frustum.IsIntersectsFast(Engine.MathEx.Box@)">
+            <summary>
+            Fast culling. Not cull everything outside the frustum.
+            </summary>
+            <param name="box"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Engine.MathEx.Frustum.IsIntersectsFast(Engine.MathEx.Box)">
+            <summary>
+            Fast culling. Not cull everything outside the frustum.
+            </summary>
+            <param name="box"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Engine.MathEx.Frustum.IsIntersects(Engine.MathEx.Bounds@)">
+            <summary>
+            Exact intersection test.
+            </summary>
+            <param name="bounds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Engine.MathEx.Frustum.IsIntersects(Engine.MathEx.Bounds)">
+            <summary>
+            Exact intersection test.
+            </summary>
+            <param name="bounds"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

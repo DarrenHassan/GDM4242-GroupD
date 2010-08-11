@@ -1,0 +1,20 @@
+type RTSGeyser
+{
+	class = MapObject
+	allowEditorCreate = True
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\Dynamic\Ball\Ball.mesh
+			castDynamicShadows = True
+			forceMaterial = Black
+			scale = 1 1 0.1
+		}
+		particle
+		{
+			particleName = RTSGeyserParticle
+			updateWhenItNotInView = False
+		}
+	}
+}

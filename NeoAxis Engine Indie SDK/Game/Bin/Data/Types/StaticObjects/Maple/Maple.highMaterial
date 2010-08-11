@@ -1,0 +1,10 @@
+highLevelMaterial Maple
+{
+	template = VegetationMaterial
+	culling = False
+	alphaRejectFunction = Greater
+	diffuse1Map
+	{
+		texture = Types\StaticObjects\Maple\Maple.dds
+	}
+}

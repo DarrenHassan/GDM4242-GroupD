@@ -1,0 +1,8 @@
+highLevelMaterial FpsDemoGarage/OuterWall
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Maps\PortalSystemDemo\StaticGeometry\Garage\OuterWall.dds
+	}
+}

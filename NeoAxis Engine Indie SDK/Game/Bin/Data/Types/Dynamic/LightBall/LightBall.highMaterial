@@ -1,0 +1,6 @@
+highLevelMaterial LightBall
+{
+	template = ShaderBaseMaterial
+	diffuseScale = 0 0 0
+	emissionScale = 0.3921569 1.568628 1.568628
+}

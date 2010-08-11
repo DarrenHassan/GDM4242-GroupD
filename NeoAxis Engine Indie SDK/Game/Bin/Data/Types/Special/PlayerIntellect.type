@@ -1,0 +1,5 @@
+type PlayerIntellect
+{
+	class = PlayerIntellect
+	networkType = Synchronized
+}

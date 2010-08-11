@@ -1,0 +1,4 @@
+type BadFaction
+{
+	class = Faction
+}

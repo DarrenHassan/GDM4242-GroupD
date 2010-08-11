@@ -1,0 +1,51 @@
+fragment_program Compositor/HDR/CalculateAdaptedLuminance_hlsl hlsl
+{
+	source Materials\PostEffects\HDR\hdr.cg_hlsl
+	entry_point calculateAdaptedLuminance
+	target ps_2_0
+}
+
+fragment_program Compositor/HDR/CalculateAdaptedLuminance_cg cg
+{
+	source Materials\PostEffects\HDR\hdr.cg_hlsl
+	entry_point calculateAdaptedLuminance
+	profiles arbfp1
+}
+
+fragment_program Compositor/HDR/CalculateAdaptedLuminance unified
+{
+	delegate Compositor/HDR/CalculateAdaptedLuminance_hlsl
+	delegate Compositor/HDR/CalculateAdaptedLuminance_cg
+}
+
+material Compositor/HDR/CalculateAdaptedLuminance
+{
+	technique
+	{
+		pass
+		{
+			cull_hardware none
+			cull_software none
+			depth_check off
+
+			vertex_program_ref Compositor/StdQuad_vp
+			{
+			}
+			fragment_program_ref Compositor/HDR/CalculateAdaptedLuminance
+			{
+			}
+
+			texture_unit
+			{
+				tex_address_mode clamp
+				filtering none
+			}
+
+			texture_unit
+			{
+				tex_address_mode clamp
+				filtering none
+			}
+		}
+	}
+}

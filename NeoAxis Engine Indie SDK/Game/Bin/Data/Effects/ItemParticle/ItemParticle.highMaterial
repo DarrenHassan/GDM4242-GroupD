@@ -1,0 +1,12 @@
+highLevelMaterial ItemParticle
+{
+	template = ShaderBaseMaterial
+	blending = AlphaAdd
+	lighting = False
+	diffuseVertexColor = True
+	diffuse1Map
+	{
+		texture = Effects/ItemParticle/Object.tga
+		clamp = True
+	}
+}

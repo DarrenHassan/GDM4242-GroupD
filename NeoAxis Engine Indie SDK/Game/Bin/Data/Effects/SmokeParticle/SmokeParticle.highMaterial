@@ -1,0 +1,12 @@
+highLevelMaterial SmokeParticle
+{
+	template = ShaderBaseMaterial
+	blending = AlphaBlend
+	lighting = False
+	diffuseVertexColor = True
+	diffuse1Map
+	{
+		texture = Effects\SmokeParticle\SmokeParticle.tga
+		clamp = True
+	}
+}

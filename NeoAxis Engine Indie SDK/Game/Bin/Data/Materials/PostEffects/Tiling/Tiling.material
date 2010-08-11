@@ -1,0 +1,45 @@
+fragment_program Compositor/Tiling_fp_hlsl hlsl
+{
+	source Materials\PostEffects\Tiling\Tiling.cg_hlsl
+	entry_point main_fp
+	target ps_2_0
+}
+
+fragment_program Compositor/Tiling_fp_cg cg
+{
+	source Materials\PostEffects\Tiling\Tiling.cg_hlsl
+	entry_point main_fp
+	profiles arbfp1
+}
+
+fragment_program Compositor/Tiling_fp unified
+{
+	delegate Compositor/Tiling_fp_hlsl
+	delegate Compositor/Tiling_fp_cg
+}
+
+material Compositor/Tiling
+{
+	technique
+	{
+	
+		pass
+		{
+			depth_check off
+
+			vertex_program_ref Compositor/StdQuad_Tex2a_vp
+			{
+			}
+
+			fragment_program_ref Compositor/Tiling_fp
+			{
+			}
+
+			texture_unit
+			{
+				tex_address_mode clamp
+				filtering trilinear
+			}
+		}
+	}
+}

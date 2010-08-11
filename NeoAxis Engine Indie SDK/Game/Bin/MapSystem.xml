@@ -1,0 +1,3464 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MapSystem</name>
+    </assembly>
+    <members>
+        <member name="T:Engine.MapSystem.RegionType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.Region"/> entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.MapObject"/> entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapGeneralObjectType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.MapGeneralObject"/> entity type.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectType.OnLoad(Engine.Utils.TextBlock)">
+            <summary>
+            Called when the type during loading.
+            </summary>
+            <param name="block">The text block in which data of type will be loaded.</param>
+            <returns><b>true</b> if the data are correct; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectType.OnSave(Engine.Utils.TextBlock)">
+            <summary>
+            Called when the type during saving.
+            </summary>
+            <param name="block">The text block in which data of type will be saved.</param>
+            <returns><b>true</b> if the data are correct; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectType.OnIsExistsReferenceToObject(System.Object)">
+            <summary>
+            Whether to check up there is a link to object.
+            </summary>
+            <remarks>
+            This method it is necessary to redirect to all of you created 
+            <b>MapObject.MapObjectCreateObjectCollection</b> objects and 
+            for all custom not serializable <b>EntityType</b> fields. 
+            It is necessary for normal work of Resource Editor.
+            </remarks>
+            <param name="obj">The cheched object.</param>
+            <returns><b>true</b> if a link to object is exists; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectType.OnChangeReferencesToObject(System.Object,System.Object)">
+            <summary>
+            Replaces the link of all objects to another.
+            </summary>
+            <remarks>
+            This method it is necessary to redirect to all of you created 
+            <b>MapObject.MapObjectCreateObjectCollection</b> objects and 
+            for all custom not serializable <b>EntityType</b> fields. 
+            It is necessary for normal work of Resource Editor.
+            </remarks>
+            <param name="obj">The source link to object.</param>
+            <param name="newValue">The new link to object.</param>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectType.PhysicsModel">
+            <summary>
+            Gets or sets the name of physics model.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectType.AttachedObjects">
+            <summary>
+            Gets the collection of attached objects. <b>Don't modify</b>.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectType.DieObjects">
+            <summary>
+            Gets the die objects collection.
+            </summary>
+            <remarks>
+            <para>
+            These objects will be created after destroying of object.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Engine.MapSystem.Region">
+            <summary>
+            Defines a region on a map.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObject">
+            <summary>
+            Defines a base map object.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapGeneralObject">
+            <summary>
+            Defines the base class for a map management objects. 
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapGeneralObject.OnRenderFrame">
+            <summary>
+            Called before the render frame will be rendered.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapGeneralObject.OnRender(Engine.Renderer.Camera)">
+            <summary>
+            Called before the object it will be rendered.
+            </summary>
+            <param name="camera">The render camera.</param>
+        </member>
+        <member name="M:Engine.MapSystem.MapGeneralObject.OnPostCreate(System.Boolean)">
+            <summary>
+            Called after the entity is added into the world.
+            </summary>
+            <param name="loaded"><b>true</b> if the entity has been loaded; otherwise, <b>false</b>.</param>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate2(System.Boolean)"/>
+        </member>
+        <member name="P:Engine.MapSystem.MapGeneralObject.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.OnLoad(Engine.Utils.TextBlock)">
+            <summary>
+            Called while entity type is loading.
+            </summary>
+            <param name="block">The text block from which data of entity will be loaded.</param>
+            <returns><b>true</b> if the entity successfully loaded; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.OnSave(Engine.Utils.TextBlock)">
+            <summary>
+            Called while entity type is saving.
+            </summary>
+            <param name="block">The text block in which data of entity will be saved.</param>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.SetTransform(Engine.MathEx.Vec3,Engine.MathEx.Quat,Engine.MathEx.Vec3)">
+            <summary>
+            Sets the transformation of object.
+            </summary>
+            <remarks>
+            <para>
+            The same effect as set of three properties (<see cref="P:Engine.MapSystem.MapObject.Position"/>, 
+            <see cref="P:Engine.MapSystem.MapObject.Rotation"/>, <see cref="P:Engine.MapSystem.MapObject.Scale"/>) has this method.
+            The difference consists what to cause one method more quickly, than to set three properties.
+            </para>
+            </remarks>
+            <param name="pos">The object position.</param>
+            <param name="rot">The object rotation.</param>
+            <param name="scl">The object scale.</param>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.OnSetTransform(Engine.MathEx.Vec3@,Engine.MathEx.Quat@,Engine.MathEx.Vec3@)">
+            <summary>
+            Called when the transformation of object is changed.
+            </summary>
+            <param name="pos">The new position.</param>
+            <param name="rot">The new rotation.</param>
+            <param name="scl">The new scale.</param>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.SetOldTransform(Engine.MathEx.Vec3,Engine.MathEx.Quat,Engine.MathEx.Vec3)">
+            <summary>
+            Sets the old transformation of object.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.CopyTransform(Engine.MapSystem.MapObject)">
+            <summary>
+            Copies parameters of transformation from other object.
+            </summary>
+            <remarks>
+            The method copies both current and old transformation.
+            </remarks>
+            <param name="from">The source object.</param>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.OnCopyTransform(Engine.MapSystem.MapObject)">
+            <summary>
+            Called when the method <see cref="M:Engine.MapSystem.MapObject.CopyTransform(Engine.MapSystem.MapObject)"/> is called.
+            </summary>
+            <param name="from">The source object.</param>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.RecalculateMapBounds">
+            <summary>
+            Recalculates object <see cref="P:Engine.MapSystem.MapObject.MapBounds"/>.
+            </summary>
+            <remarks>
+            Usually object bounds recalculation is completely automatic, 
+            but in some rare cases we need additional updating.
+            </remarks>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.OnCalculateMapBounds(Engine.MathEx.Bounds@)">
+            <summary>
+            Called when the bounds of object calculate.
+            </summary>
+            <remarks>
+            By means of this method it is possible to change standard bounds to others.
+            </remarks>
+            <param name="bounds">The bounds of object.</param>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.OnPostCreate(System.Boolean)">
+            <summary>
+            Called after the entity is added into the world.
+            </summary>
+            <param name="loaded"><b>true</b> if the entity has been loaded; otherwise, <b>false</b>.</param>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate2(System.Boolean)"/>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.OnPostCreate2(System.Boolean)">
+            <summary>
+            Called after the entity is added into the world. This method is called after <see cref="M:Engine.EntitySystem.Entity.OnPostCreate(System.Boolean)"/> method.
+            </summary>
+            <param name="loaded"><b>true</b> if the entity has been loaded; otherwise, <b>false</b>.</param>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate(System.Boolean)"/>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.OnDestroy">
+            <summary>
+            Called when the entity is removed from the world.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.OnTick">
+            <summary>
+            Called when has occured Tick in the world. 
+            </summary>
+            <remarks>
+            <para>This method will be caused, only if the entity is signed on timer events. To subscribe for timer events it is possible by means of method <see cref="M:Engine.EntitySystem.Entity.AddTimer"/>.</para>
+            </remarks>
+            <seealso cref="M:Engine.EntitySystem.Entity.AddTimer"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.RemoveTimer"/>
+            <seealso cref="P:Engine.EntitySystem.Entity.TickDelta"/>
+            <seealso cref="E:Engine.EntitySystem.Entity.Tick"/>
+            <seealso cref="P:Engine.EntitySystem.EntitySystemWorld.GameFPS"/>
+            <seealso cref="P:Engine.EntitySystem.EntitySystemWorld.Simulation"/>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.GetInterpolatedPosition">
+            <summary>
+            Returns the interpolated position of object.
+            </summary>
+            <returns>The interpolated position.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.GetInterpolatedRotation">
+            <summary>
+            Returns the interpolated rotation of object.
+            </summary>
+            <returns>The interpolated rotation.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.GetInterpolatedScale">
+            <summary>
+            Returns the interpolated scale of object.
+            </summary>
+            <returns>The interpolated scale.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.GetInterpolatedTransform(Engine.MathEx.Vec3@,Engine.MathEx.Quat@,Engine.MathEx.Vec3@)">
+            <summary>
+            Returns the interpolated transformation of object.
+            </summary>
+            <param name="pos">The interpolated position.</param>
+            <param name="rot">The interpolated rotation.</param>
+            <param name="scl">The interpolated scale.</param>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.OnRenderFrame">
+            <summary>
+            Called before the render frame will be rendered.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.OnRender(Engine.Renderer.Camera)">
+            <summary>
+            Called before the object it will be rendered.
+            </summary>
+            <param name="camera">The render camera.</param>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.Attach(Engine.MapSystem.MapObjectAttachedObject)">
+            <summary>
+            To attach object.
+            </summary>
+            <param name="attachedObject">The attached object.</param>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.Detach(Engine.MapSystem.MapObjectAttachedObject)">
+            <summary>
+            To detach object.
+            </summary>
+            <param name="attachedObject">The attached object.</param>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.OnShouldDelete">
+            <summary>
+            Called when the method <see cref="M:Engine.EntitySystem.Entity.SetShouldDelete"/> is called.
+            </summary>
+            <returns>Returns <b>true</b> the entity will be deleted; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="F:Engine.MapSystem.MapObject.DieObjectCreate">
+            <summary>
+            Occurs when the die object is created.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.OnDieObjectCreate(Engine.MapSystem.MapObjectCreateObject,System.Object)">
+            <summary>
+            Called when the die object is created.
+            </summary>
+            <param name="createObject">The die object.</param>
+            <param name="objectCreated">The created object. It is can be <see cref="T:Engine.MapSystem.MapObject"/>, <see cref="T:Engine.Renderer.SceneNode"/>, <see cref="T:Engine.Renderer.RenderLight"/>, <see cref="T:Engine.SoundSystem.VirtualChannel"/></param>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.CreatePhysicsModel">
+            <summary>
+            Creates the empty physics model of object.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.DestroyPhysicsModel">
+            <summary>
+            Destroys the physics model of object.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.OnAttach(Engine.MapSystem.MapObjectAttachedObject)">
+            <summary>
+            Called when the object is attached.
+            </summary>
+            <param name="attachedObject">The attached object.</param>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.OnDetach(Engine.MapSystem.MapObjectAttachedObject)">
+            <summary>
+            Called when the object is detached.
+            </summary>
+            <param name="attachedObject">The attached object.</param>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.OnAttachToMapObject">
+            <summary>
+            Caused after object has attached to parent map object.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.OnDetachFromMapObject">
+            <summary>
+            Caused before object has detached from parent map object.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.GetBox">
+            <summary>
+            Calculates the box of object.
+            </summary>
+            <returns>The box of object.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.GetTransform">
+            <summary>
+            Calculates the transformation of object as Matrix.
+            </summary>
+            <returns>The transformation of object as Matrix.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.GetAttachedObjectByAlias(System.String)">
+            <summary>
+            Returns the attached object by name of alias.
+            </summary>
+            <param name="alias">The attached object alias.</param>
+            <returns>The attached object.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.GetBoneSlotFromAttachedMeshes(System.String)">
+            <summary>
+            Returns the bone slot which is exists in the attached objects.
+            </summary>
+            <param name="boneSlotName">The name of the bone slot.</param>
+            <returns>Returns <b>MeshObject.BoneSlot</b> if the slot is exists; otherwise, <b>null</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.OnGetEditorSelectionByRay(Engine.MathEx.Ray,Engine.MathEx.Vec3@,System.Single@)">
+            <summary>
+            Caused when the user tries to select object the mouse.
+            </summary>
+            <param name="ray">The selection ray.</param>
+            <param name="pos">The received position of intersection of a ray.</param>
+            <param name="priority">
+            Priority of selection. It is by default equal <b>0.5</b>.
+            The object with the highest priority will be selected.
+            </param>
+            <returns>Returns <b>true</b> the object is selected; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.OnEditorSelectionDebugRender(Engine.Renderer.Camera,System.Boolean,System.Boolean)">
+            <summary>
+            Caused when it is necessary to draw a selection border in the Map Editor.
+            </summary>
+            <param name="camera">The destination camera.</param>
+            <param name="bigBorder">
+            If <b>true</b> that the border should be hardly more than usually.
+            </param>
+            <param name="simpleGeometry"></param>
+        </member>
+        <member name="M:Engine.MapSystem.MapObject.AssociateSceneNodeWithMapObject(Engine.Renderer.SceneNode,Engine.MapSystem.MapObject)">
+            <summary>
+            Need just for see <see cref="M:Engine.MapSystem.MapObject.GetMapObjectBySceneNode(Engine.Renderer.SceneNode)"/>.
+            </summary>
+            <param name="mapObject"></param>
+            <param name="sceneNode"></param>
+        </member>
+        <member name="P:Engine.MapSystem.MapObject.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObject.Position">
+            <summary>
+            Gets or sets the position of object.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObject.Rotation">
+            <summary>
+            Gets or sets the rotation of object.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObject.Scale">
+            <summary>
+            Gets or sets the scale of object.
+            </summary>
+        </member>
+        <member name="E:Engine.MapSystem.MapObject.TransformChange">
+            <summary>
+            Occurs when the transformation of object is changed.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObject.OldPosition">
+            <summary>
+            Gets or sets the old position of object.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObject.OldRotation">
+            <summary>
+            Gets or sets the old rotation of object.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObject.OldScale">
+            <summary>
+            Gets or sets the old scale of object.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObject.MapBounds">
+            <summary>
+            Gets the bounds of object.
+            </summary>
+            <remarks>
+            Bounds of object calculated automatically. It consider dimensions of meshes, 
+            physical models, etc.
+            </remarks>
+        </member>
+        <member name="E:Engine.MapSystem.MapObject.Render">
+            <summary>
+            Occurs before the object it will be rendered.
+            </summary>
+        </member>
+        <member name="E:Engine.MapSystem.MapObject.AttachEvent">
+            <summary>
+            Occurs when the object is attached.
+            </summary>
+        </member>
+        <member name="E:Engine.MapSystem.MapObject.DetachEvent">
+            <summary>
+            Occurs when the object is detached.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObject.AttachedObjects">
+            <summary>
+            Gets the collection of attached objects. <b>Don't modify</b>.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObject.PhysicsModel">
+            <summary>
+            Gets the physics model of object.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObject.AttachedMapObjectParent">
+            <summary>
+            Gets the object to which is attached the this object.
+            </summary>
+        </member>
+        <member name="E:Engine.MapSystem.MapObject.AttachToMapObject">
+            <summary>
+            Occurs after object has attached to parent map object.
+            </summary>
+        </member>
+        <member name="E:Engine.MapSystem.MapObject.DetachFromMapObject">
+            <summary>
+            Occurs before object has detached from parent map object.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObject.LastTickTime">
+            <summary>
+            Gets the last Tick time.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObject.Visible">
+            <summary>
+            Gets or sets a value indicating whether the entity is visible.
+            </summary>
+        </member>
+        <member name="E:Engine.MapSystem.MapObject.VisibleChange">
+            <summary>
+            Occurs when the visible flag of object is changed.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObject.FilterGroups">
+            <summary>
+            Gets or sets the filter group.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObject.EditorSelectable">
+            <summary>
+            Gets or sets a value indicating whether the entity can be selected in the Map Editor.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObject.TransformChangeDelegate">
+            <summary>
+            Represents the method that handles a <see cref="E:Engine.MapSystem.MapObject.TransformChange"/> event.
+            </summary>
+            <param name="entity">The map object.</param>
+        </member>
+        <member name="T:Engine.MapSystem.MapObject.RenderDelegate">
+            <summary>
+            Represents the method that handles a <see cref="E:Engine.MapSystem.MapObject.Render"/> event.
+            </summary>
+            <param name="entity">The this object.</param>
+            <param name="camera">The render camera.</param>
+        </member>
+        <member name="T:Engine.MapSystem.MapObject.DieObjectCreateDelegate">
+            <summary>
+            Represents the method that handles a <see cref="F:Engine.MapSystem.MapObject.DieObjectCreate"/> event.
+            </summary>
+            <param name="owner">The owner entity.</param>
+            <param name="createObject">The die object.</param>
+            <param name="objectCreated">The created object. It is can be <see cref="T:Engine.MapSystem.MapObject"/>, <see cref="T:Engine.Renderer.SceneNode"/>, <see cref="T:Engine.Renderer.RenderLight"/>, <see cref="T:Engine.SoundSystem.VirtualChannel"/></param>
+        </member>
+        <member name="T:Engine.MapSystem.MapObject.AttachDetachDelegate">
+            <summary>
+            Represents the method that handles a <see cref="E:Engine.MapSystem.MapObject.AttachEvent"/> and <see cref="E:Engine.MapSystem.MapObject.DetachEvent"/> event.
+            </summary>
+            <param name="entity">The map object.</param>
+            <param name="attachedObject">The attached object.</param>
+        </member>
+        <member name="T:Engine.MapSystem.MapObject.AttachDetachToMapObjectDelegate">
+            <summary>
+            Represents the method that handles a <see cref="E:Engine.MapSystem.MapObject.AttachToMapObject"/> and <see cref="E:Engine.MapSystem.MapObject.DetachFromMapObject"/> event.
+            </summary>
+            <param name="entity">The map object.</param>
+        </member>
+        <member name="T:Engine.MapSystem.MapObject.VisibleChangeDelegate">
+            <summary>
+            Represents the method that handles a <see cref="E:Engine.MapSystem.MapObject.VisibleChange"/> event.
+            </summary>
+            <param name="entity">The map object.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Region.OnLoad(Engine.Utils.TextBlock)">
+            <summary>
+            Called while entity type is loading.
+            </summary>
+            <param name="block">The text block from which data of entity will be loaded.</param>
+            <returns><b>true</b> if the entity successfully loaded; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.Region.OnSave(Engine.Utils.TextBlock)">
+            <summary>
+            Called while entity type is saving.
+            </summary>
+            <param name="block">The text block in which data of entity will be saved.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Region.OnPostCreate(System.Boolean)">
+            <summary>
+            Called after the entity is added into the world.
+            </summary>
+            <param name="loaded"><b>true</b> if the entity has been loaded; otherwise, <b>false</b>.</param>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate2(System.Boolean)"/>
+        </member>
+        <member name="M:Engine.MapSystem.Region.OnTick">
+            <summary>
+            Called when has occured Tick in the world. 
+            </summary>
+            <remarks>
+            <para>This method will be caused, only if the entity is signed on timer events. To subscribe for timer events it is possible by means of method <see cref="M:Engine.EntitySystem.Entity.AddTimer"/>.</para>
+            </remarks>
+            <seealso cref="M:Engine.EntitySystem.Entity.AddTimer"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.RemoveTimer"/>
+            <seealso cref="P:Engine.EntitySystem.Entity.TickDelta"/>
+            <seealso cref="E:Engine.EntitySystem.Entity.Tick"/>
+            <seealso cref="P:Engine.EntitySystem.EntitySystemWorld.GameFPS"/>
+            <seealso cref="P:Engine.EntitySystem.EntitySystemWorld.Simulation"/>
+        </member>
+        <member name="M:Engine.MapSystem.Region.OnRelatedEntityDelete(Engine.EntitySystem.Entity)">
+            <summary>
+            Called when the entity related with this entity is deleted.
+            </summary>
+            <param name="entity">The deleted entity.</param>
+            <seealso cref="M:Engine.EntitySystem.Entity.AddRelationship(Engine.EntitySystem.Entity)"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.RemoveRelationship(Engine.EntitySystem.Entity)"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnRelationshipAdd(Engine.EntitySystem.Entity)"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnRelationshipRemove(Engine.EntitySystem.Entity)"/>
+            <seealso cref="E:Engine.EntitySystem.Entity.RelatedEntityDelete"/>
+        </member>
+        <member name="M:Engine.MapSystem.Region.OnObjectIn(Engine.MapSystem.MapObject)">
+            <summary>
+            Caused when the object gets in region.
+            </summary>
+            <param name="obj">The map object.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Region.OnObjectOut(Engine.MapSystem.MapObject)">
+            <summary>
+            Caused when the object leaves in region.
+            </summary>
+            <param name="obj">The map object.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Region.OnSetTransform(Engine.MathEx.Vec3@,Engine.MathEx.Quat@,Engine.MathEx.Vec3@)">
+            <summary>
+            Called when the transformation of object is changed.
+            </summary>
+            <param name="pos">The new position.</param>
+            <param name="rot">The new rotation.</param>
+            <param name="scl">The new scale.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Region.OnCalculateMapBounds(Engine.MathEx.Bounds@)">
+            <summary>
+            Called when the bounds of object calculate.
+            </summary>
+            <remarks>
+            By means of this method it is possible to change standard bounds to others.
+            </remarks>
+            <param name="bounds">The bounds of object</param>
+        </member>
+        <member name="M:Engine.MapSystem.Region.OnRender(Engine.Renderer.Camera)">
+            <summary>
+            Called before the object it will be rendered.
+            </summary>
+            <param name="camera">The render camera.</param>
+        </member>
+        <member name="P:Engine.MapSystem.Region.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Region.ShapeType">
+            <summary>
+            Gets or sets the shape type of a region.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Region.Filter">
+            <summary>
+            Gets or sets the filter of check of crossing.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Region.CheckType">
+            <summary>
+            Gets or sets the technique of check of crossing.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Region.ObjectsInRegion">
+            <summary>
+            Gets the collection of a objects which are in region.
+            </summary>
+        </member>
+        <member name="E:Engine.MapSystem.Region.ObjectIn">
+            <summary>
+            Occurs when the object gets in region.
+            </summary>
+        </member>
+        <member name="E:Engine.MapSystem.Region.ObjectOut">
+            <summary>
+            Occurs when the object leaves in region.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.Region.CheckTypes">
+            <summary>
+            Defines the technique of check of crossing.
+            </summary>
+        </member>
+        <member name="F:Engine.MapSystem.Region.CheckTypes.Bounds">
+            <summary>
+            Check crossing by bounds.
+            </summary>
+        </member>
+        <member name="F:Engine.MapSystem.Region.CheckTypes.Center">
+            <summary>
+            Check hit of the center in bounds of region.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.Region.ObjectInOutDelegate">
+            <summary>
+            Represents the method that handles a <see cref="E:Engine.MapSystem.Region.ObjectIn"/> and <see cref="E:Engine.MapSystem.Region.ObjectOut"/> events.
+            </summary>
+            <param name="entity">The region.</param>
+            <param name="obj">The map object.</param>
+        </member>
+        <member name="T:Engine.MapSystem.FogType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.Fog"/> entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.Fog">
+            <summary>
+            Defines a fog on a map.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.Fog.OnPostCreate(System.Boolean)">
+            <summary>
+            Called after the entity is added into the world.
+            </summary>
+            <param name="loaded"><b>true</b> if the entity has been loaded; otherwise, <b>false</b>.</param>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate2(System.Boolean)"/>
+        </member>
+        <member name="M:Engine.MapSystem.Fog.OnDestroy">
+            <summary>
+            Called when the entity is removed from the world.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Fog.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Fog.Mode">
+            <summary>
+            Gets or sets the mode of fog.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Fog.Color">
+            <summary>
+            Gets or sets the color of the fog.
+            </summary>
+            <remarks>
+            The color of the fog. Either set this to the same
+            as your viewport background color, or to blend in with a
+            skydome or skybox.
+            </remarks>
+        </member>
+        <member name="P:Engine.MapSystem.Fog.ExpDensity">
+            <summary>
+            Gets or set the density of the fog in <b>Exp</b> or <b>Exp2</b> mode
+            </summary>
+            <remarks>
+            A value need between <b>0</b> and <b>1</b>. The default is <b>0.001</b>.
+            </remarks>
+        </member>
+        <member name="P:Engine.MapSystem.Fog.LinearStart">
+            <summary>
+            Gets or sets the distance in world units at which linear fog starts to encroach. 
+            </summary>
+            <remarks>
+            Only applicable if mode is <b>Linear</b>.
+            </remarks>
+        </member>
+        <member name="P:Engine.MapSystem.Fog.LinearEnd">
+            <summary>
+            Gets or sets the distance in world units at which linear fog becomes completely opaque. 
+            </summary>
+            <remarks>
+            Only applicable if mode is <b>Linear</b>.
+            </remarks>
+        </member>
+        <member name="P:Engine.MapSystem.CameraAttachedObjectType.BillboardItem.Color">
+            <summary>
+            Gets or sets the billboard color.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.CameraAttachedObjectType.BillboardItem.Size">
+            <summary>
+            Gets or sets the billboard dimensions.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.CameraAttachedObjectType.BillboardItem.MaterialName">
+            <summary>
+            Gets or sets the billboard material.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.CameraAttachedObjectType.BillboardItem.FadeVelocity">
+            <summary>
+            Gets or sets the melt velocity of attenuation when billboard will be invisible.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.CameraAttachedObjectType.BillboardItem.CameraVisibleCheck">
+            <summary>
+            Gets or sets value which indicates whether the billboard will become invisible 
+            when its center is not visible from the camera.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.CameraAttachedObjectType.BillboardItem.CameraVisibleStartOffset">
+            <summary>
+            Gets or sets the distance with which begins check on visibility from the camera. 
+            This space is necessary to ignore the nearest objects. Such as for example the player.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.CameraAttachedObject.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.CameraAttachedObject.BillboardItem.Color">
+            <summary>
+            Gets or sets the billboard color.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.CameraAttachedObject.BillboardItem.Size">
+            <summary>
+            Gets or sets the billboard dimensions.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.CameraAttachedObject.BillboardItem.MaterialName">
+            <summary>
+            Gets or sets the billboard material.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.CameraAttachedObject.BillboardItem.FadeVelocity">
+            <summary>
+            Gets or sets the melt velocity of attenuation when billboard will be invisible.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.CameraAttachedObject.BillboardItem.CameraVisibleCheck">
+            <summary>
+            Gets or sets value which indicates whether the billboard will become invisible 
+            when its center is not visible from the camera.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.CameraAttachedObject.BillboardItem.CameraVisibleStartOffset">
+            <summary>
+            Gets or sets the distance with which begins check on visibility from the camera. 
+            This space is necessary to ignore the nearest objects. Such as for example the player.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.CameraAttachedObject.BillboardItem.Alpha">
+            <summary>
+            Gets or sets the alpha color of billboard.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.LightType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.Light"/> entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.Light">
+            <summary>
+            Defines a light sources on a map.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.Light.OnPostCreate(System.Boolean)">
+            <summary>
+            Called after the entity is added into the world.
+            </summary>
+            <param name="loaded"><b>true</b> if the entity has been loaded; otherwise, <b>false</b>.</param>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate2(System.Boolean)"/>
+        </member>
+        <member name="M:Engine.MapSystem.Light.OnDestroy">
+            <summary>
+            Called when the entity is removed from the world.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.Light.OnRender(Engine.Renderer.Camera)">
+            <summary>
+            Called before the object it will be rendered.
+            </summary>
+            <param name="camera">The render camera.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Light.OnCalculateMapBounds(Engine.MathEx.Bounds@)">
+            <summary>
+            Called when the bounds of object calculate.
+            </summary>
+            <remarks>
+            By means of this method it is possible to change standard bounds to others.
+            </remarks>
+            <param name="bounds">The bounds of object</param>
+        </member>
+        <member name="P:Engine.MapSystem.Light.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Light.LightType">
+            <summary>
+            Gets or sets the light type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Light.DiffuseColor">
+            <summary>
+            Gets or sets the color of the diffuse light given off by this source.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Light.DiffusePower">
+            <summary>
+            Gets or sets the power of the diffuse light given off by this source.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Light.SpecularColor">
+            <summary>
+            Gets or sets the color of the specular light given off by this source.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Light.SpecularPower">
+            <summary>
+            Gets or sets the power of the specular light given off by this source.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Light.AttenuationRange">
+            <summary>
+            Gets or sets the attenuation range parameter of the light source ie how it diminishes with distance.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Light.AttenuationConstant">
+            <summary>
+            Gets or sets the attenuation constant parameter of the light source ie how it diminishes with distance.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Light.AttenuationLinear">
+            <summary>
+            Gets or sets the attenuation linear parameter of the light source ie how it diminishes with distance.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Light.AttenuationQuadric">
+            <summary>
+            Gets or sets the attenuation Quadric parameter of the light source ie how it diminishes with distance.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Light.SpotlightInnerAngle">
+            <summary>
+            Gets or sets the angle covered by the spotlights inner cone.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Light.SpotlightOuterAngle">
+            <summary>
+            Gets or sets the angle covered by the spotlights outer cone.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Light.SpotlightFalloff">
+            <summary>
+            Gets or sets the falloff between the inner and outer cones of the spotlight.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Light.CastShadows">
+            <summary>
+            Gets or sets whether or not this object will cast shadows.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.PortalType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.Portal"/> entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.Portal">
+            <summary>
+            Defines a portal for a scene management.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.Portal.OnPostCreate(System.Boolean)">
+            <summary>
+            Called after the entity is added into the world.
+            </summary>
+            <param name="loaded"><b>true</b> if the entity has been loaded; otherwise, <b>false</b>.</param>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate2(System.Boolean)"/>
+        </member>
+        <member name="M:Engine.MapSystem.Portal.OnDestroy">
+            <summary>
+            Called when the entity is removed from the world.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.Portal.OnSetTransform(Engine.MathEx.Vec3@,Engine.MathEx.Quat@,Engine.MathEx.Vec3@)">
+            <summary>
+            Called when the transformation of object is changed.
+            </summary>
+            <param name="pos">The new position.</param>
+            <param name="rot">The new rotation.</param>
+            <param name="scl">The new scale.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Portal.OnCalculateMapBounds(Engine.MathEx.Bounds@)">
+            <summary>
+            Called when the bounds of object calculate.
+            </summary>
+            <remarks>
+            By means of this method it is possible to change standard bounds to others.
+            </remarks>
+            <param name="bounds">The bounds of object</param>
+        </member>
+        <member name="M:Engine.MapSystem.Portal.OnGetEditorSelectionByRay(Engine.MathEx.Ray,Engine.MathEx.Vec3@,System.Single@)">
+            <summary>
+            Caused when the user tries to select object the mouse.
+            </summary>
+            <param name="ray">The selection ray.</param>
+            <param name="pos">The received position of intersection of a ray.</param>
+            <param name="priority">
+            Priority of selection. It is by default equal <b>0.5</b>.
+            The object with the highest priority will be selected.
+            </param>
+            <returns>Returns <b>true</b> the object is selected; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.Portal.OnEditorSelectionDebugRender(Engine.Renderer.Camera,System.Boolean,System.Boolean)">
+            <summary>
+            Caused when it is necessary to draw a selection border in the Map Editor.
+            </summary>
+            <param name="camera">The destination camera.</param>
+            <param name="bigBorder">
+            If <b>true</b> that the border should be hardly more than usually.
+            </param>
+            <param name="simpleGeometry"></param>
+        </member>
+        <member name="M:Engine.MapSystem.Portal.IsValid">
+            <summary>
+            Whether checks valid state a portal.
+            </summary>
+            <returns><b>true</b> if this portal is valid; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.Portal.GetGabaritePoints">
+            <summary>
+            Returns the list of dimensional points of a portal. <b>Don't modify</b>.
+            </summary>
+            <returns>The list of dimensional points of a portal.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.Portal.GetGabaritePointsSeeToOutdoor">
+            <summary>
+            Don't modify
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Engine.MapSystem.Portal.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Portal.Zone1">
+            <summary>
+            Gets the first zone connected for the this portal.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Portal.Zone2">
+            <summary>
+            Gets the second zone connected for the this portal.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Portal.Outdoor">
+            <summary>
+            Gets or sets a value which indicates what type a portal. Outdoor or indoor.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectCreateMesh">
+            <summary>
+            Defines a class of the Mesh of Objects Creation Collection.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectCreateObject">
+            <summary>
+            Defines the base item class of Objects Creation Collection.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateObject.Alias">
+            <summary>
+            Gets or sets the alias of attached object.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateObject.Position">
+            <summary>
+            Gets or sets the additional offset.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateObject.Rotation">
+            <summary>
+            Gets or sets the additional offset.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateObject.Scale">
+            <summary>
+            Gets or sets the additional offset.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateObject.Count">
+            <summary>
+            Gets or sets the amount of created copies.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateObject.Group">
+            <summary>
+            Gets or sets the number of group.
+            </summary>
+            <remarks>
+            At creation objects of only one group are created. The group gets out accidentally.
+            </remarks>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateObject.LifeTime">
+            <summary>
+            Gets or sets a life time of object.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateObject.AttachToOwner">
+            <summary>
+            Gets or sets a value whether which indicates it is necessary to 
+            attach object to the owner or to create free.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectCreateMesh.ToString">
+            <summary>
+            Gets the particle system name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateMesh.MeshName">
+            <summary>
+            Gets or set the mesh name.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateMesh.CastShadows">
+            <summary>
+            Gets or sets whether or not this object will cast shadows.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateMesh.UseOwnerScale">
+            <summary>
+            Gets or sets a value whether indicates he will consider scale of the parent, at calculation of the scale.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateMesh.ForceMaterial">
+            <summary>
+            Gets or sets the name of a material which will are replaced all sub meshes in a model.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.Map">
+            <summary>
+            Represents a map.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.Map.GetObjects(Engine.MathEx.Bounds,Engine.MapSystem.Map.FilterGroups,Engine.MapSystem.Map.GetObjectsDelegate)">
+            <summary>
+            Carries out query of objects by bounds.
+            </summary>
+            <param name="bounds">The bounds.</param>
+            <param name="filterGroups">The filter groups.</param>
+            <param name="callback">A call back method for reception of the objects.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Map.GetObjects(Engine.MathEx.Bounds,Engine.MapSystem.Map.GetObjectsDelegate)">
+            <summary>
+            Carries out query of objects by bounds.
+            </summary>
+            <param name="bounds">The bounds.</param>
+            <param name="callback">A call back method for reception of the objects.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Map.GetObjects(Engine.MathEx.Sphere,Engine.MapSystem.Map.FilterGroups,Engine.MapSystem.Map.GetObjectsDelegate)">
+            <summary>
+            Carries out query of objects by sphere.
+            </summary>
+            <param name="sphere">The sphere.</param>
+            <param name="filterGroups">The filter groups.</param>
+            <param name="callback">A call back method for reception of the objects.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Map.GetObjects(Engine.MathEx.Sphere,Engine.MapSystem.Map.GetObjectsDelegate)">
+            <summary>
+            Carries out query of objects by sphere.
+            </summary>
+            <param name="sphere">The sphere.</param>
+            <param name="callback">A call back method for reception of the objects.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Map.GetObjects(Engine.MathEx.Box,Engine.MapSystem.Map.FilterGroups,Engine.MapSystem.Map.GetObjectsDelegate)">
+            <summary>
+            Carries out query of objects by box.
+            </summary>
+            <param name="box">The box.</param>
+            <param name="filterGroups">The filter groups.</param>
+            <param name="callback">A call back method for reception of the objects.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Map.GetObjects(Engine.MathEx.Box,Engine.MapSystem.Map.GetObjectsDelegate)">
+            <summary>
+            Carries out query of objects by box.
+            </summary>
+            <param name="box">The box.</param>
+            <param name="callback">A call back method for reception of the objects.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Map.GetObjects(Engine.MathEx.Ray,Engine.MapSystem.Map.FilterGroups,Engine.MapSystem.Map.GetObjectsRayDelegate)">
+            <summary>
+            Carries out query of objects by ray.
+            </summary>
+            <param name="ray">The ray.</param>
+            <param name="filterGroups">The filter groups.</param>
+            <param name="callback">A call back method for reception of the objects.</param>
+            <returns><b>true</b> if it has not been interrupted; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.Map.GetObjects(Engine.MathEx.Ray,Engine.MapSystem.Map.GetObjectsRayDelegate)">
+            <summary>
+            Carries out query of objects by ray.
+            </summary>
+            <param name="ray">The ray.</param>
+            <param name="callback">A call back method for reception of the objects.</param>
+            <returns><b>true</b> if it has not been interrupted; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.Map.DoDebugRenderUI(Engine.Renderer.GuiRenderer)">
+            <summary>
+            Render debug information to gui renderer.
+            </summary>
+            <param name="renderer">The destination gui renderer.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Map.OnTick">
+            <summary>
+            Called when has occured Tick in the world. 
+            </summary>
+            <remarks>
+            <para>This method will be caused, only if the entity is signed on timer events. To subscribe for timer events it is possible by means of method <see cref="M:Engine.EntitySystem.Entity.AddTimer"/>.</para>
+            </remarks>
+            <seealso cref="M:Engine.EntitySystem.Entity.AddTimer"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.RemoveTimer"/>
+            <seealso cref="P:Engine.EntitySystem.Entity.TickDelta"/>
+            <seealso cref="E:Engine.EntitySystem.Entity.Tick"/>
+            <seealso cref="P:Engine.EntitySystem.EntitySystemWorld.GameFPS"/>
+            <seealso cref="P:Engine.EntitySystem.EntitySystemWorld.Simulation"/>
+        </member>
+        <member name="M:Engine.MapSystem.Map.OnLoad(Engine.Utils.TextBlock)">
+            <summary>
+            Called while entity type is loading.
+            </summary>
+            <param name="block">The text block from which data of entity will be loaded.</param>
+            <returns><b>true</b> if the entity successfully loaded; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.Map.OnSave(Engine.Utils.TextBlock)">
+            <summary>
+            Called while entity type is saving.
+            </summary>
+            <param name="block">The text block in which data of entity will be saved.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Map.OnPreCreate">
+            <summary>
+            Called before the entity is added into the world.
+            </summary>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate(System.Boolean)"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+        </member>
+        <member name="M:Engine.MapSystem.Map.OnPostCreate(System.Boolean)">
+            <summary>
+            Called after the entity is added into the world.
+            </summary>
+            <param name="loaded"><b>true</b> if the entity has been loaded; otherwise, <b>false</b>.</param>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate2(System.Boolean)"/>
+        </member>
+        <member name="M:Engine.MapSystem.Map.OnPostCreate2(System.Boolean)">
+            <summary>
+            Called after the entity is added into the world. This method is called after <see cref="M:Engine.EntitySystem.Entity.OnPostCreate(System.Boolean)"/> method.
+            </summary>
+            <param name="loaded"><b>true</b> if the entity has been loaded; otherwise, <b>false</b>.</param>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate(System.Boolean)"/>
+        </member>
+        <member name="M:Engine.MapSystem.Map.OnDestroy">
+            <summary>
+            Called when the entity is removed from the world.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.Map.GetVirtualFileDirectory">
+            <summary>
+            Returns the virtual file directory name of a map.
+            </summary>
+            <returns>The virtual file directory name of a map.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.Map.GetSourceMapVirtualFileDirectory">
+            <summary>
+            Returns the virtual file directory name of a source map before world serialization.
+            </summary>
+            <returns>The virtual file directory name of a map.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.Map.GetObjectsByScreenRectangle(Engine.Renderer.Camera,Engine.MathEx.Rect,Engine.MapSystem.Map.FilterGroups,Engine.MapSystem.Map.GetObjectsDelegate)">
+            <summary>
+            Carries out query of objects by screen rectangle.
+            </summary>
+            <param name="camera">The camera.</param>
+            <param name="rect">The screen rectangle</param>
+            <param name="filterGroups">The filter groups.</param>
+            <param name="callback">A call back method for reception of the objects.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Map.GetObjectsByScreenRectangle(Engine.Renderer.Camera,Engine.MathEx.Rect,Engine.MapSystem.Map.GetObjectsDelegate)">
+            <summary>
+            Carries out query of objects by screen rectangle.
+            </summary>
+            <param name="camera">The camera.</param>
+            <param name="rect">The screen rectangle</param>
+            <param name="callback">A call back method for reception of the objects.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Map.GetObjectsByScreenRectangle(Engine.MathEx.Rect,Engine.MapSystem.Map.FilterGroups,Engine.MapSystem.Map.GetObjectsDelegate)">
+            <summary>
+            Carries out query of objects by screen rectangle.
+            By the <see cref="P:Engine.Renderer.RendererWorld.DefaultCamera"/>.
+            </summary>
+            <param name="rect">The screen rectangle</param>
+            <param name="filterGroups">The filter groups.</param>
+            <param name="callback">A call back method for reception of the objects.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Map.GetObjectsByScreenRectangle(Engine.MathEx.Rect,Engine.MapSystem.Map.GetObjectsDelegate)">
+            <summary>
+            Carries out query of objects by screen rectangle.
+            By the <see cref="P:Engine.Renderer.RendererWorld.DefaultCamera"/>.
+            </summary>
+            <param name="rect">The screen rectangle</param>
+            <param name="callback">A call back method for reception of the objects.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Map.GetObjectsAttachedGuiObject(Engine.MathEx.Ray,Engine.MapSystem.MapObjectAttachedGui@,Engine.MathEx.Vec2@)">
+            <summary>
+            Gets the attached gui object by ray.
+            </summary>
+            <param name="ray">The ray.</param>
+            <param name="attachedGuiObject">The return attached gui object.</param>
+            <param name="screenPosition">The return screen position.</param>
+            <returns><b>true</b> if the object has been finded; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.Map.CreateFreeParticleSystem(System.String,Engine.MathEx.Vec3,Engine.MathEx.Quat,Engine.MathEx.Vec3)">
+            <summary>
+            Creates free particle system.
+            </summary>
+            <remarks>
+            Particle system will be automatically removed at end of the work.
+            </remarks>
+            <param name="particleSystemName">The particle system name.</param>
+            <param name="position">The position.</param>
+            <param name="rotation">The rotation.</param>
+            <param name="scale">The scale.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Map.CreateFreeParticleSystem(System.String,Engine.MathEx.Vec3)">
+            <summary>
+            Creates free particle system.
+            </summary>
+            <remarks>
+            Particle system will be automatically removed at end of the work.
+            </remarks>
+            <param name="particleSystemName">The particle system name.</param>
+            <param name="position">The position.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Map.GetObjects(Engine.MathEx.Frustum,System.Boolean,Engine.MapSystem.Map.FilterGroups,Engine.MapSystem.Map.GetObjectsDelegate)">
+            <summary>
+            Carries out query of objects by frustum.
+            </summary>
+            <param name="frustum">The frustum.</param>
+            <param name="accurateCheck">If <b>false</b>, then not cull everything outside the frustum. But faster than accurate checking.</param>
+            <param name="filterGroups">The filter groups.</param>
+            <param name="callback">A call back method for reception of the objects.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Map.GetObjects(Engine.MathEx.Frustum,System.Boolean,Engine.MapSystem.Map.GetObjectsDelegate)">
+            <summary>
+            Carries out query of objects by frustum.
+            </summary>
+            <param name="frustum">The frustum.</param>
+            <param name="accurateCheck">If <b>false</b>, then not cull everything outside the frustum. But faster than accurate checking.</param>
+            <param name="callback">A call back method for reception of the objects.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Map.GetObjects(Engine.MathEx.Plane[],Engine.MapSystem.Map.FilterGroups,Engine.MapSystem.Map.GetObjectsDelegate)">
+            <summary>
+            Carries out query of objects by clip planes.
+            </summary>
+            <param name="clipPlanes">The array of planes.</param>
+            <param name="filterGroups">The filter groups.</param>
+            <param name="callback">A call back method for reception of the objects.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Map.GetObjects(Engine.MathEx.Plane[],Engine.MapSystem.Map.GetObjectsDelegate)">
+            <summary>
+            Carries out query of objects by clip planes.
+            </summary>
+            <param name="clipPlanes">The array of planes.</param>
+            <param name="callback">A call back method for reception of the objects.</param>
+        </member>
+        <member name="P:Engine.MapSystem.Map.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Map.Instance">
+            <summary>
+            Gets an instance of the <see cref="T:Engine.MapSystem.Map"/>.
+            </summary>
+        </member>
+        <member name="E:Engine.MapSystem.Map.AddObjectToNodesEvent">
+            <summary>
+            Occurs when the object is added to nodes.
+            </summary>
+        </member>
+        <member name="E:Engine.MapSystem.Map.RemoveObjectFromNodesEvent">
+            <summary>
+            Occurs when the object is removed from nodes.
+            </summary>
+        </member>
+        <member name="E:Engine.MapSystem.Map.Render">
+            <summary>
+            Occurs before a map it will be rendered.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Map.SourceMapVirtualFileName">
+            <summary>
+            Gets the virtual file path of a source map before world serialization.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Map.ShadowColor">
+            <summary>
+            Gets or set the shadow color.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Map.ShadowFarDistance">
+            <summary>
+            Gets or set the shadow far distance.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Map.Shadow2DTextureSize">
+            <summary>
+            Gets or set the shadow 2D texture size.
+            </summary>
+            <remarks>
+            The larger the shadow texture, the better the detail on 
+            texture based shadows, but obviously this takes more memory.
+            The default size is 1024.
+            </remarks>
+        </member>
+        <member name="P:Engine.MapSystem.Map.ShadowCubicTextureSize">
+            <summary>
+            Gets or set the shadow cubic texture size.
+            </summary>
+            <remarks>
+            The larger the shadow texture, the better the detail on 
+            texture based shadows, but obviously this takes more memory.
+            The default size is 512.
+            </remarks>
+        </member>
+        <member name="P:Engine.MapSystem.Map.Shadow2DTextureCount">
+            <summary>
+            Gets or set the shadow 2D texture count.
+            </summary>
+            <remarks>
+            The default number of textures assigned to deal with texture based
+            shadows is 2; however this means you can only have one light casting
+            shadows at the same time. You can increase this number in order to 
+            make this more flexible, but be aware of the texture memory it will use.
+            </remarks>
+        </member>
+        <member name="P:Engine.MapSystem.Map.ShadowCubicTextureCount">
+            <summary>
+            Gets or set the shadow cubic texture count.
+            </summary>
+            <remarks>
+            The default number of textures assigned to deal with texture based
+            shadows is 1; however this means you can only have one light casting
+            shadows at the same time. You can increase this number in order to 
+            make this more flexible, but be aware of the texture memory it will use.
+            </remarks>
+        </member>
+        <member name="P:Engine.MapSystem.Map.AmbientLight">
+            <summary>
+            Gets or set the ambient light color.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Map.Fov">
+            <summary>
+            Gets or sets the camera FOV.
+            </summary>
+            <remarks>
+            Default value: 80.
+            </remarks>
+        </member>
+        <member name="P:Engine.MapSystem.Map.NearFarClipDistance">
+            <summary>
+            Gets or sets the camera near/far clip range.
+            </summary>
+            <remarks>
+            Default value: 0.1 1000.
+            </remarks>
+        </member>
+        <member name="P:Engine.MapSystem.Map.Zones">
+            <summary>
+            Don't modify.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Map.Portals">
+            <summary>
+            Don't modify.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Map.InitialSceneObjectsBounds">
+            <summary>
+            Gets the bounds of all scene objects at creating map.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.Map.InitialCollisionBounds">
+            <summary>
+            Gets the bounds of all shapes with <see cref="F:Engine.PhysicsSystem.ContactGroup.Collision">Collision</see>
+            contact group at creating map.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.Map.FilterGroups">
+            <summary>
+            Defines the filter groups enumeration.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.Map.ObjectToNodesDelegate">
+            <summary>
+            Represents the method that handles a <see cref="E:Engine.MapSystem.Map.AddObjectToNodesEvent"/> and 
+            <see cref="E:Engine.MapSystem.Map.RemoveObjectFromNodesEvent"/> events.
+            </summary>
+            <param name="obj">The map object.</param>
+        </member>
+        <member name="T:Engine.MapSystem.Map.GetObjectsDelegate">
+            <summary>
+            Represents the method that handles a callback for objects querying.
+            </summary>
+            <param name="obj">Object received during inquiry.</param>
+        </member>
+        <member name="T:Engine.MapSystem.Map.GetObjectsRayDelegate">
+            <summary>
+            Represents the method that handles a callback for objects querying by ray.
+            </summary>
+            <param name="obj">Object received during inquiry.</param>
+            <param name="scale">The ray intersection scale.</param>
+            <returns><b>true</b> if such querying need continue; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="T:Engine.MapSystem.Map.RenderDelegate">
+            <summary>
+            Represents the method that handles a <see cref="E:Engine.MapSystem.Map.Render"/> event.
+            </summary>
+            <param name="entity">The this map.</param>
+            <param name="camera">The render camera.</param>
+        </member>
+        <member name="T:MapSystem.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:MapSystem.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:MapSystem.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.ZoneType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.Zone"/> entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.Zone">
+            <summary>
+            Defines a zone for a scene management.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.Zone.OnPostCreate(System.Boolean)">
+            <summary>
+            Called after the entity is added into the world.
+            </summary>
+            <param name="loaded"><b>true</b> if the entity has been loaded; otherwise, <b>false</b>.</param>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate2(System.Boolean)"/>
+        </member>
+        <member name="M:Engine.MapSystem.Zone.OnDestroy">
+            <summary>
+            Called when the entity is removed from the world.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.Zone.OnSetTransform(Engine.MathEx.Vec3@,Engine.MathEx.Quat@,Engine.MathEx.Vec3@)">
+            <summary>
+            Called when the transformation of object is changed.
+            </summary>
+            <param name="pos">The new position.</param>
+            <param name="rot">The new rotation.</param>
+            <param name="scl">The new scale.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Zone.OnCalculateMapBounds(Engine.MathEx.Bounds@)">
+            <summary>
+            Called when the bounds of object calculate.
+            </summary>
+            <remarks>
+            By means of this method it is possible to change standard bounds to others.
+            </remarks>
+            <param name="bounds">The bounds of object</param>
+        </member>
+        <member name="M:Engine.MapSystem.Zone.OnGetEditorSelectionByRay(Engine.MathEx.Ray,Engine.MathEx.Vec3@,System.Single@)">
+            <summary>
+            Caused when the user tries to select object the mouse.
+            </summary>
+            <param name="ray">The selection ray.</param>
+            <param name="pos">The received position of intersection of a ray.</param>
+            <param name="priority">
+            Priority of selection. It is by default equal <b>0.5</b>.
+            The object with the highest priority will be selected.
+            </param>
+            <returns>Returns <b>true</b> the object is selected; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.Zone.OnEditorSelectionDebugRender(Engine.Renderer.Camera,System.Boolean,System.Boolean)">
+            <summary>
+            Caused when it is necessary to draw a selection border in the Map Editor.
+            </summary>
+            <param name="camera">The destination camera.</param>
+            <param name="bigBorder">
+            If <b>true</b> that the border should be hardly more than usually.
+            </param>
+            <param name="simpleGeometry"></param>
+        </member>
+        <member name="P:Engine.MapSystem.Zone.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.StaticSoundType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.StaticSound"/> entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.StaticSound">
+            <summary>
+            Defines a static sound on a map.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.StaticSound.OnPostCreate2(System.Boolean)">
+            <summary>
+            Called after the entity is added into the world. This method is called after <see cref="M:Engine.EntitySystem.Entity.OnPostCreate(System.Boolean)"/> method.
+            </summary>
+            <param name="loaded"><b>true</b> if the entity has been loaded; otherwise, <b>false</b>.</param>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate(System.Boolean)"/>
+        </member>
+        <member name="M:Engine.MapSystem.StaticSound.OnDestroy">
+            <summary>
+            Called when the entity is removed from the world.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.StaticSound.OnSetTransform(Engine.MathEx.Vec3@,Engine.MathEx.Quat@,Engine.MathEx.Vec3@)">
+            <summary>
+            Called when the transformation of object is changed.
+            </summary>
+            <param name="pos">The new position.</param>
+            <param name="rot">The new rotation.</param>
+            <param name="scl">The new scale.</param>
+        </member>
+        <member name="M:Engine.MapSystem.StaticSound.OnCalculateMapBounds(Engine.MathEx.Bounds@)">
+            <summary>
+            Called when the bounds of object calculate.
+            </summary>
+            <remarks>
+            By means of this method it is possible to change standard bounds to others.
+            </remarks>
+            <param name="bounds">The bounds of object</param>
+        </member>
+        <member name="P:Engine.MapSystem.StaticSound.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.StaticSound.SoundName">
+            <summary>
+            Gets or sets the sound file name.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.StaticSound.Volume">
+            <summary>
+            Gets or sets the sound volume.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.StaticSound.Priority">
+            <summary>
+            Gets or sets the priority of playing. Default is <b>0.5</b>.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.StaticSound.Pitch">
+            <summary>
+            Gets or sets the sound pitch.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.StaticSound.MinDistance">
+            <summary>
+            Gets or sets the minimum distance, which is the distance from the listener at 
+            which sounds in this buffer begin to be attenuated.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.StaticSound.Stream">
+            <summary>
+            Gets or sets a value which indicates that the sound will playing as a stream.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.StaticLightingManagerType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.StaticLightingManager"/> entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.StaticLightingManager">
+            <summary>
+            Defines a static precalculated lighting support of a map.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.StaticLightingManager.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.CubemapZoneType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.CubemapZone"/> entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.CubemapZone">
+            <summary>
+            Class for arrangement of zones for cubemaps.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.CubemapZone.OnPostCreate(System.Boolean)">
+            <summary>
+            Called after the entity is added into the world.
+            </summary>
+            <param name="loaded"><b>true</b> if the entity has been loaded; otherwise, <b>false</b>.</param>
+            <remarks>
+            </remarks>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate2(System.Boolean)"/>
+        </member>
+        <member name="M:Engine.MapSystem.CubemapZone.OnPostCreate2(System.Boolean)">
+            <summary>
+            Called after the entity is added into the world. This method is called after <see cref="M:Engine.EntitySystem.Entity.OnPostCreate(System.Boolean)"/> method.
+            </summary>
+            <param name="loaded"><b>true</b> if the entity has been loaded; otherwise, <b>false</b>.</param>
+            <remarks>
+            </remarks>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate(System.Boolean)"/>
+        </member>
+        <member name="M:Engine.MapSystem.CubemapZone.OnDestroy">
+            <summary>
+            Called when the entity is removed from the world.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.CubemapZone.OnSetTransform(Engine.MathEx.Vec3@,Engine.MathEx.Quat@,Engine.MathEx.Vec3@)">
+            <summary>
+            Called when the transformation of object is changed.
+            </summary>
+            <param name="pos">The new position.</param>
+            <param name="rot">The new rotation.</param>
+            <param name="scl">The new scale.</param>
+        </member>
+        <member name="M:Engine.MapSystem.CubemapZone.OnCalculateMapBounds(Engine.MathEx.Bounds@)">
+            <summary>
+            Called when the bounds of object calculate.
+            </summary>
+            <remarks>
+            By means of this method it is possible to change standard bounds to others.
+            </remarks>
+            <param name="bounds">The bounds of object</param>
+        </member>
+        <member name="M:Engine.MapSystem.CubemapZone.OnRenderFrame">
+            <summary>
+            Called before the render frame will be rendered.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.CubemapZone.OnRender(Engine.Renderer.Camera)">
+            <summary>
+            Called before the object it will be rendered.
+            </summary>
+            <param name="camera">The render camera.</param>
+        </member>
+        <member name="M:Engine.MapSystem.CubemapZone.OnBeforeCubemapUpdate">
+            <summary>
+            Called before generation of a texture.
+            </summary>
+            <remarks>
+            This method makes invisible dynamic objects and particle systems.
+            The hide objects become visible after generation of a texture in a method <see cref="M:Engine.MapSystem.CubemapZone.OnAfterCubemapUpdate"/>.
+            </remarks>
+            <seealso cref="M:Engine.MapSystem.CubemapZone.OnAfterCubemapUpdate"/>
+        </member>
+        <member name="M:Engine.MapSystem.CubemapZone.OnAfterCubemapUpdate">
+            <summary>
+            Called after generation of a texture.
+            </summary>
+            <seealso cref="M:Engine.MapSystem.CubemapZone.OnBeforeCubemapUpdate"/>
+        </member>
+        <member name="M:Engine.MapSystem.CubemapZone.UpdateTexture">
+            <summary>
+            Regenerates a texture.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.CubemapZone.SaveCubemapToFile(System.String)">
+            <summary>
+            Saves a generated texture on a disk.
+            </summary>
+            <param name="realFileName">The real file name.</param>
+            <returns><b>true</b> if the texture successfully saved; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.CubemapZone.GetTextureName">
+            <summary>
+            Returns the texture name.
+            </summary>
+            <returns>The texture name.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.CubemapZone.GetGlobalZone">
+            <summary>
+            Gets a global texture.
+            </summary>
+            <returns><see cref="T:Engine.MapSystem.CubemapZone"/> if the global zone exists; otherwise, <b>null</b>.</returns>
+        </member>
+        <member name="P:Engine.MapSystem.CubemapZone.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.CubemapZone.TextureSize">
+            <summary>
+            Gets or sets the size of the generated texture.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.CubemapZone.CustomTextureName">
+            <summary>
+            Gets or sets the name of a custom texture. Cubemap texture with this name it will be loaded, i.e. it will not be generated.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.CubemapZone.GlobalZone">
+            <summary>
+            Gets or sets a value which indicates whether this zone is global.
+            </summary>
+            <remarks>
+            <para>
+            Global zones are convenient for using for an environment mapping.
+            When the object is not within the limits of any zone the global zone is used.
+            </para>
+            <para>
+            On a map there can be only one global zone.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Engine.MapSystem.CubemapZone.NearFarClipDistance">
+            <summary>
+            Gets or sets the generation camera near/far clip range.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapSystemWorld.MapDestroy">
+            <summary>
+            Destroys a map.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapSystemWorld.GetMapObjectByBody(Engine.PhysicsSystem.Body)">
+            <summary>
+            Returns <see cref="T:Engine.MapSystem.MapObject"/> which contains the specified body.
+            </summary>
+            <param name="body">The body.</param>
+            <returns>
+            Returns <see cref="T:Engine.MapSystem.MapObject"/> which contains the specified body; 
+            otherwise, <b>null</b>.
+            </returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapSystemWorld.MapLoad(System.String)">
+            <summary>
+            Loads a map from file.
+            </summary>
+            <param name="virtualFileName">The file name of virtual file system.</param>
+            <returns><b>true</b> if the map has been loaded; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapSystemWorld.MapSave(System.String)">
+            <summary>
+            Saves a map to file.
+            </summary>
+            <param name="virtualFileName">The file name of virtual file system.</param>
+            <returns><b>true</b> if the map has been saved; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapSystemWorld.WorldLoad(Engine.EntitySystem.WorldSimulationTypes,System.String)">
+            <summary>
+            Loads a world from file.
+            </summary>
+            <param name="worldSimulationType">The world similation type.</param>
+            <param name="virtualFileName">The file name of virtual file system.</param>
+            <returns><b>true</b> if the world has been loaded; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapSystemWorld.WorldSave(System.String)">
+            <summary>
+            Saves a world to file.
+            </summary>
+            <param name="virtualFileName">The file name of virtual file system.</param>
+            <returns><b>true</b> if the world has been saved; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="T:Engine.MapSystem.MapType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.Map"/> entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectCreateMapObject">
+            <summary>
+            Defines a class of the MapObject of Objects Creation Collection.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectCreateMapObject.ToString">
+            <summary>
+            Gets the type name of attached object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateMapObject.Type">
+            <summary>
+            Gets or sets the entity type of attached object.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateMapObject.CopyVelocitiesFromParent">
+            <summary>
+            Gets or sets a value indicating whether velocities of bodies of physical model from the parent will be copied.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectTypeAttachedObject">
+            <summary>
+            Defines base class of the attached objects in entity type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedObject.Owner">
+            <summary>
+            Gets the the object to which is attached this.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedObject.Alias">
+            <summary>
+            Gets or sets the alias of attached object.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedObject.Body">
+            <summary>
+            Gets or sets the name a body of the parent to which the object will be attached.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedObject.BoneSlot">
+            <summary>
+            Gets or sets the name of the model bone slot to which the object is attached.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedObject.Position">
+            <summary>
+            Gets or sets the additional offset.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedObject.Rotation">
+            <summary>
+            Gets or sets the additional offset.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedObject.Scale">
+            <summary>
+            Gets or sets the additional offset.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedObject.Visible">
+            <summary>
+            Gets or sets this object whether to be visible or not.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedObject.OnlyForEditor">
+            <summary>
+            Gets or set a value indicates whether the object will be created only in the Map Editor.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectAttachedObject">
+            <summary>
+            Defines base class of the attached objects in entity.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectAttachedObject.SetBoneSlot(System.String)">
+            <summary>
+            Sets the mesh bone slot to which the object is attached.
+            </summary>
+            <param name="boneSlotName">The bone slot name.</param>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectAttachedObject.GetGlobalTransform(Engine.MathEx.Vec3@,Engine.MathEx.Quat@,Engine.MathEx.Vec3@)">
+            <summary>
+            Gets the global transformation of object.
+            </summary>
+            <param name="pos">The position.</param>
+            <param name="rot">The rotation.</param>
+            <param name="scl">The scale.</param>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectAttachedObject.GetGlobalOldTransform(Engine.MathEx.Vec3@,Engine.MathEx.Quat@,Engine.MathEx.Vec3@)">
+            <summary>
+            Gets the old global transformation of object.
+            </summary>
+            <param name="pos">The position.</param>
+            <param name="rot">The rotation.</param>
+            <param name="scl">The scale.</param>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectAttachedObject.GetGlobalInterpolatedTransform(Engine.MathEx.Vec3@,Engine.MathEx.Quat@,Engine.MathEx.Vec3@)">
+            <summary>
+            Gets the interpolated global transformation of object.
+            </summary>
+            <param name="pos">The position.</param>
+            <param name="rot">The rotation.</param>
+            <param name="scl">The scale.</param>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectAttachedObject.GetBox">
+            <summary>
+            Calculates the box of object.
+            </summary>
+            <returns>The box of object.</returns>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedObject.TypeObject">
+            <summary>
+            Gets the object which defines initial options of data in entity type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedObject.Alias">
+            <summary>
+            Gets or sets the alias of attached object.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedObject.Owner">
+            <summary>
+            Gets the the object to which is attached this.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedObject.UseOwnerScale">
+            <summary>
+            Gets or sets a value whether indicates he will consider scale of the parent, at calculation of the scale.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedObject.PositionOffset">
+            <summary>
+            Gets or sets the additional offset.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedObject.RotationOffset">
+            <summary>
+            Gets or sets the additional offset.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedObject.ScaleOffset">
+            <summary>
+            Gets or sets the additional offset.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedObject.Body">
+            <summary>
+            Gets or sets the body of the parent to which the object is attached.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedObject.BoneSlot">
+            <summary>
+            Gets or sets the model bone slot to which the object is attached.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedObject.Visible">
+            <summary>
+            Gets or sets this object whether to be visible or not.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectCreateBillboard">
+            <summary>
+            Defines a class of the Billboard of Objects Creation Collection.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectCreateBillboard.ToString">
+            <summary>
+            Gets the material name of billboard.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateBillboard.Color">
+            <summary>
+            Gets or sets the billboard color.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateBillboard.Size">
+            <summary>
+            Gets or sets the billboard dimensions.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateBillboard.MaterialName">
+            <summary>
+            Gets or sets the billboard material.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.OccluderType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.Occluder"/> entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.Occluder">
+            <summary>
+            Defines the occluder for a scene management.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.Occluder.OnPostCreate(System.Boolean)">
+            <summary>
+            Called after the entity is added into the world.
+            </summary>
+            <param name="loaded"><b>true</b> if the entity has been loaded; otherwise, <b>false</b>.</param>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate2(System.Boolean)"/>
+        </member>
+        <member name="M:Engine.MapSystem.Occluder.OnDestroy">
+            <summary>
+            Called when the entity is removed from the world.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.Occluder.OnSetTransform(Engine.MathEx.Vec3@,Engine.MathEx.Quat@,Engine.MathEx.Vec3@)">
+            <summary>
+            Called when the transformation of object is changed.
+            </summary>
+            <param name="pos">The new position.</param>
+            <param name="rot">The new rotation.</param>
+            <param name="scl">The new scale.</param>
+        </member>
+        <member name="M:Engine.MapSystem.Occluder.OnCalculateMapBounds(Engine.MathEx.Bounds@)">
+            <summary>
+            Called when the bounds of object calculate.
+            </summary>
+            <remarks>
+            By means of this method it is possible to change standard bounds to others.
+            </remarks>
+            <param name="bounds">The bounds of object</param>
+        </member>
+        <member name="M:Engine.MapSystem.Occluder.OnGetEditorSelectionByRay(Engine.MathEx.Ray,Engine.MathEx.Vec3@,System.Single@)">
+            <summary>
+            Caused when the user tries to select object the mouse.
+            </summary>
+            <param name="ray">The selection ray.</param>
+            <param name="pos">The received position of intersection of a ray.</param>
+            <param name="priority">
+            Priority of selection. It is by default equal <b>0.5</b>.
+            The object with the highest priority will be selected.
+            </param>
+            <returns>Returns <b>true</b> the object is selected; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.Occluder.OnEditorSelectionDebugRender(Engine.Renderer.Camera,System.Boolean,System.Boolean)">
+            <summary>
+            Caused when it is necessary to draw a selection border in the Map Editor.
+            </summary>
+            <param name="camera">The destination camera.</param>
+            <param name="bigBorder">
+            If <b>true</b> that the border should be hardly more than usually.
+            </param>
+            <param name="simpleGeometry"></param>
+        </member>
+        <member name="P:Engine.MapSystem.Occluder.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectTypeAttachedMapObject">
+            <summary>
+            Defines a class of the MapObject attached objects in entity type.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectTypeAttachedMapObject.ToString">
+            <summary>
+            Gets the type name of attached object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedMapObject.Type">
+            <summary>
+            Gets or sets the entity type of attached object.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedMapObject.ChildBody">
+            <summary>
+            Gets or sets the name of a body of the attached object.
+            This body will be connected with a body of parental object by fixed joint.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedMapObject.DetachOnOwnerDestroy">
+            <summary>
+            Gets or sets a value whether which indicates object will be detached before 
+            destruction of the owner or is destroyed.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectAttachedMapObject">
+            <summary>
+            Defines a class of the MapObject attached objects in entity.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedMapObject.MapObject">
+            <summary>
+            Gets or sets the attached entity.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedMapObject.ChildBody">
+            <summary>
+            Gets or sets the body of the attached object.
+            This body connected with a body of parental object by fixed joint.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedMapObject.DetachOnOwnerDestroy">
+            <summary>
+            Gets or sets a value whether which indicate object will be detached before 
+            destruction of the owner or is destroyed.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectTypeAttachedBillboard">
+            <summary>
+            Defines a class of the Billboard attached objects in entity type.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectTypeAttachedBillboard.ToString">
+            <summary>
+            Gets the material name of billboard.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedBillboard.Color">
+            <summary>
+            Gets or sets the billboard color.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedBillboard.Size">
+            <summary>
+            Gets or sets the billboard dimensions.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedBillboard.MaterialName">
+            <summary>
+            Gets or sets the billboard material.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedBillboard.FadeVelocity">
+            <summary>
+            Gets or sets the melt velocity of attenuation when billboard will be invisible.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedBillboard.CameraVisibleCheck">
+            <summary>
+            Gets or sets value which indicates whether the billboard will become invisible 
+            when its center is not visible from the camera.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedBillboard.CameraVisibleStartOffset">
+            <summary>
+            Gets or sets the distance with which begins check on visibility from the camera. 
+            This space is necessary to ignore the nearest objects. Such as for example the player.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectAttachedBillboard">
+            <summary>
+            Defines a class of the Billboard attached objects in entity.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedBillboard.SceneNode">
+            <summary>
+            Gets the parent scene node of billboard.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedBillboard.Color">
+            <summary>
+            Gets or sets the billboard color.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedBillboard.Size">
+            <summary>
+            Gets or sets the billboard dimensions.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedBillboard.MaterialName">
+            <summary>
+            Gets or sets the billboard material.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedBillboard.FadeVelocity">
+            <summary>
+            Gets or sets the melt velocity of attenuation when billboard will be invisible.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedBillboard.CameraVisibleCheck">
+            <summary>
+            Gets or sets value which indicates whether the billboard will become invisible 
+            when its center is not visible from the camera.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedBillboard.CameraVisibleStartOffset">
+            <summary>
+            Gets or sets the distance with which begins check on visibility from the camera. 
+            This space is necessary to ignore the nearest objects. Such as for example the player.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedBillboard.Alpha">
+            <summary>
+            Gets or sets the alpha color of billboard.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.SkyBoxType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.SkyBox"/> entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.SkyBox">
+            <summary>
+            Defines a sky box of a map.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.SkyBox.OnPostCreate(System.Boolean)">
+            <summary>
+            Called after the entity is added into the world.
+            </summary>
+            <param name="loaded"><b>true</b> if the entity has been loaded; otherwise, <b>false</b>.</param>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate2(System.Boolean)"/>
+        </member>
+        <member name="M:Engine.MapSystem.SkyBox.OnDestroy">
+            <summary>
+            Called when the entity is removed from the world.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.SkyBox.OnRender(Engine.Renderer.Camera)">
+            <summary>
+            Called before the object it will be rendered.
+            </summary>
+            <param name="camera">The render camera.</param>
+        </member>
+        <member name="P:Engine.MapSystem.SkyBox.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.SkyBox.TextureName">
+            <summary>
+            Gets or sets the texture name of a sky box.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.SkyBox.Color">
+            <summary>
+            Gets or sets the color scale.
+            </summary>
+            <remarks>
+            <para>
+            Works only with support vertex and pixel shaders.
+            </para>
+            <para>
+            This property can be changed in real-time from code.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectCreateParticle">
+            <summary>
+            Defines a class of the Particle System of Objects Creation Collection.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectCreateParticle.ToString">
+            <summary>
+            Gets the particle system name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateParticle.ParticleName">
+            <summary>
+            Gets or sets the particle system name.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateParticle.OwnerRotation">
+            <summary>
+            Gets or sets a value whether indicates he will consider rotation of the parent, at calculation of the rotation.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectTypeAttachedHelper">
+            <summary>
+            Defines a class of the Helper attached objects in entity type.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectTypeAttachedHelper.ToString">
+            <summary>
+            Gets the alias name of object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectAttachedHelper">
+            <summary>
+            Defines a class of the Helper attached objects in entity.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapCurvePointType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.MapCurvePoint"/> entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapCurvePoint">
+            <summary>
+            Defines a point of <see cref="T:Engine.MapSystem.MapCurve"/>.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapCurvePoint.OnPostCreate(System.Boolean)">
+            <summary>
+            Called after the entity is added into the world.
+            </summary>
+            <param name="loaded"><b>true</b> if the entity has been loaded; otherwise, <b>false</b>.</param>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate2(System.Boolean)"/>
+        </member>
+        <member name="M:Engine.MapSystem.MapCurvePoint.OnDestroy">
+            <summary>
+            Called when the entity is removed from the world.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapCurvePoint.OnSetTransform(Engine.MathEx.Vec3@,Engine.MathEx.Quat@,Engine.MathEx.Vec3@)">
+            <summary>
+            Called when the transformation of object is changed.
+            </summary>
+            <param name="pos">The new position.</param>
+            <param name="rot">The new rotation.</param>
+            <param name="scl">The new scale.</param>
+        </member>
+        <member name="M:Engine.MapSystem.MapCurvePoint.OnRelatedEntityDelete(Engine.EntitySystem.Entity)">
+            <summary>
+            Called when the entity related with this entity is deleted.
+            </summary>
+            <param name="entity">The deleted entity.</param>
+            <seealso cref="M:Engine.EntitySystem.Entity.AddRelationship(Engine.EntitySystem.Entity)"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.RemoveRelationship(Engine.EntitySystem.Entity)"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnRelationshipAdd(Engine.EntitySystem.Entity)"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnRelationshipRemove(Engine.EntitySystem.Entity)"/>
+            <seealso cref="E:Engine.EntitySystem.Entity.RelatedEntityDelete"/>
+        </member>
+        <member name="P:Engine.MapSystem.MapCurvePoint.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapCurvePoint.Owner">
+            <summary>
+            Gets or sets the owner curve.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapCurvePoint.Time">
+            <summary>
+            Gets or sets the time on curve of this point.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapCurveType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.MapCurve"/> entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapCurve">
+            <summary>
+            Defines a curve on a map.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapCurve.OnCreate">
+            <summary>
+            Called after the entity is created in the world.
+            </summary>
+            <remarks>
+            <para>This method is not called if the entity is loaded.</para>
+            </remarks>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPreCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate(System.Boolean)"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="E:Engine.EntitySystem.Entity.Create"/>
+        </member>
+        <member name="M:Engine.MapSystem.MapCurve.OnPostCreate(System.Boolean)">
+            <summary>
+            Called after the entity is added into the world.
+            </summary>
+            <param name="loaded"><b>true</b> if the entity has been loaded; otherwise, <b>false</b>.</param>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate2(System.Boolean)"/>
+        </member>
+        <member name="M:Engine.MapSystem.MapCurve.OnUpdateCurve">
+            <summary>
+            Called when at updating a curve.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapCurve.OnRelatedEntityDelete(Engine.EntitySystem.Entity)">
+            <summary>
+            Called when the entity related with this entity is deleted.
+            </summary>
+            <param name="entity">The deleted entity.</param>
+            <seealso cref="M:Engine.EntitySystem.Entity.AddRelationship(Engine.EntitySystem.Entity)"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.RemoveRelationship(Engine.EntitySystem.Entity)"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnRelationshipAdd(Engine.EntitySystem.Entity)"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnRelationshipRemove(Engine.EntitySystem.Entity)"/>
+            <seealso cref="E:Engine.EntitySystem.Entity.RelatedEntityDelete"/>
+        </member>
+        <member name="M:Engine.MapSystem.MapCurve.OnRender(Engine.Renderer.Camera)">
+            <summary>
+            Called before the object it will be rendered.
+            </summary>
+            <param name="camera">The render camera.</param>
+        </member>
+        <member name="M:Engine.MapSystem.MapCurve.CreatePoint(Engine.MapSystem.MapCurvePoint)">
+            <summary>
+            Creates a new point.
+            </summary>
+            <param name="afterPoint"></param>
+            <returns>The created point.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapCurve.GetCurveTimeRange">
+            <summary>
+            Returns the interval of time of values of points.
+            </summary>
+            <returns>The interval of time of values of points.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapCurve.GetCurveMaxTime">
+            <summary>
+            Returns the maximum curve time.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapCurve.CalculateCurvePointByTime(System.Single)">
+            <summary>
+            Calculates the curve position by time.
+            </summary>
+            <param name="time">The curve time.</param>
+            <returns>The curve position.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapCurve.CalculateCurvePointByCoefficient(System.Single)">
+            <summary>
+            Calculates the curve position by coefficient.
+            </summary>
+            <param name="coefficient">Coefficient within the limits of from <b>0</b> to <b>1</b>.</param>
+            <returns>The curve position.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapCurve.CalculateCurveRotationByTime(System.Single)">
+            <summary>
+            Calculates the curve rotation by time.
+            </summary>
+            <param name="time">The curve time.</param>
+            <returns>The curve rotation.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapCurve.CalculateCurveRotationByCoefficient(System.Single)">
+            <summary>
+            Calculates the curve rotation by coefficient.
+            </summary>
+            <param name="coefficient">Coefficient within the limits of from <b>0</b> to <b>1</b>.</param>
+            <returns>The curve rotation.</returns>
+        </member>
+        <member name="P:Engine.MapSystem.MapCurve.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapCurve.CurveType">
+            <summary>
+            Gets or sets the curve type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapCurve.AutomaticTimeStep">
+            <summary>
+            Gets or sets the step at automatic appointment of time to points.
+            </summary>
+            <remarks>
+            If this value is equal <b>0</b> automatic appointment is switched off.
+            </remarks>
+        </member>
+        <member name="P:Engine.MapSystem.MapCurve.Points">
+            <summary>
+            Gets the collection of a points.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapCameraCurvePointType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.MapCameraCurvePoint"/> entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapCameraCurvePoint">
+            <summary>
+            Defines the camera point for <see cref="T:Engine.MapSystem.MapCameraCurve"/>.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapCameraCurvePoint.OnGetEditorShowInformation">
+            <summary>
+            To receive the line information which will be shown in Map Editor when entity it is selected.
+            </summary>
+            <returns>Returns information string.</returns>
+        </member>
+        <member name="P:Engine.MapSystem.MapCameraCurvePoint.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapCameraCurvePoint.Fov">
+            <summary>
+            Gets or sets the FOV of camera.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapCameraCurveType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.MapCameraCurve"/> entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapCameraCurve">
+            <summary>
+            Defines the camera on a map moving on a curve.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapCameraCurve.OnGetEditorShowInformation">
+            <summary>
+            To receive the line information which will be shown in Map Editor when entity it is selected.
+            </summary>
+            <returns>Returns information string.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapCameraCurve.OnUpdateCurve">
+            <summary>
+            Called when at updating a curve.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapCameraCurve.CalculateCameraPositionByTime(System.Single,Engine.MathEx.Vec3@,Engine.MathEx.Vec3@,Engine.MathEx.Vec3@,Engine.MathEx.Degree@)">
+            <summary>
+            Counts position of the camera from time.
+            </summary>
+            <param name="time">The time.</param>
+            <param name="position">The position of a camera.</param>
+            <param name="forward">The forward vector of a camera.</param>
+            <param name="up">The up vector of a camera.</param>
+            <param name="fov">The FOV of a camera.</param>
+        </member>
+        <member name="P:Engine.MapSystem.MapCameraCurve.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapCameraCurve.Fov">
+            <summary>
+            Gets or sets the FOV of camera.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectTypeAttachedLight">
+            <summary>
+            Defines a class of the Light attached objects in entity type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedLight.LightType">
+            <summary>
+            Gets or sets the light type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedLight.DiffuseColor">
+            <summary>
+            Gets or sets the color of the diffuse light given off by this source.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedLight.DiffusePower">
+            <summary>
+            Gets or sets the power of the diffuse light given off by this source.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedLight.SpecularColor">
+            <summary>
+            Gets or sets the color of the specular light given off by this source.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedLight.SpecularPower">
+            <summary>
+            Gets or sets the power of the specular light given off by this source.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedLight.AttenuationRange">
+            <summary>
+            Gets or sets the attenuation range parameter of the light source ie how it diminishes with distance.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedLight.AttenuationConstant">
+            <summary>
+            Gets or sets the attenuation constant parameter of the light source ie how it diminishes with distance.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedLight.AttenuationLinear">
+            <summary>
+            Gets or sets the attenuation linear parameter of the light source ie how it diminishes with distance.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedLight.AttenuationQuadric">
+            <summary>
+            Gets or sets the attenuation Quadric parameter of the light source ie how it diminishes with distance.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedLight.SpotlightInnerAngle">
+            <summary>
+            Gets or sets the angle covered by the spotlights inner cone.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedLight.SpotlightOuterAngle">
+            <summary>
+            Gets or sets the angle covered by the spotlights outer cone.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedLight.SpotlightFalloff">
+            <summary>
+            Gets or sets the falloff between the inner and outer cones of the spotlight.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedLight.CastShadows">
+            <summary>
+            Gets or sets whether or not this object will cast shadows.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectAttachedLight">
+            <summary>
+            Defines a class of the Light attached objects in entity.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedLight.LightType">
+            <summary>
+            Gets or sets the light type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedLight.DiffuseColor">
+            <summary>
+            Gets or sets the color of the diffuse light given off by this source.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedLight.DiffusePower">
+            <summary>
+            Gets or sets the power of the diffuse light given off by this source.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedLight.SpecularColor">
+            <summary>
+            Gets or sets the color of the specular light given off by this source.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedLight.SpecularPower">
+            <summary>
+            Gets or sets the power of the specular light given off by this source.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedLight.AttenuationRange">
+            <summary>
+            Gets or sets the attenuation range parameter of the light source ie how it diminishes with distance.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedLight.AttenuationConstant">
+            <summary>
+            Gets or sets the attenuation constant parameter of the light source ie how it diminishes with distance.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedLight.AttenuationLinear">
+            <summary>
+            Gets or sets the attenuation linear parameter of the light source ie how it diminishes with distance.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedLight.AttenuationQuadric">
+            <summary>
+            Gets or sets the attenuation Quadric parameter of the light source ie how it diminishes with distance.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedLight.SpotlightInnerAngle">
+            <summary>
+            Gets or sets the angle covered by the spotlights inner cone.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedLight.SpotlightOuterAngle">
+            <summary>
+            Gets or sets the angle covered by the spotlights outer cone.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedLight.SpotlightFalloff">
+            <summary>
+            Gets or sets the falloff between the inner and outer cones of the spotlight.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectTypeAttachedGui">
+            <summary>
+            Defines a class of the GUI attached objects in entity type.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectTypeAttachedGui.ToString">
+            <summary>
+            Gets the "GuiObject" text.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectAttachedGui">
+            <summary>
+            Defines a class of the GUI attached objects in entity.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedGui.ControlManager">
+            <summary>
+            Gets the control manager.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.StaticMeshType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.StaticMesh"/> entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.StaticMesh">
+            <summary>
+            Defines the static mesh.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.StaticMesh.OnLoad(Engine.Utils.TextBlock)">
+            <summary>
+            Called while entity type is loading.
+            </summary>
+            <param name="block">The text block from which data of entity will be loaded.</param>
+            <returns><b>true</b> if the entity successfully loaded; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.StaticMesh.OnSave(Engine.Utils.TextBlock)">
+            <summary>
+            Called while entity type is saving.
+            </summary>
+            <param name="block">The text block in which data of entity will be saved.</param>
+        </member>
+        <member name="M:Engine.MapSystem.StaticMesh.OnPostCreate(System.Boolean)">
+            <summary>
+            Called after the entity is added into the world.
+            </summary>
+            <param name="loaded"><b>true</b> if the entity has been loaded; otherwise, <b>false</b>.</param>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate2(System.Boolean)"/>
+        </member>
+        <member name="M:Engine.MapSystem.StaticMesh.OnDestroy">
+            <summary>
+            Called when the entity is removed from the world.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.StaticMesh.OnRender(Engine.Renderer.Camera)">
+            <summary>
+            Called before the object it will be rendered.
+            </summary>
+            <param name="camera">The render camera.</param>
+        </member>
+        <member name="P:Engine.MapSystem.StaticMesh.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectCreateLight">
+            <summary>
+            Defines a class of the Light of Objects Creation Collection.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectCreateLight.ToString">
+            <summary>
+            Gets the light type name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateLight.LightType">
+            <summary>
+            Gets or sets the light type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateLight.DiffuseColor">
+            <summary>
+            Gets or sets the color of the diffuse light given off by this source.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateLight.DiffusePower">
+            <summary>
+            Gets or sets the power of the diffuse light given off by this source.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateLight.SpecularColor">
+            <summary>
+            Gets or sets the color of the specular light given off by this source.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateLight.SpecularPower">
+            <summary>
+            Gets or sets the power of the specular light given off by this source.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateLight.AttenuationRange">
+            <summary>
+            Gets or sets the attenuation range parameter of the light source ie how it diminishes with distance.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateLight.AttenuationConstant">
+            <summary>
+            Gets or sets the attenuation constant parameter of the light source ie how it diminishes with distance.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateLight.AttenuationLinear">
+            <summary>
+            Gets or sets the attenuation linear parameter of the light source ie how it diminishes with distance.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateLight.AttenuationQuadric">
+            <summary>
+            Gets or sets the attenuation Quadric parameter of the light source ie how it diminishes with distance.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateLight.SpotlightInnerAngle">
+            <summary>
+            Gets or sets the angle covered by the spotlights inner cone.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateLight.SpotlightOuterAngle">
+            <summary>
+            Gets or sets the angle covered by the spotlights outer cone.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateLight.SpotlightFalloff">
+            <summary>
+            Gets or sets the falloff between the inner and outer cones of the spotlight.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateLight.CastShadows">
+            <summary>
+            Gets or sets whether or not this object will cast shadows.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectTypeAttachedRibbonTrail">
+            <summary>
+            Defines a class of the RibbonTrail attached objects in entity type.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectTypeAttachedRibbonTrail.ToString">
+            <summary>
+            Gets the count of chains.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedRibbonTrail.TrailLength">
+            <summary>
+            Gets or sets the length of the trail.
+            </summary>
+            <remarks>
+            This sets the length of the trail, in world units. It also sets how
+            far apart each segment will be, ie length / max_elements. 
+            </remarks>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedRibbonTrail.MaxChainElements">
+            <summary>
+            Gets and sets the maximum number of chain elements per chain.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedRibbonTrail.MaterialName">
+            <summary>
+            Gets or sets the material name.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedRibbonTrail.Chains">
+            <summary>
+            Gets the chains collection.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedRibbonTrail.LifeTimeAfterDestroy">
+            <summary>
+            Gets or sets the time which will exist ribbon trail after destruction of the owner.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedRibbonTrail.CastShadows">
+            <summary>
+            Gets or sets whether or not this object will cast shadows.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectTypeAttachedRibbonTrail.Chain">
+            <summary>
+            Defines the ribbon trail chain.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectTypeAttachedRibbonTrail.Chain.ToString">
+            <summary>
+            Returns the "Chain".
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedRibbonTrail.Chain.InitialColor">
+            <summary>
+            Gets or sets the starting ribbon colour for a given segment.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedRibbonTrail.Chain.InitialWidth">
+            <summary>
+            Gets or sets the starting ribbon width in world units.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedRibbonTrail.Chain.ChangeColor">
+            <summary>
+            Gets or sets the per-second fading amount.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedRibbonTrail.Chain.ChangeWidth">
+            <summary>
+            Gets or sets the change in ribbon width per second.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectAttachedRibbonTrail">
+            <summary>
+            Defines a class of the RibbonTrail attached objects in entity.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedRibbonTrail.RibbonTrail">
+            <summary>
+            Gets the ribbon trail.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedRibbonTrail.SceneNode">
+            <summary>
+            Gets the parent scene node of ribbon trail.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedRibbonTrail.LifeTimeAfterDestroy">
+            <summary>
+            Gets or sets the time which will exist ribbon trail after destruction of the owner.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectTypeAttachedMesh">
+            <summary>
+            Defines a class of the Mesh attached objects in entity type.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectTypeAttachedMesh.ToString">
+            <summary>
+            Gets the mesh name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedMesh.MeshName">
+            <summary>
+            Gets or set the attached mesh name.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedMesh.CastDynamicShadows">
+            <summary>
+            Gets or sets whether or not this object will cast shadows.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedMesh.LinkBonesToBodies">
+            <summary>
+            Gets or sets a value which indicates it is necessary to link bones to bodies of physics model.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedMesh.UseOwnerScale">
+            <summary>
+            Gets or sets a value whether indicates he will consider scale of the parent, at calculation of the scale.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedMesh.Collision">
+            <summary>
+            Gets or sets a value indicates whether the mesh will be added to collision.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedMesh.CollisionMaterialName">
+            <summary>
+            Gets or sets a name of a physical material. Property is used only if Collision = True.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedMesh.ForceMaterial">
+            <summary>
+            Gets or sets the name of a material which will are replaced all sub meshes in a model.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectTypeAttachedMesh.MeshBoneSlot">
+            <summary>
+            Defines the mesh bone slot.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectTypeAttachedMesh.MeshBoneSlot.ToString">
+            <summary>
+            Gets the slot name and bone name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedMesh.MeshBoneSlot.Name">
+            <summary>
+            Gets or sets the name of slot.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedMesh.MeshBoneSlot.BoneName">
+            <summary>
+            Gets or sets the name of model bone.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedMesh.MeshBoneSlot.Position">
+            <summary>
+            Gets or sets the additional offset.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedMesh.MeshBoneSlot.Rotation">
+            <summary>
+            Gets or sets the additional offset.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectAttachedMesh">
+            <summary>
+            Defines a class of the Mesh attached objects in entity.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedMesh.MeshName">
+            <summary>
+            Gets or sets mesh name.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedMesh.MeshObject">
+            <summary>
+            Gets the mesh object.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedMesh.SceneNode">
+            <summary>
+            Gets the parent scene node of mesh object.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedMesh.Collision">
+            <summary>
+            Gets or sets a value indicates whether the mesh will be added to collision.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedMesh.CollisionMaterialName">
+            <summary>
+            Gets or sets a name of a physical material. Property is used only if Collision = True.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedMesh.CastDynamicShadows">
+            <summary>
+            Gets or sets whether or not this object will cast shadows.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectAttachedMesh.MeshBoneSlot">
+            <summary>
+            Defines a bone slot.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectAttachedMesh.MeshBoneSlot.GetGlobalTransform(Engine.MathEx.Vec3@,Engine.MathEx.Quat@,Engine.MathEx.Vec3@)">
+            <summary>
+            Returns bone global transform.
+            </summary>
+            <param name="pos">The position.</param>
+            <param name="rot">The rotation.</param>
+            <param name="scl">The scale.</param>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedMesh.MeshBoneSlot.Owner">
+            <summary>
+            Gets the owner.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedMesh.MeshBoneSlot.Name">
+            <summary>
+            Gets the slot name.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedMesh.MeshBoneSlot.Bone">
+            <summary>
+            Gets the bone.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedMesh.MeshBoneSlot.PositionOffset">
+            <summary>
+            Gets or sets the position offset.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedMesh.MeshBoneSlot.RotationOffset">
+            <summary>
+            Gets or sets the rotation offset.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectCreateObjectCollection">
+            <summary>
+            Defines the objects creation collection.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectCreateObjectCollection.Load(Engine.Utils.TextBlock)">
+            <summary>
+            Loads the collection from the text block.
+            </summary>
+            <param name="block">The text block.</param>
+            <returns><b>true</b> if the entity has been loaded; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectCreateObjectCollection.Save(Engine.Utils.TextBlock)">
+            <summary>
+            Saves the collection to the text block.
+            </summary>
+            <param name="block">The text block.</param>
+            <returns><b>true</b> if the entity has been saved; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectCreateObjectCollection.IsExistsReferenceToObject(System.Object)">
+            <summary>
+            Whether to check up there is a link to object.
+            </summary>
+            <remarks>
+            This method is necessary for causing from 
+            <see cref="M:Engine.EntitySystem.EntityType.OnIsExistsReferenceToObject(System.Object)"/> 
+            for normal work of the Resource Editor.
+            </remarks>
+            <param name="obj">The cheched object.</param>
+            <returns><b>true</b> if a link to object is exists; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectCreateObjectCollection.ChangeReferencesToObject(System.Object,System.Object)">
+            <summary>
+            Replaces the link of all objects to another.
+            </summary>
+            <remarks>
+            This method is necessary for causing from 
+            <see cref="M:Engine.EntitySystem.EntityType.OnChangeReferencesToObject(System.Object,System.Object)"/> 
+            for normal work of the Resource Editor.
+            </remarks>
+            <param name="obj">The source link to object.</param>
+            <param name="newValue">The new link to object.</param>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectCreateObjectCollection.CreateObjects(Engine.MapSystem.MapObject)">
+            <summary>
+            Creates objects of a collection.
+            </summary>
+            <param name="owner">The owner object.</param>
+        </member>
+        <member name="E:Engine.MapSystem.MapObjectCreateObjectCollection.IsAllowCreateObject">
+            <summary>
+            Occurs before creation of object and allows to forbid its creation.
+            </summary>
+        </member>
+        <member name="E:Engine.MapSystem.MapObjectCreateObjectCollection.CreateObject">
+            <summary>
+            Occurs after creation of object.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectCreateObjectCollection.IsAllowCreateObjectDelegate">
+            <summary>
+            Represents the method that handles a <see cref="E:Engine.MapSystem.MapObjectCreateObjectCollection.IsAllowCreateObject"/> event.
+            </summary>
+            <param name="owner">The owner object.</param>
+            <param name="createObject">The creating object.</param>
+            <param name="allow">If to set <b>false</b> that object it will not be created.</param>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectCreateObjectCollection.CreateObjectDelegate">
+            <summary>
+            Represents the method that handles a <see cref="E:Engine.MapSystem.MapObjectCreateObjectCollection.CreateObject"/> event.
+            </summary>
+            <param name="owner">The owner entity.</param>
+            <param name="createObject">The creation object.</param>
+            <param name="objectCreated">
+            The created object.
+            It can be <see cref="T:Engine.Renderer.SceneNode"/>, <see cref="T:Engine.MapSystem.MapObject"/> or 
+            <see cref="T:Engine.SoundSystem.VirtualChannel"/> depending on created type of object.
+            </param>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectTypeAttachedSound">
+            <summary>
+            Defines a class of the Sound attached objects in entity type.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectTypeAttachedSound.ToString">
+            <summary>
+            Returns the sound file name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedSound.SoundName">
+            <summary>
+            Gets or sets the sound file name.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedSound.Volume">
+            <summary>
+            Gets or sets the sound volume.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedSound.Priority">
+            <summary>
+            Gets or sets the priority of playing. Default is <b>0.5</b>.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedSound.Pitch">
+            <summary>
+            Gets or sets the sound pitch.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedSound.MinDistance">
+            <summary>
+            Gets or sets the minimum distance, which is the distance from the listener at 
+            which sounds in this buffer begin to be attenuated.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectAttachedSound">
+            <summary>
+            Defines a class of the Sound attached objects in entity.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectAttachedSound.SetSoundName(System.String,System.Boolean)">
+            <summary>
+            Changes sound.
+            </summary>
+            <param name="soundName">The sound name.</param>
+            <param name="loop">The loop flag.</param>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedSound.SoundName">
+            <summary>
+            Gets the sound name.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedSound.Volume">
+            <summary>
+            Gets or sets the sound volume.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedSound.Priority">
+            <summary>
+            Gets or sets the priority of playing. Default is <b>0.5</b>.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedSound.Pitch">
+            <summary>
+            Gets or sets the sound pitch.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedSound.MinDistance">
+            <summary>
+            Gets or sets the minimum distance, which is the distance from the listener at 
+            which sounds in this buffer begin to be attenuated.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedSound.Channel">
+            <summary>
+            Gets the playing channel.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectTypeAttachedParticle">
+            <summary>
+            Defines a class of the Particle System attached objects in entity type.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectTypeAttachedParticle.ToString">
+            <summary>
+            Gets the particle system name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedParticle.ParticleName">
+            <summary>
+            Gets or sets the particle system name.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedParticle.OwnerRotation">
+            <summary>
+            Gets or sets a value whether indicates he will consider rotation of the parent, at calculation of the rotation.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectTypeAttachedParticle.StartTime">
+            <summary>
+            Gets or sets the time from which will start to work particle system after creation.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectAttachedParticle">
+            <summary>
+            Defines a class of the Particle attached objects in entity.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedParticle.ParticleName">
+            <summary>
+            Gets the particle system name.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedParticle.ParticleSystem">
+            <summary>
+            Gets the particle system.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedParticle.SceneNode">
+            <summary>
+            Gets the parent scene node of particle system.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedParticle.OwnerRotation">
+            <summary>
+            Gets or sets a value whether indicates he will consider rotation of the parent, at calculation of the rotation.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedParticle.StartTime">
+            <summary>
+            Gets or sets the time from which will start to work particle system after creation.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectAttachedParticle.ForceCoefficient">
+            <summary>
+            Gets or sets the coefficient of force of particle system.
+            </summary>
+            <remarks>
+            This coefficient - an additional multiplier for 
+            <see cref="P:Engine.Renderer.ParticleEmitter.EmissionRate"/> and 
+            <see cref="P:Engine.Renderer.ParticleEmitter.ParticleVelocity"/> 
+            for all emitters of a particle system.
+            </remarks>
+        </member>
+        <member name="T:Engine.MapSystem.SkyDomeType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.SkyDome"/> entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.SkyDome">
+            <summary>
+            Defines a sky dome of a map.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.SkyDome.OnCreate">
+            <summary>
+            Called after the entity is created in the world.
+            </summary>
+            <remarks>
+            <para>This method is not called if the entity is loaded.</para>
+            </remarks>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPreCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate(System.Boolean)"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="E:Engine.EntitySystem.Entity.Create"/>
+        </member>
+        <member name="M:Engine.MapSystem.SkyDome.OnPostCreate(System.Boolean)">
+            <summary>
+            Called after the entity is added into the world.
+            </summary>
+            <param name="loaded"><b>true</b> if the entity has been loaded; otherwise, <b>false</b>.</param>
+            <seealso cref="M:Engine.EntitySystem.Entity.PostCreate"/>
+            <seealso cref="M:Engine.EntitySystem.Entity.OnPostCreate2(System.Boolean)"/>
+        </member>
+        <member name="M:Engine.MapSystem.SkyDome.OnDestroy">
+            <summary>
+            Called when the entity is removed from the world.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.SkyDome.OnRender(Engine.Renderer.Camera)">
+            <summary>
+            Called before the object it will be rendered.
+            </summary>
+            <param name="camera">The render camera.</param>
+        </member>
+        <member name="P:Engine.MapSystem.SkyDome.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.SkyDome.Color">
+            <summary>
+            Gets or sets the color scale.
+            </summary>
+            <remarks>
+            <para>
+            Works only with support vertex and pixel shaders.
+            </para>
+            <para>
+            This property can be changed in real-time from code.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Engine.MapSystem.MapObjectCreateSound">
+            <summary>
+            Defines a class of the Sound of Objects Creation Collection.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapObjectCreateSound.ToString">
+            <summary>
+            Gets the sound file name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateSound.SoundName">
+            <summary>
+            Gets or sets the sound file name.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateSound.Volume">
+            <summary>
+            Gets or sets the sound volume.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateSound.Priority">
+            <summary>
+            Gets or sets the priority of playing. Default is <b>0.5</b>.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateSound.Pitch">
+            <summary>
+            Gets or sets the sound pitch.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapObjectCreateSound.MinDistance">
+            <summary>
+            Gets or sets the minimum distance, which is the distance from the listener at 
+            which sounds in this buffer begin to be attenuated.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapCameraType">
+            <summary>
+            Defines the <see cref="T:Engine.MapSystem.MapCamera"/> entity type.
+            </summary>
+        </member>
+        <member name="T:Engine.MapSystem.MapCamera">
+            <summary>
+            Defines the camera on a map.
+            </summary>
+        </member>
+        <member name="M:Engine.MapSystem.MapCamera.OnGetEditorShowInformation">
+            <summary>
+            To receive the line information which will be shown in Map Editor when entity it is selected.
+            </summary>
+            <returns>Returns information string.</returns>
+        </member>
+        <member name="P:Engine.MapSystem.MapCamera.Type">
+            <summary>
+            Gets the entity type.
+            </summary>
+        </member>
+        <member name="P:Engine.MapSystem.MapCamera.Fov">
+            <summary>
+            Gets or sets the FOV of camera.
+            </summary>
+        </member>
+    </members>
+</doc>

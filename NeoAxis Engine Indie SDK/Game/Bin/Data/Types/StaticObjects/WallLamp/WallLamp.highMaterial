@@ -1,0 +1,8 @@
+highLevelMaterial WallLamp
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Types\StaticObjects\WallLamp\WallLamp.dds
+	}
+}

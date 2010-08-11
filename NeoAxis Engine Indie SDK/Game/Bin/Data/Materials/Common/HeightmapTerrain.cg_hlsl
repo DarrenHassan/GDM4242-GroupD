@@ -1,0 +1,540 @@
+// Copyright (C) 2006-2010 NeoAxis Group Ltd.
+
+#include "Materials/Common/getFogValue.cg_hlsl"
+#include "Materials/Common/ShadowReceiverFunctions.cg_hlsl"
+
+#ifdef LAYER0_NORMAL_MAP
+#define ALLOW_NORMAL_MAPS
+#endif
+#ifdef LAYER1_NORMAL_MAP
+#define ALLOW_NORMAL_MAPS
+#endif
+#ifdef LAYER2_NORMAL_MAP
+#define ALLOW_NORMAL_MAPS
+#endif
+
+half3 expand(half3 v)
+{
+	return v * 2 - 1;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+void main_vp(
+	uniform float4x4 worldViewProjMatrix,
+	uniform float4x4 textureViewProjMatrix0,
+	uniform float4x4 textureViewProjMatrix1,
+	uniform float4x4 textureViewProjMatrix2,
+	uniform float3 cameraPosition,
+
+#if LIGHT_COUNT >= 1
+	uniform float4 lightPositionArray[LIGHT_COUNT],
+	uniform float4 lightDirectionArray[LIGHT_COUNT],
+	uniform float4 spotLightParamsArray[LIGHT_COUNT],
+#endif
+
+	float4 position : POSITION,
+	float3 normal : NORMAL,
+
+	uniform float2 detailMapsDistanceRange,
+	uniform float2 tileMinVertexPosition,
+	uniform float4 masksUVTransform,
+
+	//GeoMorphing
+#ifdef GEO_MORPHING
+	//float4 delta : TEXCOORD1,
+	//uniform float morphFactor,
+	float4 delta0 : TEXCOORD1,
+	uniform float3 morphFactor,
+#ifdef GEO_MORPHING_BORDER
+	float4 delta1 : TEXCOORD2,
+	float4 delta2 : TEXCOORD3,
+	float3 deltaIndex : TEXCOORD4,
+#endif
+#endif
+
+#if LIGHT_COUNT >= 1
+	#ifdef SHADOW_MAP
+		uniform float3 shadowFarDistance,
+		uniform float3 shadowTextureSizes,
+		out float4 oShadowUV0 : TEXCOORD3,
+		#ifdef SHADOW_PSSM
+			uniform float4 shadowDirectionalLightSplitDistances,
+			out float4 oShadowUV1 : TEXCOORD5,
+			out float4 oShadowUV2 : TEXCOORD6,
+			out float oPSSMDistance : TEXCOORD7,
+		#endif
+
+	#endif
+#endif
+
+#ifdef LIGHTMAP
+	uniform float4 lightmapTransform,
+#endif
+
+#ifdef ALLOW_NORMAL_MAPS
+	out float3 oLightDirectionTangentSpace : TEXCOORD4,
+#endif
+
+	out float4 oPosition : POSITION,
+	out float4 oMasksAndLightmapUV : TEXCOORD0,
+	out float4 oNormalAndDetailCoefficient : TEXCOORD1,
+	out float4 oWorldPositionAndCameraDistance : TEXCOORD2
+)
+{
+	//GeoMorphing
+#ifdef GEO_MORPHING
+	float4 delta;
+	float factor;
+#ifdef GEO_MORPHING_BORDER
+	delta = delta0 * deltaIndex.x + delta1 * deltaIndex.y + delta2 * deltaIndex.z;
+	factor = dot(morphFactor, deltaIndex);
+#else
+	delta = delta0;
+	factor = morphFactor.x;
+#endif
+	position.z += delta.w * factor;
+	normal = normal * (1 - factor) + delta.xyz * factor;
+	//position.z += delta.w * morphFactor;
+	//normal = normal * (1 - morphFactor) + delta.xyz * morphFactor;
+#endif
+
+	//General
+	oPosition = mul(worldViewProjMatrix, position);
+
+	#ifdef SHADOW_PSSM
+		oPSSMDistance = oPosition.z;
+	#endif
+
+	//masks and lightmap uv
+	float2 localPosition = position.xy - tileMinVertexPosition.xy;
+	oMasksAndLightmapUV.xy = masksUVTransform.xy + localPosition * masksUVTransform.zw;
+#ifdef LIGHTMAP
+	oMasksAndLightmapUV.zw = lightmapTransform.xy + localPosition * lightmapTransform.zw;
+#else
+	oMasksAndLightmapUV.zw = float2(0,0);
+#endif
+
+	float4 worldPosition = position;//mul(worldMatrix, position);
+	float cameraDistance = length(cameraPosition.xyz - worldPosition.xyz);
+
+	oNormalAndDetailCoefficient.xyz = normal;
+	oNormalAndDetailCoefficient.w = 
+		1.0f - saturate((cameraDistance - detailMapsDistanceRange.x) * detailMapsDistanceRange.y);
+
+	oWorldPositionAndCameraDistance.xyz = worldPosition.xyz;
+	oWorldPositionAndCameraDistance.w = cameraDistance;
+
+#if LIGHT_COUNT >= 1
+	#ifdef SHADOW_MAP
+
+		#ifdef SHADOW_PSSM
+			getShadowUV(textureViewProjMatrix0, textureViewProjMatrix1, textureViewProjMatrix2, 
+				lightPositionArray[0].xyz, lightDirectionArray[0].xyz, worldPosition.xyz, 
+				spotLightParamsArray[0], shadowTextureSizes, oShadowUV0, oShadowUV1, 
+				oShadowUV2, shadowDirectionalLightSplitDistances, oPSSMDistance
+				);
+		#else
+			getShadowUV(textureViewProjMatrix0, 
+				lightPositionArray[0].xyz, lightDirectionArray[0].xyz, worldPosition.xyz, 
+				spotLightParamsArray[0], shadowFarDistance, shadowTextureSizes, oShadowUV0 );
+		#endif
+
+	#endif
+#endif
+
+#ifdef ALLOW_NORMAL_MAPS
+	float3 lightDirection = float3(0,0,1);
+	#if LIGHT_COUNT >= 1
+		lightDirection = normalize(lightPositionArray[0].xyz - position.xyz * lightPositionArray[0].w);
+	#endif
+	float3 tangent = normalize(float3(-normal.z, 0, normal.x));
+	float3 binormal = normalize(cross(tangent, normal));
+	float3x3 rotation = float3x3(tangent, binormal, normal);
+	oLightDirectionTangentSpace = mul(rotation, lightDirection);
+#endif
+
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+void main_fp(
+
+	uniform float3 cameraPosition,
+#ifdef AMBIENT_PASS
+	uniform half4 ambientLightColor,
+#endif
+
+#if LIGHT_COUNT >= 1
+	uniform float4 lightPositionArray[LIGHT_COUNT],
+	uniform float4 lightDirectionArray[LIGHT_COUNT],
+	uniform half4 lightAttenuationArray[LIGHT_COUNT],
+	uniform half4 lightDiffuseColorPowerScaledArray[LIGHT_COUNT],
+	//uniform half4 lightSpecularColorPowerScaledArray[LIGHT_COUNT],
+#ifdef LIGHTTYPE_SPOT
+	uniform half4 spotLightParamsArray[LIGHT_COUNT],
+#endif
+	uniform half lightCastShadowsArray[LIGHT_COUNT],
+#endif
+
+	//General
+	float4 masksAndLightmapUV : TEXCOORD0,
+	uniform sampler2D masksMap : register(s0),
+
+	half4 normalAndDetailCoefficient : TEXCOORD1,
+	float4 worldPositionAndCameraDistance : TEXCOORD2,
+
+	//Fog
+#ifdef FOG_ENABLED
+	uniform half4 fogColor,
+	uniform half4 fogParams,
+#endif
+
+#ifdef LIGHTMAP
+	uniform sampler2D lightmap : register(LIGHTMAP_REGISTER),
+#endif
+
+#if LIGHT_COUNT >= 1
+	#ifdef SHADOW_MAP
+		float4 shadowUV0 : TEXCOORD3,
+		#ifdef SHADOW_PSSM
+			float4 shadowUV1 : TEXCOORD5,
+			float4 shadowUV2 : TEXCOORD6,
+			float pssmDistance : TEXCOORD7,
+		#endif
+		uniform sampler2D shadowMap0 : register(SHADOW_MAP0_REGISTER),
+		#ifdef SHADOW_PSSM
+			uniform sampler2D shadowMap1 : register(SHADOW_MAP1_REGISTER),
+			uniform sampler2D shadowMap2 : register(SHADOW_MAP2_REGISTER),
+		#endif
+		uniform float lightShadowFarClipDistance,
+		uniform half3 shadowFarDistance,
+		uniform float3 shadowTextureSizes,
+		uniform half shadowColorIntensity,
+		#ifdef SHADOW_PSSM
+			uniform float4 shadowDirectionalLightSplitDistances,
+		#endif
+	#endif
+#endif
+
+#ifdef ALLOW_NORMAL_MAPS
+	half3 lightDirectionTangentSpace : TEXCOORD4,
+#endif
+
+	//Texturing
+#if LAYERS >= 1
+	uniform sampler2D layer0BaseMap : register(LAYER0_BASE_MAP_REGISTER),
+	#ifdef LAYER0_DETAIL_MAP
+		uniform sampler2D layer0DetailMap : register(LAYER0_DETAIL_MAP_REGISTER),
+	#endif
+	#ifdef LAYER0_NORMAL_MAP
+		uniform sampler2D layer0NormalMap : register(LAYER0_NORMAL_MAP_REGISTER),
+	#endif
+#endif
+
+#if LAYERS >= 2
+	uniform sampler2D layer1BaseMap : register(LAYER1_BASE_MAP_REGISTER),
+	#ifdef LAYER1_DETAIL_MAP
+		uniform sampler2D layer1DetailMap : register(LAYER1_DETAIL_MAP_REGISTER),
+	#endif
+	#ifdef LAYER1_NORMAL_MAP
+		uniform sampler2D layer1NormalMap : register(LAYER1_NORMAL_MAP_REGISTER),
+	#endif
+#endif
+
+#if LAYERS >= 3
+	uniform sampler2D layer2BaseMap : register(LAYER2_BASE_MAP_REGISTER),
+	#ifdef LAYER2_DETAIL_MAP
+		uniform sampler2D layer2DetailMap : register(LAYER2_DETAIL_MAP_REGISTER),
+	#endif
+	#ifdef LAYER2_NORMAL_MAP
+		uniform sampler2D layer2NormalMap : register(LAYER2_NORMAL_MAP_REGISTER),
+	#endif
+#endif
+
+#ifdef OPENGL
+	uniform float4 clipPlane0,
+	uniform float4 clipPlane1,
+	uniform float4 clipPlane2,
+	uniform float4 clipPlane3,
+	uniform float4 clipPlane4,
+	uniform float4 clipPlane5,
+#endif
+
+	uniform half disableFetch4ForBrokenDrivers,
+
+	out half4 oColor : COLOR )
+{
+	float3 worldPosition = worldPositionAndCameraDistance.xyz;
+	float cameraDistance = worldPositionAndCameraDistance.w;
+	half3 normal = normalAndDetailCoefficient.xyz;
+	half detailCoefficient = normalAndDetailCoefficient.w;
+	half detailCoefficientCounter = 1.0h - detailCoefficient;
+	half detailCoefficient2 = detailCoefficient * 2;
+
+#ifdef ALLOW_NORMAL_MAPS
+	half3 lightDirectionTangentSpaceNormalized = /*normalize*/(lightDirectionTangentSpace);
+#endif
+
+	//calculate masks values
+	half mask0;
+	half mask1;
+	half mask2;
+	{
+		half4 masks = (half4)tex2D(masksMap, masksAndLightmapUV.xy/*masksUV*/);
+		half realMasks[5];
+		realMasks[0] = masks.a;
+		realMasks[1] = masks.r;
+		realMasks[2] = masks.g;
+		realMasks[3] = masks.b;
+		realMasks[4] = 1 - (masks.a + masks.r + masks.g + masks.b);
+
+		mask0 = realMasks[LAYER0_REAL_INDEX];
+		#if LAYERS >= 2
+			mask1 = realMasks[LAYER1_REAL_INDEX];
+		#endif
+		#if LAYERS >= 3
+			mask2 = realMasks[LAYER2_REAL_INDEX];
+		#endif
+	}
+
+	half3 ambientColor = half3(0,0,0);
+	#ifdef AMBIENT_PASS
+		ambientColor = ambientLightColor.rgb;
+	#endif
+
+	half3 lightDiffuseColor = half3(0,0,0);
+	//half3 lightSpecularColor = half3(0,0,0);
+	half lightMultiplier = 0;
+	float3 lightDirection = float3(0,0,0);
+	half shadowMultiplier = 1;
+
+	#if LIGHT_COUNT >= 1
+		lightDiffuseColor = lightDiffuseColorPowerScaledArray[0].xyz;
+
+		//lightSpecularColor = lightSpecularColorPowerScaledArray[0].xyz;
+		lightMultiplier = 1;
+
+		float3 lightVector = lightPositionArray[0].xyz - worldPosition.xyz * lightPositionArray[0].w;
+		float distance = length(lightVector);
+		lightDirection = lightVector / distance;
+
+		#ifndef LIGHTTYPE_DIRECTIONAL
+			lightMultiplier *= saturate(1 / (lightAttenuationArray[0].y + 
+				lightAttenuationArray[0].z * distance + lightAttenuationArray[0].w * distance * distance));
+		#endif
+
+		#ifdef LIGHTTYPE_SPOT
+			// factor in spotlight angle
+			half rho0 = saturate(dot(-lightDirectionArray[0].xyz, lightDirection));
+			// factor = (rho - cos(outer/2)) / (cos(inner/2) - cos(outer/2)) ^ falloff 
+			half spotFactor0 = saturate(pow(saturate(rho0 - spotLightParamsArray[0].y) / 
+				(spotLightParamsArray[0].x - spotLightParamsArray[0].y), spotLightParamsArray[0].z));
+			lightMultiplier *= spotFactor0;
+		#endif
+
+		//Shadows
+		#ifdef SHADOW_MAP
+
+			#ifdef SHADOW_PSSM
+				shadowMultiplier = getShadowmapReceiveValue( shadowUV0, shadowUV1, shadowUV2,
+					shadowMap0, shadowMap1, shadowMap2, lightCastShadowsArray[0], 
+					lightShadowFarClipDistance, shadowTextureSizes, shadowColorIntensity, 
+					shadowDirectionalLightSplitDistances, pssmDistance);
+			#else
+				shadowMultiplier = getShadowmapReceiveValue( shadowUV0, shadowMap0, cameraDistance, 
+					lightCastShadowsArray[0], lightShadowFarClipDistance, shadowFarDistance,
+					shadowTextureSizes, shadowColorIntensity, disableFetch4ForBrokenDrivers);
+			#endif
+
+		#endif
+
+	#endif
+
+	half3 lightColorWithoutNormalMapping;
+#ifdef LIGHTMAP
+	half3 lightmapColor = (half3)tex2D(lightmap, masksAndLightmapUV.zw).rgb;
+	#ifdef SHADOW_MAP
+		lightmapColor = min(lightmapColor, 1.0h - sqrt(1.0h - shadowMultiplier));
+		//lightmapColor = min(lightmapColor, shadowMultiplier);
+	#endif
+	//#if LIGHT_COUNT >= 1
+	//	lightColorWithoutNormalMapping = ambientColor + lightmapColor * lightMultiplier;
+	//#else
+	lightColorWithoutNormalMapping = ambientColor + lightmapColor;
+	//#endif
+#else
+	lightMultiplier *= shadowMultiplier;
+	lightColorWithoutNormalMapping = ambientColor + 
+		lightDiffuseColor * saturate(dot(normal, lightDirection)) * lightMultiplier;
+#endif
+
+	half3 color = half3(0,0,0);
+
+	//Layer0
+#if LAYERS >= 1
+
+	float2 layer0BaseUV = worldPositionAndCameraDistance.LAYER0_PROJECTION_AXIS / 
+		LAYER0_BASE_SCALE + float2(.5f, .5f);
+	float2 layer0DetailUV = worldPositionAndCameraDistance.LAYER0_PROJECTION_AXIS / 
+		LAYER0_DETAIL_SCALE + float2(.5f, .5f);
+
+	half3 color0 = (half3)tex2D(layer0BaseMap, layer0BaseUV).rgb * mask0;
+	#ifdef LAYER0_DETAIL_MAP
+		half3 detail0 = (half3)tex2D(layer0DetailMap, layer0DetailUV).rgb;// * 2;
+		color0 *= detailCoefficientCounter.xxx + detail0 * detailCoefficient2;
+	#endif
+
+	#ifdef LAYER0_NORMAL_MAP
+		#ifdef LAYER0_NORMAL_MAP_TYPE_BASE
+			half3 normal0 = /*normalize*/(expand((half3)tex2D(layer0NormalMap, layer0BaseUV).rgb));
+			normal0.z = (half)sqrt(1.0h - dot(normal0.xy, normal0.xy));
+			half3 normalMappedCoef0 = ambientColor + lightDiffuseColor *
+				(saturate(dot(normal0, lightDirectionTangentSpaceNormalized)) * lightMultiplier);
+			color += color0 * normalMappedCoef0;
+		#else
+			half3 normal0 = /*normalize*/(expand((half3)tex2D(layer0NormalMap, layer0DetailUV).rgb));
+			normal0.z = (half)sqrt(1.0h - dot(normal0.xy, normal0.xy));
+			half3 normalMappedCoef0 = ambientColor + lightDiffuseColor *
+				(saturate(dot(normal0, lightDirectionTangentSpaceNormalized)) * lightMultiplier);
+			color += color0 * (lightColorWithoutNormalMapping * detailCoefficientCounter + 
+				normalMappedCoef0 * detailCoefficient);
+		#endif
+	#else
+		#ifdef ALLOW_NORMAL_MAPS
+			color += color0 * lightColorWithoutNormalMapping;
+		#endif
+	#endif
+
+	//#ifdef LAYER0_SPECULAR
+	//	half3 specular0 = LAYER0_SPECULAR_COLOR;
+	//	#ifdef LAYER0_SPECULAR_MAP
+	//		half2 specularMapUV0;
+	//		#ifdef LAYER0_SPECULAR_TYPE_BASE
+	//			specularMapUV0 = layer0BaseDetailUV.xy;
+	//		#else
+	//			specularMapUV0 = layer0BaseDetailUV.zw;
+	//		#endif
+	//		specular0 *= (half3)tex2D(layer0SpecularMap, specularMapUV0).rgb;
+	//	#endif
+
+	//	Xxxxx;Normalmapping also need
+
+	//	half3 halfAngle0 = normalize(objectLightDirection0 + eye);
+	//	color += specular0 * lightSpecularColor * 
+	//		(pow(saturate(dot(n, halfAngle0)), LAYER0_SPECULAR_SHININESS) * objectLightAttenuation0);
+	//#endif
+
+#endif
+
+	//Layer1
+#if LAYERS >= 2
+
+	float2 layer1BaseUV = worldPositionAndCameraDistance.LAYER1_PROJECTION_AXIS / 
+		LAYER1_BASE_SCALE + float2(.5f, .5f);
+	float2 layer1DetailUV = worldPositionAndCameraDistance.LAYER1_PROJECTION_AXIS / 
+		LAYER1_DETAIL_SCALE + float2(.5f, .5f);
+
+	half3 color1 = (half3)tex2D(layer1BaseMap, layer1BaseUV).rgb * mask1;	
+	#ifdef LAYER1_DETAIL_MAP
+		half3 detail1 = (half3)tex2D(layer1DetailMap, layer1DetailUV).rgb;// * 2;
+		color1 *= detailCoefficientCounter.xxx + detail1 * detailCoefficient2;
+	#endif
+
+	#ifdef LAYER1_NORMAL_MAP
+		#ifdef LAYER1_NORMAL_MAP_TYPE_BASE
+			half3 normal1 = /*normalize*/(expand((half3)tex2D(layer1NormalMap, layer1BaseUV).rgb));
+			normal1.z = (half)sqrt(1.0h - dot(normal1.xy, normal1.xy));
+			half3 normalMappedCoef1 = ambientColor + lightDiffuseColor *
+				(saturate(dot(normal1, lightDirectionTangentSpaceNormalized)) * lightMultiplier);
+			color += color1 * normalMappedCoef1;
+		#else
+			half3 normal1 = /*normalize*/(expand((half3)tex2D(layer1NormalMap, layer1DetailUV).rgb));
+			normal1.z = (half)sqrt(1.0h - dot(normal1.xy, normal1.xy));
+			half3 normalMappedCoef1 = ambientColor + lightDiffuseColor *
+				(saturate(dot(normal1, lightDirectionTangentSpaceNormalized)) * lightMultiplier);
+			color += color1 * (lightColorWithoutNormalMapping * detailCoefficientCounter + 
+				normalMappedCoef1 * detailCoefficient);
+		#endif
+	#else
+		#ifdef ALLOW_NORMAL_MAPS
+			color += color1 * lightColorWithoutNormalMapping;
+		#endif
+	#endif
+
+#endif
+
+	//Layer2
+#if LAYERS >= 3
+
+	float2 layer2BaseUV = worldPositionAndCameraDistance.LAYER2_PROJECTION_AXIS / 
+		LAYER2_BASE_SCALE + float2(.5f, .5f);
+	float2 layer2DetailUV = worldPositionAndCameraDistance.LAYER2_PROJECTION_AXIS / 
+		LAYER2_DETAIL_SCALE + float2(.5f, .5f);
+
+	half3 color2 = (half3)tex2D(layer2BaseMap, layer2BaseUV).rgb * mask2;
+	#ifdef LAYER2_DETAIL_MAP
+		half3 detail2 = (half3)tex2D(layer2DetailMap, layer2DetailUV).rgb;// * 2;
+		color2 *= detailCoefficientCounter.xxx + detail2 * detailCoefficient2;
+	#endif
+
+	#ifdef LAYER2_NORMAL_MAP
+		#ifdef LAYER2_NORMAL_MAP_TYPE_BASE
+			half3 normal2 = /*normalize*/(expand((half3)tex2D(layer2NormalMap, layer2BaseUV).rgb));
+			normal2.z = (half)sqrt(1.0h - dot(normal2.xy, normal2.xy));
+			half3 normalMappedCoef2 = ambientColor + lightDiffuseColor *
+				(saturate(dot(normal2, lightDirectionTangentSpaceNormalized)) * lightMultiplier);
+			color += color2 * normalMappedCoef2;
+		#else
+			half3 normal2 = /*normalize*/(expand((half3)tex2D(layer2NormalMap, layer2DetailUV).rgb));
+			normal2.z = (half)sqrt(1.0h - dot(normal2.xy, normal2.xy));
+			half3 normalMappedCoef2 = ambientColor + lightDiffuseColor *
+				(saturate(dot(normal2, lightDirectionTangentSpaceNormalized)) * lightMultiplier);
+			color += color2 * (lightColorWithoutNormalMapping * detailCoefficientCounter + 
+				normalMappedCoef2 * detailCoefficient);
+		#endif
+	#else
+		#ifdef ALLOW_NORMAL_MAPS
+			color += color2 * lightColorWithoutNormalMapping;
+		#endif
+	#endif
+
+#endif
+
+	//faster calculation if we not have normal maps
+#ifndef ALLOW_NORMAL_MAPS
+	#if LAYERS >= 1
+		color += color0;
+	#endif
+	#if LAYERS >= 2
+		color += color1;
+	#endif
+	#if LAYERS >= 3
+		color += color2;
+	#endif
+	color *= lightColorWithoutNormalMapping;
+#endif
+
+	//Fog
+#ifdef FOG_ENABLED
+	half fog = getFogValue(cameraDistance, fogParams);
+	color = color * fog;
+	#ifdef ADD_FOG_COLOR
+		color += fogColor.rgb * (1.0h - fog);
+	#endif
+#endif
+
+	//Result
+	oColor = half4(color, 1);
+
+	//OpenGL clip plane support. Direct3D is already support clip planes without this code.
+#ifdef OPENGL
+	clip(dot(clipPlane0, float4(worldPosition, 1)));
+	//uncomment it for support more than 1 clip plane
+	//clip(dot(clipPlane1, float4(worldPosition, 1)));
+	//clip(dot(clipPlane2, float4(worldPosition, 1)));
+	//clip(dot(clipPlane3, float4(worldPosition, 1)));
+	//clip(dot(clipPlane4, float4(worldPosition, 1)));
+	//clip(dot(clipPlane5, float4(worldPosition, 1)));
+#endif
+}

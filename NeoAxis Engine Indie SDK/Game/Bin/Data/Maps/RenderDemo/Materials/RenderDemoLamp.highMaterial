@@ -1,0 +1,22 @@
+highLevelMaterial RenderDemoLamp
+{
+	template = ShaderBaseMaterial
+	emissionScale = 2.745098 2.745098 2.745098
+	specularScale = 1 1 1
+	diffuse1Map
+	{
+		texture = Maps\RenderDemo\Textures\LampDiffuse.dds
+	}
+	emissionMap
+	{
+		texture = Maps\RenderDemo\Textures\LampEmissive.dds
+	}
+	specularMap
+	{
+		texture = Maps\RenderDemo\Textures\LampSpecular.dds
+	}
+	normalMap
+	{
+		texture = Maps\RenderDemo\Textures\LampNormal.dds
+	}
+}

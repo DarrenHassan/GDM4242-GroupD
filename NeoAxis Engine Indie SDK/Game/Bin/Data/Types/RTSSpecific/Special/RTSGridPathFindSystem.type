@@ -1,0 +1,7 @@
+type RTSGridPathFindSystem
+{
+	class = RTSGridPathFindSystem
+	fieldSize = 2
+	allowEditorCreate = True
+	uniqueEntityInstance = True
+}

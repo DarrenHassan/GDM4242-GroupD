@@ -1,0 +1,96 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E4C09433-ECC3-404C-A303-E9A93F241B91}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GameCommon</RootNamespace>
+    <AssemblyName>GameCommon</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <DocumentationFile>GameCommon.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <NoWarn>1591</NoWarn>
+    <DocumentationFile>GameCommon.xml</DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EngineApp, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="EntitySystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="FileSystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="Log, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="MapSystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="MathEx, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="Networking, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="PhysicsSystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="Renderer, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="SoundSystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="UISystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="Utils, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EngineConsole.cs" />
+    <Compile Include="GameControlKeys.cs" />
+    <Compile Include="GameControlsManager.cs" />
+    <Compile Include="GameEngineInitialization.cs" />
+    <Compile Include="LowLevelSceneManagement.cs" />
+    <Compile Include="MeshObjectAnimationController.cs" />
+    <Compile Include="MaterialSchemes.cs" />
+    <Compile Include="DebugInformationWindow.cs" />
+    <Compile Include="GameMusic.cs" />
+    <Compile Include="HighLevel Materials\FPSWeaponMaterial.cs" />
+    <Compile Include="HighLevel Materials\ShaderBaseMaterial.cs" />
+    <Compile Include="HighLevel Materials\SimpleExampleMaterial.cs" />
+    <Compile Include="HighLevel Materials\VegetationMaterial.cs" />
+    <Compile Include="Networking\ChatNetworkService.cs" />
+    <Compile Include="Networking\CustomMessagesNetworkService.cs" />
+    <Compile Include="Networking\EntitySystemNetworkService.cs" />
+    <Compile Include="Networking\GameNetworkClient.cs" />
+    <Compile Include="Networking\GameNetworkServer.cs" />
+    <Compile Include="Networking\UserManagementNetworkService.cs" />
+    <Compile Include="Post Processing\BlurCompositorInstance.cs" />
+    <Compile Include="Post Processing\LDRBloomCompositorInstance.cs" />
+    <Compile Include="Post Processing\HeatVisionCompositorInstance.cs" />
+    <Compile Include="Post Processing\HDRCompositorInstance.cs" />
+    <Compile Include="Post Processing\MotionBlurCompositorInstance.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

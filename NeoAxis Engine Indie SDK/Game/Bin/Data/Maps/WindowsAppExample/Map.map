@@ -1,0 +1,117 @@
+type = GameMap
+uin = 2
+classPrompt = GameMap
+gameType = None
+gameMusic = Sounds\Music\Game.ogg
+ambientLight = 0.2 0.2 0.2
+editorCameraPosition = 5.488183 12.66991 4.622484
+editorCameraDirection = 2.128305 -0.6269597
+shadowColor = 0.6 0.6 0.6 0.6
+shadow2DTextureSize = 512
+logicSystemManager = 3
+shadowTechnique = Stencil
+rootEditorLayer
+{
+	layer
+	{
+		name = StaticGeometry
+		allowEdit = False
+	}
+}
+entity
+{
+	type = LogicSystemManager
+	uin = 3
+	mapClassManager = 4
+	entity
+	{
+		type = LogicClassManager
+		uin = 4
+	}
+}
+entity
+{
+	type = Light
+	uin = 5
+	classPrompt = Light
+	lightType = Spot
+	diffuseColor = 1 1 1
+	diffusePower = 1
+	specularColor = 1 1 1
+	specularPower = 1
+	attenuationRangeAutomatic = True
+	attenuationRange = Infinity
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0
+	spotlightInnerAngle = 55.135
+	spotlightOuterAngle = 63.243
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	allowDynamicLighting = True
+	position = -0.715307 9.870626 4.827685
+	rotation = -0.2075989 0.1116171 0.6416377 0.7298942
+	name = Light_0
+}
+entity
+{
+	type = Girl
+	uin = 6
+	classPrompt = GameCharacter
+	intellectShouldDeleteAfterDetach = False
+	position = 3.641852 15.78624 1.198708
+	rotation = 0 0 -0.9229512 0.384917
+	name = Girl_0
+}
+entity
+{
+	type = Bug
+	uin = 7
+	classPrompt = GameCharacter
+	intellectShouldDeleteAfterDetach = False
+	position = -0.3002372 15.72324 0.5137323
+	rotation = 0 0 -0.1782765 0.9839804
+	name = Bug_1
+}
+entity
+{
+	type = MapCamera
+	uin = 8
+	classPrompt = MapCamera
+	fov = 70
+	position = 3.077988 12.05979 1.920068
+	rotation = -0.04939312 0.01674634 0.8056517 0.5900896
+	name = MapCamera_0
+}
+entity
+{
+	type = StopSign
+	uin = 9
+	classPrompt = MapObject
+	position = -1.242249 18.16291 1.776649
+	rotation = 0 0 0.2279582 0.9736709
+	name = StopSign_0
+}
+entity
+{
+	type = Eyes
+	uin = 10
+	classPrompt = MapObject
+	position = 1.327266 19.51716 2.002492
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 1 3.718169 2.850059
+	name = Eyes_0
+}
+entity
+{
+	type = StaticMesh
+	uin = 11
+	classPrompt = StaticMesh
+	position = 0 0 0
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Models\Rooms\Rooms.mesh
+	splitGeometry = True
+	splitGeometryPieceSize = 30 30 30
+	allowDecals = All
+}

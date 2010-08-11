@@ -1,0 +1,4 @@
+type DefaultRTSBuildingAI
+{
+	class = RTSBuildingAI
+}

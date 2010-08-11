@@ -1,0 +1,83 @@
+
+vertex_program DepthShadowmapDefaultCaster_nVidiaVP_hlsl hlsl
+{
+	source Materials\Common\DepthShadowmapDefaultCaster_nVidia.cg_hlsl
+	entry_point shadowCaster_vp
+	target vs_2_0
+	preprocessor_defines INSTANCING
+
+	default_params
+	{
+		param_named_auto worldMatrix world_matrix
+		param_named_auto viewProjMatrix viewproj_matrix
+		param_named_auto texelOffsets texel_offsets
+		param_named_auto instancing instancing
+	}
+}
+
+vertex_program DepthShadowmapDefaultCaster_nVidiaVP_cg cg
+{
+	source Materials\Common\DepthShadowmapDefaultCaster_nVidia.cg_hlsl
+	entry_point shadowCaster_vp
+	profiles arbvp1
+	
+	default_params
+	{
+		param_named_auto worldMatrix world_matrix
+		param_named_auto viewProjMatrix viewproj_matrix
+		param_named_auto texelOffsets texel_offsets
+	}
+}
+
+fragment_program DepthShadowmapDefaultCaster_nVidiaFP_hlsl hlsl
+{
+	source Materials\Common\DepthShadowmapDefaultCaster_nVidia.cg_hlsl
+	entry_point shadowCaster_fp
+	target ps_2_0
+
+	default_params
+	{
+	}
+}
+
+fragment_program DepthShadowmapDefaultCaster_nVidiaFP_cg cg
+{
+	source Materials\Common\DepthShadowmapDefaultCaster_nVidia.cg_hlsl
+	entry_point shadowCaster_fp
+	profiles arbfp1
+	
+	default_params
+	{
+	}
+}
+
+vertex_program DepthShadowmapDefaultCaster_nVidiaVP unified
+{
+	delegate DepthShadowmapDefaultCaster_nVidiaVP_hlsl
+	delegate DepthShadowmapDefaultCaster_nVidiaVP_cg
+}
+
+fragment_program DepthShadowmapDefaultCaster_nVidiaFP unified
+{
+	delegate DepthShadowmapDefaultCaster_nVidiaFP_hlsl
+	delegate DepthShadowmapDefaultCaster_nVidiaFP_cg
+}
+
+
+material DepthShadowmapDefaultCaster_nVidia
+{
+	technique
+	{
+		pass
+		{
+			fog_override true none
+
+			vertex_program_ref DepthShadowmapDefaultCaster_nVidiaVP
+			{
+			}
+			fragment_program_ref DepthShadowmapDefaultCaster_nVidiaFP
+			{
+			}
+		}
+	}
+}

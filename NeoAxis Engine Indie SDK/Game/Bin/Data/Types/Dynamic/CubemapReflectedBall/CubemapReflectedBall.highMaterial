@@ -1,0 +1,13 @@
+highLevelMaterial CubemapReflectedBall
+{
+	template = ShaderBaseMaterial
+	diffuseScale = 2.745098 2.745098 2.745098
+	reflectionScale = 2.745098 2.745098 3.137255
+	emissionScale = 0 0 0.1960784
+	specularScale = 3.137255 3.137255 3.137255
+	specularShininess = 10
+	diffuse1Map
+	{
+		texture = Types\Dynamic\CubemapReflectedBall\Diffuse.dds
+	}
+}

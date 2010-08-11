@@ -1,0 +1,22 @@
+type ZombieMeleeWeapon
+{
+	class = MeleeWeapon
+	networkType = Synchronized
+	normalMode
+	{
+		damage = 5
+		impulse = 500
+		soundKick = Types\Units\Zombie\Kick.ogg
+		betweenFireTime = 1
+		soundFire = Types\Units\Zombie\Blow.ogg
+		useDistanceRange = 0 2
+		fireTimes = 0.5
+		fireAnimationName = fire
+		fireUnitAnimationName = attack
+	}
+	alternativeMode
+	{
+		fireTimes = 
+		fireAnimationName = fire
+	}
+}

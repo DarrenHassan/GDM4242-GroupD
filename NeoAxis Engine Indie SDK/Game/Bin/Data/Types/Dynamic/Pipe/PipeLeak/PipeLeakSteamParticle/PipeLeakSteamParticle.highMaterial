@@ -1,0 +1,11 @@
+highLevelMaterial PipeLeakSteamParticle
+{
+	template = ShaderBaseMaterial
+	blending = AlphaAdd
+	lighting = False
+	diffuseVertexColor = True
+	diffuse1Map
+	{
+		texture = Types\Dynamic\GasFlamePipe\GasFlamePipeParticle\fire.dds
+	}
+}

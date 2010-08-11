@@ -1,0 +1,1160 @@
+type = GameMap
+uin = 2
+classPrompt = GameMap
+ambientLight = 0.2 0.2 0.2
+editorCameraPosition = 14.31858 -8.315933 17.09771
+editorCameraDirection = 2.582534 -0.342807
+shadowColor = 1 1 1
+shadowFarDistance = 100
+fov = 80
+logicSystemManager = 39
+name = GameMap_0
+rootEditorLayer
+{
+	layer
+	{
+		name = StaticGeometry
+		allowEdit = False
+	}
+}
+entity
+{
+	type = GasFlamePipe
+	uin = 3
+	classPrompt = PhysicalStream
+	relationships = 54
+	alternativeMode = False
+	throttle = 0
+	position = -1.341118 -3.43064 0.4506167
+	rotation = 0 -0.7071068 0 0.7071068
+	name = GasFlamePipe_3
+}
+entity
+{
+	type = GasFlamePipe
+	uin = 4
+	classPrompt = PhysicalStream
+	relationships = 66
+	alternativeMode = False
+	throttle = 0
+	position = -4.869007 3.429121 0.4506167
+	rotation = 0 -0.7071068 0 0.7071068
+	name = GasFlamePipe_2
+}
+entity
+{
+	type = GasFlamePipe
+	uin = 5
+	classPrompt = PhysicalStream
+	relationships = 62
+	alternativeMode = False
+	throttle = 0
+	position = 2.619219 3.414407 0.4506167
+	rotation = 0 -0.7071068 0 0.7071068
+	name = GasFlamePipe_1
+}
+entity
+{
+	type = GasFlamePipe
+	uin = 6
+	classPrompt = PhysicalStream
+	relationships = 58
+	alternativeMode = False
+	throttle = 0
+	position = 6.147649 -3.483387 0.4506167
+	rotation = 0 -0.7071068 0 0.7071068
+	name = GasFlamePipe_0
+}
+entity
+{
+	type = BooleanSwitch
+	uin = 7
+	classPrompt = BooleanSwitch
+	relationships = 41
+	value = False
+	position = 12.96313 -6.404213 0.8229753
+	name = BooleanSwitch_GasFlame
+	logicClass = 41
+}
+entity
+{
+	type = PipeLeak
+	uin = 8
+	classPrompt = PhysicalStream
+	relationships = 85 106
+	alternativeMode = False
+	throttle = 0
+	position = -4.85389 3.568736 0.5989982
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeLeak_3
+}
+entity
+{
+	type = PipeLeak
+	uin = 9
+	classPrompt = PhysicalStream
+	relationships = 81 101
+	alternativeMode = False
+	throttle = 0
+	position = -1.35389 -3.583264 0.5989982
+	rotation = 0 0 -0.7071068 -0.7071068
+	name = PipeLeak_2
+}
+entity
+{
+	type = PipeLeak
+	uin = 10
+	classPrompt = PhysicalStream
+	relationships = 70 91
+	alternativeMode = False
+	throttle = 0
+	position = 6.14611 -3.583264 0.5989982
+	rotation = 0 0 -0.7071068 -0.7071068
+	name = PipeLeak_0
+}
+entity
+{
+	type = PipeSwitch
+	uin = 11
+	classPrompt = TurnFloatSwitch
+	relationships = 89
+	value = 0
+	position = 12.5 -5 0.5
+	rotation = 0.5 -0.5 0.5 -0.5
+	name = PipeSwitch_Gas
+	logicClass = 89
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 12
+	classPrompt = MapChangeRegion
+	mapName = Maps\MainDemo\Map.map
+	spawnPointName = SpawnPoint_FromSwitchesDemo
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = 17.4 -32.00097 0.2226906
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 3 6 6.933166
+	name = MapChangeRegion_0
+	checkType = Bounds
+}
+entity
+{
+	type = Door
+	uin = 13
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 17.58513 -36.38088 0.2063458
+	name = Door_1
+}
+entity
+{
+	type = Door
+	uin = 14
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 17.61415 -20.05266 0.2205143
+	name = Door_0
+}
+entity
+{
+	type = Terminal
+	uin = 15
+	classPrompt = GameGuiObject
+	relationships = 111
+	initialControl = Gui\SwitchesDemoTerminal.gui
+	position = 13.98495 4.590276 1.753296
+	rotation = 0 0 -0.3191328 0.94771
+	name = Terminal_0
+	logicClass = 111
+}
+entity
+{
+	type = Light
+	uin = 16
+	classPrompt = Light
+	lightType = Spot
+	diffuseColor = 1.098039 1.098039 1.294118
+	specularColor = 1.372549 1.372549 1.392157
+	attenuationRangeAutomatic = True
+	attenuationRange = Infinity
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0
+	spotlightInnerAngle = 80
+	spotlightOuterAngle = 120
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	position = 0 0 22
+	rotation = 0 -0.7071068 0 -0.7071068
+	name = Light_0
+}
+entity
+{
+	type = SpawnPoint
+	uin = 17
+	classPrompt = SpawnPoint
+	defaultPoint = True
+	position = 17.4 -24.6 0.2202166
+	rotation = 0 0 -0.7071068 -0.7071068
+	name = SpawnPoint_0
+}
+entity
+{
+	type = SubmachineGunItem
+	uin = 18
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = 16.6557 -16.48188 0.4757236
+	rotation = 0 0 0.4639315 0.8858711
+}
+entity
+{
+	type = ShotgunItem
+	uin = 19
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = 18.88097 -15.95745 0.4307123
+	rotation = 0 0 0.2703913 0.9627505
+}
+entity
+{
+	type = PipeDirect4
+	uin = 20
+	classPrompt = MapObject
+	position = -10 -4 0.5
+	name = PipeDirect4_0
+}
+entity
+{
+	type = PipeDirect4
+	uin = 21
+	classPrompt = MapObject
+	position = -10 4 0.5
+	name = PipeDirect4_1
+}
+entity
+{
+	type = PipeDirect4
+	uin = 22
+	classPrompt = MapObject
+	position = -6 -4 0.5
+	name = PipeDirect4_2
+}
+entity
+{
+	type = PipeDirect4
+	uin = 23
+	classPrompt = MapObject
+	position = -6 4 0.5
+	name = PipeDirect4_3
+}
+entity
+{
+	type = PipeDirect4
+	uin = 24
+	classPrompt = MapObject
+	position = -18 -4 0.5
+	name = PipeDirect4_4
+}
+entity
+{
+	type = PipeDirect4
+	uin = 25
+	classPrompt = MapObject
+	position = -14 -4 0.5
+	name = PipeDirect4_5
+}
+entity
+{
+	type = PipeDirect4
+	uin = 26
+	classPrompt = MapObject
+	position = -18 4 0.5
+	name = PipeDirect4_6
+}
+entity
+{
+	type = PipeDirect4
+	uin = 27
+	classPrompt = MapObject
+	position = -14 4 0.5
+	name = PipeDirect4_7
+}
+entity
+{
+	type = PipeDirect4
+	uin = 28
+	classPrompt = MapObject
+	position = 6 -4 0.5
+	name = PipeDirect4_8
+}
+entity
+{
+	type = PipeDirect4
+	uin = 29
+	classPrompt = MapObject
+	position = -2 -4 0.5
+	name = PipeDirect4_9
+}
+entity
+{
+	type = PipeDirect4
+	uin = 30
+	classPrompt = MapObject
+	position = 2 -4 0.5
+	name = PipeDirect4_10
+}
+entity
+{
+	type = PipeDirect4
+	uin = 31
+	classPrompt = MapObject
+	position = 10 -4 0.5
+	name = PipeDirect4_11
+}
+entity
+{
+	type = PipeDirect4
+	uin = 32
+	classPrompt = MapObject
+	position = -2 4 0.5
+	name = PipeDirect4_12
+}
+entity
+{
+	type = PipeDirect4
+	uin = 33
+	classPrompt = MapObject
+	position = 2 4 0.5
+	name = PipeDirect4_13
+}
+entity
+{
+	type = PipeDirect4
+	uin = 34
+	classPrompt = MapObject
+	position = 6 4 0.5
+	name = PipeDirect4_14
+}
+entity
+{
+	type = PipeDirect4
+	uin = 35
+	classPrompt = MapObject
+	position = 10 4 0.5
+	name = PipeDirect4_15
+}
+entity
+{
+	type = PipeDirect4
+	uin = 36
+	classPrompt = MapObject
+	position = 12.5 -7.5 0.5
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_16
+}
+entity
+{
+	type = PipeDirect4
+	uin = 37
+	classPrompt = MapObject
+	position = 12.5 6.5 0.5
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_17
+}
+entity
+{
+	type = PipeLeak
+	uin = 38
+	classPrompt = PhysicalStream
+	relationships = 77 96
+	alternativeMode = False
+	throttle = 0
+	position = 2.64611 3.568736 0.5989982
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeLeak_1
+}
+entity
+{
+	type = LogicSystemManager
+	uin = 39
+	mapClassManager = 40
+	entity
+	{
+		type = LogicClassManager
+		uin = 40
+		entity
+		{
+			type = LogicEntityClass
+			uin = 41
+			relationships = 7
+			entityClassName = BooleanSwitch
+			className = BooleanSwitch_GasFlame
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicDesignerMethod
+				uin = 42
+				actions = 74 43 46 58 62 66 54 70 77 81 85
+				methodName = ValueChange
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicDeclareLocalVariableAction
+					uin = 43
+					variableTypeName = Single
+					variableName = throttle
+					valueAction = 44
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 44
+						valueType = System.Single
+						value = 0
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 45
+						valueType = System.Single
+						value = 0
+					}
+				}
+				entity
+				{
+					type = LogicIfThenElseAction
+					uin = 46
+					conditionAction = 53
+					trueActions = 47
+					falseActions = 
+					entity
+					{
+						type = LogicGetVariableAction
+						uin = 47
+						variableName = throttle
+						dotPathAction = 48
+						entity
+						{
+							type = LogicAssignVariableAction
+							uin = 48
+							valueAction = 49
+							entity
+							{
+								type = LogicGetConstantValueAction
+								uin = 49
+								valueType = System.Single
+								value = 1
+							}
+						}
+						entity
+						{
+							type = LogicAssignVariableAction
+							uin = 50
+							valueAction = 51
+							entity
+							{
+								type = LogicGetConstantValueAction
+								uin = 51
+								valueType = System.Single
+								value = 1
+							}
+							entity
+							{
+								type = LogicGetConstantValueAction
+								uin = 52
+								valueType = System.Single
+								value = 1
+							}
+						}
+					}
+					entity
+					{
+						type = LogicGetVariableAction
+						uin = 53
+						variableName = enabled
+					}
+				}
+				entity
+				{
+					type = LogicCallGetEntityMethodAction
+					uin = 54
+					relationships = 3
+					entity = 3
+					dotPathAction = 55
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 55
+						propertyName = Throttle
+						dotPathAction = 56
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 56
+							valueAction = 57
+							entity
+							{
+								type = LogicGetVariableAction
+								uin = 57
+								variableName = throttle
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicCallGetEntityMethodAction
+					uin = 58
+					relationships = 6
+					entity = 6
+					dotPathAction = 59
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 59
+						propertyName = Throttle
+						dotPathAction = 60
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 60
+							valueAction = 61
+							entity
+							{
+								type = LogicGetVariableAction
+								uin = 61
+								variableName = throttle
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicCallGetEntityMethodAction
+					uin = 62
+					relationships = 5
+					entity = 5
+					dotPathAction = 63
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 63
+						propertyName = Throttle
+						dotPathAction = 64
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 64
+							valueAction = 65
+							entity
+							{
+								type = LogicGetVariableAction
+								uin = 65
+								variableName = throttle
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicCallGetEntityMethodAction
+					uin = 66
+					relationships = 4
+					entity = 4
+					dotPathAction = 67
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 67
+						propertyName = Throttle
+						dotPathAction = 68
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 68
+							valueAction = 69
+							entity
+							{
+								type = LogicGetVariableAction
+								uin = 69
+								variableName = throttle
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicCallGetEntityMethodAction
+					uin = 70
+					relationships = 10
+					entity = 10
+					dotPathAction = 71
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 71
+						propertyName = AlternativeMode
+						dotPathAction = 72
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 72
+							valueAction = 73
+							entity
+							{
+								type = LogicGetVariableAction
+								uin = 73
+								variableName = enabled
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicDeclareLocalVariableAction
+					uin = 74
+					variableTypeName = Boolean
+					variableName = enabled
+					valueAction = 75
+					entity
+					{
+						type = LogicCallThisMethodAction
+						uin = 75
+						entityOwnerProperty = True
+						dotPathAction = 76
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 76
+							propertyName = Value
+						}
+					}
+				}
+				entity
+				{
+					type = LogicCallGetEntityMethodAction
+					uin = 77
+					relationships = 38
+					entity = 38
+					dotPathAction = 78
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 78
+						propertyName = AlternativeMode
+						dotPathAction = 79
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 79
+							valueAction = 80
+							entity
+							{
+								type = LogicGetVariableAction
+								uin = 80
+								variableName = enabled
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicCallGetEntityMethodAction
+					uin = 81
+					relationships = 9
+					entity = 9
+					dotPathAction = 82
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 82
+						propertyName = AlternativeMode
+						dotPathAction = 83
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 83
+							valueAction = 84
+							entity
+							{
+								type = LogicGetVariableAction
+								uin = 84
+								variableName = enabled
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicCallGetEntityMethodAction
+					uin = 85
+					relationships = 8
+					entity = 8
+					dotPathAction = 86
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 86
+						propertyName = AlternativeMode
+						dotPathAction = 87
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 87
+							valueAction = 88
+							entity
+							{
+								type = LogicGetVariableAction
+								uin = 88
+								variableName = enabled
+							}
+						}
+					}
+				}
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 89
+			relationships = 11
+			entityClassName = TurnFloatSwitch
+			className = PipeSwitch_Gas
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicDesignerMethod
+				uin = 90
+				actions = 91 96 101 106
+				methodName = ValueChange
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicCallGetEntityMethodAction
+					uin = 91
+					relationships = 10
+					entity = 10
+					dotPathAction = 92
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 92
+						propertyName = Throttle
+						dotPathAction = 93
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 93
+							valueAction = 94
+							entity
+							{
+								type = LogicCallThisMethodAction
+								uin = 94
+								entityOwnerProperty = True
+								dotPathAction = 95
+								entity
+								{
+									type = LogicCallNonStaticMethodAction
+									uin = 95
+									propertyName = Value
+								}
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicCallGetEntityMethodAction
+					uin = 96
+					relationships = 38
+					entity = 38
+					dotPathAction = 97
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 97
+						propertyName = Throttle
+						dotPathAction = 98
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 98
+							valueAction = 99
+							entity
+							{
+								type = LogicCallThisMethodAction
+								uin = 99
+								entityOwnerProperty = True
+								dotPathAction = 100
+								entity
+								{
+									type = LogicCallNonStaticMethodAction
+									uin = 100
+									propertyName = Value
+								}
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicCallGetEntityMethodAction
+					uin = 101
+					relationships = 9
+					entity = 9
+					dotPathAction = 102
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 102
+						propertyName = Throttle
+						dotPathAction = 103
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 103
+							valueAction = 104
+							entity
+							{
+								type = LogicCallThisMethodAction
+								uin = 104
+								entityOwnerProperty = True
+								dotPathAction = 105
+								entity
+								{
+									type = LogicCallNonStaticMethodAction
+									uin = 105
+									propertyName = Value
+								}
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicCallGetEntityMethodAction
+					uin = 106
+					relationships = 8
+					entity = 8
+					dotPathAction = 107
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 107
+						propertyName = Throttle
+						dotPathAction = 108
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 108
+							valueAction = 109
+							entity
+							{
+								type = LogicCallThisMethodAction
+								uin = 109
+								entityOwnerProperty = True
+								dotPathAction = 110
+								entity
+								{
+									type = LogicCallNonStaticMethodAction
+									uin = 110
+									propertyName = Value
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 111
+			relationships = 15
+			entityClassName = GameGuiObject
+			className = Terminal_0
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 112
+				code = "foreach( Entity entity in Map.Instance.Children )\r\n{\r\n\tstring str = entity.UserData as string;\r\n\tif( str != null && str == \"AllowClear\" )\r\n\t{\r\n\t\tentity.SetDeleted();\r\n\t\tcontinue;\r\n\t}\r\n\r\n\tif( ( entity as Corpse ) != null )\r\n\t\tentity.SetDeleted();\r\n}\r\n"
+				methodName = clear_Click
+				returnType = System.Void
+				parameters = 113
+				isEntityEventMethod = False
+				entity
+				{
+					type = LogicParameter
+					uin = 113
+					parameterType = Engine.UISystem.EButton
+					parameterName = sender
+				}
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 114
+				code = "EntityType type = EntityTypes.Instance.GetByName( \"Zombie\" );\r\n\r\nfor( float y = -2; y <= 3; y += 2 )\r\n{\r\n\tbool positionFound = false;\r\n\tVec3 position = Vec3.Zero;\r\n\r\n\t//put unit to free area\r\n\tfor( float x = -12; x >= -20; x-- )\r\n\t{\r\n\t\tVec3 pos = new Vec3( x, y, 1.2f );\r\n\t\tBounds bounds = new Bounds(pos - new Vec3(1,1,1), pos + new Vec3(1,1,1));\r\n\t\tbool free = true;\r\n\t\tMap.Instance.GetObjects( bounds, delegate( MapObject o )\r\n\t\t{\r\n\t\t\tif( o.PhysicsModel != null )\r\n\t\t\t\tfree = false;\r\n\t\t} );\r\n\r\n\t\tif( free )\r\n\t\t{\r\n\t\t\tpositionFound = true;\r\n\t\t\tposition = pos;\r\n\t\t\tbreak;\r\n\t\t}\r\n\t}\r\n\r\n\tif(positionFound)\r\n\t{\r\n\t\tUnit obj = (Unit)Entities.Instance.Create( type, Map.Instance );\r\n\t\tobj.UserData = \"AllowClear\";\r\n\t\tobj.Position = position;\r\n\t\tobj.PostCreate();\r\n\t}\r\n}\r\n"
+				methodName = createZombie_Click
+				returnType = System.Void
+				parameters = 115
+				isEntityEventMethod = False
+				entity
+				{
+					type = LogicParameter
+					uin = 115
+					parameterType = Engine.UISystem.EButton
+					parameterName = sender
+				}
+			}
+			entity
+			{
+				type = LogicDesignerMethod
+				uin = 116
+				actions = 118 125
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 117
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 117
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+				entity
+				{
+					type = LogicCallThisMethodAction
+					uin = 118
+					entityOwnerProperty = True
+					dotPathAction = 119
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 119
+						propertyName = MainControl
+						dotPathAction = 120
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 120
+							propertyName = Controls
+							dotPathAction = 121
+							entity
+							{
+								type = LogicCallNonStaticMethodAction
+								uin = 121
+								propertyName = Item
+								parameterActions = 122
+								dotPathAction = 123
+								parameterTypeNames
+								{
+									item
+									{
+										value = String
+									}
+								}
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 122
+									valueType = System.String
+									value = CreateZombie
+								}
+								entity
+								{
+									type = LogicCallAsIsMethodAction
+									uin = 123
+									asCast = True
+									castTypeName = EButton
+									dotPathAction = 124
+									entity
+									{
+										type = LogicEventAction
+										uin = 124
+										eventName = Click
+										methodName = createZombie_Click
+									}
+								}
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicCallThisMethodAction
+					uin = 125
+					entityOwnerProperty = True
+					dotPathAction = 126
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 126
+						propertyName = MainControl
+						dotPathAction = 127
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 127
+							propertyName = Controls
+							dotPathAction = 128
+							entity
+							{
+								type = LogicCallNonStaticMethodAction
+								uin = 128
+								propertyName = Item
+								parameterActions = 129
+								dotPathAction = 130
+								parameterTypeNames
+								{
+									item
+									{
+										value = String
+									}
+								}
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 129
+									valueType = System.String
+									value = Clear
+								}
+								entity
+								{
+									type = LogicCallAsIsMethodAction
+									uin = 130
+									asCast = True
+									castTypeName = EButton
+									dotPathAction = 131
+									entity
+									{
+										type = LogicEventAction
+										uin = 131
+										eventName = Click
+										methodName = clear_Click
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+entity
+{
+	type = PipeCorner
+	uin = 132
+	classPrompt = MapObject
+	position = 12.5 4 0.5
+	rotation = 3.090862E-08 -0.7071068 0.7071068 -3.090862E-08
+	name = PipeCorner_0
+}
+entity
+{
+	type = PipeCorner
+	uin = 133
+	classPrompt = MapObject
+	position = 12.5 -4 0.5
+	rotation = 3.090862E-08 -0.7071068 -0.7071068 -3.090862E-08
+	name = PipeCorner_1
+}
+entity
+{
+	type = PipeDirect4
+	uin = 134
+	classPrompt = MapObject
+	position = 12.5 -11.5 0.5
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_18
+}
+entity
+{
+	type = PipeDirect4
+	uin = 135
+	classPrompt = MapObject
+	position = 12.5 -15.5 0.5
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_19
+}
+entity
+{
+	type = PipeDirect4
+	uin = 136
+	classPrompt = MapObject
+	position = 12.5 -19.5 0.5
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_20
+}
+entity
+{
+	type = PipeDirect4
+	uin = 137
+	classPrompt = MapObject
+	position = 12.5 10.5 0.5
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_21
+}
+entity
+{
+	type = PipeDirect4
+	uin = 138
+	classPrompt = MapObject
+	position = 12.5 14.5 0.5
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_22
+}
+entity
+{
+	type = PipeDirect4
+	uin = 139
+	classPrompt = MapObject
+	position = 12.5 18.5 0.5
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_23
+}
+entity
+{
+	type = PipeDirect4
+	uin = 140
+	classPrompt = MapObject
+	position = -22 -4 0.5
+	name = PipeDirect4_24
+}
+entity
+{
+	type = PipeDirect4
+	uin = 141
+	classPrompt = MapObject
+	position = -22 4 0.5
+	name = PipeDirect4_25
+}
+entity
+{
+	type = StaticMesh
+	uin = 142
+	classPrompt = StaticMesh
+	position = 0 0 0
+	editorLayer = Root\StaticGeometry
+	meshName = Models\Rooms\Rooms.mesh
+	splitGeometry = True
+	splitGeometryPieceSize = 30 30 30
+	allowDecals = All
+	castDynamicShadows = True
+}

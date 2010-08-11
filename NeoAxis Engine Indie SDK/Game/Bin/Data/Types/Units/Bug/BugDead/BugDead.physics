@@ -1,0 +1,12 @@
+physicsModel
+{
+	body main
+	{
+		shape
+		{
+			type = box
+			dimensions = .6 .6 .4
+			material{ density = 10; friction = 1; hardness = 0; bounciness = 0 }
+		}
+	}
+}

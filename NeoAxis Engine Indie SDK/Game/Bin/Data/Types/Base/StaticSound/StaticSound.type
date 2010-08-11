@@ -1,0 +1,14 @@
+type StaticSound
+{
+	class = StaticSound
+	allowEditorCreate = True
+	networkType = ClientOnly
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\Base\StaticSound\StaticSound.mesh
+			onlyForEditor = True
+		}
+	}
+}

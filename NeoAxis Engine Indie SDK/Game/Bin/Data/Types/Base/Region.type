@@ -1,0 +1,14 @@
+type Region
+{
+	class = Region
+	allowEditorCreate = True
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\Base\InvisiblePoint.mesh
+			useOwnerScale = False
+			onlyForEditor = True
+		}
+	}
+}

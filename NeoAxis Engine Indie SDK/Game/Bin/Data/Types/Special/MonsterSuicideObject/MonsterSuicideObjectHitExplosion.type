@@ -1,0 +1,9 @@
+type MonsterSuicideObjectHitExplosion
+{
+	class = Explosion
+	radius = 7
+	damage = 550
+	impulse = 3000
+	influenceType = FireInfluence
+	influenceMaxTime = 5
+}

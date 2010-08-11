@@ -1,0 +1,48 @@
+type EngineLogoPlacard
+{
+	class = MapObject
+	allowEditorCreate = True
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Models\ZPlane\ZPlane.mesh
+			forceMaterial = EngineLogoPlacard
+			toCollision = True
+			rotation = 0.4998778 0.4998778 0.5001222 0.5001222
+			scale = 7.1 4.3 6
+		}
+		mesh
+		{
+			meshName = Models\DefaultBox\DefaultBox.mesh
+			forceMaterial = Rooms/FloorHall
+			toCollision = True
+			position = 0 0 2.2
+			scale = 0.1 7.3 0.1
+		}
+		mesh
+		{
+			meshName = Models\DefaultBox\DefaultBox.mesh
+			forceMaterial = Rooms/FloorHall
+			toCollision = True
+			position = 0 0 -2.2
+			scale = 0.1 7.3 0.1
+		}
+		mesh
+		{
+			meshName = Models\DefaultBox\DefaultBox.mesh
+			forceMaterial = Rooms/FloorHall
+			toCollision = True
+			position = 0 -3.6 0
+			scale = 0.1 0.1 4.3
+		}
+		mesh
+		{
+			meshName = Models\DefaultBox\DefaultBox.mesh
+			forceMaterial = Rooms/FloorHall
+			toCollision = True
+			position = 0 3.6 0
+			scale = 0.1 0.1 4.3
+		}
+	}
+}

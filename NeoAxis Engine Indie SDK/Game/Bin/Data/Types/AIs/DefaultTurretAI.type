@@ -1,0 +1,5 @@
+type DefaultTurretAI
+{
+	class = TurretAI
+	networkType = ServerOnly
+}

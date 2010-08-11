@@ -1,0 +1,14 @@
+type SpawnPoint
+{
+	class = SpawnPoint
+	allowEditorCreate = True
+	networkType = ServerOnly
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\Base\InvisiblePoint.mesh
+			onlyForEditor = True
+		}
+	}
+}

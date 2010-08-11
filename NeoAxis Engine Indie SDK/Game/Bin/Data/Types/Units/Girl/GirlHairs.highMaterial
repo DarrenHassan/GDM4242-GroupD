@@ -1,0 +1,9 @@
+highLevelMaterial GirlHairs
+{
+	template = ShaderBaseMaterial
+	blending = AlphaBlend
+	diffuse1Map
+	{
+		texture = Types\Units\Girl\GirlHairs.dds
+	}
+}

@@ -1,0 +1,22 @@
+type RTSRobotDead
+{
+	class = Corpse
+	lifeTime = 10
+	allowEmptyName = False
+	influenceSlotNames
+	{
+	}
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = "Types\\Units\\Robot\\Robot.mesh"
+			castShadows = True
+		}
+		particle
+		{
+			particleName = SmallSmokeParticle2
+			position = "0.7 0 0.3"
+		}
+	}
+}

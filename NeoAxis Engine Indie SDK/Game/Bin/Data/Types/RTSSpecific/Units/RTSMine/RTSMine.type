@@ -1,0 +1,142 @@
+type RTSMine
+{
+	class = RTSMine
+	buildCost = 100
+	initialAI = DefaultRTSBuildingAI
+	lifeMax = 200
+	substance = Metal
+	physicsModel = Types\RTSSpecific\Units\RTSMine\RTSMine.physics
+	allowEditorCreate = True
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\RTSSpecific\Units\RTSMine\RTSMineBase.mesh
+			castDynamicShadows = True
+		}
+		mesh
+		{
+			meshName = Types\RTSSpecific\Units\RTSMine\RTSMinePipes.mesh
+			castDynamicShadows = True
+		}
+		mesh
+		{
+			meshName = Types\RTSSpecific\Units\RTSMine\RTSMineTower.mesh
+			castDynamicShadows = True
+		}
+		mesh
+		{
+			meshName = Types\RTSSpecific\Units\RTSMine\RTSMinePropeller.mesh
+			castDynamicShadows = True
+		}
+		particle
+		{
+			particleName = RTSGeyserParticle
+			updateWhenItNotInView = False
+			position = 0 0 3
+		}
+		mesh
+		{
+			meshName = Types\RTSSpecific\Units\RTSMine\RTSMineBase.mesh
+			forceMaterial = RTSBuildMaterial
+			alias = building0
+			visible = False
+		}
+		mesh
+		{
+			meshName = Types\RTSSpecific\Units\RTSMine\RTSMineBase.mesh
+			castDynamicShadows = True
+			alias = building1
+			visible = False
+		}
+		mesh
+		{
+			meshName = Types\RTSSpecific\Units\RTSMine\RTSMineTower.mesh
+			forceMaterial = RTSBuildMaterial
+			alias = building1
+			visible = False
+		}
+		mesh
+		{
+			meshName = Types\RTSSpecific\Units\RTSMine\RTSMineBase.mesh
+			castDynamicShadows = True
+			alias = building2
+			visible = False
+		}
+		mesh
+		{
+			meshName = Types\RTSSpecific\Units\RTSMine\RTSMineTower.mesh
+			castDynamicShadows = True
+			alias = building2
+			visible = False
+		}
+		mesh
+		{
+			meshName = Types\RTSSpecific\Units\RTSMine\RTSMinePipes.mesh
+			forceMaterial = RTSBuildMaterial
+			alias = building2
+			visible = False
+		}
+		mesh
+		{
+			meshName = Types\RTSSpecific\Units\RTSMine\RTSMinePropeller.mesh
+			forceMaterial = RTSBuildMaterial
+			alias = building2
+			visible = False
+		}
+		particle
+		{
+			particleName = BigFireParticle
+			updateWhenItNotInView = False
+			alias = lessHalfLife
+			position = -1.5 -1.5 1.5
+			visible = False
+		}
+		particle
+		{
+			particleName = BigFireParticle
+			updateWhenItNotInView = False
+			alias = lessQuarterLife
+			position = 1.5 1.5 1.5
+			visible = False
+		}
+		particle
+		{
+			particleName = BigFireParticle
+			updateWhenItNotInView = False
+			alias = lessQuarterLife
+			position = -1.2 1.3 3
+			visible = False
+		}
+	}
+	dieObjects
+	{
+		particle
+		{
+			particleName = ExplosionParticle
+		}
+		sound
+		{
+			soundName = Sounds\Explode.ogg
+			priority = 0.7
+		}
+		mapObject
+		{
+			type = FumingSplinterBullet
+			alias = randomRotation
+			count = 10
+			position = 0 0 2.5
+		}
+		mapObject
+		{
+			type = FireworkBullet
+			alias = randomRotation
+			count = 5
+			position = 0 0 2.5
+		}
+		mapObject
+		{
+			type = RTSMineDead
+		}
+	}
+}

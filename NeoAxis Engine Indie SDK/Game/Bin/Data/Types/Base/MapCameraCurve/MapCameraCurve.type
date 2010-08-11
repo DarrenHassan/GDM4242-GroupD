@@ -1,0 +1,15 @@
+type MapCameraCurve
+{
+	class = MapCameraCurve
+	allowEditorCreate = True
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\Base\MapCamera\MapCamera.mesh
+			onlyForEditor = True
+		}
+	}
+
+	pointType = MapCameraCurvePoint
+}

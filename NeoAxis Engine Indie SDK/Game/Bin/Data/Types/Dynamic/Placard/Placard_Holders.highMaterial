@@ -1,0 +1,5 @@
+highLevelMaterial Placard/Holders
+{
+	template = ShaderBaseMaterial
+	diffuseScale = 0.2745098 0.2745098 0.2745098
+}

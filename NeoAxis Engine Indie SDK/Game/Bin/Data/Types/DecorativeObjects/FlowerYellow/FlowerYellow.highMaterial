@@ -1,0 +1,14 @@
+highLevelMaterial FlowerYellow
+{
+	template = VegetationMaterial
+	culling = False
+	useNormals = False
+	alphaRejectFunction = GreaterEqual
+	alphaToCoverage = True
+	fadingByDistanceRange = 50 60
+	receiveObjectsPositionsFromVertices = True
+	diffuse1Map
+	{
+		texture = Types\DecorativeObjects\FlowerYellow\FlowerYellow.dds
+	}
+}

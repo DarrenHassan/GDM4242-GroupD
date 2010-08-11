@@ -1,0 +1,13 @@
+highLevelMaterial BumpMappingExample
+{
+	template = ShaderBaseMaterial
+	specularScale = 1 1 1
+	diffuse1Map
+	{
+		texture = Types\StaticObjects\OgreHead\BumpMappingExample\BumpMappingExample.dds
+	}
+	normalMap
+	{
+		texture = Types\StaticObjects\OgreHead\BumpMappingExample\BumpMappingExample_Normal.png
+	}
+}

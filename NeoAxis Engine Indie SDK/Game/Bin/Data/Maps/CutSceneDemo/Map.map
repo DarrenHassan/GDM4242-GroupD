@@ -1,0 +1,1973 @@
+type = GameMap
+uin = 2
+classPrompt = GameMap
+gameMusic = Sounds\Music\Game.ogg
+ambientLight = 0.3 0.3 0.3
+editorCameraPosition = 14.21707 -15.67864 15.17738
+editorCameraDirection = 2.29099 -0.713191
+shadowColor = 1 1 1
+shadowFarDistance = 100
+fov = 80
+logicSystemManager = 10
+name = GameMap_0
+rootEditorLayer
+{
+	layer
+	{
+		name = StaticGeometry
+		allowEdit = False
+	}
+}
+entity
+{
+	type = SubmachineGunItem
+	uin = 3
+	classPrompt = WeaponItem
+	respawnTime = 0
+	position = 20.64926 -15.92849 0.4435568
+	rotation = 0 0 0.5820066 -0.8131841
+}
+entity
+{
+	type = Light
+	uin = 4
+	classPrompt = Light
+	relationships = 148
+	lightType = Spot
+	diffuseColor = 3.921569 3.921569 5.882353
+	specularColor = 3.921569 3.921569 5.882353
+	attenuationRangeAutomatic = True
+	attenuationRange = 120.8548
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0.01
+	spotlightInnerAngle = 60
+	spotlightOuterAngle = 70
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	allowDynamicLighting = True
+	position = -1.998556 -1.507627 2.583075
+	name = Light_0
+	logicClass = 148
+}
+entity
+{
+	type = Terminal
+	uin = 5
+	classPrompt = Terminal
+	relationships = 49
+	initialControl = Gui\CutSceneDemoTerminal.gui
+	position = 17.99189 -11.38136 1.79371
+	rotation = 0 0 -0.7061533 0.708059
+	name = Terminal_0
+	logicClass = 49
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 6
+	classPrompt = MapChangeRegion
+	mapName = Maps\MainDemo\Map.map
+	spawnPointName = SpawnPoint_FromCutSceneDemo
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = 17.53239 -32.08323 0.2692733
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 3 8 6.700861
+	name = MapChangeRegion_0
+	checkType = Bounds
+}
+entity
+{
+	type = SpawnPoint
+	uin = 7
+	classPrompt = SpawnPoint
+	defaultPoint = True
+	position = 17.53239 -24.39407 0.222651
+	rotation = 0 0 -0.7071068 -0.7071068
+	name = SpawnPoint_0
+}
+entity
+{
+	type = Door
+	uin = 8
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 17.61415 -20.05266 0.2205143
+	name = Door_0
+}
+entity
+{
+	type = Door
+	uin = 9
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 17.60123 -36.40117 0.2253547
+	name = Door_2
+}
+entity
+{
+	type = LogicSystemManager
+	uin = 10
+	mapClassManager = 11
+	entity
+	{
+		type = LogicClassManager
+		uin = 11
+		entity
+		{
+			type = LogicEntityClass
+			uin = 12
+			relationships = 156
+			entityClassName = Region
+			className = Region_CutScene
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicDesignerMethod
+				uin = 13
+				actions = 15
+				methodName = ObjectIn
+				returnType = System.Void
+				parameters = 14
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 14
+					parameterType = Engine.MapSystem.MapObject
+					parameterName = obj
+				}
+				entity
+				{
+					type = LogicIfThenElseAction
+					uin = 15
+					conditionAction = 16
+					trueActions = 31 34 18 27 29 38 44 42 47 24 36 21
+					falseActions = 
+					entity
+					{
+						type = LogicGetVariableAction
+						uin = 16
+						variableName = obj
+						dotPathAction = 17
+						entity
+						{
+							type = LogicCallAsIsMethodAction
+							uin = 17
+							asCast = False
+							castTypeName = PlayerCharacter
+						}
+					}
+					entity
+					{
+						type = LogicCallStaticSystemMethodAction
+						uin = 18
+						className = CutSceneManager
+						propertyName = CutSceneEnable
+						dotPathAction = 19
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 19
+							valueAction = 20
+							entity
+							{
+								type = LogicGetConstantValueAction
+								uin = 20
+								valueType = System.Boolean
+								value = True
+							}
+						}
+					}
+					entity
+					{
+						type = LogicCallStaticSystemMethodAction
+						uin = 21
+						className = CutSceneManager
+						propertyName = CutSceneEnable
+						dotPathAction = 22
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 22
+							valueAction = 23
+							entity
+							{
+								type = LogicGetConstantValueAction
+								uin = 23
+								valueType = System.Boolean
+								value = False
+							}
+						}
+					}
+					entity
+					{
+						type = LogicCallStaticSystemMethodAction
+						uin = 24
+						className = CutSceneManager
+						methodName = FadeInOut
+						parameterActions = 25 26
+						parameterTypeNames
+						{
+							item
+							{
+								value = Single
+							}
+							item
+							{
+								value = Single
+							}
+						}
+						entity
+						{
+							type = LogicGetConstantValueAction
+							uin = 25
+							valueType = System.Single
+							value = 1
+						}
+						entity
+						{
+							type = LogicGetConstantValueAction
+							uin = 26
+							valueType = System.Single
+							value = 1
+						}
+					}
+					entity
+					{
+						type = LogicCallStaticSystemMethodAction
+						uin = 27
+						className = CutSceneManager
+						methodName = SetCamera
+						parameterActions = 28
+						parameterTypeNames
+						{
+							item
+							{
+								value = MapObject
+							}
+						}
+						entity
+						{
+							type = LogicCallGetEntityMethodAction
+							uin = 28
+							relationships = 169
+							entity = 169
+						}
+					}
+					entity
+					{
+						type = LogicCallStaticSystemMethodAction
+						uin = 29
+						className = LogicUtils
+						methodName = Wait
+						parameterActions = 30
+						parameterTypeNames
+						{
+							item
+							{
+								value = Single
+							}
+						}
+						entity
+						{
+							type = LogicGetConstantValueAction
+							uin = 30
+							valueType = System.Single
+							value = 2
+						}
+					}
+					entity
+					{
+						type = LogicCallStaticSystemMethodAction
+						uin = 31
+						className = CutSceneManager
+						methodName = FadeInOut
+						parameterActions = 32 33
+						parameterTypeNames
+						{
+							item
+							{
+								value = Single
+							}
+							item
+							{
+								value = Single
+							}
+						}
+						entity
+						{
+							type = LogicGetConstantValueAction
+							uin = 32
+							valueType = System.Single
+							value = 1
+						}
+						entity
+						{
+							type = LogicGetConstantValueAction
+							uin = 33
+							valueType = System.Single
+							value = 1
+						}
+					}
+					entity
+					{
+						type = LogicCallStaticSystemMethodAction
+						uin = 34
+						className = LogicUtils
+						methodName = Wait
+						parameterActions = 35
+						parameterTypeNames
+						{
+							item
+							{
+								value = Single
+							}
+						}
+						entity
+						{
+							type = LogicGetConstantValueAction
+							uin = 35
+							valueType = System.Single
+							value = 1
+						}
+					}
+					entity
+					{
+						type = LogicCallStaticSystemMethodAction
+						uin = 36
+						className = LogicUtils
+						methodName = Wait
+						parameterActions = 37
+						parameterTypeNames
+						{
+							item
+							{
+								value = Single
+							}
+						}
+						entity
+						{
+							type = LogicGetConstantValueAction
+							uin = 37
+							valueType = System.Single
+							value = 1
+						}
+					}
+					entity
+					{
+						type = LogicDeclareLocalVariableAction
+						uin = 38
+						variableTypeName = MapObject
+						variableName = newObj
+						valueAction = 39
+						entity
+						{
+							type = LogicCallStaticSystemMethodAction
+							uin = 39
+							className = Entities
+							methodName = Create
+							parameterActions = 40 41
+							parameterTypeNames
+							{
+								item
+								{
+									value = String
+								}
+								item
+								{
+									value = Entity
+								}
+							}
+							entity
+							{
+								type = LogicGetConstantValueAction
+								uin = 40
+								valueType = System.String
+								value = Box
+							}
+							entity
+							{
+								type = LogicCallStaticSystemMethodAction
+								uin = 41
+								className = Map
+								propertyName = Instance
+							}
+						}
+					}
+					entity
+					{
+						type = LogicGetVariableAction
+						uin = 42
+						variableName = newObj
+						dotPathAction = 43
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 43
+							methodName = PostCreate
+						}
+					}
+					entity
+					{
+						type = LogicGetVariableAction
+						uin = 44
+						variableName = newObj
+						dotPathAction = 45
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 45
+							methodName = CopyTransform
+							parameterActions = 46
+							parameterTypeNames
+							{
+								item
+								{
+									value = MapObject
+								}
+							}
+							entity
+							{
+								type = LogicCallGetEntityMethodAction
+								uin = 46
+								relationships = 173
+								entity = 173
+							}
+						}
+					}
+					entity
+					{
+						type = LogicCallStaticSystemMethodAction
+						uin = 47
+						className = LogicUtils
+						methodName = Wait
+						parameterActions = 48
+						parameterTypeNames
+						{
+							item
+							{
+								value = Single
+							}
+						}
+						entity
+						{
+							type = LogicGetConstantValueAction
+							uin = 48
+							valueType = System.Single
+							value = 3
+						}
+					}
+				}
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 49
+			relationships = 5
+			entityClassName = GameGuiObject
+			className = Terminal_0
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicDesignerMethod
+				uin = 50
+				actions = 51 54 56 59 61 63 66 68
+				methodName = SimpleCamera_Click
+				returnType = System.Void
+				parameters = 71
+				isEntityEventMethod = False
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 51
+					className = CutSceneManager
+					methodName = FadeInOut
+					parameterActions = 52 53
+					parameterTypeNames
+					{
+						item
+						{
+							value = Single
+						}
+						item
+						{
+							value = Single
+						}
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 52
+						valueType = System.Single
+						value = 1
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 53
+						valueType = System.Single
+						value = 1
+					}
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 54
+					className = LogicUtils
+					methodName = Wait
+					parameterActions = 55
+					parameterTypeNames
+					{
+						item
+						{
+							value = Single
+						}
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 55
+						valueType = System.Single
+						value = 1
+					}
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 56
+					className = CutSceneManager
+					propertyName = CutSceneEnable
+					dotPathAction = 57
+					entity
+					{
+						type = LogicAssignPropertyAction
+						uin = 57
+						valueAction = 58
+						entity
+						{
+							type = LogicGetConstantValueAction
+							uin = 58
+							valueType = System.Boolean
+							value = True
+						}
+					}
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 59
+					className = CutSceneManager
+					methodName = SetCamera
+					parameterActions = 60
+					parameterTypeNames
+					{
+						item
+						{
+							value = MapObject
+						}
+					}
+					entity
+					{
+						type = LogicCallGetEntityMethodAction
+						uin = 60
+						relationships = 174
+						entity = 174
+					}
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 61
+					className = LogicUtils
+					methodName = Wait
+					parameterActions = 62
+					parameterTypeNames
+					{
+						item
+						{
+							value = Single
+						}
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 62
+						valueType = System.Single
+						value = 3
+					}
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 63
+					className = CutSceneManager
+					methodName = FadeInOut
+					parameterActions = 64 65
+					parameterTypeNames
+					{
+						item
+						{
+							value = Single
+						}
+						item
+						{
+							value = Single
+						}
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 64
+						valueType = System.Single
+						value = 1
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 65
+						valueType = System.Single
+						value = 1
+					}
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 66
+					className = LogicUtils
+					methodName = Wait
+					parameterActions = 67
+					parameterTypeNames
+					{
+						item
+						{
+							value = Single
+						}
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 67
+						valueType = System.Single
+						value = 1
+					}
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 68
+					className = CutSceneManager
+					propertyName = CutSceneEnable
+					dotPathAction = 69
+					entity
+					{
+						type = LogicAssignPropertyAction
+						uin = 69
+						valueAction = 70
+						entity
+						{
+							type = LogicGetConstantValueAction
+							uin = 70
+							valueType = System.Boolean
+							value = False
+						}
+					}
+				}
+				entity
+				{
+					type = LogicParameter
+					uin = 71
+					parameterType = Engine.UISystem.EButton
+					parameterName = sender
+				}
+			}
+			entity
+			{
+				type = LogicDesignerMethod
+				uin = 72
+				actions = 74 81
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 73
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 73
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+				entity
+				{
+					type = LogicCallThisMethodAction
+					uin = 74
+					entityOwnerProperty = True
+					dotPathAction = 75
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 75
+						propertyName = MainControl
+						dotPathAction = 76
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 76
+							propertyName = Controls
+							dotPathAction = 77
+							entity
+							{
+								type = LogicCallNonStaticMethodAction
+								uin = 77
+								propertyName = Item
+								parameterActions = 78
+								dotPathAction = 79
+								parameterTypeNames
+								{
+									item
+									{
+										value = String
+									}
+								}
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 78
+									valueType = System.String
+									value = SimpleCamera
+								}
+								entity
+								{
+									type = LogicCallAsIsMethodAction
+									uin = 79
+									asCast = True
+									castTypeName = EButton
+									dotPathAction = 80
+									entity
+									{
+										type = LogicEventAction
+										uin = 80
+										eventName = Click
+										methodName = SimpleCamera_Click
+									}
+								}
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicCallThisMethodAction
+					uin = 81
+					entityOwnerProperty = True
+					dotPathAction = 82
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 82
+						propertyName = MainControl
+						dotPathAction = 83
+						entity
+						{
+							type = LogicCallNonStaticMethodAction
+							uin = 83
+							propertyName = Controls
+							dotPathAction = 84
+							entity
+							{
+								type = LogicCallNonStaticMethodAction
+								uin = 84
+								propertyName = Item
+								parameterActions = 85
+								dotPathAction = 86
+								parameterTypeNames
+								{
+									item
+									{
+										value = String
+									}
+								}
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 85
+									valueType = System.String
+									value = CurveCamera
+								}
+								entity
+								{
+									type = LogicCallAsIsMethodAction
+									uin = 86
+									asCast = True
+									castTypeName = EButton
+									dotPathAction = 87
+									entity
+									{
+										type = LogicEventAction
+										uin = 87
+										eventName = Click
+										methodName = CurveCamera_Click
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			entity
+			{
+				type = LogicDesignerMethod
+				uin = 88
+				actions = 90 93 95 122 117 112 133 110 98 100 130 128 142 140 145 138 102 105 126 107
+				methodName = CurveCamera_Click
+				returnType = System.Void
+				parameters = 89
+				isEntityEventMethod = False
+				entity
+				{
+					type = LogicParameter
+					uin = 89
+					parameterType = Engine.UISystem.EButton
+					parameterName = sender
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 90
+					className = CutSceneManager
+					methodName = FadeInOut
+					parameterActions = 91 92
+					parameterTypeNames
+					{
+						item
+						{
+							value = Single
+						}
+						item
+						{
+							value = Single
+						}
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 91
+						valueType = System.Single
+						value = 1
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 92
+						valueType = System.Single
+						value = 1
+					}
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 93
+					className = LogicUtils
+					methodName = Wait
+					parameterActions = 94
+					parameterTypeNames
+					{
+						item
+						{
+							value = Single
+						}
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 94
+						valueType = System.Single
+						value = 1
+					}
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 95
+					className = CutSceneManager
+					propertyName = CutSceneEnable
+					dotPathAction = 96
+					entity
+					{
+						type = LogicAssignPropertyAction
+						uin = 96
+						valueAction = 97
+						entity
+						{
+							type = LogicGetConstantValueAction
+							uin = 97
+							valueType = System.Boolean
+							value = True
+						}
+					}
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 98
+					className = CutSceneManager
+					methodName = SetCamera
+					parameterActions = 99
+					parameterTypeNames
+					{
+						item
+						{
+							value = MapObject
+						}
+					}
+					entity
+					{
+						type = LogicCallGetEntityMethodAction
+						uin = 99
+						relationships = 175
+						entity = 175
+					}
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 100
+					className = LogicUtils
+					methodName = Wait
+					parameterActions = 101
+					parameterTypeNames
+					{
+						item
+						{
+							value = Single
+						}
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 101
+						valueType = System.Single
+						value = 7
+					}
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 102
+					className = CutSceneManager
+					methodName = FadeInOut
+					parameterActions = 103 104
+					parameterTypeNames
+					{
+						item
+						{
+							value = Single
+						}
+						item
+						{
+							value = Single
+						}
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 103
+						valueType = System.Single
+						value = 1
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 104
+						valueType = System.Single
+						value = 1
+					}
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 105
+					className = LogicUtils
+					methodName = Wait
+					parameterActions = 106
+					parameterTypeNames
+					{
+						item
+						{
+							value = Single
+						}
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 106
+						valueType = System.Single
+						value = 1
+					}
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 107
+					className = CutSceneManager
+					propertyName = CutSceneEnable
+					dotPathAction = 108
+					entity
+					{
+						type = LogicAssignPropertyAction
+						uin = 108
+						valueAction = 109
+						entity
+						{
+							type = LogicGetConstantValueAction
+							uin = 109
+							valueType = System.Boolean
+							value = False
+						}
+					}
+				}
+				entity
+				{
+					type = LogicGetVariableAction
+					uin = 110
+					variableName = character
+					dotPathAction = 111
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 111
+						methodName = PostCreate
+					}
+				}
+				entity
+				{
+					type = LogicGetVariableAction
+					uin = 112
+					variableName = character
+					dotPathAction = 113
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 113
+						propertyName = Rotation
+						dotPathAction = 114
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 114
+							valueAction = 115
+							entity
+							{
+								type = LogicCallGetEntityMethodAction
+								uin = 115
+								relationships = 202
+								entity = 202
+								dotPathAction = 116
+								entity
+								{
+									type = LogicCallNonStaticMethodAction
+									uin = 116
+									propertyName = Rotation
+								}
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicGetVariableAction
+					uin = 117
+					variableName = character
+					dotPathAction = 118
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 118
+						propertyName = Position
+						dotPathAction = 119
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 119
+							valueAction = 120
+							entity
+							{
+								type = LogicCallGetEntityMethodAction
+								uin = 120
+								relationships = 202
+								entity = 202
+								dotPathAction = 121
+								entity
+								{
+									type = LogicCallNonStaticMethodAction
+									uin = 121
+									propertyName = Position
+								}
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicDeclareLocalVariableAction
+					uin = 122
+					variableTypeName = GameCharacter
+					variableName = character
+					valueAction = 123
+					entity
+					{
+						type = LogicCallStaticSystemMethodAction
+						uin = 123
+						className = Entities
+						methodName = Create
+						parameterActions = 125 124
+						parameterTypeNames
+						{
+							item
+							{
+								value = String
+							}
+							item
+							{
+								value = Entity
+							}
+						}
+						entity
+						{
+							type = LogicCallStaticSystemMethodAction
+							uin = 124
+							className = Map
+							propertyName = Instance
+						}
+						entity
+						{
+							type = LogicGetConstantValueAction
+							uin = 125
+							valueType = System.String
+							value = Zombie
+						}
+					}
+				}
+				entity
+				{
+					type = LogicGetVariableAction
+					uin = 126
+					variableName = character
+					dotPathAction = 127
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 127
+						methodName = SetDeleted
+					}
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 128
+					className = LogicUtils
+					methodName = Wait
+					parameterActions = 129
+					parameterTypeNames
+					{
+						item
+						{
+							value = Single
+						}
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 129
+						valueType = System.Single
+						value = 3
+					}
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 130
+					className = CutSceneManager
+					methodName = PlayObjectAnimation
+					parameterActions = 131 132
+					parameterTypeNames
+					{
+						item
+						{
+							value = MapObject
+						}
+						item
+						{
+							value = String
+						}
+					}
+					entity
+					{
+						type = LogicGetVariableAction
+						uin = 131
+						variableName = character
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 132
+						valueType = System.String
+						value = cry
+					}
+				}
+				entity
+				{
+					type = LogicGetVariableAction
+					uin = 133
+					variableName = character
+					dotPathAction = 134
+					entity
+					{
+						type = LogicCallNonStaticMethodAction
+						uin = 134
+						propertyName = InitialFaction
+						dotPathAction = 135
+						entity
+						{
+							type = LogicAssignPropertyAction
+							uin = 135
+							valueAction = 136
+							entity
+							{
+								type = LogicCallStaticSystemMethodAction
+								uin = 136
+								className = EntityTypes
+								methodName = GetByName
+								parameterActions = 137
+								parameterTypeNames
+								{
+									item
+									{
+										value = String
+									}
+								}
+								entity
+								{
+									type = LogicGetConstantValueAction
+									uin = 137
+									valueType = System.String
+									value = GoodFaction
+								}
+							}
+						}
+					}
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 138
+					className = LogicUtils
+					methodName = Wait
+					parameterActions = 139
+					parameterTypeNames
+					{
+						item
+						{
+							value = Single
+						}
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 139
+						valueType = System.Single
+						value = 14
+					}
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 140
+					className = LogicUtils
+					methodName = Wait
+					parameterActions = 141
+					parameterTypeNames
+					{
+						item
+						{
+							value = Single
+						}
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 141
+						valueType = System.Single
+						value = 3
+					}
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 142
+					className = CutSceneManager
+					methodName = PlayObjectAnimation
+					parameterActions = 143 144
+					parameterTypeNames
+					{
+						item
+						{
+							value = MapObject
+						}
+						item
+						{
+							value = String
+						}
+					}
+					entity
+					{
+						type = LogicGetVariableAction
+						uin = 143
+						variableName = character
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 144
+						valueType = System.String
+						value = cry
+					}
+				}
+				entity
+				{
+					type = LogicCallStaticSystemMethodAction
+					uin = 145
+					className = CutSceneManager
+					methodName = PlayObjectAnimation
+					parameterActions = 146 147
+					parameterTypeNames
+					{
+						item
+						{
+							value = MapObject
+						}
+						item
+						{
+							value = String
+						}
+					}
+					entity
+					{
+						type = LogicGetVariableAction
+						uin = 146
+						variableName = character
+					}
+					entity
+					{
+						type = LogicGetConstantValueAction
+						uin = 147
+						valueType = System.String
+						value = cry
+					}
+				}
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 148
+			relationships = 196 4
+			entityClassName = MapObject
+			className = TestLamp_Move
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicVariable
+				uin = 149
+				variableType = System.Single
+				variableName = moveTime
+				supportSerialization = False
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 150
+				code = "MapCurve mapCurve = (MapCurve)Entities.Instance.GetByName(\"MapCurve_MoveLamp\");\r\n\r\nmoveTime += Entity.TickDelta;\r\nif(moveTime >= mapCurve.GetCurveMaxTime())\r\n\tmoveTime -= mapCurve.GetCurveMaxTime();\r\n\r\nVec3 center = new Vec3(0,0,2);\r\n\r\nOwner.Position = mapCurve.CalculateCurvePointByTime(moveTime);\r\n\r\nVec3 diff = center - Owner.Position;\r\nRadian horizontalAngle = MathFunctions.ATan( diff.Y, diff.X );\r\nRadian verticalAngle = MathFunctions.ATan( diff.Z, diff.ToVec2().Length() );\r\nOwner.Rotation = new Angles( 0, 0, -horizontalAngle.InDegrees() ).ToQuat() * \r\n\tnew Angles( 0, verticalAngle.InDegrees(), 0 ).ToQuat();\r\n"
+				methodName = Tick
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = True
+			}
+		}
+	}
+}
+entity
+{
+	type = ShotgunItem
+	uin = 151
+	classPrompt = WeaponItem
+	respawnTime = 0
+	position = 20.8884 -14.29807 0.3870205
+	rotation = 0 0 0.9546641 0.2976851
+}
+entity
+{
+	type = Palm
+	uin = 152
+	classPrompt = MapObject
+	position = 0 0 0
+	name = Palm_0
+}
+entity
+{
+	type = Stone
+	uin = 153
+	classPrompt = MapObject
+	position = 0.08434868 -1.950536 -0.4065142
+	rotation = 0 0 0.8660254 0.5
+	name = Stone_0
+}
+entity
+{
+	type = Stone
+	uin = 154
+	classPrompt = MapObject
+	position = 1.339479 0.7166741 -0.04709435
+	rotation = 0 0 0.5 0.8660254
+	scale = 0.6896552 0.6896552 0.6896552
+	name = Stone_1
+}
+entity
+{
+	type = Stone
+	uin = 155
+	classPrompt = MapObject
+	position = -2.130114 0.4106321 -0.4900246
+	name = Stone_2
+}
+entity
+{
+	type = Region
+	uin = 156
+	classPrompt = Region
+	relationships = 12
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = 13.70415 9.0952 0.5336228
+	scale = 7.293657 7.293657 7.293657
+	name = Region_CutScene
+	logicClass = 12
+	checkType = Bounds
+}
+entity
+{
+	type = TestLamp
+	uin = 157
+	classPrompt = Dynamic
+	position = 10.05178 5.451957 0.08357678
+	name = TestLamp_0
+}
+entity
+{
+	type = TestLamp
+	uin = 158
+	classPrompt = Dynamic
+	position = 17.32811 5.400274 0.113986
+	name = TestLamp_1
+}
+entity
+{
+	type = TestLamp
+	uin = 159
+	classPrompt = Dynamic
+	position = 17.31069 12.73827 0.09177954
+	name = TestLamp_2
+}
+entity
+{
+	type = TestLamp
+	uin = 160
+	classPrompt = Dynamic
+	position = 10.07478 12.69812 0.05908751
+	name = TestLamp_3
+}
+entity
+{
+	type = TestLamp
+	uin = 161
+	classPrompt = Dynamic
+	position = 10.05178 5.451957 1.366402
+	name = TestLamp_4
+}
+entity
+{
+	type = TestLamp
+	uin = 162
+	classPrompt = Dynamic
+	position = 10.07478 12.69812 1.341913
+	name = TestLamp_5
+}
+entity
+{
+	type = TestLamp
+	uin = 163
+	classPrompt = Dynamic
+	position = 17.32811 5.400274 1.396812
+	name = TestLamp_6
+}
+entity
+{
+	type = TestLamp
+	uin = 164
+	classPrompt = Dynamic
+	position = 17.31069 12.73827 1.374605
+	name = TestLamp_7
+}
+entity
+{
+	type = TestLamp
+	uin = 165
+	classPrompt = Dynamic
+	position = 10.05178 5.451957 2.615921
+	name = TestLamp_8
+}
+entity
+{
+	type = TestLamp
+	uin = 166
+	classPrompt = Dynamic
+	position = 10.07478 12.69812 2.591432
+	name = TestLamp_9
+}
+entity
+{
+	type = TestLamp
+	uin = 167
+	classPrompt = Dynamic
+	position = 17.32811 5.400274 2.646331
+	name = TestLamp_10
+}
+entity
+{
+	type = TestLamp
+	uin = 168
+	classPrompt = Dynamic
+	position = 17.31069 12.73827 2.624124
+	name = TestLamp_11
+}
+entity
+{
+	type = MapCameraCurve
+	uin = 169
+	classPrompt = MapCameraCurve
+	relationships = 170 171 28
+	fov = 0
+	curveType = UniformCubicSpline
+	points = 169 170 171
+	automaticTimeStep = 3
+	owner = 169
+	time = 0
+	position = 11.42064 -0.5792019 4.238652
+	rotation = -0.2241439 0.1294095 0.4829629 0.8365163
+	name = MapCameraCurve_RegionScene
+}
+entity
+{
+	type = MapCameraCurvePoint
+	uin = 170
+	classPrompt = MapCameraCurvePoint
+	relationships = 169
+	fov = 0
+	owner = 169
+	time = 3
+	position = 5.318023 9.291943 1.516843
+}
+entity
+{
+	type = MapCameraCurvePoint
+	uin = 171
+	classPrompt = MapCameraCurvePoint
+	relationships = 169
+	fov = 0
+	owner = 169
+	time = 6
+	position = 13.83067 16.07765 3.882755
+	rotation = 0.1830127 0.1830127 -0.6830127 0.6830127
+}
+entity
+{
+	type = CutSceneManager
+	uin = 172
+	classPrompt = CutSceneManager
+}
+entity
+{
+	type = HelperPoint
+	uin = 173
+	classPrompt = MapObject
+	relationships = 46
+	position = 14.78142 9.423115 13.02835
+	name = HelperPoint_CreateObject
+}
+entity
+{
+	type = MapCamera
+	uin = 174
+	classPrompt = MapCamera
+	relationships = 60
+	fov = 0
+	position = 2.082842 -9.814308 8.208123
+	rotation = -0.1658787 0.2091867 0.7653998 0.5855668
+	name = MapCamera_Simple
+}
+entity
+{
+	type = MapCameraCurve
+	uin = 175
+	classPrompt = MapCameraCurve
+	relationships = 176 177 178 179 180 181 182 183 184 185 186 187 188 189 99
+	fov = 0
+	curveType = UniformCubicSpline
+	points = 175 176 177 178 179 180 183 181 182 184 185 186 187 188 189
+	automaticTimeStep = 2
+	owner = 175
+	time = 0
+	position = 9.409698 -4.540973 6.285407
+	rotation = 0.1426954 0.02559255 -0.9738962 -0.1746692
+	name = MapCameraCurve_0
+}
+entity
+{
+	type = MapCameraCurvePoint
+	uin = 176
+	classPrompt = MapCameraCurvePoint
+	relationships = 175
+	fov = 0
+	owner = 175
+	time = 2
+	position = 6.117253 -11.18712 7.417253
+	rotation = 0.03122875 -0.08501749 -0.8561724 -0.5086902
+}
+entity
+{
+	type = MapCameraCurvePoint
+	uin = 177
+	classPrompt = MapCameraCurvePoint
+	relationships = 175
+	fov = 0
+	owner = 175
+	time = 4
+	position = -2.299708 -11.87127 7.417253
+	rotation = 0.1566061 -0.1294391 -0.6237949 -0.7547185
+}
+entity
+{
+	type = MapCameraCurvePoint
+	uin = 178
+	classPrompt = MapCameraCurvePoint
+	relationships = 175
+	fov = 0
+	owner = 175
+	time = 6
+	position = -11.10411 -6.745015 7.417253
+	rotation = 0.06217813 -0.3122541 -0.3152745 -0.8939984
+}
+entity
+{
+	type = MapCameraCurvePoint
+	uin = 179
+	classPrompt = MapCameraCurvePoint
+	relationships = 175
+	fov = 0
+	owner = 175
+	time = 8
+	position = -13.8653 1.037525 7.417253
+	rotation = 0.009454362 -0.2001037 0.04623798 -0.9786374
+}
+entity
+{
+	type = MapCameraCurvePoint
+	uin = 180
+	classPrompt = MapCameraCurvePoint
+	relationships = 175
+	fov = 30
+	owner = 175
+	time = 10
+	position = -14.1776 2.001716 8.539131
+	rotation = 0.02316237 -0.2893702 0.06091433 -0.9549962
+}
+entity
+{
+	type = MapCameraCurvePoint
+	uin = 181
+	classPrompt = MapCameraCurvePoint
+	relationships = 175
+	fov = 0
+	owner = 175
+	time = 14
+	position = -14.24912 3.679096 8.539131
+	rotation = 0.02484099 -0.1954985 0.05297226 -0.9789571
+}
+entity
+{
+	type = MapCameraCurvePoint
+	uin = 182
+	classPrompt = MapCameraCurvePoint
+	relationships = 175
+	fov = 0
+	owner = 175
+	time = 16
+	position = -13.50738 6.446301 8.539131
+	rotation = -0.01340764 -0.1966137 0.2411585 -0.9502661
+}
+entity
+{
+	type = MapCameraCurvePoint
+	uin = 183
+	classPrompt = MapCameraCurvePoint
+	relationships = 175
+	fov = 30
+	owner = 175
+	time = 12
+	position = -14.23203 2.856162 8.539131
+	rotation = -0.004977174 0.06338276 -0.07812627 0.9949141
+}
+entity
+{
+	type = MapCameraCurvePoint
+	uin = 184
+	classPrompt = MapCameraCurvePoint
+	relationships = 175
+	fov = 0
+	owner = 175
+	time = 18
+	position = -12.14898 8.428384 8.539131
+	rotation = -0.863013 0.08205824 0.3336512 -0.37034
+}
+entity
+{
+	type = MapCameraCurvePoint
+	uin = 185
+	classPrompt = MapCameraCurvePoint
+	relationships = 175
+	fov = 0
+	owner = 175
+	time = 20
+	position = -10.52717 10.11184 8.539131
+	rotation = -0.6613376 0.553039 0.054124 0.5038359
+}
+entity
+{
+	type = MapCameraCurvePoint
+	uin = 186
+	classPrompt = MapCameraCurvePoint
+	relationships = 175
+	fov = 0
+	owner = 175
+	time = 22
+	position = -8.725861 11.19441 8.539131
+	rotation = 0.1660433 0.1819005 -0.4457897 0.8605886
+}
+entity
+{
+	type = MapCameraCurvePoint
+	uin = 187
+	classPrompt = MapCameraCurvePoint
+	relationships = 175
+	fov = 0
+	owner = 175
+	time = 24
+	position = 1.089595 4.044249 3.992792
+	rotation = 0.2024463 0.1402627 -0.6265834 0.7394149
+}
+entity
+{
+	type = MapCameraCurvePoint
+	uin = 188
+	classPrompt = MapCameraCurvePoint
+	relationships = 175
+	fov = 0
+	owner = 175
+	time = 26
+	position = 5.300772 -1.919186 4.841693
+	rotation = -0.2140106 0.1218918 0.9376526 0.2452523
+}
+entity
+{
+	type = MapCameraCurvePoint
+	uin = 189
+	classPrompt = MapCameraCurvePoint
+	relationships = 175
+	fov = 150
+	owner = 175
+	time = 28
+	position = 5.825912 -6.585307 5.515292
+	rotation = -0.1967317 0.1481715 0.8987522 0.3627476
+}
+entity
+{
+	type = MapCurve
+	uin = 190
+	classPrompt = MapCurve
+	relationships = 191 192 193 194 195 197 198 199 200 201
+	curveType = UniformCubicSpline
+	points = 190 191 192 193 194 195 197 198 199 200 201
+	automaticTimeStep = 4
+	owner = 190
+	time = 0
+	position = -6.59846 0.09030724 5.341268
+	name = MapCurve_MoveLamp
+}
+entity
+{
+	type = MapCurvePoint
+	uin = 191
+	classPrompt = MapCurvePoint
+	relationships = 190
+	owner = 190
+	time = 4
+	position = -4.483302 5.06783 5.564692
+}
+entity
+{
+	type = MapCurvePoint
+	uin = 192
+	classPrompt = MapCurvePoint
+	relationships = 190
+	owner = 190
+	time = 8
+	position = 4.767766 4.339926 2.717014
+}
+entity
+{
+	type = MapCurvePoint
+	uin = 193
+	classPrompt = MapCurvePoint
+	relationships = 190
+	owner = 190
+	time = 12
+	position = 5.852493 -3.508834 7.969028
+}
+entity
+{
+	type = MapCurvePoint
+	uin = 194
+	classPrompt = MapCurvePoint
+	relationships = 190
+	owner = 190
+	time = 16
+	position = -0.003859282 -7.126559 5.989438
+}
+entity
+{
+	type = MapCurvePoint
+	uin = 195
+	classPrompt = MapCurvePoint
+	relationships = 190
+	owner = 190
+	time = 20
+	position = -4.994462 -6.109812 5.956701
+}
+entity
+{
+	type = TestLamp
+	uin = 196
+	classPrompt = Dynamic
+	relationships = 148
+	position = -2.832997 -0.181083 3.567934
+	name = TestLamp_Move
+	logicClass = 148
+}
+entity
+{
+	type = MapCurvePoint
+	uin = 197
+	classPrompt = MapCurvePoint
+	relationships = 190
+	owner = 190
+	time = 24
+	position = -4.994462 3.360353 6.120263
+}
+entity
+{
+	type = MapCurvePoint
+	uin = 198
+	classPrompt = MapCurvePoint
+	relationships = 190
+	owner = 190
+	time = 28
+	position = 5.294497 3.614664 8.120263
+}
+entity
+{
+	type = MapCurvePoint
+	uin = 199
+	classPrompt = MapCurvePoint
+	relationships = 190
+	owner = 190
+	time = 32
+	position = 6.248311 -4.859612 7.27086
+}
+entity
+{
+	type = MapCurvePoint
+	uin = 200
+	classPrompt = MapCurvePoint
+	relationships = 190
+	owner = 190
+	time = 36
+	position = -7.276081 -4.208964 8.469445
+}
+entity
+{
+	type = MapCurvePoint
+	uin = 201
+	classPrompt = MapCurvePoint
+	relationships = 190
+	owner = 190
+	time = 40
+	position = -6.59846 0.09030724 5.341268
+}
+entity
+{
+	type = HelperPoint
+	uin = 202
+	classPrompt = MapObject
+	relationships = 115 120
+	position = -2.817864 -2.672381 1.231668
+	rotation = 0 0 -0.4099574 -0.9121046
+	name = HelperPoint_Character
+}
+entity
+{
+	type = Ball
+	uin = 203
+	classPrompt = Dynamic
+	position = -0.06093121 3.960938 0.5204386
+	name = Ball_0
+}
+entity
+{
+	type = Ball
+	uin = 204
+	classPrompt = Dynamic
+	position = -1.367897 3.714912 0.5276194
+	name = Ball_1
+}
+entity
+{
+	type = StaticMesh
+	uin = 205
+	classPrompt = StaticMesh
+	position = 0 0 0
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Models\Rooms\Rooms.mesh
+	splitGeometry = True
+	splitGeometryPieceSize = 30 30 30
+	allowDecals = All
+	castDynamicShadows = True
+}

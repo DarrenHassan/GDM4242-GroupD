@@ -1,0 +1,36 @@
+highLevelMaterial OgreHeadAnimated
+{
+	template = ShaderBaseMaterial
+	emissionScale = 1.568628 1.568628 3.921569
+	specularScale = 0.6666667 0.6666667 0.6666667
+	diffuse1Map
+	{
+		texture = Models\Rooms\PassageWall.dds
+	}
+	diffuse2Map
+	{
+		texture = Gui\Various\Engine.png
+		transform
+		{
+			animation
+			{
+				rotateSpeed = 0.003
+			}
+		}
+	}
+	emissionMap
+	{
+		texture = Effects\ExplosionParticle\fire.png
+		transform
+		{
+			animation
+			{
+				scrollSpeed = 1 0
+			}
+		}
+	}
+	specularMap
+	{
+		texture = Types\StaticObjects\OgreHead\OgreHead_Specular.dds
+	}
+}

@@ -1,0 +1,14 @@
+highLevelMaterial GrassGreen
+{
+	template = VegetationMaterial
+	culling = False
+	useNormals = False
+	alphaRejectFunction = GreaterEqual
+	alphaToCoverage = True
+	fadingByDistanceRange = 90 100
+	receiveObjectsPositionsFromVertices = True
+	diffuse1Map
+	{
+		texture = Types\DecorativeObjects\GrassGreen\GrassGreen.dds
+	}
+}

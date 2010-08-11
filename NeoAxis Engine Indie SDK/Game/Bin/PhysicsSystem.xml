@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PhysicsSystem</name>
+    </assembly>
+    <members>
+        <member name="M:Engine.PhysicsSystem.MeshShape.GetData(Engine.MathEx.Vec3[]@,System.Int32[]@)">
+            <summary>
+            Don't modify out data.
+            </summary>
+            <param name="vertices"></param>
+            <param name="indices"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Engine.PhysicsSystem.Body.Shapes">
+            <summary>Don't modify.</summary>
+        </member>
+        <member name="P:Engine.PhysicsSystem.Body.CCD">
+            <summary>
+            Gets or sets the continuous collision detection.
+            </summary>
+        </member>
+        <member name="P:Engine.PhysicsSystem.Body.Joints">
+            <summary>
+            null if no joints
+            </summary>
+        </member>
+        <member name="T:Engine.PhysicsSystem.ContactGroup">
+            <summary>
+            Defines physics contacts groups enumeration.
+            </summary>
+        </member>
+        <member name="F:Engine.PhysicsSystem.ContactGroup.CastAll">
+            <summary>
+            For ray casts: Checks collisions with all groups.
+            </summary>
+        </member>
+        <member name="F:Engine.PhysicsSystem.ContactGroup.Collision">
+            <summary>
+            Static collision group.
+            </summary>
+        </member>
+        <member name="F:Engine.PhysicsSystem.ContactGroup.Dynamic">
+            <summary>
+            Physical models for <b>MapObject</b> based objects have this group.
+            </summary>
+        </member>
+        <member name="F:Engine.PhysicsSystem.ContactGroup.NoContact">
+            <summary>
+            There are no contacts.
+            </summary>
+        </member>
+        <member name="F:Engine.PhysicsSystem.ContactGroup.CastOnlyCollision">
+            <summary>
+            For ray casts: Checks only with <b>Collision</b> group.
+            </summary>
+        </member>
+        <member name="F:Engine.PhysicsSystem.ContactGroup.CastOnlyDynamic">
+            <summary>
+            For ray casts: Checks only with <b>Dynamic</b> group.
+            </summary>
+        </member>
+        <member name="F:Engine.PhysicsSystem.ContactGroup.CastOnlyContact">
+            <summary>
+            For ray casts: Checks only with <b>Collision</b> and <b>Dynamic</b> groups.
+            </summary>
+        </member>
+        <member name="P:Engine.PhysicsSystem.PhysicsWorld._MeshGeometry.Vertices">
+            <summary>
+            Don't modify
+            </summary>
+        </member>
+        <member name="P:Engine.PhysicsSystem.PhysicsWorld._MeshGeometry.Indices">
+            <summary>
+            Don't modify
+            </summary>
+        </member>
+        <member name="F:Engine.PhysicsSystem.ForceType.Local">
+            <summary>
+            Apply a force in a direction relative to the Body's local 
+            coordinate system.
+            </summary>
+        </member>
+        <member name="F:Engine.PhysicsSystem.ForceType.Global">
+            <summary>
+            Apply a force in a direction relative to the global 
+            coordinate system.
+            </summary>
+        </member>
+        <member name="F:Engine.PhysicsSystem.ForceType.LocalTorque">
+            <summary>
+            Apply a torque with the axis specified relative to the Body's 
+            local coordinate system.
+            </summary>
+        </member>
+        <member name="F:Engine.PhysicsSystem.ForceType.GlobalTorque">
+            <summary>
+            Apply a torque with the axis specified relative to global 
+            coordinate system.
+            </summary>
+        </member>
+        <member name="F:Engine.PhysicsSystem.ForceType.LocalAtLocalPos">
+            <summary>
+            Apply a force at a position relative to the Body's local 
+            coordinate system in a direction relative to the Body's local 
+            coordinate system.
+            </summary>
+        </member>
+        <member name="F:Engine.PhysicsSystem.ForceType.LocalAtGlobalPos">
+            <summary>
+            Apply a force at a position relative to the global 
+            coordinate system in a direction relative to the Body's local 
+            coordinate system.
+            </summary>
+        </member>
+        <member name="F:Engine.PhysicsSystem.ForceType.GlobalAtLocalPos">
+            <summary>
+            Apply a force at a position relative to the Body's local 
+            coordinate system in a direction relative to the global 
+            coordinate system.
+            </summary>
+        </member>
+        <member name="F:Engine.PhysicsSystem.ForceType.GlobalAtGlobalPos">
+            <summary>
+            Apply a force at a position relative to the global 
+            coordinate system in a direction relative to the global 
+            coordinate system.
+            </summary>
+        </member>
+        <member name="M:Engine.PhysicsSystem.Hinge2Joint.SetODESuspension(System.Single,System.Single)">
+            <summary>
+            This ODE specific method for initialization
+            dJointSetHinge2Param( jointID, Ode.dJointParams.dParamSuspensionCFM, cfm ) and
+            dJointSetHinge2Param( jointID, Ode.dJointParams.dParamSuspensionERP, erp ) parameters.
+            </summary>
+            <param name="erp"></param>
+            <param name="cfm"></param>
+        </member>
+        <member name="P:Engine.PhysicsSystem.PhysicsModel.Bodies">
+            <summary>Don't modify.</summary>
+        </member>
+        <member name="P:Engine.PhysicsSystem.PhysicsModel.Joints">
+            <summary>Don't modify.</summary>
+        </member>
+        <member name="P:Engine.PhysicsSystem.PhysicsModel.Motors">
+            <summary>Don't modify.</summary>
+        </member>
+    </members>
+</doc>

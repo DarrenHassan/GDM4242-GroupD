@@ -1,0 +1,8 @@
+highLevelMaterial FpsDemoHouse/Floor
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Maps\PortalSystemDemo\StaticGeometry\House\Floor.dds
+	}
+}

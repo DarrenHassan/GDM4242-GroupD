@@ -1,0 +1,11 @@
+highLevelMaterial PipeLeakFlameParticle
+{
+	template = ShaderBaseMaterial
+	blending = AlphaAdd
+	lighting = False
+	diffuseVertexColor = True
+	diffuse1Map
+	{
+		texture = Effects/FireParticle/fire.png
+	}
+}

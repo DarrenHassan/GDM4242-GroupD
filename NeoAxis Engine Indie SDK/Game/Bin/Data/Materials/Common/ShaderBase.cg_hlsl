@@ -1,0 +1,955 @@
+// Copyright (C) 2006-2010 NeoAxis Group Ltd.
+
+#include "Materials/Common/getFogValue.cg_hlsl"
+#include "Materials/Common/blendFunctions.cg_hlsl"
+#include "Materials/Common/ShadowReceiverFunctions.cg_hlsl"
+
+//!!!!!
+#ifdef SHADOW_PSSM
+	error. not realized.
+#endif
+
+half3 expand(half3 v)
+{
+	return v * 2 - 1;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+void main_vp(
+	uniform float4x4 worldMatrix, //instancing specific: initialized from instance data.
+	uniform float4x4 viewProjMatrix,
+	uniform float4x4 textureViewProjMatrix0,
+	uniform float4x4 textureViewProjMatrix1,
+	uniform float4x4 textureViewProjMatrix2,
+	uniform float3 cameraPositionObjectSpace, //instancing specific: initialized from instance data.
+	uniform float3 cameraPosition,
+
+	float4 position : POSITION,
+	float3 normal : NORMAL,
+	float2 texCoord0 : TEXCOORD0,
+	float2 texCoord1 : TEXCOORD1,
+#ifdef TEXCOORD23
+	float2 texCoord2 : TEXCOORD2,
+	float2 texCoord3 : TEXCOORD3,
+#endif
+#ifdef NORMAL_MAP
+	float4 tangent : TANGENT,
+#endif
+#ifdef DIFFUSE_VERTEX_COLOR
+	float4 vertexColor : COLOR0,
+#endif
+
+#ifdef INSTANCING
+	uniform float instancing,
+	//instance data
+	float4 instancingWorldMatrix0 : TEXCOORD5,
+	float4 instancingWorldMatrix1 : TEXCOORD6,
+	float4 instancingWorldMatrix2 : TEXCOORD7,
+	float4 instancingCameraPositionObjectSpace : TEXCOORD8,
+	float4 instancingLightPositionObjectSpace0 : TEXCOORD9,
+#endif
+
+	out float4 oTexCoord01 : TEXCOORD0, //texCoord0 - xy, texCoord1 - zw
+	out float3 oNormal : TEXCOORD1,
+	out float4 oEyeDirectionAndPSSMDistance : TEXCOORD2,
+	out float4 oWorldPositionAndCameraDistance : TEXCOORD3,
+#ifdef TEXCOORD23
+	out float4 oTexCoord23 : TEXCOORD23_TEXCOORD, //texCoord2 - xy, texCoord3 - zw
+#endif
+
+#ifdef DIFFUSE_VERTEX_COLOR
+	out float4 oVertexColor : VERTEX_COLOR_TEXCOORD,
+#endif
+
+#ifdef REFLECTION
+	out float3 oReflectDirection : REFLECTION_TEXCOORD,
+#endif
+
+#ifdef AMBIENT_PASS
+#ifdef NORMAL_MAP
+	out float3 oAmbientLightDirection : AMBIENT_LIGHT_DIRECTION_TEXCOORD,
+#endif
+#endif
+
+#if LIGHT_COUNT >= 1
+	uniform float4 lightPositionArray[LIGHT_COUNT],
+	uniform float4 lightPositionObjectSpaceArray[LIGHT_COUNT],//instancing specific: initialized from instance data.
+	uniform float4 lightDirectionArray[LIGHT_COUNT],
+	uniform float4 lightAttenuationArray[LIGHT_COUNT],
+	uniform float4 spotLightParamsArray[LIGHT_COUNT],
+
+	#ifndef CULLING
+		#if defined(SHADER_MODEL_2) || defined(OPENGL)
+			out float3 oEyeDirectionObjectSpace : EYE_DIRECTION_OBJECT_SPACE_TEXCOORD,
+		#endif
+	#endif
+
+	out float4 oObjectLightDirectionAndAttenuation0 : OBJECT_LIGHT_DIRECTION_AND_ATTENUATION_0_TEXCOORD,//direction - xyz, attenuation - w
+	#ifdef LIGHTTYPE_SPOT
+		out float3 oObjectWorldLightDirection0 : OBJECT_WORLD_LIGHT_DIRECTION_0_TEXCOORD,
+	#endif
+	#ifdef SHADOW_MAP
+		uniform float3 shadowFarDistance,
+		uniform float3 shadowTextureSizes,
+
+		out float4 oShadowUV0 : SHADOW_UV0_TEXCOORD,
+		#ifdef SHADOW_PSSM
+			uniform float4 shadowDirectionalLightSplitDistances,
+			out float4 oShadowUV1 : SHADOW_UV1_TEXCOORD,
+			out float4 oShadowUV2 : SHADOW_UV2_TEXCOORD,
+		#endif
+
+	#endif
+#endif
+
+	uniform float time,
+
+	//Extension additions
+	#define VERTEX_HEADER
+	//This line it will be replaced at loading.
+	_INCLUDE_EXTENSION_FILE
+	#undef VERTEX_HEADER
+
+	out float4 oPosition : POSITION
+ 	)
+{
+
+#ifdef INSTANCING
+	if(instancing > 0)
+	{
+		worldMatrix = float4x4(
+			instancingWorldMatrix0,
+			instancingWorldMatrix1,
+			instancingWorldMatrix2,
+			float4(0,0,0,1));
+
+		cameraPositionObjectSpace = instancingCameraPositionObjectSpace;
+
+		#if LIGHT_COUNT >= 1
+			lightPositionObjectSpaceArray[0] = instancingLightPositionObjectSpace0;
+		#endif
+
+		//you can add more instance data in the modified OGRE sources. Only for advanced developers.
+	}
+#endif
+
+	//Extension additions
+	{
+		#define VERTEX_BODY_BEGIN
+		//This line it will be replaced at loading.
+		_INCLUDE_EXTENSION_FILE
+		#undef VERTEX_BODY_BEGIN
+	}
+	
+	//calculate base parameters
+	float4 worldPosition = mul(worldMatrix, position);
+	oPosition = mul(viewProjMatrix, worldPosition);
+
+	oTexCoord01.xy = texCoord0;
+	oTexCoord01.zw = texCoord1;
+#ifdef TEXCOORD23
+	oTexCoord23.xy = texCoord2;
+	oTexCoord23.zw = texCoord3;
+#endif
+
+	float3 normalizedNormal = normalize(normal);
+	oNormal = normal;
+
+	float cameraDistance = length(cameraPosition.xyz - worldPosition.xyz);
+
+	oWorldPositionAndCameraDistance.xyz = worldPosition.xyz;
+	oWorldPositionAndCameraDistance.w = cameraDistance;
+
+#ifdef DIFFUSE_VERTEX_COLOR
+	oVertexColor = vertexColor;
+#endif
+
+	//Calculate eye direction
+	oEyeDirectionAndPSSMDistance.xyz = cameraPositionObjectSpace - position.xyz;
+	oEyeDirectionAndPSSMDistance.w = 0;
+
+#ifdef NORMAL_MAP
+	oNormal = normalizedNormal;
+	float3 tangentNormalized = normalize(tangent.xyz);
+	float3 binormal = normalize(cross(tangentNormalized, oNormal)) * tangent.www;
+	float3x3 rotation = float3x3(tangentNormalized, binormal, oNormal);
+	oEyeDirectionAndPSSMDistance.xyz = mul(rotation, oEyeDirectionAndPSSMDistance.xyz);
+#endif
+
+	//Reflection
+#ifdef REFLECTION
+	float3 worldEyeDirection = worldPosition.xyz - cameraPosition;
+	float3 worldNormal = mul((float3x3)worldMatrix, normalizedNormal);
+	oReflectDirection = reflect(worldEyeDirection, worldNormal);
+	//temp. flipped cubemaps
+	oReflectDirection = half3(-oReflectDirection.y, oReflectDirection.z, oReflectDirection.x);
+#endif
+
+	//Ambient light direction for normal map
+#ifdef AMBIENT_PASS
+#ifdef NORMAL_MAP
+	oAmbientLightDirection = mul(rotation, normalizedNormal);
+#endif
+#endif
+
+	//Light direction and attenuation
+#if LIGHT_COUNT >= 1
+{
+	float3 direction = lightPositionObjectSpaceArray[0].xyz - 
+		position.xyz * lightPositionObjectSpaceArray[0].w;
+
+	#ifndef CULLING
+		#if defined(SHADER_MODEL_2) || defined(OPENGL)
+			oEyeDirectionObjectSpace = normalize(cameraPositionObjectSpace - position.xyz);
+		#endif
+	#endif
+		
+	#ifdef NORMAL_MAP
+		direction = mul(rotation, direction);
+	#endif
+	oObjectLightDirectionAndAttenuation0.xyz = direction;
+
+	#ifndef LIGHTTYPE_DIRECTIONAL
+		float distance = length(lightPositionArray[0].xyz - worldPosition.xyz);
+		oObjectLightDirectionAndAttenuation0.w = saturate(1 / (lightAttenuationArray[0].y +
+			lightAttenuationArray[0].z * distance + lightAttenuationArray[0].w * distance * distance));
+	#else
+		oObjectLightDirectionAndAttenuation0.w = 1;
+	#endif
+
+	#ifdef LIGHTTYPE_SPOT
+		oObjectWorldLightDirection0 = lightPositionArray[0].xyz - worldPosition.xyz;
+	#endif
+
+	//Shadows
+	#ifdef SHADOW_MAP
+
+		#ifdef SHADOW_PSSM
+			oEyeDirectionAndPSSMDistance.w = oPosition.z;
+
+			getShadowUV(textureViewProjMatrix0, textureViewProjMatrix1, textureViewProjMatrix2, 
+				lightPositionArray[0].xyz, lightDirectionArray[0].xyz, worldPosition.xyz, 
+				spotLightParamsArray[0], shadowTextureSizes, oShadowUV0, oShadowUV1, 
+				oShadowUV2, shadowDirectionalLightSplitDistances, oEyeDirectionAndPSSMDistance.w);
+		#else
+			getShadowUV(textureViewProjMatrix0, lightPositionArray[0].xyz, 
+				lightDirectionArray[0].xyz, worldPosition.xyz, spotLightParamsArray[0], 
+				shadowFarDistance, shadowTextureSizes, oShadowUV0);
+		#endif
+
+	#endif
+}
+#endif
+
+	//Extension additions
+	{
+		#define VERTEX_BODY_END
+		//This line it will be replaced at loading.
+		_INCLUDE_EXTENSION_FILE
+		#undef VERTEX_BODY_END
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+void main_fp( 
+
+#ifdef AMBIENT_PASS
+	uniform half4 ambientLightColor,
+#endif
+
+#if LIGHT_COUNT >= 1
+	uniform half4 lightDiffuseColorPowerScaledArray[LIGHT_COUNT],
+	uniform half4 lightSpecularColorPowerScaledArray[LIGHT_COUNT],
+#ifdef LIGHTTYPE_SPOT
+	uniform half4 lightDirectionArray[LIGHT_COUNT],
+	uniform half4 spotLightParamsArray[LIGHT_COUNT],
+#endif
+	uniform half lightCastShadowsArray[LIGHT_COUNT],
+#endif
+
+	float4 texCoord01 : TEXCOORD0, //texCoord0 - xy, texCoord1 - zw
+	half3 normal : TEXCOORD1,
+	float4 eyeDirectionAndPSSMDistance : TEXCOORD2,
+	half4 worldPositionAndCameraDistance : TEXCOORD3,
+#ifdef TEXCOORD23
+	float4 texCoord23 : TEXCOORD23_TEXCOORD, //texCoord2 - xy, texCoord3 - zw
+#endif
+
+#ifdef DIFFUSE_VERTEX_COLOR
+	half4 vertexColor : VERTEX_COLOR_TEXCOORD,
+#endif
+
+#ifdef FOG_ENABLED
+	uniform half4 fogColor,
+	uniform half4 fogParams,
+#endif
+
+#ifdef REFLECTION
+	half3 reflectDirection : REFLECTION_TEXCOORD,
+#endif
+
+#ifdef AMBIENT_PASS
+#ifdef NORMAL_MAP
+	half3 ambientLightDirection : AMBIENT_LIGHT_DIRECTION_TEXCOORD,
+#endif
+#endif
+
+#ifdef LIGHTMAP
+	uniform sampler2D lightmap : register(LIGHTMAP_REGISTER),
+	uniform half4 lightmapUVTransform,
+#endif
+
+#if LIGHT_COUNT >= 1
+	half4 objectLightDirectionAndAttenuation0 : OBJECT_LIGHT_DIRECTION_AND_ATTENUATION_0_TEXCOORD,//direction - xyz, attenuation - w
+	
+	#ifndef CULLING
+		#if defined(SHADER_MODEL_2) || defined(OPENGL)
+			half3 eyeDirectionObjectSpace : EYE_DIRECTION_OBJECT_SPACE_TEXCOORD,
+		#endif
+	#endif
+	
+	#ifdef LIGHTTYPE_SPOT
+		half3 objectWorldLightDirection0 : OBJECT_WORLD_LIGHT_DIRECTION_0_TEXCOORD,
+	#endif
+	
+	#ifdef SHADOW_MAP
+
+		float4 shadowUV0 : SHADOW_UV0_TEXCOORD,
+		#ifdef SHADOW_PSSM
+			float4 shadowUV1 : SHADOW_UV1_TEXCOORD,
+			float4 shadowUV2 : SHADOW_UV2_TEXCOORD,
+		#endif
+
+		uniform sampler2D shadowMap0 : register(SHADOW_MAP0_REGISTER),
+		#ifdef SHADOW_PSSM
+			uniform sampler2D shadowMap1 : register(SHADOW_MAP1_REGISTER),
+			uniform sampler2D shadowMap2 : register(SHADOW_MAP2_REGISTER),
+		#endif
+
+		uniform float lightShadowFarClipDistance,
+		uniform half3 shadowFarDistance,
+		uniform float3 shadowTextureSizes,
+		uniform half shadowColorIntensity,
+		#ifdef SHADOW_PSSM
+			uniform float4 shadowDirectionalLightSplitDistances,
+		#endif
+	#endif
+#endif
+
+#ifdef DIFFUSE1_MAP
+	uniform sampler2D diffuse1Map : register(DIFFUSE1_MAP_REGISTER),
+	uniform float4 diffuse1MapTransformMul,
+	uniform float2 diffuse1MapTransformAdd,
+#endif
+
+#ifdef DIFFUSE2_MAP
+	uniform sampler2D diffuse2Map : register(DIFFUSE2_MAP_REGISTER),
+	uniform float4 diffuse2MapTransformMul,
+	uniform float2 diffuse2MapTransformAdd,
+#endif
+
+#ifdef DIFFUSE3_MAP
+	uniform sampler2D diffuse3Map : register(DIFFUSE3_MAP_REGISTER),
+	uniform float4 diffuse3MapTransformMul,
+	uniform float2 diffuse3MapTransformAdd,
+#endif
+
+#ifdef DIFFUSE4_MAP
+	uniform sampler2D diffuse4Map : register(DIFFUSE4_MAP_REGISTER),
+	uniform float4 diffuse4MapTransformMul,
+	uniform float2 diffuse4MapTransformAdd,
+#endif
+
+#ifdef REFLECTION
+	#ifdef REFLECTION_MAP
+		uniform sampler2D reflectionMap : register(REFLECTION_MAP_REGISTER),
+		uniform float4 reflectionMapTransformMul,
+		uniform float2 reflectionMapTransformAdd,
+	#endif
+	uniform samplerCUBE reflectionCubeMap : register(REFLECTION_CUBEMAP_REGISTER),
+#endif
+
+#ifdef EMISSION_MAP
+	uniform sampler2D emissionMap : register(EMISSION_MAP_REGISTER),
+	uniform float4 emissionMapTransformMul,
+	uniform float2 emissionMapTransformAdd,
+#endif
+
+#ifdef SPECULAR_MAP
+	uniform sampler2D specularMap : register(SPECULAR_MAP_REGISTER),
+	uniform float4 specularMapTransformMul,
+	uniform float2 specularMapTransformAdd,
+#endif
+
+#ifdef NORMAL_MAP
+	uniform sampler2D normalMap : register(NORMAL_MAP_REGISTER),
+	uniform float4 normalMapTransformMul,
+	uniform float2 normalMapTransformAdd,
+#endif
+
+#ifdef HEIGHT_MAP
+	uniform sampler2D heightMap : register(HEIGHT_MAP_REGISTER),
+	uniform float4 heightMapTransformMul,
+	uniform float2 heightMapTransformAdd,
+#endif
+
+	uniform float time,
+
+	//dynamic parameters
+	uniform half4 dynamicDiffuseScale,
+	uniform half3 dynamicEmissionScale,
+	uniform half3 dynamicReflectionScale,
+	uniform half4 dynamicSpecularScaleAndShininess,
+#ifdef FADING_BY_DISTANCE
+	uniform half2 fadingByDistanceRange,
+#endif
+
+#ifdef OPENGL
+	uniform float4 clipPlane0,
+	uniform float4 clipPlane1,
+	uniform float4 clipPlane2,
+	uniform float4 clipPlane3,
+	uniform float4 clipPlane4,
+	uniform float4 clipPlane5,
+#endif
+
+#if defined(DIRECT3D) && defined(SHADER_MODEL_3)
+	half vFace : VFACE,
+#endif
+
+	uniform half disableFetch4ForBrokenDrivers,
+
+	//Extension additions
+	#define FRAGMENT_HEADER
+	//This line it will be replaced at loading.
+	_INCLUDE_EXTENSION_FILE
+	#undef FRAGMENT_HEADER
+
+	out half4 oColor : COLOR )
+{
+	//Extension additions
+	{
+		#define FRAGMENT_BODY_BEGIN
+		//This line it will be replaced at loading.
+		_INCLUDE_EXTENSION_FILE
+		#undef FRAGMENT_BODY_BEGIN
+	}
+
+	float2 texCoord0 = texCoord01.xy;
+	float2 texCoord1 = texCoord01.zw;
+#ifdef TEXCOORD23
+	float2 texCoord2 = texCoord23.xy;
+	float2 texCoord3 = texCoord23.zw;
+#endif
+	half3 eye = normalize(eyeDirectionAndPSSMDistance.xyz);
+
+	half3 worldPosition = worldPositionAndCameraDistance.xyz;
+	half cameraDistance = worldPositionAndCameraDistance.w;
+
+	half3 n;
+	half3 lightColor = half3(0,0,0);
+	
+	half3 normalizedNormal = normalize(normal);
+	
+#ifdef HEIGHT_MAP
+	float height = tex2D(heightMap, HEIGHT_MAP_TEXCOORD).r;
+	float scale = HEIGHT_SCALE;
+	float displacement = (height * scale) - scale * .5;
+	float2 offset = eye.xy * displacement;
+	texCoord0 += offset;
+	texCoord1 += offset;
+	#ifdef TEXCOORD23
+		texCoord2 += offset;
+		texCoord3 += offset;
+	#endif
+#endif
+
+#ifdef HEIGHT_FROM_NORMAL_MAP_ALPHA
+	float height = tex2D(normalMap, NORMAL_MAP_TEXCOORD).a;
+	float scale = HEIGHT_SCALE;
+	float displacement = (height * scale) - scale * .5;
+	float2 offset = eye.xy * displacement;
+	texCoord0 += offset;
+	texCoord1 += offset;
+	#ifdef TEXCOORD23
+		texCoord2 += offset;
+		texCoord3 += offset;
+	#endif
+#endif
+
+	//Calculate normal
+#ifdef NORMAL_MAP
+	half3 normalMapValue = expand(tex2D(normalMap, NORMAL_MAP_TEXCOORD).rgb);
+	normalMapValue.z = (half)sqrt(1.0h - dot(normalMapValue.xy, normalMapValue.xy));
+	n = (half3)normalize(normalMapValue);
+#else
+	n = normalizedNormal;
+#endif 
+
+	//Calculate light color for ambient pass
+#ifdef AMBIENT_PASS
+	#ifdef LIGHTING
+		lightColor = ambientLightColor.rgb;
+	#else
+		lightColor = half3(1,1,1);
+	#endif
+	#ifdef NORMAL_MAP
+		lightColor *= saturate(dot(n, normalize(ambientLightDirection)));
+	#endif
+#endif
+
+#if LIGHT_COUNT >= 1
+	bool frontFace = true;
+	#ifndef CULLING
+		#if defined(SHADER_MODEL_2) || defined(OPENGL)
+			frontFace = dot(normalize(eyeDirectionObjectSpace), normalizedNormal) > 0;
+		#else
+			frontFace = vFace < 0;
+		#endif
+	#endif
+#endif
+
+	//Calculate light color for light pass
+#if LIGHT_COUNT >= 1
+	half3 objectLightDirection0 = normalize(objectLightDirectionAndAttenuation0.xyz);
+	half objectLightAttenuation0 = objectLightDirectionAndAttenuation0.w;
+	half shadowMultiplier = 1;
+
+	#ifdef LIGHTTYPE_SPOT
+		// factor in spotlight angle
+		half rho0 = saturate(dot(-lightDirectionArray[0].xyz, normalize(objectWorldLightDirection0)));
+		// factor = (rho - cos(outer/2)) / (cos(inner/2) - cos(outer/2)) ^ falloff 
+		half spotFactor0 = saturate(pow(saturate(rho0 - spotLightParamsArray[0].y) / 
+			(spotLightParamsArray[0].x - spotLightParamsArray[0].y), spotLightParamsArray[0].z));
+		objectLightAttenuation0 *= spotFactor0;
+	#endif
+
+	//Shadows
+	#ifdef SHADOW_MAP
+
+		#ifdef SHADOW_PSSM
+			shadowMultiplier = getShadowmapReceiveValue( shadowUV0, shadowUV1, shadowUV2,
+				shadowMap0, shadowMap1, shadowMap2, lightCastShadowsArray[0], 
+				lightShadowFarClipDistance, shadowTextureSizes, shadowColorIntensity, 
+				shadowDirectionalLightSplitDistances, eyeDirectionAndPSSMDistance.w);
+		#else
+			shadowMultiplier = getShadowmapReceiveValue( shadowUV0, shadowMap0, cameraDistance, 
+				lightCastShadowsArray[0], lightShadowFarClipDistance, shadowFarDistance,
+				shadowTextureSizes, shadowColorIntensity, disableFetch4ForBrokenDrivers);
+		#endif
+
+	#endif
+
+	half normalCoef0;
+	#ifdef USE_NORMALS
+		if(frontFace)
+			normalCoef0 = saturate(dot(n, objectLightDirection0));
+		else
+			normalCoef0 = saturate(dot(-n, objectLightDirection0));
+	#else
+		normalCoef0 = 1;
+	#endif
+
+	#ifdef LIGHTMAP
+		half2 lightmapUV = lightmapUVTransform.xy + lightmapUVTransform.zw * LIGHTMAP_TEXCOORD;
+		half3 lightmapColor = (half3)tex2D(lightmap, lightmapUV).rgb;
+		#ifdef SHADOW_MAP
+			lightmapColor = min(lightmapColor, 1.0h - sqrt(1.0h - shadowMultiplier));
+			//lightmapColor = min(lightmapColor, shadowMultiplier);
+		#endif
+		//lightColor += lightmapColor * (objectLightAttenuation0 * normalCoef0);
+		lightColor += lightmapColor;
+	#endif
+
+	#ifdef SHADOW_MAP
+		objectLightAttenuation0 *= shadowMultiplier;
+	#endif
+
+	#ifndef LIGHTMAP
+		lightColor += lightDiffuseColorPowerScaledArray[0].rgb * (objectLightAttenuation0 * normalCoef0);
+	#endif
+
+#endif
+
+	//Calculate pixel color
+	half4 color = half4(0,0,0,0);
+
+	//Diffuse
+	half4 diffuse;
+#ifdef DIFFUSE1_MAP
+	diffuse = (half4)tex2D(diffuse1Map, DIFFUSE1_MAP_TEXCOORD);
+#else
+	diffuse = half4(1,1,1,1);
+#endif
+#ifdef DIFFUSE2_MAP
+	diffuse = DIFFUSE2_MAP_BLEND((half4)tex2D(diffuse2Map, DIFFUSE2_MAP_TEXCOORD), diffuse);
+#endif
+#ifdef DIFFUSE3_MAP
+	diffuse = DIFFUSE3_MAP_BLEND((half4)tex2D(diffuse3Map, DIFFUSE3_MAP_TEXCOORD), diffuse);
+#endif
+#ifdef DIFFUSE4_MAP
+	diffuse = DIFFUSE4_MAP_BLEND((half4)tex2D(diffuse4Map, DIFFUSE4_MAP_TEXCOORD), diffuse);
+#endif
+
+	#ifdef DYNAMIC_DIFFUSE_SCALE
+		diffuse *= dynamicDiffuseScale;
+	#else
+		diffuse *= DIFFUSE_SCALE;
+	#endif
+
+#ifdef DIFFUSE_VERTEX_COLOR
+	diffuse *= vertexColor;
+#endif
+
+	color += diffuse * float4(lightColor, 1);
+
+	//Reflection
+#ifdef REFLECTION
+
+	half3 reflection;
+	#ifdef DYNAMIC_REFLECTION_SCALE
+		reflection = dynamicReflectionScale;
+	#else
+		reflection = REFLECTION_SCALE;
+	#endif
+
+	#ifdef REFLECTION_MAP
+		reflection *= (half3)tex2D(reflectionMap, REFLECTION_MAP_TEXCOORD).rgb;
+	#endif
+	half3 cubeMapTexCoord = reflectDirection;//half3 cubeMapTexCoord = reflect(-eye, n);
+	reflection *= (half3)texCUBE(reflectionCubeMap, cubeMapTexCoord).rgb;
+	color.xyz += reflection * lightColor;
+
+#endif
+
+	//Emission
+#ifdef EMISSION
+#ifdef AMBIENT_PASS
+	half3 emission;
+	#ifdef DYNAMIC_EMISSION_SCALE
+		emission = dynamicEmissionScale;
+	#else
+		emission = EMISSION_SCALE;
+	#endif
+
+	#ifdef EMISSION_MAP
+		emission *= (half3)tex2D(emissionMap, EMISSION_MAP_TEXCOORD).rgb;
+	#endif
+	color.xyz += emission;
+#endif
+#endif
+
+	//Specular
+#ifdef SPECULAR
+#if LIGHT_COUNT >= 1
+#ifdef USE_NORMALS
+	half3 specular;
+	#ifdef DYNAMIC_SPECULAR_SCALE
+		specular = dynamicSpecularScaleAndShininess.rgb;
+	#else
+		specular = SPECULAR_SCALE;
+	#endif
+	#ifdef SPECULAR_MAP
+		specular *= (half3)tex2D(specularMap, SPECULAR_MAP_TEXCOORD).rgb;
+	#endif
+
+	half3 halfAngle0 = normalize(objectLightDirection0 + eye);
+	half normalSpecCoef0;
+	
+	if(frontFace)
+		normalSpecCoef0 = saturate(dot(n, halfAngle0));
+	else
+		normalSpecCoef0 = saturate(dot(-n, halfAngle0));
+	
+	color.rgb += specular * lightSpecularColorPowerScaledArray[0].rgb * 
+		(pow(normalSpecCoef0, dynamicSpecularScaleAndShininess.a) * objectLightAttenuation0);
+#endif
+#endif
+#endif
+
+	//Fog
+#ifdef FOG_ENABLED
+	half4 oldColor = color;
+	half fog = getFogValue(cameraDistance, fogParams);
+	color.rgb *= fog;
+
+	#ifdef AMBIENT_PASS
+		#ifdef BLENDING_OPAQUE
+			color.rgb += fogColor.rgb * (1.0h - fog);
+		#endif
+	#endif
+
+	#ifdef BLENDING_ALPHABLEND
+		color.rgb += fogColor.rgb * (1.0h - fog);
+	#endif
+
+#endif
+
+#ifdef FADING_BY_DISTANCE
+	//fadingByDistanceRange.x: min
+	//fadingByDistanceRange.y: 1 / (max - min)
+	color.a *= 1.0h - saturate((cameraDistance - fadingByDistanceRange.x) * fadingByDistanceRange.y);
+#endif
+
+	oColor = color;
+
+	//OpenGL clip plane support. Direct3D is already support clip planes without this code.
+#ifdef OPENGL
+	clip(dot(clipPlane0, float4(worldPosition, 1)));
+	//uncomment it for support more than 1 clip plane
+	//clip(dot(clipPlane1, float4(worldPosition, 1)));
+	//clip(dot(clipPlane2, float4(worldPosition, 1)));
+	//clip(dot(clipPlane3, float4(worldPosition, 1)));
+	//clip(dot(clipPlane4, float4(worldPosition, 1)));
+	//clip(dot(clipPlane5, float4(worldPosition, 1)));
+#endif
+
+	//Extension additions
+	{
+		#define FRAGMENT_BODY_END
+		//This line it will be replaced at loading.
+		_INCLUDE_EXTENSION_FILE
+		#undef FRAGMENT_BODY_END
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+void shadowCaster_vp(
+	uniform float4x4 worldMatrix, //instancing specific: initialized from instance data.
+	uniform float4x4 viewProjMatrix,
+	
+	float4 position : POSITION,
+	float2 texCoord0 : TEXCOORD0,
+	float2 texCoord1 : TEXCOORD1,
+#ifdef TEXCOORD23
+	float2 texCoord2 : TEXCOORD2,
+	float2 texCoord3 : TEXCOORD3,
+#endif
+#ifdef DIFFUSE_VERTEX_COLOR
+	float4 vertexColor : COLOR0,
+#endif
+
+#ifdef INSTANCING
+	uniform float instancing,
+	//instance data
+	float4 instancingWorldMatrix0 : TEXCOORD5,
+	float4 instancingWorldMatrix1 : TEXCOORD6,
+	float4 instancingWorldMatrix2 : TEXCOORD7,
+#endif
+
+	out float4 oTexCoord01 : TEXCOORD0, //texCoord0 - xy, texCoord1 - zw
+#ifdef TEXCOORD23
+	out float4 oTexCoord23 : TEXCOORD1/*TEXCOORD23_TEXCOORD*/, //texCoord2 - xy, texCoord3 - zw
+#endif
+
+#ifdef DIFFUSE_VERTEX_COLOR
+	out float4 oVertexColor : TEXCOORD2/*VERTEX_COLOR_TEXCOORD*/,
+#endif
+
+	uniform float time,
+
+	//Extension additions
+	#define VERTEX_HEADER
+	//This line it will be replaced at loading.
+	_INCLUDE_EXTENSION_FILE
+	#undef VERTEX_HEADER
+
+	//shadow caster specific
+	uniform float4 texelOffsets,
+#ifndef NVIDIA_HARDWARE_SHADOWS
+	out float oDepth : TEXCOORD3,
+#endif
+	out float4 oPosition : POSITION
+ 	)
+{
+#ifdef INSTANCING
+	if(instancing > 0)
+	{
+		worldMatrix = float4x4(
+			instancingWorldMatrix0,
+			instancingWorldMatrix1,
+			instancingWorldMatrix2,
+			float4(0,0,0,1));
+	}
+#endif
+
+	//Extension additions
+	{
+		#define VERTEX_BODY_BEGIN
+		//This line it will be replaced at loading.
+		_INCLUDE_EXTENSION_FILE
+		#undef VERTEX_BODY_BEGIN
+	}
+
+	//calculate base parameters
+	float4 worldPosition = mul(worldMatrix, position);
+	oPosition = mul(viewProjMatrix, worldPosition);
+
+	oTexCoord01.xy = texCoord0;
+	oTexCoord01.zw = texCoord1;
+#ifdef TEXCOORD23
+	oTexCoord23.xy = texCoord2;
+	oTexCoord23.zw = texCoord3;
+#endif
+
+#ifdef DIFFUSE_VERTEX_COLOR
+	oVertexColor = vertexColor;
+#endif
+
+	//shadow caster specific
+	oPosition.xy += texelOffsets.zw * oPosition.w;
+#ifndef NVIDIA_HARDWARE_SHADOWS
+	oDepth = oPosition.z;
+#endif
+
+	//Extension additions
+	{
+		#define VERTEX_BODY_END
+		//This line it will be replaced at loading.
+		_INCLUDE_EXTENSION_FILE
+		#undef VERTEX_BODY_END
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+void shadowCaster_fp( 
+	uniform float farClipDistance,
+
+	float4 texCoord01 : TEXCOORD0, //texCoord0 - xy, texCoord1 - zw
+#ifdef TEXCOORD23
+	float4 texCoord23 : TEXCOORD1/*TEXCOORD23_TEXCOORD*/, //texCoord2 - xy, texCoord3 - zw
+#endif
+
+#ifdef DIFFUSE_VERTEX_COLOR
+	half4 vertexColor : TEXCOORD2/*VERTEX_COLOR_TEXCOORD*/,
+#endif
+
+#ifdef DIFFUSE1_MAP
+	uniform sampler2D diffuse1Map : register(DIFFUSE1_MAP_REGISTER),
+	uniform float4 diffuse1MapTransformMul,
+	uniform float2 diffuse1MapTransformAdd,
+#endif
+
+#ifdef DIFFUSE2_MAP
+	uniform sampler2D diffuse2Map : register(DIFFUSE2_MAP_REGISTER),
+	uniform float4 diffuse2MapTransformMul,
+	uniform float2 diffuse2MapTransformAdd,
+#endif
+
+#ifdef DIFFUSE3_MAP
+	uniform sampler2D diffuse3Map : register(DIFFUSE3_MAP_REGISTER),
+	uniform float4 diffuse3MapTransformMul,
+	uniform float2 diffuse3MapTransformAdd,
+#endif
+
+#ifdef DIFFUSE4_MAP
+	uniform sampler2D diffuse4Map : register(DIFFUSE4_MAP_REGISTER),
+	uniform float4 diffuse4MapTransformMul,
+	uniform float2 diffuse4MapTransformAdd,
+#endif
+
+	uniform float time,
+
+	//dynamic parameters
+	uniform half4 dynamicDiffuseScale,
+
+	//shadow caster specific
+#ifndef NVIDIA_HARDWARE_SHADOWS
+	float depth : TEXCOORD3,
+#endif
+	uniform half alphaRejectValue,
+
+	//Extension additions
+	#define FRAGMENT_HEADER
+	//This line it will be replaced at loading.
+	_INCLUDE_EXTENSION_FILE
+	#undef FRAGMENT_HEADER
+
+#ifndef NVIDIA_HARDWARE_SHADOWS
+	out float oDepth : DEPTH,
+#endif
+	out float4 oColor : COLOR )
+{
+	//Extension additions
+	{
+		#define FRAGMENT_BODY_BEGIN
+		//This line it will be replaced at loading.
+		_INCLUDE_EXTENSION_FILE
+		#undef FRAGMENT_BODY_BEGIN
+	}
+
+	float2 texCoord0 = texCoord01.xy;
+	float2 texCoord1 = texCoord01.zw;
+#ifdef TEXCOORD23
+	float2 texCoord2 = texCoord23.xy;
+	float2 texCoord3 = texCoord23.zw;
+#endif
+
+	//Diffuse
+	half4 diffuse;
+#ifdef DIFFUSE1_MAP
+	diffuse = (half4)tex2D(diffuse1Map, DIFFUSE1_MAP_TEXCOORD);
+#else
+	diffuse = half4(1,1,1,1);
+#endif
+#ifdef DIFFUSE2_MAP
+	diffuse = DIFFUSE2_MAP_BLEND((half4)tex2D(diffuse2Map, DIFFUSE2_MAP_TEXCOORD), diffuse);
+#endif
+#ifdef DIFFUSE3_MAP
+	diffuse = DIFFUSE3_MAP_BLEND((half4)tex2D(diffuse3Map, DIFFUSE3_MAP_TEXCOORD), diffuse);
+#endif
+#ifdef DIFFUSE4_MAP
+	diffuse = DIFFUSE4_MAP_BLEND((half4)tex2D(diffuse4Map, DIFFUSE4_MAP_TEXCOORD), diffuse);
+#endif
+
+	#ifdef DYNAMIC_DIFFUSE_SCALE
+		diffuse *= dynamicDiffuseScale;
+	#else
+		diffuse *= DIFFUSE_SCALE;
+	#endif
+
+#ifdef DIFFUSE_VERTEX_COLOR
+	diffuse *= vertexColor;
+#endif
+
+	//shadow caster specific
+
+	half alpha = diffuse.a;
+
+#ifdef ALPHA_REJECT_FUNCTION_LESSEQUAL
+	clip(alphaRejectValue - alpha);
+#endif
+#ifdef ALPHA_REJECT_FUNCTION_LESS
+	clip(alphaRejectValue - alpha);
+#endif
+#ifdef ALPHA_REJECT_FUNCTION_GREATEREQUAL
+	clip(alpha - alphaRejectValue);
+#endif
+#ifdef ALPHA_REJECT_FUNCTION_GREATER
+	clip(alpha - alphaRejectValue);
+#endif
+
+#ifdef NVIDIA_HARDWARE_SHADOWS
+	oColor = float4(0, 0, 0, 1);
+#else
+	float normalizedDepth = depth / farClipDistance;
+	oColor = float4(normalizedDepth, 0, 0, 1);
+	oDepth = normalizedDepth;
+#endif
+
+	//Extension additions
+	{
+		#define FRAGMENT_BODY_END
+		//This line it will be replaced at loading.
+		_INCLUDE_EXTENSION_FILE
+		#undef FRAGMENT_BODY_END
+	}
+
+}

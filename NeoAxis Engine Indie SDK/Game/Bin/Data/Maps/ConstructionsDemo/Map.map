@@ -1,0 +1,578 @@
+type = GameMap
+uin = 2
+classPrompt = GameMap
+gameMusic = Sounds\Music\Game.ogg
+ambientLight = 0.4980392 0.4980392 0.4980392
+editorCameraPosition = -28.03042 -82.92681 14.7551
+editorCameraDirection = 0.8140836 -0.4780977
+shadowTechnique = ShadowmapHigh
+shadowColor = 0.6 0.6 0.6 0.6
+shadowFarDistance = 50
+logicSystemManager = 3
+rootEditorLayer
+{
+	layer
+	{
+		name = StaticGeometry
+	}
+}
+entity
+{
+	type = LogicSystemManager
+	uin = 3
+	mapClassManager = 4
+	entity
+	{
+		type = LogicClassManager
+		uin = 4
+	}
+}
+entity
+{
+	type = Light
+	uin = 5
+	classPrompt = Light
+	lightType = Directional
+	diffuseColor = 0.8627452 0.8627452 0.8627452
+	diffusePower = 1
+	specularColor = 1 1 1
+	specularPower = 1
+	attenuationRangeAutomatic = True
+	attenuationRange = Infinity
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0
+	spotlightInnerAngle = 30
+	spotlightOuterAngle = 40
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	allowDynamicLighting = True
+	position = -37.71922 -1.393759 37.08606
+	rotation = 0.374715 -0.3659987 -0.2429488 -0.8164617
+	name = Light_0
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 6
+	classPrompt = MapChangeRegion
+	mapName = Maps\MainDemo\Map.map
+	spawnPointName = SpawnPoint_FromConstructionsDemo
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = -8.835548 -100.285 1.760882
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 3 5.405561 3
+	name = MapChangeRegion_0
+	checkType = Bounds
+}
+entity
+{
+	type = SpawnPoint
+	uin = 7
+	classPrompt = SpawnPoint
+	defaultPoint = True
+	position = -8.869759 -91.93073 1.883622
+	rotation = 0 0 -0.7071068 -0.7071068
+	name = SpawnPoint_0
+}
+entity
+{
+	type = Door
+	uin = 8
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -8.957649 -87.78265 1.844998
+	name = Door_0
+}
+entity
+{
+	type = Door
+	uin = 9
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = -8.949257 -104.0426 1.854069
+	name = Door_2
+}
+entity
+{
+	type = Bridge
+	uin = 10
+	classPrompt = Dynamic
+	position = -23.28619 -43.43913 -1.550504
+	name = Bridge_0
+}
+entity
+{
+	type = Stone
+	uin = 11
+	classPrompt = MapObject
+	position = -25.52941 -21.31283 -2.996737
+	scale = 1.084852 0.7678679 0.7278776
+	name = Stone_0
+}
+entity
+{
+	type = SubmachineGunItem
+	uin = 12
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = -9.009996 -76.9493 1.004927
+	rotation = 0 0 0.659684 0.7515431
+}
+entity
+{
+	type = ShotgunItem
+	uin = 13
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = -6.82057 -77.43248 1.191669
+	rotation = 0 0 0.999518 -0.03104347
+}
+entity
+{
+	type = Stone
+	uin = 14
+	classPrompt = MapObject
+	position = -21.04203 -67.32265 -2.853513
+	scale = 1.253919 1 0.6896213
+	name = Stone_1
+}
+entity
+{
+	type = ExplosionBarrel
+	uin = 15
+	classPrompt = Dynamic
+	position = -22.75341 -25.07898 -2.959566
+	rotation = 0 -0.7071068 0 0.7071068
+	name = ExplosionBarrel_2
+}
+entity
+{
+	type = Stone
+	uin = 16
+	classPrompt = MapObject
+	position = -20.62743 -26.00246 -5.032025
+	scale = 0.7920355 0.7920355 0.7920355
+	name = Stone_2
+}
+entity
+{
+	type = Stone
+	uin = 17
+	classPrompt = MapObject
+	position = -22.84634 -26.00246 -5.032025
+	scale = 0.7920355 0.7920355 0.7920355
+	name = Stone_3
+}
+entity
+{
+	type = ExplosionBarrel
+	uin = 18
+	classPrompt = Dynamic
+	position = -20.83703 -25.07898 -2.985846
+	rotation = 0 -0.7071068 0 0.7071068
+	name = ExplosionBarrel_3
+}
+entity
+{
+	type = ExplosionBarrel
+	uin = 19
+	classPrompt = Dynamic
+	position = -20.83703 -23.83267 -2.803662
+	rotation = 0 -0.7071068 0 0.7071068
+	name = ExplosionBarrel_4
+}
+entity
+{
+	type = ExplosionBarrel
+	uin = 20
+	classPrompt = Dynamic
+	position = -22.79022 -23.83267 -2.803662
+	rotation = 0 -0.7071068 0 0.7071068
+	name = ExplosionBarrel_5
+}
+entity
+{
+	type = Box
+	uin = 21
+	classPrompt = Dynamic
+	position = 17.13266 -26.2541 1.952481
+	name = Box_5
+}
+entity
+{
+	type = Box
+	uin = 22
+	classPrompt = Dynamic
+	position = 13.67371 -22.59586 1.805947
+	name = Box_7
+}
+entity
+{
+	type = Box
+	uin = 23
+	classPrompt = Dynamic
+	position = 15.05905 -21.50603 1.854946
+	name = Box_8
+}
+entity
+{
+	type = Box
+	uin = 24
+	classPrompt = Dynamic
+	position = 19.15263 -26.30677 2.025549
+	name = Box_11
+}
+entity
+{
+	type = ExplosionBarrel
+	uin = 25
+	classPrompt = Dynamic
+	position = -23.21106 -22.69966 -0.5798219
+	rotation = 0 -1 0 0
+	name = ExplosionBarrel_0
+}
+entity
+{
+	type = ExplosionBarrel
+	uin = 26
+	classPrompt = Dynamic
+	position = -22.00286 -22.69966 -0.5798219
+	rotation = 0 -1 0 0
+	name = ExplosionBarrel_1
+}
+entity
+{
+	type = ExplosionBarrel
+	uin = 27
+	classPrompt = Dynamic
+	position = -24.56561 -22.69966 -0.5798219
+	rotation = 0 -1 0 0
+	name = ExplosionBarrel_6
+}
+entity
+{
+	type = Crane
+	uin = 28
+	classPrompt = Crane
+	intellectShouldDeleteAfterDetach = False
+	position = 0.5202246 -11.35032 24.038
+	name = Crane_1
+}
+entity
+{
+	type = Cart
+	uin = 29
+	classPrompt = Dynamic
+	position = 30.82965 -6.048874 1.462194
+	name = Cart_4
+}
+entity
+{
+	type = Cart
+	uin = 30
+	classPrompt = Dynamic
+	position = 30.89627 -17.34199 -1.652114
+	name = Cart_6
+}
+entity
+{
+	type = Cart
+	uin = 31
+	classPrompt = Dynamic
+	position = 31.13648 -10.87584 0.9514084
+	rotation = 0 0 0.998035 -0.06265889
+	name = Cart_8
+}
+entity
+{
+	type = Box
+	uin = 32
+	classPrompt = Dynamic
+	position = 32.98176 -16.73999 -1.949157
+	name = Box_1
+}
+entity
+{
+	type = Box
+	uin = 33
+	classPrompt = Dynamic
+	position = 32.37252 -13.84944 3.153992
+	name = Box_2
+}
+entity
+{
+	type = Box
+	uin = 34
+	classPrompt = Dynamic
+	position = 22.23841 -17.02629 3.230752
+	name = Box_3
+}
+entity
+{
+	type = Box
+	uin = 35
+	classPrompt = Dynamic
+	position = 36.0659 -17.95446 -1.468141
+	name = Box_12
+}
+entity
+{
+	type = Box
+	uin = 36
+	classPrompt = Dynamic
+	position = 31.51061 -18.64444 2.109486
+	name = Box_13
+}
+entity
+{
+	type = ExplosionBarrel
+	uin = 37
+	classPrompt = Dynamic
+	position = 24.31226 -18.37114 -1.451961
+	rotation = -0.6355914 0 0 0.7720256
+	name = ExplosionBarrel_7
+}
+entity
+{
+	type = ExplosionBarrel
+	uin = 38
+	classPrompt = Dynamic
+	position = 33.34071 -7.8501 1.339727
+	name = ExplosionBarrel_8
+}
+entity
+{
+	type = WindMill
+	uin = 39
+	classPrompt = Dynamic
+	position = 38.35769 -87.21743 7.678139
+	rotation = 0 0 -0.9560941 -0.2930599
+	name = WindMill_0
+}
+entity
+{
+	type = Cart
+	uin = 40
+	classPrompt = Dynamic
+	position = 7.846931 -47.58981 -3.895013
+	name = Cart_0
+}
+entity
+{
+	type = Cart
+	uin = 41
+	classPrompt = Dynamic
+	position = 26.3517 -36.66383 -3.994219
+	name = Cart_1
+}
+entity
+{
+	type = Cart
+	uin = 42
+	classPrompt = Dynamic
+	position = 19.28053 9.566113 4.05242
+	rotation = 0.1309093 0 0 0.9913943
+	name = Cart_2
+}
+entity
+{
+	type = Box
+	uin = 43
+	classPrompt = Dynamic
+	position = 1.704543 -39.59924 -3.214585
+	name = Box_0
+}
+entity
+{
+	type = Box
+	uin = 44
+	classPrompt = Dynamic
+	position = 3.276391 -39.08199 -3.141517
+	name = Box_4
+}
+entity
+{
+	type = ExplosionBarrel
+	uin = 45
+	classPrompt = Dynamic
+	position = 7.53001 -33.33747 -4.319454
+	rotation = 0 -0.7071068 0 0.7071068
+	name = ExplosionBarrel_9
+}
+entity
+{
+	type = WaterPlane
+	uin = 46
+	classPrompt = WaterPlane
+	size = 10000 10000
+	position = 0 -42 -4
+	segments = 20 20
+	renderQueueGroup = Queue3
+	reflectionLevel = ReflectAll
+	physicsHeight = 24
+	deepColor = 0 0.3019608 0.5019608
+	shallowColor = 0 1 1
+	reflectionColor = 1 1 1
+	reflectionTextureSize = HalfOfFrameBuffer
+	visible = True
+}
+entity
+{
+	type = ExplosionBarrel
+	uin = 47
+	classPrompt = Dynamic
+	position = -13.73126 -38.86529 -3.620016
+	rotation = 0 -1 0 0
+	name = ExplosionBarrel_10
+}
+entity
+{
+	type = Stone
+	uin = 48
+	classPrompt = MapObject
+	position = -25.26912 -66.48747 -2.942319
+	rotation = 0 0 -0.9835948 -0.1803918
+	scale = 1.253919 1 0.6896213
+	name = Stone_4
+}
+entity
+{
+	type = Stone
+	uin = 49
+	classPrompt = MapObject
+	position = -21.65176 -21.31283 -2.996737
+	scale = 1.681455 0.7678679 0.7278776
+	name = Stone_5
+}
+entity
+{
+	type = HeightmapTerrain
+	uin = 50
+	classPrompt = HeightmapTerrain
+	position = 0 0 -25
+	horizontalSize = 400
+	verticalSize = 100
+	dataDirectory = HeightmapTerrain
+	masksSize = 512
+	detailMapsDistance = 50
+	renderQueueGroup = WorldGeometry1
+	collisionMaterialName = Default
+	bottomClipHeight = -10000
+	castDynamicShadows = False
+	receiveStaticShadows = True
+	tileSize = 32
+	layers
+	{
+		item
+		{
+			name = base
+			baseMap = Maps\ConstructionsDemo\Resources\Textures\Grass_Diffuse.dds
+			baseScale = 8.514
+			detailScale = 2
+			normalMap = Maps\ConstructionsDemo\Resources\Textures\Grass_Normal.dds
+		}
+		item
+		{
+			name = second
+			baseMap = Maps\ConstructionsDemo\Resources\Textures\Sand_Diffuse.dds
+			baseScale = 14
+			detailScale = 2
+			normalMap = Maps\ConstructionsDemo\Resources\Textures\Sand_Normal.dds
+		}
+		item
+		{
+			name = rock
+			baseMap = Maps\ConstructionsDemo\Resources\Textures\Rock_Diffuse.dds
+			baseScale = 87
+			detailScale = 2
+			normalMap = Maps\ConstructionsDemo\Resources\Textures\Rock_Normal.dds
+		}
+	}
+}
+entity
+{
+	type = SkyDome
+	uin = 51
+	classPrompt = SkyDome
+	horizonMap = Types\Base\SkyDome\DefaultSkyDomeHorizon.png
+	color = 1 1 1
+	power = 1
+	diffuse1Map
+	{
+		texture = Types\Base\SkyDome\DefaultSkyDome.jpg
+		tiling = 5
+		scrollSpeed = -0.005 0
+	}
+	diffuse2Map
+	{
+		blending = Add
+		texture = Types\Base\SkyDome\DefaultSkyDome2.jpg
+		tiling = 4
+		scrollSpeed = -0.018 0
+	}
+	diffuse3Map
+	{
+		blending = Add
+		tiling = 10
+		scrollSpeed = 0 0
+	}
+	diffuse4Map
+	{
+		blending = Add
+		tiling = 10
+		scrollSpeed = 0 0
+	}
+}
+entity
+{
+	type = StaticMesh
+	uin = 52
+	classPrompt = StaticMesh
+	position = -8.978257 -95.52203 1.89699
+	rotation = 0 0 -0.7071068 0.7071068
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Models\CorridorExit\CorridorExit.mesh
+	splitGeometryPieceSize = 60 60 60
+	allowDecals = All
+	castDynamicShadows = True
+}
+entity
+{
+	type = DecorativeObjectManager
+	uin = 53
+	classPrompt = DecorativeObjectManager
+	visible = True
+	itemDataVersion = 2
+	typeItems
+	{
+		item
+		{
+			type = FlowerYellow
+			itemCount = 1649
+		}
+		item
+		{
+			type = FlowerWhite
+			itemCount = 681
+		}
+		item
+		{
+			type = GrassBrown
+			itemCount = 484
+		}
+		item
+		{
+			type = GrassGreen
+			itemCount = 11786
+		}
+	}
+}

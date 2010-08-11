@@ -1,0 +1,53 @@
+type Bug
+{
+	class = GameCharacter
+	optimalAttackDistanceRange = 0.3 2
+	idleAnimationName = idleAgressive
+	walkAnimationName = walkAgressive
+	height = 0.95
+	walkUpHeight = 0.1
+	walkMaxVelocity = 6
+	walkForce = 10000
+	flyControlMaxVelocity = 3
+	flyControlForce = 700
+	initialAI = DefaultGameCharacterAI
+	viewRadius = 40
+	fpsCameraOffset = 0.4 0 0.3
+	lifeMax = 30
+	targetPriority = 1
+	substance = Flesh
+	allowEditorCreate = True
+	networkType = Synchronized
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\Units\Bug\Bug.mesh
+			castDynamicShadows = True
+			position = 0 0 -0.52
+			scale = 0.2 0.2 0.2
+		}
+		mapObject
+		{
+			type = BugMeleeWeapon
+			position = 1 0 0
+		}
+		mapObject
+		{
+			type = BugJumpBlowMeleeWeapon
+		}
+	}
+	dieObjects
+	{
+		sound
+		{
+			soundName = Types\Units\Bug\Die.ogg
+		}
+		mapObject
+		{
+			type = BugDead
+			copyVelocitiesFromParent = True
+			position = 0 0 -0.24
+		}
+	}
+}

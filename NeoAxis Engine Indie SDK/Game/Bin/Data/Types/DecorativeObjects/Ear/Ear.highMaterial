@@ -1,0 +1,14 @@
+highLevelMaterial Ear
+{
+	template = VegetationMaterial
+	culling = False
+	useNormals = False
+	alphaRejectFunction = GreaterEqual
+	alphaToCoverage = True
+	fadingByDistanceRange = 55 65
+	receiveObjectsPositionsFromVertices = True
+	diffuse1Map
+	{
+		texture = Types\DecorativeObjects\Ear\Ear.dds
+	}
+}

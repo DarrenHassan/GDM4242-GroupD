@@ -1,0 +1,142 @@
+// Copyright (C) 2006-2010 NeoAxis Group Ltd.
+
+#include "Materials/Common/getFogValue.cg_hlsl"
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+void main_vp(
+	uniform float4x4 worldMatrix,
+	uniform float4x4 worldViewProjMatrix,
+
+	float4 position : POSITION,
+	float3 normal : NORMAL,
+	float2 texCoord0 : TEXCOORD0,
+
+	out float2 oTexCoord0 : TEXCOORD0,
+	out float3 oNormal : TEXCOORD1,
+
+#if LIGHT_COUNT >= 1
+	uniform float4 lightPositionArray[LIGHT_COUNT],
+	uniform float4 lightPositionObjectSpaceArray[LIGHT_COUNT],
+	uniform float4 lightAttenuationArray[LIGHT_COUNT],
+	uniform float4 spotLightParamsArray[LIGHT_COUNT],
+
+	out float4 oObjectLightDirectionAndAttenuation0 : TEXCOORD2,//direction - xyz, attenuation - w
+	#ifdef LIGHTTYPE_SPOT
+		out float3 oObjectWorldLightDirection0 : TEXCOORD3,
+	#endif
+#endif
+
+	out float4 oPosition : POSITION
+ 	)
+{
+	//Calculate base parameters
+	oPosition = mul(worldViewProjMatrix, position);
+	oTexCoord0.xy = texCoord0;
+	oNormal = normal;
+
+	float4 worldPosition = mul(worldMatrix, position);
+
+	//Light direction and attenuation
+#if LIGHT_COUNT >= 1
+{
+	float3 direction = lightPositionObjectSpaceArray[0].xyz - 
+		position.xyz * lightPositionObjectSpaceArray[0].w;
+	oObjectLightDirectionAndAttenuation0.xyz = direction;
+
+	#ifndef LIGHTTYPE_DIRECTIONAL
+		float distance = length(lightPositionArray[0].xyz - worldPosition.xyz);
+		oObjectLightDirectionAndAttenuation0.w = saturate(1 / (lightAttenuationArray[0].y +
+			lightAttenuationArray[0].z * distance + lightAttenuationArray[0].w * distance * distance));
+	#else
+		oObjectLightDirectionAndAttenuation0.w = 1;
+	#endif
+
+	#ifdef LIGHTTYPE_SPOT
+		oObjectWorldLightDirection0 = lightPositionArray[0].xyz - worldPosition.xyz;
+	#endif
+}
+#endif
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+void main_fp( 
+
+#ifdef AMBIENT_PASS
+	uniform half4 ambientLightColor,
+#endif
+
+#if LIGHT_COUNT >= 1
+	uniform half4 lightDiffuseColorPowerScaledArray[LIGHT_COUNT],
+#ifdef LIGHTTYPE_SPOT
+	uniform half4 lightDirectionArray[LIGHT_COUNT],
+	uniform half4 spotLightParamsArray[LIGHT_COUNT],
+#endif
+#endif
+
+	float2 texCoord0 : TEXCOORD0,
+	half3 normal : TEXCOORD1,
+
+#if LIGHT_COUNT >= 1
+	half4 objectLightDirectionAndAttenuation0 : TEXCOORD2,//direction - xyz, attenuation - w
+	#ifdef LIGHTTYPE_SPOT
+		half3 objectWorldLightDirection0 : TEXCOORD3,
+	#endif
+#endif
+
+#ifdef DIFFUSE_MAP
+	uniform sampler2D diffuseMap : register(s0),
+#endif
+
+	out half4 oColor : COLOR )
+{
+	half3 n = (half3)normalize(normal);
+
+	half3 lightColor = half3(0,0,0);
+	
+	//Calculate light color for ambient pass
+#ifdef AMBIENT_PASS
+	#ifdef LIGHTING
+		lightColor = ambientLightColor.rgb;
+	#else
+		lightColor = half3(1,1,1);
+	#endif
+#endif
+
+	//Calculate light color for light pass
+#if LIGHT_COUNT >= 1
+	half3 objectLightDirection0 = normalize(objectLightDirectionAndAttenuation0.xyz);
+	half objectLightAttenuation0 = objectLightDirectionAndAttenuation0.w;
+
+	#ifdef LIGHTTYPE_SPOT
+		// factor in spotlight angle
+		half rho0 = saturate(dot(-lightDirectionArray[0].xyz, normalize(objectWorldLightDirection0)));
+		// factor = (rho - cos(outer/2)) / (cos(inner/2) - cos(outer/2)) ^ falloff 
+		half spotFactor0 = saturate(pow(saturate(rho0 - spotLightParamsArray[0].y) / 
+			(spotLightParamsArray[0].x - spotLightParamsArray[0].y), spotLightParamsArray[0].z));
+		objectLightAttenuation0 *= spotFactor0;
+	#endif
+
+	half normalCoef0 = saturate(dot(n, objectLightDirection0));
+
+	lightColor += lightDiffuseColorPowerScaledArray[0].rgb * (objectLightAttenuation0 * normalCoef0);
+
+#endif
+
+	//Calculate pixel color
+	half4 color = half4(0,0,0,0);
+
+	//Diffuse
+	half4 diffuse;
+#ifdef DIFFUSE_MAP
+	diffuse = (half4)tex2D(diffuseMap, texCoord0);
+#else
+	diffuse = half4(1,1,1,1);
+#endif
+
+	color += diffuse * half4(lightColor, 1);
+
+	oColor = color;
+}

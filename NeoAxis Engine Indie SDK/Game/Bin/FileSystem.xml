@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FileSystem</name>
+    </assembly>
+    <members>
+        <member name="T:Engine.FileSystem.VirtualFileStream">
+            <summary>
+            Defines a file stream for virtual file system.
+            </summary>
+        </member>
+        <member name="M:Engine.FileSystem.VirtualFileSystem.CorrectCurrentDirectory">
+            <summary>
+            Reset the current directory of the application.
+            </summary>
+        </member>
+        <member name="M:Engine.FileSystem.VirtualFileSystem.GetVirtualPathByReal(System.String)">
+            <summary>
+            Converts a file path of real file system to path of virtual file system.
+            </summary>
+            <param name="realPath">The real file path.</param>
+            <returns>The virtual file path.</returns>
+        </member>
+        <member name="M:Engine.FileSystem.VirtualFileSystem.GetRealPathByVirtual(System.String)">
+            <summary>
+            Converts a file path of virtual file system to path of real file system.
+            </summary>
+            <param name="virtualPath">The virtual file path.</param>
+            <returns>The real file path.</returns>
+        </member>
+        <member name="T:Engine.FileSystem.VirtualFile">
+            <summary>
+            Defines a file for virtual file system.
+            </summary>
+        </member>
+        <member name="M:Engine.FileSystem.VirtualFile.Exists(System.String)">
+            <summary>
+            Determines whether the specified file exists. 
+            </summary>
+            <param name="path">The file to check.</param>
+            <returns><b>true</b> if the file is exists; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="T:Engine.FileSystem.VirtualDirectory">
+            <summary>
+            Defines a directory for virtual file system.
+            </summary>
+        </member>
+        <member name="M:Engine.FileSystem.VirtualDirectory.Exists(System.String)">
+            <summary>
+            Determines whether the given path refers to an existing directory on virtual file system.
+            </summary>
+            <param name="path">The path to test.</param>
+            <returns><b>true</b> if the directory is exists; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Engine.FileSystem.VirtualDirectory.GetFiles(System.String)">
+            <summary>
+            Returns the names of files in the specified directory.  
+            </summary>
+            <param name="path">The directory from which to retrieve the files.</param>
+            <returns>A <b>String</b> array of file names in the specified directory.</returns>
+        </member>
+        <member name="M:Engine.FileSystem.VirtualDirectory.GetFiles(System.String,System.String)">
+            <summary>
+            Returns the names of files in the specified directory that match the specified 
+            search pattern.  
+            </summary>
+            <param name="path">The directory from which to retrieve the files.</param>
+            <param name="searchPattern">
+            The search string to match against the names of files in path. The parameter
+            cannot end in two periods ("..") or contain two periods ("..") followed by
+            System.IO.Path.DirectorySeparatorChar or System.IO.Path.AltDirectorySeparatorChar,
+            nor can it contain any of the characters in System.IO.Path.InvalidPathChars.
+            </param>
+            <returns>
+            A <b>String</b> array containing the names of files in the specified directory 
+            that match the specified search pattern.
+            </returns>
+        </member>
+        <member name="M:Engine.FileSystem.VirtualDirectory.GetFiles(System.String,System.String,System.IO.SearchOption)">
+            <summary>
+            Returns the names of files in the specified directory that match the specified 
+            search pattern, using a value to determine whether to search subdirectories.
+            </summary>
+            <param name="path">The directory from which to retrieve the files.</param>
+            <param name="searchPattern">
+            The search string to match against the names of files in path. The parameter
+            cannot end in two periods ("..") or contain two periods ("..") followed by
+            System.IO.Path.DirectorySeparatorChar or System.IO.Path.AltDirectorySeparatorChar,
+            nor can it contain any of the characters in System.IO.Path.InvalidPathChars.
+            
+            </param>
+            <param name="searchOption">
+            One of the System.IO.SearchOption values that specifies whether the search
+            operation should include all subdirectories or only the current directory.
+            </param>
+            <returns>
+            A <b>String</b> array containing containing the names of files in the 
+            specified directory that match the specified search pattern.
+            </returns>
+        </member>
+        <member name="M:Engine.FileSystem.VirtualDirectory.GetDirectories(System.String)">
+            <summary>
+            Gets the names of subdirectories in the specified directory.
+            </summary>
+            <param name="path">The path for which an array of subdirectory names is returned.</param>
+            <returns>An array of type <b>String</b> containing the names of subdirectories in path.</returns>
+        </member>
+        <member name="M:Engine.FileSystem.VirtualDirectory.GetDirectories(System.String,System.String)">
+            <summary>
+            Gets an array of directories matching the specified search pattern from the 
+            current directory.
+            </summary>
+            <param name="path">The path to search.</param>
+            <param name="searchPattern">
+            The search string to match against the names of files in path. The parameter cannot 
+            end in two periods ("..") or contain two periods ("..") followed by 
+            DirectorySeparatorChar or AltDirectorySeparatorChar, nor can it contain any 
+            of the characters in InvalidPathChars.
+            </param>
+            <returns>
+            A <b>String</b> array of directories matching the search pattern. 
+            </returns>
+        </member>
+        <member name="M:Engine.FileSystem.VirtualDirectory.GetDirectories(System.String,System.String,System.IO.SearchOption)">
+            <summary>
+            Gets an array of directories matching the specified search pattern from the 
+            current directory, using a value to determine whether to search subdirectories. 
+            </summary>
+            <param name="path">The path to search.</param>
+            <param name="searchPattern">
+            The search string to match against the names of files in path. The parameter 
+            cannot end in two periods ("..") or contain two periods ("..") followed by 
+            DirectorySeparatorChar or AltDirectorySeparatorChar, nor can it contain any 
+            of the characters in InvalidPathChars.
+            </param>
+            <param name="searchOption">
+            One of the SearchOption values that specifies whether the search operation 
+            should include all subdirectories or only the current directory.
+            </param>
+            <returns>
+            A <b>String</b> array of directories matching the search pattern. 
+            </returns>
+        </member>
+        <member name="M:Engine.FileSystem.Archives.Archive.Dispose">
+            <summary>Releases the resources that are used by the object.</summary>
+        </member>
+    </members>
+</doc>

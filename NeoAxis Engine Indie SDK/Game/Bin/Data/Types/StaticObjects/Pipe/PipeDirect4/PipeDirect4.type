@@ -1,0 +1,16 @@
+type PipeDirect4
+{
+	class = MapObject
+	allowEditorCreate = True
+	allowEmptyName = False
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = "Types\\StaticObjects\\Pipe\\PipeDirect4\\PipeDirect4.mesh"
+			castShadows = True
+			toCollision = True
+			scale = "0.005 0.005 0.005"
+		}
+	}
+}

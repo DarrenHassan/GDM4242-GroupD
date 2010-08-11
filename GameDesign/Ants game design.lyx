@@ -1,0 +1,569 @@
+#LyX 1.6.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\language british
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Ants Game Design
+\end_layout
+
+\begin_layout Author
+Darren Hassan
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+This document will describe a design for the game 
+\emph on
+Ants
+\emph default
+ (this title is only a suggestion).
+ Ants is a 
+\emph on
+Real Time Strategy
+\emph default
+ (RTS) game, in a similar mold to such titles as 
+\emph on
+The Age of Empire
+\emph default
+ or 
+\emph on
+The Settlers
+\emph default
+ series.
+ 
+\end_layout
+
+\begin_layout Standard
+You play as the queen of an ant colony.
+ As queen, you have complete control of the colony, and its development.
+ You can choose between creating several different types of ants (described
+ below), which serve the colony in different ways.
+ It is your task to coordinates the colony's units, while balancing competing
+ demands, to achieve a goal.
+ 
+\end_layout
+
+\begin_layout Standard
+Ants is a three-dimensional game, played from an aerial perspective; in
+ a similar style to the NeoAxis RTS Demo.
+\end_layout
+
+\begin_layout Section
+Setting
+\end_layout
+
+\begin_layout Standard
+Ants will be played in two modes.
+ 
+\emph on
+Conquest
+\emph default
+ mode is played on a randomly generated map where the objective of the game
+ is to defeat all enemies.
+ The 
+\emph on
+puzzle
+\emph default
+ mode of play will be where a specific objective must be achieved, such
+ as navigating your queen across some sort of obstacle, such as a rivulet.
+ 
+\end_layout
+
+\begin_layout Section
+Game play
+\end_layout
+
+\begin_layout Standard
+All games initially start with a nursery, several builder and forager ants.
+ The nursery is where you, the queen lives, it is the only building that
+ cannot be replaced.
+ Destroying a colony's nursery results in the death of the queen and the
+ destruction of the colony.
+ 
+\end_layout
+
+\begin_layout Section
+Maps
+\end_layout
+
+\begin_layout Standard
+Maps will consist of different types of terrain.
+ The map will initially be blackened, except for a small area around the
+ nursery.
+ The map will be revealed as ants from your colony explore.
+ If an area of the map has not been explored by an ant from your colony
+ for a certain amount of time it will become grey and eventually black again.
+ While the map is blackened its state can change, for example, an area of
+ the map that had previously contained a food source could be replaced by
+ a human foot print when next revealed.
+ Characteristics common to all maps will include:
+\end_layout
+
+\begin_layout Itemize
+Squares where ants cannot enter, such as steep gradients.
+\end_layout
+
+\begin_layout Itemize
+Squares where ants can enter, but entry will result in the ants death, such
+ as water.
+\end_layout
+
+\begin_layout Itemize
+Food sources that the ants can harvest to produce energy.
+\end_layout
+
+\begin_layout Itemize
+Building material sources that the ants can collect to construct new buildings.
+\end_layout
+
+\begin_layout Standard
+Weather will also be associated with each type of terrain.
+ Tropical terrains will frequently have rain, which causes the map to change
+ by creating new rivulets and water bodies, which could cause buildings
+ or ants in shallow regions to be drowned.
+\end_layout
+
+\begin_layout Section
+Generic Ant Characteristics
+\end_layout
+
+\begin_layout Standard
+All ants will have such attributes as:
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+cost
+\emph default
+: the energy required to create an ant.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+health
+\emph default
+: the individual ant's health, which when equal to zero results in the ant's
+ destruction.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\emph on
+intelligence
+\emph default
+: the individual ant's ability to reason about problems, such as navigating
+ around obstacles.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+strength
+\emph default
+: the ant's propensity to work, capacity to carry stuff.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+vision
+\emph default
+:
+\emph on
+ 
+\emph default
+the distance an ant can see.
+ Vision relates to the ant's ability to detect percepts in its surroundings.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+directional sense
+\emph default
+: the propensity for an ant to move in the direction in which it is commanded.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+pheromone intensity
+\emph default
+: the concentration of pheromone an ant lays when moving.
+\end_layout
+
+\begin_layout Subsection
+Ant movement
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Ant-paths"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ants remain stationary until they are issued a command to move.
+ Ants decide on a direction to move by a combination of directional sense
+ and pheromone intensity.
+ An isolated ant, one where the intensity of pheromone around it is zero,
+ will move in the intended direction with a certain probability proportional
+ to its directional sense.
+\end_layout
+
+\begin_layout Standard
+When ants move they lay pheromones (in varying quantities) on the ground,
+ thus marking a path by a trail of pheromones.
+ Pheromone continually evaporates at the same rate across the map.
+ For an ant to detect a trail it must have been traversed by an ant within
+ a certain amount of time.
+ An ant encountering a previously laid pheromone trail can detect and decide
+ with high probability to follow it, thus reinforcing the trail with its
+ own pheromones.
+ The more the ants follow a trail, the more attractive that trail becomes
+ and the more ants follow it.
+ The probability of an ant following a path increases with the number of
+ ants that have previously traversed the path.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename antPath.png
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+An example of real ants.
+ (a) Ants follow a path between point A and E.
+ (b) An obstacle is introduced; ants can choose to go around it following
+ one of the two different paths with equal probability.
+ (c) On the shorter path more pheromone is laid down 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-1"
+
+\end_inset
+
+.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:antPath"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Assume there is a path along which ants are walking, from the nest at A
+ to a food source at E, and visa verse (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:antPath"
+
+\end_inset
+
+ (a)).
+ If an obstacle suddenly appears on that path, the ants will be cut-off
+ from the pheromone trail.
+ At position B, the ants walking from A to E have to decide whether to turn
+ right or left (Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:antPath"
+
+\end_inset
+
+ (b)).
+ The choice is influenced by the intensity of the pheromone trail.
+ The first ant to encounter the obstacle will have an equal probability
+ of turning right or left, as there is no pheromone on either path.
+ Because path BCD is shorter than path BHD, the first ant following it will
+ reach D before the first ant following BHD (Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:antPath"
+
+\end_inset
+
+ (c)).
+ The result is that an ant returning from E to D will find a stronger trail
+ on path DCB, causing it to favour this path.
+ The quantity of pheromone on the shorter path will grow faster than on
+ the longer one.
+ The probability with which any single ant chooses the path to follow is
+ quickly biased towards the shorter one, until eventually all ants choose
+ the short path because all the pheromone would have evaporated from the
+ longer path.
+ 
+\end_layout
+
+\begin_layout Section
+Ant Guilds
+\end_layout
+
+\begin_layout Standard
+You can choose between creating ants from several different guilds.
+ With more energy and time better ants from each guild can be created.
+ Ant guilds include:
+\end_layout
+
+\begin_layout Subsection
+Foragers
+\end_layout
+
+\begin_layout Standard
+Forage ants can be sent out across the map to collect the raw materials
+ needed by the colony, such as food and building materials.
+ Foragers are cheap to create and are able to carry several times their
+ own weight in raw material.
+ 
+\end_layout
+
+\begin_layout Standard
+Forager ants can be issued commands to collect raw material, by selecting
+ one or more forager ants, clicking the 
+\emph on
+collect
+\emph default
+ button and then clicking on the raw material to be foraged.
+ The forager ants will then navigate a path to the raw material, as described
+ in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Ant-paths"
+
+\end_inset
+
+, collect a certain quantity depending on their strength and then follow
+ the same path to the storage building where they will deposit their raw
+ material.
+ The Foragers will then continually repeat these steps until all the raw
+ material has been collected.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename HoneyAnt.jpg
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The honey ant; improved foragers could resemble this ant.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:HoneyAnt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As the game progresses better foragers can be created.
+ Improved foragers are able to see further and thus navigate more direct
+ paths to raw material.
+ Improved foragers can also carry more stuff, such as the
+\emph on
+ 
+\emph default
+Honey ant (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:HoneyAnt"
+
+\end_inset
+
+), and therefore take less time to deplete the raw materials.
+\end_layout
+
+\begin_layout Subsection
+Warriors
+\end_layout
+
+\begin_layout Standard
+There are several different warrior ants that can be used to do battle against
+ rival colonies.
+ Ants generally fight other ants with 'hand-to-hand' or 'pincer-to-pincer'
+ combat.
+ Warrior ants are robust units, however they have low intellect.
+ Warrior ants can be directed towards an enemy, they will then march in
+ single file towards the energy and fight pincer-to-pincer to the death.
+ 
+\end_layout
+
+\begin_layout Standard
+As the game progresses better warriors can be created.
+ Improved warriors can move more quickly and are more effective killers.
+ 
+\end_layout
+
+\begin_layout Subsection
+Builders
+\end_layout
+
+\begin_layout Standard
+Builder ants use the building materials collected by foragers to construct
+ new building.
+ Examples of the type of buildings that can be built include:
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Defences
+\emph default
+, such as walls and watch towers that can be used to protect the colony
+ from predators, other colonies.
+\end_layout
+
+\begin_layout Itemize
+A 
+\emph on
+storage building
+\emph default
+, that are need to store building supplies and food.
+ A storage building allows the colony to collect a positive balance of energy
+ that decreases very slowly, whereas without a food storage building the
+ colony's energy decreases more rapidly.
+ 
+\end_layout
+
+\begin_layout Itemize
+A 
+\emph on
+barracks
+\emph default
+ for housing and training warrior ants.
+ 
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-1"
+
+\end_inset
+
+ An System: Optimization by a Colony of Cooperating Agents.
+ Marco Dorigo, Vittorio Maniezzo, and Alberto Colorni.
+ IEEE Transactions On Systems, Man, And Cybernetica-Part B: Cybernetics.
+ Vol.
+ 26, No.
+ 1, February 1996.
+\end_layout
+
+\end_body
+\end_document

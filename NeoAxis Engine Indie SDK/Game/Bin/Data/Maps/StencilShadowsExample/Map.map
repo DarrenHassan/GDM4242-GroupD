@@ -1,0 +1,272 @@
+type = GameMap
+uin = 2
+classPrompt = GameMap
+relationships = 5
+gameMusic = Sounds\Music\Game.ogg
+ambientLight = 0.2 0.2 0.2
+editorCameraPosition = 24.03858 -67.98539 12.24969
+editorCameraDirection = 1.853472 -0.7427629
+shadowColor = 1 1 1
+logicSystemManager = 3
+logicClass = 5
+shadowTechnique = Stencil
+rootEditorLayer
+{
+}
+entity
+{
+	type = LogicSystemManager
+	uin = 3
+	mapClassManager = 4
+	entity
+	{
+		type = LogicClassManager
+		uin = 4
+		entity
+		{
+			type = LogicEntityClass
+			uin = 5
+			relationships = 2
+			entityClassName = GameMap
+			className = GameMap
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicVariable
+				uin = 6
+				variableType = System.Boolean
+				variableName = enableStencilShadowsChecked
+				supportSerialization = False
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 7
+				code = "if(!enableStencilShadowsChecked)\r\n{\r\n\tenableStencilShadowsChecked = true;\r\n\r\n\tif(!EngineApp.Instance.IsMapEditor)\r\n\t{\r\n\t\tif(!SceneManager.Instance.IsShadowTechniqueStencilBased())\r\n\t\t{\r\n\t\t\tLog.Warning(\"You should enable stencil shadows for this map in the Options.\");\r\n\t\t}\r\n\t}\r\n}\r\n"
+				methodName = Tick
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = True
+			}
+		}
+	}
+}
+entity
+{
+	type = HeightmapTerrain
+	uin = 8
+	classPrompt = HeightmapTerrain
+	position = 0 0 -50
+	horizontalSize = 300
+	verticalSize = 100
+	dataDirectory = HeightmapTerrain
+	masksSize = 512
+	detailMapsDistance = 50
+	renderQueueGroup = WorldGeometry1
+	collisionMaterialName = Default
+	bottomClipHeight = -10000
+	castDynamicShadows = False
+	receiveStaticShadows = True
+	simpleRendering = False
+	tileSize = 16
+	layers
+	{
+		item
+		{
+			name = base
+			baseMap = Types\Base\HeightmapTerrain\DefaultLayer1Base.jpg
+			baseScale = 10
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
+			detailScale = 2
+		}
+	}
+}
+entity
+{
+	type = Light
+	uin = 9
+	classPrompt = Light
+	lightType = Spot
+	diffuseColor = 1 1 1
+	diffusePower = 1
+	specularColor = 1 1 1
+	specularPower = 1
+	attenuationRangeAutomatic = True
+	attenuationRange = Infinity
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0
+	spotlightInnerAngle = 30
+	spotlightOuterAngle = 40
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	allowDynamicLighting = True
+	position = 4.105104 -41.62447 10.36729
+	rotation = 0.08020156 0.337636 -0.2167454 0.9124642
+	name = Light_0
+}
+entity
+{
+	type = Light
+	uin = 10
+	classPrompt = Light
+	lightType = Directional
+	diffuseColor = 1 1 1
+	diffusePower = 1
+	specularColor = 1 1 1
+	specularPower = 1
+	attenuationRangeAutomatic = True
+	attenuationRange = Infinity
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0
+	spotlightInnerAngle = 30
+	spotlightOuterAngle = 40
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	allowDynamicLighting = True
+	position = 14.87209 -2.054343 33.04127
+	rotation = -0.2507559 0.9246386 0.07502604 0.2766514
+	name = Light_1
+}
+entity
+{
+	type = Box
+	uin = 11
+	classPrompt = Dynamic
+	position = 16.74537 -50.43751 0.4992015
+	name = Box_0
+}
+entity
+{
+	type = Box
+	uin = 12
+	classPrompt = Dynamic
+	position = 22.47491 -50.43751 0.4992015
+	name = Box_1
+}
+entity
+{
+	type = SpawnPoint
+	uin = 13
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = 18.61594 -65.91245 0.03979263
+	rotation = 0 0 0.7363312 0.6766213
+	name = SpawnPoint_0
+}
+entity
+{
+	type = Box
+	uin = 14
+	classPrompt = Dynamic
+	position = 15.09368 -48.31352 0.4992015
+	name = Box_2
+}
+entity
+{
+	type = Box
+	uin = 15
+	classPrompt = Dynamic
+	position = 20.82323 -48.31352 0.4992015
+	name = Box_3
+}
+entity
+{
+	type = Box
+	uin = 16
+	classPrompt = Dynamic
+	position = 12.40461 -45.87033 0.4992015
+	name = Box_4
+}
+entity
+{
+	type = Box
+	uin = 17
+	classPrompt = Dynamic
+	position = 18.13416 -45.87033 0.4992015
+	name = Box_5
+}
+entity
+{
+	type = SkyDome
+	uin = 18
+	classPrompt = SkyDome
+	horizonMap = Types\Base\SkyDome\DefaultSkyDomeHorizon.png
+	color = 1 1 1
+	power = 1
+	diffuse1Map
+	{
+		texture = Types\Base\SkyDome\DefaultSkyDome2.jpg
+		tiling = 5
+		scrollSpeed = 0.005 0
+	}
+	diffuse2Map
+	{
+		blending = Add
+		tiling = 4
+		scrollSpeed = 0.018 0
+	}
+	diffuse3Map
+	{
+		blending = Add
+		tiling = 10
+		scrollSpeed = 0 0
+	}
+	diffuse4Map
+	{
+		blending = Add
+		tiling = 10
+		scrollSpeed = 0 0
+	}
+}
+entity
+{
+	type = Box
+	uin = 19
+	classPrompt = Dynamic
+	position = 22.47491 -39.43406 0.4992015
+	name = Box_6
+}
+entity
+{
+	type = Box
+	uin = 20
+	classPrompt = Dynamic
+	position = 20.82323 -37.31007 0.4992015
+	name = Box_7
+}
+entity
+{
+	type = Box
+	uin = 21
+	classPrompt = Dynamic
+	position = 18.13416 -34.86689 0.4992015
+	name = Box_8
+}
+entity
+{
+	type = Ball
+	uin = 22
+	classPrompt = Dynamic
+	position = 15.84001 -52.30041 0.502058
+	name = Ball_0
+}
+entity
+{
+	type = SubmachineGunItem
+	uin = 23
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = 18.85531 -60.97037 0.4301796
+}
+entity
+{
+	type = ShotgunItem
+	uin = 24
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = 22.74154 -60.77768 0.3491045
+}

@@ -1,0 +1,64 @@
+
+#ignore thumbnails created by windows
+#Thumbs.db
+#Ignore files built by Visual Studio
+
+*.obj
+##### *.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+### [Bb]in  # Causes issues with NeoAxis Game/Bin
+[Dd]ebug*/
+*.lib
+*.sbr
+obj/
+[Rr]elease*/
+_ReSharper*/
+[Tt]est[Rr]esult*
+*.vshost.exe
+
+*StaticMeshCache*
+*LogicSystemCache*
+
+#_LogicSystemCache/
+_Temp/
+*.shaderCache
+*.orig
+
+### If you'll generally recompile often, consider ignoring .dll and .exe's 
+
+## /NeoAxis Engine Indie SDK/Game/Bin/GameCommon.dll
+## /NeoAxis Engine Indie SDK/Game/Bin/GameEntities.dll
+## /NeoAxis Engine Indie SDK/Game/Bin/WindowsAppFramework.dll
+## /NeoAxis Engine Indie SDK/Game/Bin/Game.exe
+
+
+### Ignoring the xml's means each person has their own settings.
+### Comment these if everyone should have the same settings.
+/NeoAxis Engine Indie SDK/Game/Bin/ChatExample.xml
+/NeoAxis Engine Indie SDK/Game/Bin/DedicatedServer.xml
+/NeoAxis Engine Indie SDK/Game/Bin/Game.xml
+/NeoAxis Engine Indie SDK/Game/Bin/GameCommon.xml
+/NeoAxis Engine Indie SDK/Game/Bin/GameEntities.xml
+
+/NeoAxis Engine Indie SDK/Game/Src/ChatExample/ChatExample.xml
+/NeoAxis Engine Indie SDK/Game/Src/DedicatedServer/DedicatedServer.xml
+/NeoAxis Engine Indie SDK/Game/Src/Game/Game.xml
+/NeoAxis Engine Indie SDK/Game/Src/GameCommon/GameCommon.xml
+/NeoAxis Engine Indie SDK/Game/Src/GameEntities/GameEntities.xml
+/NeoAxis Engine Indie SDK/Game/Src/UpgradeLog.XML
+
+/NeoAxis Engine Indie SDK/Game/Bin/UserSettings

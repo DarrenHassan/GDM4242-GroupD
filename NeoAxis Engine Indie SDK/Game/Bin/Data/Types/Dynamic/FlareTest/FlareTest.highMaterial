@@ -1,0 +1,13 @@
+highLevelMaterial FlareTest
+{
+	template = ShaderBaseMaterial
+	blending = AlphaAdd
+	lighting = False
+	receiveShadows = False
+	diffuseVertexColor = True
+	diffuse1Map
+	{
+		texture = Types\Dynamic\FlareTest\FlareTest.jpg
+		clamp = True
+	}
+}

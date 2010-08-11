@@ -1,0 +1,24 @@
+type RobotBullet
+{
+	class = Bullet
+	velocity = 200
+	damage = 6
+	impulse = 100
+	lifeTime = 1
+	networkType = Synchronized
+	attachedObjects
+	{
+		billboard
+		{
+			materialName = ItemParticle
+			size = 2 2
+		}
+	}
+	dieObjects
+	{
+		particle
+		{
+			particleName = RobotBulletHit
+		}
+	}
+}

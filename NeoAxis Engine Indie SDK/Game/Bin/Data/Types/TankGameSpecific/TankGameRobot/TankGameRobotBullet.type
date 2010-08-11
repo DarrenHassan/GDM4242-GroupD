@@ -1,0 +1,29 @@
+type TankGameRobotBullet
+{
+	class = Bullet
+	velocity = 200
+	damage = 12
+	impulse = 100
+	lifeTime = 1
+	networkType = Synchronized
+	attachedObjects
+	{
+		billboard
+		{
+			materialName = ItemParticle
+			size = 2 2
+		}
+	}
+	dieObjects
+	{
+		particle
+		{
+			particleName = RobotBulletHit
+		}
+		sound
+		{
+			soundName = Types\TankGameSpecific\TankGameRobot\TankGameRobotBulletHit.ogg
+			priority = 0.3
+		}
+	}
+}

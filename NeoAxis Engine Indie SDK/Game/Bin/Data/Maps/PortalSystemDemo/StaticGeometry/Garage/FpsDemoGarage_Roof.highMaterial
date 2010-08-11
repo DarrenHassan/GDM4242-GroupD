@@ -1,0 +1,8 @@
+highLevelMaterial FpsDemoGarage/Roof
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Maps\PortalSystemDemo\StaticGeometry\Garage\Roof.dds
+	}
+}

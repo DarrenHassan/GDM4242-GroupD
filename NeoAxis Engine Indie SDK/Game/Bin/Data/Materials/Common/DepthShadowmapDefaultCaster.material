@@ -1,0 +1,85 @@
+
+vertex_program DepthShadowmapDefaultCasterVP_hlsl hlsl
+{
+	source Materials\Common\DepthShadowmapDefaultCaster.cg_hlsl
+	entry_point shadowCaster_vp
+	target vs_2_0
+	preprocessor_defines INSTANCING
+
+	default_params
+	{
+		param_named_auto worldMatrix world_matrix
+		param_named_auto viewProjMatrix viewproj_matrix
+		param_named_auto texelOffsets texel_offsets
+		param_named_auto instancing instancing
+	}
+}
+
+vertex_program DepthShadowmapDefaultCasterVP_cg cg
+{
+	source Materials\Common\DepthShadowmapDefaultCaster.cg_hlsl
+	entry_point shadowCaster_vp
+	profiles arbvp1
+	
+	default_params
+	{
+		param_named_auto worldMatrix world_matrix
+		param_named_auto viewProjMatrix viewproj_matrix
+		param_named_auto texelOffsets texel_offsets
+	}
+}
+
+fragment_program DepthShadowmapDefaultCasterFP_hlsl hlsl
+{
+	source Materials\Common\DepthShadowmapDefaultCaster.cg_hlsl
+	entry_point shadowCaster_fp
+	target ps_2_0
+
+	default_params
+	{
+		param_named_auto farClipDistance far_clip_distance
+	}
+}
+
+fragment_program DepthShadowmapDefaultCasterFP_cg cg
+{
+	source Materials\Common\DepthShadowmapDefaultCaster.cg_hlsl
+	entry_point shadowCaster_fp
+	profiles arbfp1
+	
+	default_params
+	{
+		param_named_auto farClipDistance far_clip_distance
+	}
+}
+
+vertex_program DepthShadowmapDefaultCasterVP unified
+{
+	delegate DepthShadowmapDefaultCasterVP_hlsl
+	delegate DepthShadowmapDefaultCasterVP_cg
+}
+
+fragment_program DepthShadowmapDefaultCasterFP unified
+{
+	delegate DepthShadowmapDefaultCasterFP_hlsl
+	delegate DepthShadowmapDefaultCasterFP_cg
+}
+
+
+material DepthShadowmapDefaultCaster
+{
+	technique
+	{
+		pass
+		{
+			fog_override true none
+
+			vertex_program_ref DepthShadowmapDefaultCasterVP
+			{
+			}
+			fragment_program_ref DepthShadowmapDefaultCasterFP
+			{
+			}
+		}
+	}
+}

@@ -1,0 +1,8 @@
+highLevelMaterial RTSMine2
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Types\RTSSpecific\Units\RTSMine\RTSMine2.dds
+	}
+}

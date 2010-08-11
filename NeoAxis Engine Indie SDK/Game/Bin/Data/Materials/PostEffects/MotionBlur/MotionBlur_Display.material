@@ -1,0 +1,20 @@
+material Compositor/MotionBlur/Display
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_check off
+
+			texture_unit
+			{
+				//texture Sum
+				tex_address_mode clamp
+				filtering linear linear none
+				colour_op replace
+				tex_coord_set 0
+			}
+		}
+	}
+}

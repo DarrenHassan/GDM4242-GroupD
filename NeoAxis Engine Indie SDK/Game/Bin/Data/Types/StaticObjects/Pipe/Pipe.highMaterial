@@ -1,0 +1,8 @@
+highLevelMaterial Pipe
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Types\StaticObjects\Pipe\Pipe.dds
+	}
+}

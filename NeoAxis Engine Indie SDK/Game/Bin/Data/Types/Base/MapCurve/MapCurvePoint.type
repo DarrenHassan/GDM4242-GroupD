@@ -1,0 +1,14 @@
+type MapCurvePoint
+{
+	class = MapCurvePoint
+	allowEmptyName = True
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\Base\InvisiblePoint.mesh
+			scale = "0.5 0.5 0.5"
+			onlyForEditor = True
+		}
+	}
+}

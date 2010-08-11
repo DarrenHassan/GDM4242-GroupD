@@ -1,0 +1,26 @@
+type RTSRobotBullet
+{
+	class = Bullet
+	velocity = 200
+	lifeTime = 1
+	damage = 6
+	networkType = Network
+	influenceSlotNames
+	{
+	}
+	attachedObjects
+	{
+		billboard
+		{
+			materialName = ItemParticle
+			size = "2 2"
+		}
+	}
+	dieObjects
+	{
+		particle
+		{
+			particleName = RTSRobotBulletHit
+		}
+	}
+}

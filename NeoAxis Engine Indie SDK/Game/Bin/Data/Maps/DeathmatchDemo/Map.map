@@ -1,0 +1,426 @@
+type = GameMap
+uin = 2
+classPrompt = GameMap
+gameMusic = Sounds\Music\Game.ogg
+ambientLight = 0.4980392 0.4980392 0.4980392
+editorCameraPosition = -19.78045 10.14798 82.60657
+editorCameraDirection = 4.977115 -0.4056359
+shadowTechnique = ShadowmapHigh
+shadowColor = 0.6 0.6 0.6 0.6
+shadowFarDistance = 50
+fov = 80
+logicSystemManager = 3
+rootEditorLayer
+{
+}
+entity
+{
+	type = LogicSystemManager
+	uin = 3
+	mapClassManager = 4
+	entity
+	{
+		type = LogicClassManager
+		uin = 4
+	}
+}
+entity
+{
+	type = HeightmapTerrain
+	uin = 5
+	classPrompt = HeightmapTerrain
+	position = 0 0 0
+	horizontalSize = 200
+	verticalSize = 100
+	dataDirectory = HeightmapTerrain
+	masksSize = 512
+	detailMapsDistance = 50
+	renderQueueGroup = WorldGeometry1
+	collisionMaterialName = Default
+	bottomClipHeight = -10000
+	castDynamicShadows = False
+	tileSize = 32
+	layers
+	{
+		item
+		{
+			name = base
+			baseMap = Maps\DeathmatchDemo\Resources\Textures\Grass_Diffuse.dds
+			baseScale = 8.514
+			detailScale = 2
+			normalMap = Maps\DeathmatchDemo\Resources\Textures\Grass_Normal.dds
+		}
+		item
+		{
+			name = second
+			baseMap = Maps\DeathmatchDemo\Resources\Textures\Sand_Diffuse.dds
+			baseScale = 14
+			detailScale = 2
+			normalMap = Maps\DeathmatchDemo\Resources\Textures\Sand_Normal.dds
+		}
+		item
+		{
+			name = rock
+			baseMap = Maps\DeathmatchDemo\Resources\Textures\Rock_Diffuse.dds
+			baseScale = 87
+			detailScale = 2
+			normalMap = Maps\DeathmatchDemo\Resources\Textures\Rock_Normal.dds
+		}
+	}
+}
+entity
+{
+	type = Turret
+	uin = 6
+	classPrompt = Turret
+	intellectShouldDeleteAfterDetach = False
+	position = 31.37016 -31.45882 80.45798
+	name = Turret_0
+}
+entity
+{
+	type = Turret
+	uin = 7
+	classPrompt = Turret
+	intellectShouldDeleteAfterDetach = False
+	position = 40.76417 -29.883 79.25415
+	name = Turret_1
+}
+entity
+{
+	type = SpawnPoint
+	uin = 8
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = 58.40179 64.146 51.76527
+	rotation = 0 0 0.9830459 -0.1833598
+	name = SpawnPoint_1
+}
+entity
+{
+	type = SpawnPoint
+	uin = 9
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = -68.7066 56.60793 52.68572
+	name = SpawnPoint_2
+}
+entity
+{
+	type = SpawnPoint
+	uin = 10
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = -62.64821 -34.63216 49.24654
+	editorAlignmentMethod = ByBounds
+	name = SpawnPoint_3
+}
+entity
+{
+	type = SpawnPoint
+	uin = 11
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = 52.42757 -65.69279 51.72504
+	editorAlignmentMethod = ByBounds
+	name = SpawnPoint_4
+}
+entity
+{
+	type = SpawnPoint
+	uin = 12
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = 10.26105 -3.525305 54.12041
+	editorAlignmentMethod = ByBounds
+	name = SpawnPoint_5
+}
+entity
+{
+	type = SubmachineGunItem
+	uin = 13
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = -58.72236 -36.33689 49.68262
+	editorAlignmentMethod = ByBounds
+}
+entity
+{
+	type = SubmachineGunItem
+	uin = 14
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = 55.50576 -65.13466 52.29303
+	editorAlignmentMethod = ByBounds
+}
+entity
+{
+	type = SubmachineGunItem
+	uin = 15
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = 10.97662 1.18576 54.44903
+	editorAlignmentMethod = ByBounds
+}
+entity
+{
+	type = SubmachineGunItem
+	uin = 16
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = 53.13333 64.84817 52.05217
+	editorAlignmentMethod = ByBounds
+}
+entity
+{
+	type = SubmachineGunItem
+	uin = 17
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = -63.59239 56.54972 53.1481
+	editorAlignmentMethod = ByBounds
+}
+entity
+{
+	type = ShotgunItem
+	uin = 18
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = 5.677816 -2.852938 54.39711
+	editorAlignmentMethod = ByBounds
+}
+entity
+{
+	type = SmallHealthItem
+	uin = 19
+	classPrompt = HealthItem
+	respawnTime = 10
+	position = 31.33811 50.05339 54.0615
+	editorAlignmentMethod = ByBounds
+}
+entity
+{
+	type = SmallHealthItem
+	uin = 20
+	classPrompt = HealthItem
+	respawnTime = 10
+	position = 29.22723 50.04111 53.89738
+	editorAlignmentMethod = ByBounds
+}
+entity
+{
+	type = SmallHealthItem
+	uin = 21
+	classPrompt = HealthItem
+	respawnTime = 10
+	position = -28.58671 13.6342 54.28408
+	editorAlignmentMethod = ByBounds
+}
+entity
+{
+	type = SmallHealthItem
+	uin = 22
+	classPrompt = HealthItem
+	respawnTime = 10
+	position = -25.81131 12.56123 53.95894
+	editorAlignmentMethod = ByBounds
+}
+entity
+{
+	type = SmallHealthItem
+	uin = 23
+	classPrompt = HealthItem
+	respawnTime = 10
+	position = 38.41319 -38.03188 78.29848
+	editorAlignmentMethod = ByBounds
+}
+entity
+{
+	type = SmallHealthItem
+	uin = 24
+	classPrompt = HealthItem
+	respawnTime = 10
+	position = 51.8949 -3.44433 56.64037
+	editorAlignmentMethod = ByBounds
+}
+entity
+{
+	type = SmallHealthItem
+	uin = 25
+	classPrompt = HealthItem
+	respawnTime = 10
+	position = -28.96791 -32.33718 58.36903
+	editorAlignmentMethod = ByBounds
+}
+entity
+{
+	type = SmallHealthItem
+	uin = 26
+	classPrompt = HealthItem
+	respawnTime = 10
+	position = 51.4007 -60.65275 51.72135
+	editorAlignmentMethod = ByBounds
+}
+entity
+{
+	type = TigerTank
+	uin = 27
+	classPrompt = TigerTank
+	intellectShouldDeleteAfterDetach = False
+	position = -49.64902 76.40517 52.64899
+	rotation = 0 0 9.362054E-10 1
+	editorAlignmentMethod = ByBoundsWithRotation
+	name = TigerTank_1
+}
+entity
+{
+	type = TigerTank
+	uin = 28
+	classPrompt = TigerTank
+	intellectShouldDeleteAfterDetach = False
+	position = -59.32111 1.381746 52.24854
+	rotation = 0.06089909 -0.06677897 0.6906204 0.7175482
+	editorAlignmentMethod = ByBoundsWithRotation
+	name = TigerTank_2
+}
+entity
+{
+	type = TigerTank
+	uin = 29
+	classPrompt = TigerTank
+	intellectShouldDeleteAfterDetach = False
+	position = 58.54119 -6.675499 58.04181
+	rotation = 0.02115592 0.01489142 0.7951822 0.6058183
+	editorAlignmentMethod = ByBoundsWithRotation
+	name = TigerTank_3
+}
+entity
+{
+	type = TigerTank
+	uin = 30
+	classPrompt = TigerTank
+	intellectShouldDeleteAfterDetach = False
+	position = 53.68212 57.76357 52.66473
+	rotation = -0.001898668 -0.007223304 -0.9981953 0.0595855
+	editorAlignmentMethod = ByBoundsWithRotation
+	name = TigerTank_4
+}
+entity
+{
+	type = TigerTank
+	uin = 31
+	classPrompt = TigerTank
+	intellectShouldDeleteAfterDetach = False
+	position = -4.407402 8.283644 55.38837
+	rotation = 0.05123711 0.03290753 0.7941366 0.6046808
+	editorAlignmentMethod = ByBoundsWithRotation
+	name = TigerTank_0
+}
+entity
+{
+	type = Light
+	uin = 32
+	classPrompt = Light
+	lightType = Directional
+	diffuseColor = 0.8627452 0.8627452 0.8627452
+	specularColor = 1 1 1
+	attenuationRangeAutomatic = True
+	attenuationRange = Infinity
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0
+	spotlightInnerAngle = 30
+	spotlightOuterAngle = 40
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	allowDynamicLighting = True
+	position = -37.71922 -1.393759 37.08606
+	rotation = 0.374715 -0.3659987 -0.2429488 -0.8164617
+	name = Light_0
+}
+entity
+{
+	type = FastAttackInfluenceItem
+	uin = 33
+	classPrompt = InfluenceItem
+	respawnTime = 10
+	position = -14.72929 -44.00214 52.53516
+	rotation = -0.04084413 -0.05776774 0.002365407 0.9974914
+	editorAlignmentMethod = ByBoundsWithRotation
+}
+entity
+{
+	type = FastAttackInfluenceItem
+	uin = 34
+	classPrompt = InfluenceItem
+	respawnTime = 10
+	position = -26.19865 37.57224 58.61523
+	rotation = 0.05421397 0.09193621 0.005012925 0.9942753
+	editorAlignmentMethod = ByBoundsWithRotation
+}
+entity
+{
+	type = FastMoveInfluenceItem
+	uin = 35
+	classPrompt = InfluenceItem
+	respawnTime = 10
+	position = 5.685622 40.61694 51.91602
+	editorAlignmentMethod = ByBoundsWithRotation
+}
+entity
+{
+	type = FastMoveInfluenceItem
+	uin = 36
+	classPrompt = InfluenceItem
+	respawnTime = 10
+	position = -56.34827 34.41071 63.40222
+	rotation = -0.01608269 -0.05491865 0.0008846899 0.9983609
+	editorAlignmentMethod = ByBoundsWithRotation
+}
+entity
+{
+	type = SmallHealthItem
+	uin = 37
+	classPrompt = HealthItem
+	respawnTime = 10
+	position = -53.85157 -67.37347 51.78711
+	rotation = 0.02828629 0.01317488 0.0003728501 0.999513
+	editorAlignmentMethod = ByBoundsWithRotation
+}
+entity
+{
+	type = BigDamageInfluenceItem
+	uin = 38
+	classPrompt = InfluenceItem
+	respawnTime = 10
+	position = 54.14668 9.868636 51.74414
+	rotation = -0.01367035 -0.004396434 6.010699E-05 0.9998969
+	editorAlignmentMethod = ByBoundsWithRotation
+}
+entity
+{
+	type = StaticMesh
+	uin = 39
+	classPrompt = StaticMesh
+	position = -37.12892 -23.34966 61.97136
+	scale = 0.2 0.2 0.2
+	meshName = Maps\TankDemo\Resources\Meshes\Trees\TankDemoTree01.mesh
+}
+entity
+{
+	type = StaticMesh
+	uin = 40
+	classPrompt = StaticMesh
+	position = 37.77419 32.74036 64.21605
+	scale = 0.2 0.2 0.2
+	meshName = Maps\TankDemo\Resources\Meshes\Trees\TankDemoTree01.mesh
+}
+entity
+{
+	type = SkyBox
+	uin = 41
+	classPrompt = SkyBox
+	textureName = Types\Base\SkyBox\DefaultSkyBox.jpg
+	colorScale = 1 1 1
+}

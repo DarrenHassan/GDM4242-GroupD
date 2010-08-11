@@ -1,0 +1,9 @@
+highLevelMaterial WindMillFan
+{
+	template = ShaderBaseMaterial
+	blending = AlphaBlend
+	diffuse1Map
+	{
+		texture = Types\Dynamic\WindMill\WindMillFan.dds
+	}
+}

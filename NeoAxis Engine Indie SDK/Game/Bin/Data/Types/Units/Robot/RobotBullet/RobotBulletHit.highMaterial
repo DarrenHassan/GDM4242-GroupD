@@ -1,0 +1,11 @@
+highLevelMaterial RobotBulletHit
+{
+	template = ShaderBaseMaterial
+	blending = AlphaAdd
+	lighting = False
+	diffuseVertexColor = True
+	diffuse1Map
+	{
+		texture = Types\Units\Robot\RobotBullet\RobotBulletHit.tga
+	}
+}

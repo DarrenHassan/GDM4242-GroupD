@@ -1,0 +1,9 @@
+highLevelMaterial Placard
+{
+	template = ShaderBaseMaterial
+	diffuseScale = 1 0 0
+	diffuse1Map
+	{
+		texture = Models\Rooms\CellingDiffuse.dds
+	}
+}

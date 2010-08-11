@@ -1,0 +1,86 @@
+type = GameMap
+uin = 2
+classPrompt = GameMap
+gameType = JigsawPuzzleGame
+gameMusic = JigsawPuzzleGame\Music.ogg
+ambientLight = 0.2 0.2 0.2
+editorCameraPosition = 0.7122623 -10.57629 13.744
+editorCameraDirection = 1.568758 -0.9082075
+shadowColor = 1 1 1
+fov = 80
+logicSystemManager = 3
+rootEditorLayer
+{
+}
+entity
+{
+	type = LogicSystemManager
+	uin = 3
+	mapClassManager = 4
+	entity
+	{
+		type = LogicClassManager
+		uin = 4
+	}
+}
+entity
+{
+	type = Light
+	uin = 5
+	classPrompt = Light
+	lightType = Directional
+	diffuseColor = 1 1 1
+	specularColor = 0 0 0
+	attenuationRangeAutomatic = True
+	attenuationRange = Infinity
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0
+	spotlightInnerAngle = 30
+	spotlightOuterAngle = 40
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	allowDynamicLighting = True
+	position = 8.206941 3.138267 39.18921
+	rotation = 0 0.6442715 0 0.7647969
+	name = Light_0
+}
+entity
+{
+	type = MapCamera
+	uin = 6
+	classPrompt = MapCamera
+	fov = 0
+	position = 7.011959 -5.067504 10.60545
+	rotation = -0.4142313 0.3789786 0.653434 0.5077518
+	name = MapCamera_0
+}
+entity
+{
+	type = JigsawPuzzleManager
+	uin = 7
+	classPrompt = JigsawPuzzleManager
+}
+entity
+{
+	type = SkyBox
+	uin = 8
+	classPrompt = SkyBox
+	textureName = Types\Base\SkyBox\DefaultSkyBox.jpg
+	colorScale = 1 1 1
+}
+entity
+{
+	type = WaterPlane
+	uin = 9
+	classPrompt = WaterPlane
+	size = 4000 4000
+	position = 0 0 -1
+	segments = 20 20
+	renderQueueGroup = Queue3
+	reflectionLevel = OnlyModels
+	physicsHeight = 0
+	deepColor = 0 0.3 0.5
+	shallowColor = 0 1 1
+}

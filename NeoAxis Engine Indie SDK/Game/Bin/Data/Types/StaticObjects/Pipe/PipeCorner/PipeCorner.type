@@ -1,0 +1,16 @@
+type PipeCorner
+{
+	class = MapObject
+	allowEditorCreate = True
+	allowEmptyName = False
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = "Types\\StaticObjects\\Pipe\\PipeCorner\\PipeCorner.mesh"
+			castShadows = True
+			toCollision = True
+			scale = "0.005 0.005 0.005"
+		}
+	}
+}

@@ -1,0 +1,9 @@
+highLevelMaterial RTSBuildMaterial
+{
+	template = ShaderBaseMaterial
+	blending = AlphaAdd
+	diffuse1Map
+	{
+		texture = Types\RTSSpecific\Special\RTSBuildMaterial\RTSBuildMaterial.dds
+	}
+}

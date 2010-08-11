@@ -1,0 +1,53 @@
+// Copyright (C) 2006-2010 NeoAxis Group Ltd.
+
+void withTexture_vp(
+	uniform float4x4 worldViewProjMatrix,
+
+	float4 position : POSITION,
+	float4 vertexColor : COLOR0,
+	float2 texCoord : TEXCOORD0,
+
+	out float4 oPosition : POSITION,
+	out float2 oTexCoord : TEXCOORD0,
+	out float4 oVertexColor : TEXCOORD1
+	)
+{
+	oPosition = mul(worldViewProjMatrix, position);
+	oTexCoord = texCoord;
+	oVertexColor = vertexColor;
+}
+
+void withTexture_fp(
+	float2 texCoord : TEXCOORD0,
+	half4 vertexColor : TEXCOORD1,
+	
+	uniform sampler2D diffuseMap : register(s0),
+
+	out half4 oColor : COLOR)
+{
+	oColor = (half4)tex2D(diffuseMap, texCoord) * vertexColor;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+void withoutTexture_vp(
+	uniform float4x4 worldViewProjMatrix,
+
+	float4 position : POSITION,
+	float4 vertexColor : COLOR0,
+
+	out float4 oPosition : POSITION,
+	out float4 oVertexColor : TEXCOORD0
+	)
+{
+	oPosition = mul(worldViewProjMatrix, position);
+	oVertexColor = vertexColor;
+}
+
+void withoutTexture_fp(
+	half4 vertexColor : TEXCOORD0,
+	
+	out half4 oColor : COLOR)
+{
+	oColor = vertexColor;
+}

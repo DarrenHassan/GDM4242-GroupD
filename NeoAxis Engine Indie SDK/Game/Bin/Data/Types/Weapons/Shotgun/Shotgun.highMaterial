@@ -1,0 +1,22 @@
+highLevelMaterial Shotgun
+{
+	template = ShaderBaseMaterial
+	emissionScale = 7.058824 6.27451 0.7843138
+	specularScale = 0.5882353 0.5882353 0.5882353
+	specularShininess = 20
+	diffuse1Map
+	{
+		texture = Types\Weapons\Shotgun\Shotgun.dds
+	}
+	emissionMap
+	{
+		texture = Types\Weapons\Shotgun\ShotgunEmission.png
+		transform
+		{
+			animation
+			{
+				scrollSpeed = 0.13 0.2
+			}
+		}
+	}
+}

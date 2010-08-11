@@ -1,0 +1,105 @@
+NeoAxis Engine 0.85 Indie License Agreement
+==================
+
+Copyright (C) 2006-2010 NeoAxis Group Ltd. All rights reserved.
+
+Except where otherwise noted, all of the documentation and software 
+included in the NeoAxis Engine Indie License Setup 
+package is copyrighted by NeoAxis Group Ltd.
+
+1. LICENSE AGREEMENT
+   This document is an agreement between NeoAxis Group Ltd
+   ("Licensor") and Licensee regarding the use of the "NeoAxis Engine 
+   Indie License Package" by Licensee in a single product, Product X.
+
+2. DEFINITIONS 
+   When used in this document, the following terms have the meanings 
+   described below: 
+   a. "Product X" means the one (1) video game product that 
+      Licensee wishes to use The SDK to develop. 
+   b. "Licensee" means the person or entity that purchased this 
+      license and wishes to use The SDK in Product X.
+   c. "The SDK" means the "NeoAxis Engine Indie License SDK".
+   d. Monetary amounts are in United States Dollars. 
+
+3. COPYRIGHT
+   All material contained in the distribution library is Copyright
+   (C) NeoAxis Group Ltd unless otherwise noted.
+
+4. OWNERSHIP
+   The title and ownership of the Software and shall remain with
+   Licensor. All rights to patents, copyrights, or any other 
+   intellectual property rights shall remain with the Licensor, or 
+   their respective owner.
+
+5. LICENSE GRANT
+   a. Licensee may not redistribute, transfer, sub-license or sell 
+      The SDK.
+   b. Licensee has the right to distribute any parts of the Software 
+      except for following file types in the package: .cs, .chm, .xml.
+   c. All redistributions must retain all occurrences of the above 
+      copyright notice and web site addresses that are currently in
+      place (for example: Must display the engine logo upon startup 
+      of the game.).
+   d. Licensee may use The SDK in Object Code form as as part of 
+      Product X on the condition the Licenses agrees to all the terms 
+      of this contract. 
+   e. Any sequels or derivative work of Product X are considered 
+      separate products and are not covered by this agreement. 
+   f. Any modifications made to The SDK by Licensee shall also be 
+      covered by this agreement.
+
+   If you do not accept this disclaimer of warranty or it is not
+   enforceable in your jurisdiction, then you may not use the Software.
+
+6. FEE 
+   a. The initial fee to be paid by Licensee for this agreement 
+   is $95. The commencement date of this agreement is from the day 
+   that Licensor confirms this payment.
+
+7. LIMITATIONS 
+   Use of The SDK under this agreement is strictly for small game 
+   projects only. If either: 
+   a. The gross revenue produced by Product X exceeds $100,000.
+   b. The product X should be a video game product.
+
+   Licensee agrees to either, upgrade to NeoAxis Commercial License 
+   (300$ for upgrade) or completely remove The SDK from Product X. 
+   Licensee agrees to comply within three (3) weeks from the date 
+   when one of conditions is exceeded.
+
+8. DISCLAIMER OF WARRANTY
+   The Software is provided "AS IS" and any warranty, expressed or 
+   implied, including with out limitation, the implied warranties of 
+   merchantability and fitness for a particular purpose, and 
+   non-infringement of any third party rights are disclaimed.
+
+   If you do not accept this disclaimer of warranty or it is not
+   enforceable in your jurisdiction, then you may not use the Software.
+
+9. NO LIABILITY
+   Licensee agrees that use of the Software is at their own risk.
+   Licensee agrees that they or any third party shall not have any
+   claim against Licensor or anyone associated directly or indirectly 
+   with Licensor for any direct, indirect, consequential, special, 
+   exemplary, punitive, and/or other damages (including with out 
+   limitation harm, injury, loss of profits, loss of data and/or 
+   business interruption) from any cause, in connection to the use 
+   and/or distribution of the Software.
+
+   If you do not accept this disclaimer of warranty or it is not
+   enforceable in your jurisdiction, then you may not use the Software.
+
+10.MISCELLANEOUS
+   If any provision in this agreement is unenforceable or invalid it 
+   shall not affect the rest of the agreement. The licensee agrees to 
+   replace any unenforceable or invalid provision with a valid 
+   provision that upholds the intent of the provision to the greatest
+   extent possible.
+
+11.AGREEMENT
+   This agreement constitutes the complete agreement concerning this 
+   license. Any change to this agreement must be made in writing.
+
+NeoAxis Group Ltd.
+http://www.neoaxisgroup.com/

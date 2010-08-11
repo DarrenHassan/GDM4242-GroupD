@@ -1,0 +1,23 @@
+highLevelMaterial RenderDemoCorridorFloor
+{
+	template = ShaderBaseMaterial
+	emissionScale = 2.745098 2.745098 2.745098
+	specularScale = 1 1 1
+	specularShininess = 55.919
+	diffuse1Map
+	{
+		texture = Maps\RenderDemo\Textures\FloorDiffuse.dds
+	}
+	emissionMap
+	{
+		texture = Maps\RenderDemo\Textures\FloorEmmisive.dds
+	}
+	specularMap
+	{
+		texture = Maps\RenderDemo\Textures\FloorSpecular.dds
+	}
+	normalMap
+	{
+		texture = Maps\RenderDemo\Textures\FloorNormals.dds
+	}
+}

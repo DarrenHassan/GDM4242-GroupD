@@ -1,0 +1,19 @@
+highLevelMaterial TankDemoTree_Leafs
+{
+	template = ShaderBaseMaterial
+	culling = False
+	useNormals = False
+	receiveShadows = False
+	alphaRejectFunction = GreaterEqual
+	diffuseVertexColor = True
+	specularScale = 1 1 1
+	specularShininess = 38.1
+	diffuse1Map
+	{
+		texture = Maps\TankDemo\Resources\Meshes\Trees\TankDemoTree_Leafs.dds
+	}
+	specularMap
+	{
+		texture = Maps\TankDemo\Resources\Meshes\Trees\TankDemoTree_Leafs_SPEC.dds
+	}
+}

@@ -1,0 +1,14 @@
+highLevelMaterial MapleLOD1
+{
+	template = VegetationMaterial
+	culling = False
+	useNormals = False
+	alphaRejectFunction = GreaterEqual
+	alphaRejectValue = 30
+	diffuseScale = 0.8627452 0.8627452 0.8627452
+	waveOnlyInVerticalPosition = True
+	diffuse1Map
+	{
+		texture = Types\StaticObjects\Maple\Maple.dds
+	}
+}

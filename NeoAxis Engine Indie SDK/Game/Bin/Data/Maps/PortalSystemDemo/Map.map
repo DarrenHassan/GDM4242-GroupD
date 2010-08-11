@@ -1,0 +1,1115 @@
+type = GameMap
+uin = 2
+classPrompt = GameMap
+gameMusic = Sounds\Music\Game.ogg
+ambientLight = 0.3921569 0.3921569 0.3921569
+editorCameraPosition = 26.21066 -17.08579 13.99378
+editorCameraDirection = 2.385172 -0.4093342
+shadowColor = 0.6 0.6 0.6 0.6
+shadowFarDistance = 60
+shadow2DTextureSize = 2048
+fov = 80
+logicSystemManager = 3
+rootEditorLayer
+{
+	layer
+	{
+		name = ZonesAndPortals
+	}
+	layer
+	{
+		name = StaticGeometry
+	}
+}
+entity
+{
+	type = LogicSystemManager
+	uin = 3
+	mapClassManager = 4
+	entity
+	{
+		type = LogicClassManager
+		uin = 4
+	}
+}
+entity
+{
+	type = SpawnPoint
+	uin = 5
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = 31.58236 -5.517383 -0.07949513
+	rotation = 0 0 -0.9627673 -0.2703313
+	name = SpawnPoint_0
+}
+entity
+{
+	type = Eyes
+	uin = 6
+	classPrompt = MapObject
+	position = -10.29897 0.3963017 1.942144
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 1 2.460675 1.824692
+	name = Eyes_0
+}
+entity
+{
+	type = Palette
+	uin = 7
+	classPrompt = MapObject
+	position = -4.296133 -0.9006577 0.1273079
+	rotation = 0.5000001 -0.5000001 0.5000001 -0.5000001
+	name = Palette_0
+}
+entity
+{
+	type = ParkingBarrier
+	uin = 8
+	classPrompt = MapObject
+	position = -17.2545 -3.257999 0.1421055
+	rotation = 0 0 -0.7071068 0.7071068
+	name = ParkingBarrier_0
+}
+entity
+{
+	type = ParkingBarrier
+	uin = 9
+	classPrompt = MapObject
+	position = -16.24545 -2.887888 0.1341679
+	rotation = 0 0 -0.7071068 0.7071068
+	name = ParkingBarrier_1
+}
+entity
+{
+	type = SwitchBox
+	uin = 10
+	classPrompt = MapObject
+	position = -6.507986 -14.83786 1.121012
+	rotation = 0 0 -1 0
+	name = SwitchBox_0
+}
+entity
+{
+	type = SwitchBox
+	uin = 11
+	classPrompt = MapObject
+	position = -7.741426 -14.83786 1.121012
+	rotation = 0 0 -1 0
+	name = SwitchBox_1
+}
+entity
+{
+	type = SwitchBox
+	uin = 12
+	classPrompt = MapObject
+	position = -8.983166 -14.83786 1.121012
+	rotation = 0 0 -1 0
+	name = SwitchBox_2
+}
+entity
+{
+	type = Palette
+	uin = 13
+	classPrompt = MapObject
+	position = -3.700593 -0.9006581 1.247716
+	rotation = 0.1830128 -0.1830128 0.683013 -0.683013
+	name = Palette_1
+}
+entity
+{
+	type = SubmachineGunItem
+	uin = 14
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = 17.09712 0.467227 0.2685518
+	rotation = 0 0 0.07564536 -0.9971348
+}
+entity
+{
+	type = ShotgunItem
+	uin = 15
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = 19.58952 5.756447 0.1846858
+	rotation = 0 0 0.9167324 -0.3995019
+}
+entity
+{
+	type = ParkingBarrier
+	uin = 16
+	classPrompt = MapObject
+	position = -17.09438 -8.722921 0.1421055
+	rotation = 0 0 -0.5000001 0.8660256
+	name = ParkingBarrier_2
+}
+entity
+{
+	type = ParkingBarrier
+	uin = 17
+	classPrompt = MapObject
+	position = -16.36995 -7.835264 0.5005059
+	rotation = -0.09763555 -0.02465671 -0.8629576 0.4951405
+	name = ParkingBarrier_3
+}
+entity
+{
+	type = Box
+	uin = 18
+	classPrompt = Dynamic
+	position = -13.24837 -4.334537 0.4553456
+	name = Box_0
+}
+entity
+{
+	type = Box
+	uin = 19
+	classPrompt = Dynamic
+	position = -13.2991 -3.16756 0.4595362
+	name = Box_1
+}
+entity
+{
+	type = Box
+	uin = 20
+	classPrompt = Dynamic
+	position = -11.63633 -3.297852 0.4624262
+	name = Box_2
+}
+entity
+{
+	type = ExplosionBarrel
+	uin = 21
+	classPrompt = Dynamic
+	position = -12.95221 -0.4522676 0.7609283
+	name = ExplosionBarrel_0
+}
+entity
+{
+	type = ExplosionBarrel
+	uin = 22
+	classPrompt = Dynamic
+	position = -9.991734 -0.8063755 0.5251358
+	rotation = -0.7016613 0 0 0.7125106
+	name = ExplosionBarrel_1
+}
+entity
+{
+	type = Box
+	uin = 23
+	classPrompt = Dynamic
+	position = -13.24837 -4.334537 1.574441
+	name = Box_3
+}
+entity
+{
+	type = Box
+	uin = 24
+	classPrompt = Dynamic
+	position = -13.2991 -3.16756 1.578631
+	name = Box_4
+}
+entity
+{
+	type = Box
+	uin = 25
+	classPrompt = Dynamic
+	position = -11.63633 -3.297852 1.581522
+	rotation = 0 0 -0.3666582 0.9303557
+	name = Box_5
+}
+entity
+{
+	type = Stone
+	uin = 26
+	classPrompt = MapObject
+	position = -9.065682 -16.53822 -0.04013157
+	rotation = 0.5912928 0 0 0.806457
+	name = Stone_1
+}
+entity
+{
+	type = Stone
+	uin = 27
+	classPrompt = MapObject
+	position = -9.065682 -18.60723 -0.1999836
+	rotation = 0.9995679 0 0 -0.02939418
+	scale = 0.6666667 0.6666667 0.9724978
+	name = Stone_2
+}
+entity
+{
+	type = SwitchBox
+	uin = 28
+	classPrompt = MapObject
+	position = -3.196938 7.367639 1.28135
+	rotation = 0 0 -1 2.980232E-08
+	name = SwitchBox_3
+}
+entity
+{
+	type = SwitchBox
+	uin = 29
+	classPrompt = MapObject
+	position = -7.245618 7.367639 1.28135
+	rotation = 0 0 -1 2.980232E-08
+	name = SwitchBox_4
+}
+entity
+{
+	type = SwitchBox
+	uin = 30
+	classPrompt = MapObject
+	position = -8.642047 7.367639 1.28135
+	rotation = 0 0 -1 2.980232E-08
+	name = SwitchBox_5
+}
+entity
+{
+	type = WallLamp
+	uin = 31
+	classPrompt = MapObject
+	position = -8.106097 14.66323 2.357644
+	name = WallLamp_0
+}
+entity
+{
+	type = WallLamp
+	uin = 32
+	classPrompt = MapObject
+	position = -3.840026 14.66323 2.357644
+	name = WallLamp_1
+}
+entity
+{
+	type = WallLamp
+	uin = 33
+	classPrompt = MapObject
+	position = -12.44837 23.03601 2.357644
+	name = WallLamp_2
+}
+entity
+{
+	type = WallLamp
+	uin = 34
+	classPrompt = MapObject
+	position = -5.726729 23.03601 2.357644
+	name = WallLamp_3
+}
+entity
+{
+	type = SwitchBox
+	uin = 35
+	classPrompt = MapObject
+	position = -8.176216 23.03735 1.291467
+	name = SwitchBox_6
+}
+entity
+{
+	type = SwitchBox
+	uin = 36
+	classPrompt = MapObject
+	position = -4.139689 22.83811 1.286743
+	name = SwitchBox_7
+}
+entity
+{
+	type = SwitchBox
+	uin = 37
+	classPrompt = MapObject
+	position = -2.432864 15.99929 1.294807
+	rotation = 0 0 -0.8660254 0.5000001
+	name = SwitchBox_8
+}
+entity
+{
+	type = Eyes
+	uin = 38
+	classPrompt = MapObject
+	position = -12.57928 19.93194 7.479098
+	scale = 1 1.704553 1.345102
+	name = Eyes_1
+}
+entity
+{
+	type = RabbitHead
+	uin = 39
+	classPrompt = MapObject
+	position = -2.778204 7.887488 3.607267
+	rotation = 0 0 0.9659259 0.258819
+	scale = 0.2357019 0.2357019 0.2357019
+	name = RabbitHead_0
+}
+entity
+{
+	type = Palette
+	uin = 40
+	classPrompt = MapObject
+	position = -16.21495 8.782469 0.2664554
+	rotation = -0.7014694 0.08911106 -0.08911106 0.7014694
+	name = Palette_2
+}
+entity
+{
+	type = Palette
+	uin = 41
+	classPrompt = MapObject
+	position = -16.21495 8.782469 0.6075191
+	rotation = -0.7071068 0 0 0.7071068
+	name = Palette_3
+}
+entity
+{
+	type = Palette
+	uin = 42
+	classPrompt = MapObject
+	position = -16.21495 8.782469 0.9276464
+	rotation = -0.7071068 0 0 0.7071068
+	name = Palette_4
+}
+entity
+{
+	type = Palette
+	uin = 43
+	classPrompt = MapObject
+	position = -16.21495 8.782469 1.261804
+	rotation = -0.7024047 -0.08141031 0.08141031 0.7024047
+	name = Palette_5
+}
+entity
+{
+	type = WallLamp
+	uin = 44
+	classPrompt = MapObject
+	position = -17.78124 13.47829 2.332714
+	rotation = 0 0 0.7071068 0.7071068
+	name = WallLamp_4
+}
+entity
+{
+	type = StopSign
+	uin = 45
+	classPrompt = MapObject
+	position = -8.974881 23.41794 7.895647
+	name = StopSign_1
+}
+entity
+{
+	type = Box
+	uin = 46
+	classPrompt = Dynamic
+	position = -3.960501 14.09476 3.577534
+	name = Box_6
+}
+entity
+{
+	type = Box
+	uin = 47
+	classPrompt = Dynamic
+	position = -3.009545 12.35149 3.56996
+	rotation = 0 0 -0.5 0.8660254
+	name = Box_7
+}
+entity
+{
+	type = Box
+	uin = 48
+	classPrompt = Dynamic
+	position = -6.724451 14.30395 3.573968
+	name = Box_8
+}
+entity
+{
+	type = Box
+	uin = 49
+	classPrompt = Dynamic
+	position = -3.665134 10.11799 3.592046
+	rotation = 0 0 -0.7071068 0.7071068
+	name = Box_9
+}
+entity
+{
+	type = SubmachineGunItem
+	uin = 50
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = -8.071564 14.92118 6.558399
+	rotation = 0 0 0.9189532 -0.3943665
+}
+entity
+{
+	type = SmallHealthItem
+	uin = 51
+	classPrompt = HealthItem
+	respawnTime = 10
+	position = -6.496827 19.24627 3.377977
+	rotation = 0 0 0.09727424 0.9952576
+}
+entity
+{
+	type = Box
+	uin = 52
+	classPrompt = Dynamic
+	position = -15.90937 8.014799 6.548808
+	name = Box_10
+}
+entity
+{
+	type = Box
+	uin = 53
+	classPrompt = Dynamic
+	position = -15.95483 9.184337 6.555974
+	name = Box_11
+}
+entity
+{
+	type = Box
+	uin = 54
+	classPrompt = Dynamic
+	position = -16.05807 10.26722 6.557777
+	name = Box_12
+}
+entity
+{
+	type = Box
+	uin = 55
+	classPrompt = Dynamic
+	position = -16.07123 11.37635 6.559635
+	name = Box_13
+}
+entity
+{
+	type = SwitchBox
+	uin = 56
+	classPrompt = MapObject
+	position = -4.263691 15.76455 4.283456
+	rotation = 0 0 -1 1.216796E-08
+	name = SwitchBox_9
+}
+entity
+{
+	type = SwitchBox
+	uin = 57
+	classPrompt = MapObject
+	position = -2.635254 15.93611 4.279576
+	rotation = 0 0 -1 1.216796E-08
+	name = SwitchBox_10
+}
+entity
+{
+	type = ParkingBarrier
+	uin = 58
+	classPrompt = MapObject
+	position = 16.31335 37.09817 0.2590302
+	rotation = 0 0 -0.9848078 0.1736482
+	name = ParkingBarrier_5
+}
+entity
+{
+	type = ParkingBarrier
+	uin = 59
+	classPrompt = MapObject
+	position = 14.71165 39.87342 0.2393698
+	name = ParkingBarrier_6
+}
+entity
+{
+	type = ParkingBarrier
+	uin = 60
+	classPrompt = MapObject
+	position = 15.97165 38.53846 0.247093
+	name = ParkingBarrier_7
+}
+entity
+{
+	type = ParkingBarrier
+	uin = 61
+	classPrompt = MapObject
+	position = 12.63808 37.60411 0.2633091
+	rotation = 0 0 -0.3420202 0.9396927
+	name = ParkingBarrier_8
+}
+entity
+{
+	type = SwitchBox
+	uin = 62
+	classPrompt = MapObject
+	position = 6.951544 26.6822 1.254562
+	rotation = 0 0 0.797882 0.6028137
+	name = SwitchBox_11
+}
+entity
+{
+	type = SwitchBox
+	uin = 63
+	classPrompt = MapObject
+	position = 6.616368 27.86223 1.254562
+	rotation = 0 0 0.797882 0.6028137
+	name = SwitchBox_12
+}
+entity
+{
+	type = SwitchBox
+	uin = 64
+	classPrompt = MapObject
+	position = 6.280868 29.04341 1.254562
+	rotation = 0 0 0.797882 0.6028137
+	name = SwitchBox_13
+}
+entity
+{
+	type = SwitchBox
+	uin = 65
+	classPrompt = MapObject
+	position = 5.937745 30.25142 1.254562
+	rotation = 0 0 0.797882 0.6028137
+	name = SwitchBox_14
+}
+entity
+{
+	type = SmallHealthItem
+	uin = 66
+	classPrompt = HealthItem
+	respawnTime = 10
+	position = 13.89411 31.67377 0.1498375
+	rotation = 0 0 0.9502838 0.311385
+}
+entity
+{
+	type = Zone
+	uin = 67
+	classPrompt = Zone
+	position = -10.71662 -7.409879 1.422793
+	scale = 15.78596 15.73983 3.567531
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 68
+	classPrompt = Portal
+	outdoor = True
+	active = True
+	position = -2.827468 -7.373513 1.39234
+	scale = 0.2 10.07887 3.000419
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 69
+	classPrompt = Portal
+	outdoor = True
+	active = True
+	position = -14.64556 -15.26757 1.106294
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 0.2 1.614137 2.357568
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 70
+	classPrompt = Zone
+	position = 12.7512 32.71149 1.527694
+	rotation = 0 0 -0.6087614 0.7933534
+	scale = 15.78596 15.73983 3.567531
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 71
+	classPrompt = Portal
+	outdoor = True
+	active = True
+	position = 4.141939 34.47218 1.211195
+	rotation = 0 0 -0.991445 0.1305262
+	scale = 0.2 1.614137 2.451837
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 72
+	classPrompt = Portal
+	outdoor = True
+	active = True
+	position = 14.87679 25.11359 1.497241
+	rotation = 0 0 -0.6087614 0.7933534
+	scale = 0.2 10.17965 3.000419
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 73
+	classPrompt = Zone
+	position = -5.774143 10.99437 4.466713
+	scale = 8.309924 8.462192 2.96263
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 74
+	classPrompt = Zone
+	position = -5.774143 19.43918 4.466713
+	scale = 8.309924 8.462192 2.96263
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 75
+	classPrompt = Zone
+	position = -14.07178 15.25962 4.466713
+	scale = 8.309924 16.76114 2.96263
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 76
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -9.925115 19.26266 4.234972
+	scale = 0 1.610206 2.443895
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 77
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -9.925115 11.09645 4.234972
+	scale = 0 1.610206 2.443895
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 78
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -10.04811 19.44436 1.277861
+	scale = 0 1.610206 2.443895
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 79
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -10.02704 11.13655 1.26997
+	scale = 0 3.751773 2.443895
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 80
+	classPrompt = Portal
+	outdoor = True
+	active = True
+	position = -1.623692 10.34997 4.602817
+	scale = 0.2 1.626308 1.634461
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 81
+	classPrompt = Portal
+	outdoor = True
+	active = True
+	position = -1.623692 20.12469 4.602817
+	scale = 0.2 1.626308 1.634461
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 82
+	classPrompt = Portal
+	outdoor = True
+	active = True
+	position = -1.637608 20.09345 1.61859
+	scale = 0.2 1.626308 1.634461
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 83
+	classPrompt = Portal
+	outdoor = True
+	active = True
+	position = -14.31374 23.58332 4.602817
+	rotation = 0 0 0.7071068 0.7071068
+	scale = 0.2 1.626308 1.634461
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 84
+	classPrompt = Portal
+	outdoor = True
+	active = True
+	position = -14.31374 23.58332 1.606996
+	rotation = 0 0 0.7071068 0.7071068
+	scale = 0.2 1.626308 1.683495
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 85
+	classPrompt = Portal
+	outdoor = True
+	active = True
+	position = -18.22538 10.35543 4.632504
+	rotation = 0 0 1 0
+	scale = 0.2 1.626308 1.634461
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 86
+	classPrompt = Portal
+	outdoor = True
+	active = True
+	position = -18.30363 10.35543 1.567289
+	rotation = 0 0 1 0
+	scale = 0.2 1.626308 1.784578
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 87
+	classPrompt = Portal
+	outdoor = True
+	active = True
+	position = -5.647327 6.831394 4.602817
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 0.2 1.626308 1.634461
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 88
+	classPrompt = Portal
+	outdoor = True
+	active = True
+	position = -14.16991 6.910918 4.641763
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 0.2 1.626308 1.634461
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 89
+	classPrompt = Portal
+	outdoor = True
+	active = True
+	position = -14.16991 6.910918 1.625616
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 0.2 1.626308 1.634461
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 90
+	classPrompt = Portal
+	outdoor = True
+	active = True
+	position = -5.651145 6.805761 1.625616
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 0.2 1.626308 1.634461
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 91
+	classPrompt = Portal
+	outdoor = True
+	active = True
+	position = -1.624479 12.80655 1.275902
+	scale = 0.2 1.610206 2.443895
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 92
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -6.197113 15.17255 1.235632
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 0 1.610206 2.443895
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 93
+	classPrompt = Portal
+	outdoor = False
+	active = True
+	position = -16.97177 19.83377 3.00504
+	rotation = 0 -0.7071068 0 0.7071068
+	scale = 0 6.637568 2.194566
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 94
+	classPrompt = Portal
+	outdoor = True
+	active = True
+	position = -14.22663 18.88405 5.942815
+	rotation = 0 -0.7071068 0 0.7071068
+	scale = 0.2 4.967433 3.127755
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 95
+	classPrompt = Zone
+	position = -14.17339 15.25962 1.527616
+	scale = 8.309924 16.76114 2.96263
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 96
+	classPrompt = Zone
+	position = -5.822392 19.35166 1.464664
+	scale = 8.476122 8.462192 2.96263
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Zone
+	uin = 97
+	classPrompt = Zone
+	position = -5.838025 10.95635 1.464664
+	scale = 8.43059 8.462192 2.96263
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Door
+	uin = 98
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 26.94719 -3.105473 -0.1891071
+	rotation = 0 0 0.5 0.8660254
+	name = Door_0
+}
+entity
+{
+	type = Door
+	uin = 99
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 41.02153 -11.23131 -0.1891071
+	rotation = 0 0 0.5 0.8660254
+	name = Door_1
+}
+entity
+{
+	type = Zone
+	uin = 100
+	classPrompt = Zone
+	position = 33.88963 -7.069233 1.834352
+	rotation = 0 0 0.5 0.8660254
+	scale = 5.76151 16.26564 4.18916
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = Portal
+	uin = 101
+	classPrompt = Portal
+	outdoor = True
+	active = True
+	position = 26.91946 -3.083413 1.310302
+	rotation = 0 0 -0.9659259 -0.2588191
+	scale = 0.2 2.590795 2.837975
+	editorLayer = Root Layer\ZonesAndPortals
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 102
+	classPrompt = MapChangeRegion
+	mapName = Maps\MainDemo\Map.map
+	spawnPointName = SpawnPoint_FromPortalSystemDemo
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = 37.58784 -9.286013 -0.1820322
+	rotation = 0 0 -0.2588191 0.9659259
+	scale = 3.758474 5.432537 3.739524
+	name = MapChangeRegion_0
+	checkType = Bounds
+}
+entity
+{
+	type = Light
+	uin = 103
+	classPrompt = Light
+	lightType = Directional
+	diffuseColor = 1 1 1
+	specularColor = 1 1 1
+	attenuationRangeAutomatic = True
+	attenuationRange = Infinity
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0
+	spotlightInnerAngle = 30
+	spotlightOuterAngle = 40
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	allowDynamicLighting = True
+	position = -1.873143 -3.048527 25.65666
+	rotation = 0.303243 0.8052097 -0.0341464 0.5084439
+	name = Light_0
+}
+entity
+{
+	type = StaticMesh
+	uin = 104
+	classPrompt = StaticMesh
+	position = 0 0 0
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Maps\PortalSystemDemo\StaticGeometry\Garage1.mesh
+	splitGeometry = True
+	splitGeometryPieceSize = 30 30 30
+	allowDecals = All
+	castDynamicShadows = True
+}
+entity
+{
+	type = StaticMesh
+	uin = 105
+	classPrompt = StaticMesh
+	position = 0 0 0
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Maps\PortalSystemDemo\StaticGeometry\Garage2.mesh
+	splitGeometry = True
+	splitGeometryPieceSize = 30 30 30
+	allowDecals = All
+	castDynamicShadows = True
+}
+entity
+{
+	type = StaticMesh
+	uin = 106
+	classPrompt = StaticMesh
+	position = 0 0 0
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Maps\PortalSystemDemo\StaticGeometry\House.mesh
+	splitGeometry = True
+	splitGeometryPieceSize = 30 30 30
+	allowDecals = All
+	castDynamicShadows = True
+}
+entity
+{
+	type = StaticMesh
+	uin = 107
+	classPrompt = StaticMesh
+	position = 33.66117 -7.005553 -0.1279041
+	rotation = 0 0 -0.258819 0.9659258
+	editorLayer = Root Layer\StaticGeometry
+	meshName = Models\CorridorExit\CorridorExit.mesh
+	splitGeometryPieceSize = 30 30 30
+	allowDecals = All
+	castDynamicShadows = True
+}
+entity
+{
+	type = HeightmapTerrain
+	uin = 108
+	classPrompt = HeightmapTerrain
+	position = 0 0 -0.2
+	horizontalSize = 500
+	verticalSize = 100
+	dataDirectory = HeightmapTerrain
+	masksSize = 1024
+	detailMapsDistance = 50
+	renderQueueGroup = WorldGeometry1
+	collisionMaterialName = Default
+	bottomClipHeight = -10000
+	castDynamicShadows = False
+	tileSize = 32
+	layers
+	{
+		item
+		{
+			name = base
+			baseMap = Types\Base\HeightmapTerrain\DefaultLayer0Base.jpg
+			baseScale = 10
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer0Detail.jpg
+			detailScale = 2
+		}
+		item
+		{
+			name = second
+			baseMap = Types\Base\HeightmapTerrain\DefaultLayer1Base.jpg
+			baseScale = 10
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
+			detailScale = 2
+		}
+	}
+}
+entity
+{
+	type = SkyBox
+	uin = 109
+	classPrompt = SkyBox
+	textureName = Types\Base\SkyBox\DefaultSkyBox.jpg
+	colorScale = 1 1 1
+}
+entity
+{
+	type = ParkingBarrier
+	uin = 110
+	classPrompt = MapObject
+	position = 0.9776569 27.59214 -0.001953959
+	rotation = 0 0 0.3723199 0.9281045
+	name = ParkingBarrier_4
+}
+entity
+{
+	type = ParkingBarrier
+	uin = 111
+	classPrompt = MapObject
+	position = -19.1257 3.699994 -0.01482034
+	rotation = 0 0 0.7102881 0.7039111
+	name = ParkingBarrier_9
+}

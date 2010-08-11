@@ -1,0 +1,46 @@
+type FireworkBullet
+{
+	class = Bullet
+	velocity = 18
+	damage = 1
+	gravity = 9.81
+	attachedObjects
+	{
+		ribbonTrail
+		{
+			trailLength = 10
+			maxChainElements = 20
+			materialName = FireworkBulletRibbonTrail
+			lifeTimeAfterDestroy = 0.7
+			chains
+			{
+				chain
+				{
+					initialColor = 1 1 0
+					initialWidth = 0.2
+					changeColor = 1.2 1.2 1.2
+				}
+			}
+		}
+		particle
+		{
+			particleName = ShotgunBulletParticle
+		}
+		billboard
+		{
+			color = 1 1 0.3
+			materialName = DefaultFlare
+		}
+	}
+	dieObjects
+	{
+		particle
+		{
+			particleName = ShotgunBulletHitParticle
+		}
+		particle
+		{
+			particleName = FireworkBulletHitParticle
+		}
+	}
+}

@@ -1,0 +1,8 @@
+NeoAxis Engine officially supports exporters for Autodesk 3dsMax and Maya at this time.
+
+If you use another software - you can download third party exporters for Softimage XSI, Blender and Milkshape3D.
+
+See link here:
+	http://www.ogre3d.org/download/tools
+
+NeoAxis Group Ltd.

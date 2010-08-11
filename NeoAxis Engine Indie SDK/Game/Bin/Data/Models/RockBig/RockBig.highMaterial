@@ -1,0 +1,14 @@
+highLevelMaterial RockBig
+{
+	template = ShaderBaseMaterial
+	specularColor = 1 1 1
+	specularShininess = 14.73
+	diffuse1Map
+	{
+		texture = Models\RockBig\RockBigDiffuse.dds
+	}
+	specularMap
+	{
+		texture = Models\RockBig\RockBigSpecular.dds
+	}
+}

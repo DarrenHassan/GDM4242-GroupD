@@ -1,0 +1,12 @@
+highLevelMaterial Fir
+{
+	template = VegetationMaterial
+	lighting = False
+	culling = False
+	alphaRejectFunction = GreaterEqual
+	alphaRejectValue = 182
+	diffuse1Map
+	{
+		texture = Types\StaticObjects\Fir\Fir.dds
+	}
+}

@@ -1,0 +1,14 @@
+type MapCameraCurvePoint
+{
+	class = MapCameraCurvePoint
+	allowEmptyName = True
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\Base\MapCamera\MapCamera.mesh
+			onlyForEditor = True
+			scale = .5 .5 .5
+		}
+	}
+}

@@ -1,0 +1,63 @@
+type = GameMap
+uin = 2
+classPrompt = GameMap
+gameType = None
+ambientLight = 0.2 0.2 0.2
+editorCameraPosition = 16.31659 -6.13976 23.9377
+editorCameraDirection = 3.061358 -1.034504
+shadowTechnique = None
+shadowColor = 0.75 0.75 0.75
+fov = 80
+logicSystemManager = 3
+name = GameMap_0
+rootEditorLayer
+{
+}
+entity
+{
+	type = LogicSystemManager
+	uin = 3
+	mapClassManager = 4
+	entity
+	{
+		type = LogicClassManager
+		uin = 4
+	}
+}
+entity
+{
+	type = Light
+	uin = 5
+	classPrompt = Light
+	lightType = Point
+	diffuseColor = 1 1 1
+	specularColor = 1 1 1
+	attenuationRangeAutomatic = True
+	attenuationRange = Infinity
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0
+	spotlightInnerAngle = 30
+	spotlightOuterAngle = 40
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	position = 0.3874392 -1.393759 16.25432
+	name = Light_0
+}
+entity
+{
+	type = Firework
+	uin = 6
+	classPrompt = Firework
+	position = 0 0 0
+	name = Firework_0
+}
+entity
+{
+	type = StaticMesh
+	uin = 7
+	classPrompt = StaticMesh
+	position = 0 0 0
+	meshName = Maps\MainMenu\StaticGeometry\Data.mesh
+}

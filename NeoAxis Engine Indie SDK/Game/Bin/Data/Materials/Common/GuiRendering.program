@@ -1,0 +1,107 @@
+// Copyright (C) 2006-2010 NeoAxis Group Ltd.
+
+vertex_program GuiRenderingWithTextureVP_hlsl hlsl
+{
+	source Materials\Common\GuiRendering.cg_hlsl
+	entry_point withTexture_vp
+	target vs_2_0
+
+	default_params
+	{
+		param_named_auto worldViewProjMatrix worldviewproj_matrix
+	}
+}
+
+vertex_program GuiRenderingWithTextureVP_cg cg
+{
+	source Materials\Common\GuiRendering.cg_hlsl
+	entry_point withTexture_vp
+	profiles arbvp1
+	
+	default_params
+	{
+		param_named_auto worldViewProjMatrix worldviewproj_matrix
+	}
+}
+
+vertex_program GuiRenderingWithTextureVP unified
+{
+	delegate GuiRenderingWithTextureVP_hlsl
+	delegate GuiRenderingWithTextureVP_cg
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+fragment_program GuiRenderingWithTextureFP_hlsl hlsl
+{
+	source Materials\Common\GuiRendering.cg_hlsl
+	entry_point withTexture_fp
+	target ps_2_0
+}
+
+fragment_program GuiRenderingWithTextureFP_cg cg
+{
+	source Materials\Common\GuiRendering.cg_hlsl
+	entry_point withTexture_fp
+	profiles arbfp1
+}
+
+fragment_program GuiRenderingWithTextureFP unified
+{
+	delegate GuiRenderingWithTextureFP_hlsl
+	delegate GuiRenderingWithTextureFP_cg
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+vertex_program GuiRenderingWithoutTextureVP_hlsl hlsl
+{
+	source Materials\Common\GuiRendering.cg_hlsl
+	entry_point withoutTexture_vp
+	target vs_2_0
+
+	default_params
+	{
+		param_named_auto worldViewProjMatrix worldviewproj_matrix
+	}
+}
+
+vertex_program GuiRenderingWithoutTextureVP_cg cg
+{
+	source Materials\Common\GuiRendering.cg_hlsl
+	entry_point withoutTexture_vp
+	profiles arbvp1
+	
+	default_params
+	{
+		param_named_auto worldViewProjMatrix worldviewproj_matrix
+	}
+}
+
+vertex_program GuiRenderingWithoutTextureVP unified
+{
+	delegate GuiRenderingWithoutTextureVP_hlsl
+	delegate GuiRenderingWithoutTextureVP_cg
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+fragment_program GuiRenderingWithoutTextureFP_hlsl hlsl
+{
+	source Materials\Common\GuiRendering.cg_hlsl
+	entry_point withoutTexture_fp
+	target ps_2_0
+}
+
+fragment_program GuiRenderingWithoutTextureFP_cg cg
+{
+	source Materials\Common\GuiRendering.cg_hlsl
+	entry_point withoutTexture_fp
+	profiles arbfp1
+}
+
+fragment_program GuiRenderingWithoutTextureFP unified
+{
+	delegate GuiRenderingWithoutTextureFP_hlsl
+	delegate GuiRenderingWithoutTextureFP_cg
+}

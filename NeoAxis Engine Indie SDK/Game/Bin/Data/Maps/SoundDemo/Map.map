@@ -1,0 +1,1068 @@
+type = GameMap
+uin = 2
+classPrompt = GameMap
+ambientLight = 0.2 0.2 0.2
+editorCameraPosition = 14.08812 -10.12123 12.08982
+editorCameraDirection = 2.273344 -0.2028911
+shadowColor = 1 1 1
+shadowFarDistance = 100
+fov = 80
+logicSystemManager = 9
+name = GameMap_0
+rootEditorLayer
+{
+	layer
+	{
+		name = StaticSounds
+	}
+	layer
+	{
+		name = StaticGeometry
+		allowEdit = False
+	}
+}
+entity
+{
+	type = SubmachineGunItem
+	uin = 3
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = 17.5155 -14.44777 0.4746118
+	rotation = 0 0 0.2237357 -0.9746498
+}
+entity
+{
+	type = Light
+	uin = 4
+	classPrompt = Light
+	lightType = Spot
+	diffuseColor = 1.098039 1.098039 1.294118
+	specularColor = 1.372549 1.372549 1.392157
+	attenuationRangeAutomatic = True
+	attenuationRange = Infinity
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0
+	spotlightInnerAngle = 80
+	spotlightOuterAngle = 120
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	position = 0 0 22
+	rotation = 0 -0.7071068 0 -0.7071068
+	name = Light_0
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 5
+	classPrompt = MapChangeRegion
+	mapName = Maps\MainDemo\Map.map
+	spawnPointName = SpawnPoint_FromSoundDemo
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = 17.53239 -32.03278 0.2692733
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 3 8 6.15352
+	name = MapChangeRegion_0
+	checkType = Bounds
+}
+entity
+{
+	type = SpawnPoint
+	uin = 6
+	classPrompt = SpawnPoint
+	defaultPoint = True
+	position = 17.53239 -24.39407 0.222651
+	rotation = 0 0 -0.7071068 -0.7071068
+	name = SpawnPoint_0
+}
+entity
+{
+	type = Door
+	uin = 7
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 17.61415 -20.05266 0.2205143
+	name = Door_0
+}
+entity
+{
+	type = Door
+	uin = 8
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 17.60123 -36.35072 0.2253547
+	name = Door_2
+}
+entity
+{
+	type = LogicSystemManager
+	uin = 9
+	mapClassManager = 10
+	entity
+	{
+		type = LogicClassManager
+		uin = 10
+		entity
+		{
+			type = LogicEntityClass
+			uin = 11
+			relationships = 40 41
+			entityClassName = GameGuiObject
+			className = Placard_RealChannels
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 12
+				code = "Owner.MainControl.Controls[\"Title\"].Text = \"Real Channels\";\r\n\r\nstring text = \"\";\r\n\r\nint freeCount = 0;\r\nint activeCount = 0;\r\n\r\nfor(int nRealChannels = 0; nRealChannels < 2; nRealChannels++)\r\n{\r\n\tIEnumerable<RealChannel> realChannels = nRealChannels == 0 ?\r\n\t\tSoundWorld.Instance.Real2DChannels : SoundWorld.Instance.Real3DChannels;\r\n\tforeach(RealChannel realChannel in realChannels)\r\n\t{\r\n\t\tif(realChannel.CurrentVirtualChannel == null)\r\n\t\t\tfreeCount++;\r\n\t\telse\r\n\t\t\tactiveCount++;\r\n\t}\r\n}\r\n\r\ntext += \"Free channels: \" + freeCount.ToString() + \"\\n\";\r\ntext += \"Active channels: \" + activeCount.ToString() + \"\\n\";\r\ntext += \"\\n\";\r\n\r\nbool last3d = false;\r\n\r\nfor(int nRealChannels = 0; nRealChannels < 2; nRealChannels++)\r\n{\r\n\tIEnumerable<RealChannel> realChannels = nRealChannels == 0 ?\r\n\t\tSoundWorld.Instance.Real2DChannels : SoundWorld.Instance.Real3DChannels;\r\n\r\n\tforeach(RealChannel realChannel in realChannels)\r\n\t{\r\n\t\tVirtualChannel virtualChannel = realChannel.CurrentVirtualChannel;\r\n\r\n\t\tif(!last3d && realChannel.Is3D)\r\n\t\t{\r\n\t\t\tlast3d = true;\r\n\t\t\ttext += \"\\n\";\r\n\t\t}\r\n\r\n\t\ttext += string.Format(\"{0}: \", realChannel.Is3D ? \"3D\" : \"2D\");\r\n\r\n\t\tif(virtualChannel != null)\r\n\t\t{\r\n\t\t\tstring soundName;\r\n\t\t\r\n\t\t\tif( virtualChannel.CurrentSound.Name != null )\r\n\t\t\t\tsoundName = virtualChannel.CurrentSound.Name;\r\n\t\t\telse\r\n\t\t\t\tsoundName = \"DataBuffer\";\r\n\t\t\r\n\t\t\ttext += string.Format( \"{0}  Volume {1}\\n\", soundName, \r\n\t\t\t\tvirtualChannel.GetTotalVolume().ToString( \"F3\" ) );\r\n\t\t}\r\n\t\telse\r\n\t\t\ttext += \"Free\\n\";\r\n\t}\r\n}\r\n\r\nOwner.MainControl.Controls[\"Data\"].Text = text;"
+				methodName = Tick
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = True
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 13
+			relationships = 41 78
+			entityClassName = GameGuiObject
+			className = Placard_VirtualChannels
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 14
+				code = "Owner.MainControl.Controls[\"Title\"].Text = \"Virtual Channels\";\r\n\r\nstring text = \"\";\r\n\r\n//int freeChannelCount = SoundWorld.Instance.GetFreeVirtualChannelsCount();\r\nint activeChannelCount = SoundWorld.Instance.ActiveVirtual2DChannels.Count +\r\n\tSoundWorld.Instance.ActiveVirtual3DChannels.Count;\r\n\r\n//text += \"Free channels: \" + freeChannelCount.ToString() + \"\\n\";\r\ntext += \"Active channels: \" + activeChannelCount.ToString() + \"\\n\";\r\ntext += \"\\n\";\r\n\r\nfor(int nChannels = 0; nChannels < 2; nChannels++)\r\n{\r\n\tIEnumerable<VirtualChannel> activeChannels = nChannels == 0 ?\r\n\t\tSoundWorld.Instance.ActiveVirtual2DChannels : SoundWorld.Instance.ActiveVirtual3DChannels;\r\n\r\n\tforeach(VirtualChannel virtualChannel in activeChannels)\r\n\t{\r\n\t\tif(virtualChannel.CurrentRealChannel != null)\r\n\t\t\ttext += \"Real - \";\r\n\t\telse\r\n\t\t\ttext += \"Virtual - \";\r\n\r\n\t\tstring soundName;\r\n\r\n\t\tif( virtualChannel.CurrentSound.Name != null )\r\n\t\t\tsoundName = virtualChannel.CurrentSound.Name;\r\n\t\telse\r\n\t\t\tsoundName = \"DataBuffer\";\r\n\t\ttext += string.Format( \"{0}  Volume {1}\\n\", soundName, \r\n\t\t\tvirtualChannel.GetTotalVolume().ToString( \"F3\" ) );\r\n\t}\r\n}\r\n\r\nOwner.MainControl.Controls[\"Data\"].Text = text;"
+				methodName = Tick
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = True
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 15
+			relationships = 78
+			entityClassName = GameGuiObject
+			className = Placard_LoadedSounds
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 16
+				code = "Owner.MainControl.Controls[\"Title\"].Text = \"Loaded Sounds\";\r\n\r\nstring text = \"\";\r\n\r\ntext += \"Count: \" + SoundWorld.Instance.Sounds.Count + \"\\n\";\r\ntext += \"\\n\";\r\n\r\nforeach(Sound sound in SoundWorld.Instance.Sounds)\r\n\ttext += sound.ToString() + \"\\n\";\r\n\r\nOwner.MainControl.Controls[\"Data\"].Text = text;"
+				methodName = Tick
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = True
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 17
+			relationships = 79 108
+			entityClassName = GameGuiObject
+			className = Terminal_Main
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 18
+				code = "if(movingSoundPitch == 0)\r\n\tmovingSoundPitch = 1;\r\nneedUpdateStaticSounds = true;\r\n\r\n//for world serialization\r\n((ECheckBox)Owner.MainControl.Controls[\"MovingSound\"]).Checked = movingSoundVisible;\r\n((EScrollBar)Owner.MainControl.Controls[\"MovingSoundPitch\"]).Value = movingSoundPitch;\r\n((ECheckBox)Owner.MainControl.Controls[\"StaticSounds\"]).Checked = staticSoundsVisible;\r\n\r\n((ECheckBox)Owner.MainControl.Controls[\"MovingSound\"]).CheckedChange += delegate(ECheckBox sender)\r\n{\r\n\tmovingSoundVisible = sender.Checked;\r\n};\r\n\r\n((EScrollBar)Owner.MainControl.Controls[\"MovingSoundPitch\"]).ValueChange += delegate(EScrollBar sender)\r\n{\r\n\tmovingSoundPitch = sender.Value;\r\n};\r\n\r\n((ECheckBox)Owner.MainControl.Controls[\"StaticSounds\"]).CheckedChange += delegate(ECheckBox sender)\r\n{\r\n\tstaticSoundsVisible = sender.Checked;\r\n\tneedUpdateStaticSounds = true;\r\n};\r\n\r\nstring text = \"Active Sound Library:\\n\" + SoundWorld.Instance.DriverName;\r\nOwner.MainControl.Controls[\"Driver\"].Text = text;\r\n\r\n//update Visible flag of static sounds\r\nforeach( Entity entity in Map.Instance.Children )\r\n{\r\n\tif(entity.TextUserData != \"StaticSound\")\r\n\t\tcontinue;\r\n\tMapObject obj = (MapObject)entity;\r\n\tobj.Visible = staticSoundsVisible;\r\n}\r\n"
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 19
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 19
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 20
+				variableType = System.Boolean
+				variableName = movingSoundVisible
+				supportSerialization = True
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 21
+				variableType = System.Boolean
+				variableName = staticSoundsVisible
+				supportSerialization = True
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 22
+				code = "//update pitch for moving object\r\n{\r\n\tMapObject movingObject = (MapObject)Entities.Instance.GetByName(\"StaticSoundTest_Moving\");\r\n\r\n\tforeach(MapObjectAttachedObject attachedObject in movingObject.AttachedObjects)\r\n\t{\r\n\t\tMapObjectAttachedSound attachedSound = attachedObject as MapObjectAttachedSound;\r\n\t\tif(attachedSound != null)\r\n\t\t\tattachedSound.Pitch = movingSoundPitch;\r\n\t}\r\n}\r\n\r\n//update moving object\r\n{\r\n\tMapObject movingObject = (MapObject)Entities.Instance.GetByName(\"StaticSoundTest_Moving\");\r\n\tmovingObject.Visible = movingSoundVisible;\r\n}\r\n\r\nif(needUpdateStaticSounds)\r\n{\r\n\tforeach( Entity entity in Map.Instance.Children )\r\n\t{\r\n\t\tif(entity.TextUserData != \"StaticSound\")\r\n\t\t\tcontinue;\r\n\r\n\t\tMapObject obj = (MapObject)entity;\r\n\t\tobj.Visible = staticSoundsVisible;\r\n\r\n\t\tif(obj.Visible)\r\n\t\t{\r\n\t\t\tforeach(MapObjectAttachedObject attachedObject in obj.AttachedObjects)\r\n\t\t\t{\r\n\t\t\t\tMapObjectAttachedSound attachedSound = attachedObject as MapObjectAttachedSound;\r\n\t\t\t\tif(attachedSound != null && attachedSound.Channel != null)\r\n\t\t\t\t\tattachedSound.Channel.Time = World.Instance.Random.NextFloat() * .1f;\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\r\n\tneedUpdateStaticSounds = false;\r\n}"
+				methodName = Tick
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = True
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 23
+				variableType = System.Single
+				variableName = movingSoundPitch
+				supportSerialization = True
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 24
+				variableType = System.Boolean
+				variableName = needUpdateStaticSounds
+				supportSerialization = False
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 25
+			relationships = 80
+			entityClassName = MapObject
+			className = StaticSoundTest_Moving
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 26
+				code = "//Hide at start\r\nOwner.Visible = false;"
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 27
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 27
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 28
+				code = "angle += Entity.TickDelta / 4;\r\n\r\nfloat radius = 17;\r\n\r\nOwner.Position = new Vec3(MathFunctions.Cos(angle) * radius, \r\n\tMathFunctions.Sin(angle) * radius, 1.5f);\r\n\r\nStaticSoundsUpdater.Update(Owner);\r\n"
+				methodName = Tick
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = True
+			}
+			entity
+			{
+				type = LogicVariable
+				uin = 29
+				variableType = System.Single
+				variableName = angle
+				supportSerialization = True
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 30
+			relationships = 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107
+			entityClassName = MapObject
+			className = StaticSoundTest_Static
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 31
+				code = "StaticSoundsUpdater.Update(Owner);\r\n"
+				methodName = Tick
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = True
+			}
+		}
+		entity
+		{
+			type = LogicClass
+			uin = 32
+			className = StaticSoundsUpdater
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 33
+				code = "if(obj.Visible)\r\n{\r\n\tVirtualChannel channel = null;\r\n\r\n\tforeach(MapObjectAttachedObject attachedObject in obj.AttachedObjects)\r\n\t{\r\n\t\tMapObjectAttachedSound attachedSound = attachedObject as MapObjectAttachedSound;\r\n\t\tif(attachedSound != null)\r\n\t\t{\r\n\t\t\tchannel = attachedSound.Channel;\r\n\t\t\tbreak;\r\n\t\t}\r\n\t}\r\n\r\n\tif(channel != null)\r\n\t{\r\n\t\tforeach(MapObjectAttachedObject attachedObject in obj.AttachedObjects)\r\n\t\t{\r\n\t\t\tMapObjectAttachedBillboard attachedBillboard = attachedObject as \r\n\t\t\t\tMapObjectAttachedBillboard;\r\n\t\t\tif(attachedBillboard != null)\r\n\t\t\t{\r\n\t\t\t\tif(channel.CurrentRealChannel != null)\r\n\t\t\t\t\tattachedBillboard.Size = new Vec2(1,3);\r\n\t\t\t\telse\r\n\t\t\t\t\tattachedBillboard.Size = new Vec2(.5f, .5f);\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+				methodName = Update
+				returnType = System.Void
+				parameters = 34
+				isEntityEventMethod = False
+				entity
+				{
+					type = LogicParameter
+					uin = 34
+					parameterType = Engine.MapSystem.MapObject
+					parameterName = obj
+				}
+			}
+		}
+		entity
+		{
+			type = LogicEntityClass
+			uin = 35
+			relationships = 108
+			entityClassName = GameGuiObject
+			className = Terminal_Record
+			customScriptCodeCreated = True
+			customScriptCode = "\r\n//UI\r\nEComboBox inputDataComboBox;\r\nfloat volumeMultiplier = 1;\r\nfloat originalSoundDataOutputHeight;\r\n\r\n//Auto generation\r\nfloat sinTime;\r\nfloat volumeTime;\r\n\r\n//Record\r\nconst int recordBufferLength = 65536;\r\nSound recordSound;\r\nint currentRecordPosition = 0;\r\n\r\n//Output\r\nconst int playbackBufferLength = 16384;\r\nbyte[] playbackTempBuffer = new byte[ playbackBufferLength ];\r\nfloat lastSoundOutputVolume;\r\nSound outputSound;\r\nVirtualChannel outputChannel;\r\n\r\n////////////////////////////////////\r\n\r\nvoid RecreateSounds()\r\n{\r\n\tDestroyOutputSound();\r\n\tRecordStop();\r\n\r\n\tif(inputDataComboBox.SelectedIndex == 1)\r\n\t{\r\n\t\tCreateOutputSound(AutoGenerateReadData);\r\n\t}\r\n\tif(inputDataComboBox.SelectedIndex == 2)\r\n\t{\r\n\t\tRecordStart();\r\n\t\tCreateOutputSound(RecordReadData);\r\n\t}\r\n}\r\n\r\nvoid RecordStart()\r\n{\r\n\trecordSound = SoundWorld.Instance.SoundCreateDataBuffer(\r\n\t\tSoundMode.Record, 1, 44100, recordBufferLength, null );\r\n\r\n\tif(recordSound == null)\r\n\t{\r\n\t\tLog.Warning(\"Record sound creation failed.\");\r\n\t\treturn;\r\n\t}\r\n\r\n\tbool recording = SoundWorld.Instance.RecordStart( recordSound );\r\n\tif(!recording)\r\n\t\tLog.Warning(\"Recording start failed.\");\r\n}\r\n\r\nvoid RecordStop()\r\n{\r\n\tSoundWorld.Instance.RecordStop();\r\n\r\n\tif(recordSound != null)\r\n\t{\r\n\t\trecordSound.Dispose();\r\n\t\trecordSound = null;\r\n\t}\r\n}\r\n\r\n////////////////////////////////////\r\n\r\nvoid CreateOutputSound(SoundWorld.DataReadDelegate readCallback)\r\n{\r\n\toutputSound = SoundWorld.Instance.SoundCreateDataBuffer(\r\n\t\tSoundMode.Loop | SoundMode.Stream, 1, 44100, playbackBufferLength, readCallback );\r\n\r\n\tif( outputSound != null )\r\n\t{\r\n\t\toutputChannel = SoundWorld.Instance.SoundPlay( outputSound,\r\n\t\t\tEngineApp.Instance.DefaultSoundChannelGroup, 1 );\r\n\t}\r\n}\r\n\r\nvoid DestroyOutputSound()\r\n{\r\n\tif(outputChannel != null)\r\n\t{\r\n\t\toutputChannel.Stop();\r\n\t\toutputChannel = null;\r\n\t}\r\n\tif(outputSound != null)\r\n\t{\r\n\t\toutputSound.Dispose();\r\n\t\toutputSound = null;\r\n\t}\r\n\r\n\tlastSoundOutputVolume = 0;\r\n}\r\n\r\n////////////////////////////////////\r\n\r\nunsafe int AutoGenerateReadData( byte[] buffer, int bufferOffset, int length )\r\n{\r\n\tlastSoundOutputVolume = 0;\r\n\r\n\tfixed( byte* pBuffer = buffer )\r\n\t{\r\n\t\tshort* pBufferShort = (short*)( pBuffer + bufferOffset );\r\n\t\tint samples = length / 2;\r\n\r\n\t\tfor( int n = 0; n < samples; n++ )\r\n\t\t{\r\n\t\t\tsinTime += .1f;\r\n\t\t\tvolumeTime += .0005f;\r\n\r\n\t\t\tfloat value = MathFunctions.Sin( sinTime ) * .5f + .5f;\r\n\t\t\tvalue *= MathFunctions.Sin( volumeTime ) * .5f + .5f;\r\n\r\n\t\t\tif(value > lastSoundOutputVolume)\r\n\t\t\t\tlastSoundOutputVolume = value;\r\n\r\n\t\t\t*pBufferShort = (short)( value * 32767.0f );\r\n\t\t\tpBufferShort++;\r\n\t\t}\r\n\r\n\t\treturn length;\r\n\t}\r\n}\r\n\r\n////////////////////////////////////\r\n\r\nunsafe int RecordReadData( byte[] buffer, int bufferOffset, int length )\r\n{\r\n\tlastSoundOutputVolume = 0;\r\n\r\n\tbool recording = SoundWorld.Instance.IsRecording();\r\n\tif( !recording )\r\n\t\treturn 0;\r\n\r\n\tint availableBytes = recordSound.RecordRead( playbackTempBuffer, length );\r\n\tint totalLength = Math.Min( length, availableBytes );\r\n\r\n\tfixed( byte* pBuffer = buffer, pTempBuffer = playbackTempBuffer )\r\n\t{\r\n\t\tshort* pBufferShort = (short*)( pBuffer + bufferOffset );\r\n\t\tint samples = totalLength / 2;\r\n\r\n\t\tfor( int n = 0; n < samples; n++ )\r\n\t\t{\r\n\t\t\tshort shortValue = ( (short*)pTempBuffer )[ n ];\r\n\r\n\t\t\tfloat value = (float)shortValue / 32767.0f;\r\n\t\t\tvalue *= volumeMultiplier;\r\n\t\t\tMathFunctions.Clamp( ref value, 0, 1 );\r\n\r\n\t\t\tif(value > lastSoundOutputVolume)\r\n\t\t\t\tlastSoundOutputVolume = value;\r\n\r\n\t\t\t*pBufferShort = (short)( value * 32767.0f );\r\n\t\t\tpBufferShort++;\r\n\t\t}\r\n\t}\r\n\r\n\treturn totalLength;\r\n}\r\n\r\n////////////////////////////////////\r\n"
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 36
+				code = "//RecordDriver combo box\r\nEComboBox comboBox = (EComboBox)Owner.MainControl.Controls[\"RecordDriver\"];\r\nforeach(string driverName in SoundWorld.Instance.RecordDrivers)\r\n\tcomboBox.Items.Add(driverName);\r\nif(SoundWorld.Instance.RecordDriver != -1 && SoundWorld.Instance.RecordDrivers.Length != 0)\r\n\tcomboBox.SelectedIndex = SoundWorld.Instance.RecordDriver;\r\ncomboBox.SelectedIndexChange += delegate( EComboBox sender )\r\n{\r\n\tDestroyOutputSound();\r\n\tRecordStop();\r\n\r\n\tSoundWorld.Instance.RecordDriver = sender.SelectedIndex;\r\n\r\n\tRecreateSounds();\r\n};\r\n\r\n//InputData combo box\r\ninputDataComboBox = (EComboBox)Owner.MainControl.Controls[\"InputData\"];\r\ninputDataComboBox.Items.Add(\"None\");\r\ninputDataComboBox.Items.Add(\"Auto Generate From Code\");\r\ninputDataComboBox.Items.Add(\"Microphone Record\");\r\ninputDataComboBox.SelectedIndex = 0;\r\ninputDataComboBox.SelectedIndexChange += delegate( EComboBox sender )\r\n{\r\n\tRecreateSounds();\r\n};\r\n\r\n\r\n//VolumeMultiplier scroll bar\r\nEScrollBar scrollBar = (EScrollBar)Owner.MainControl.Controls[\"VolumeMultiplier\"];\r\nscrollBar.ValueChange += delegate(EScrollBar sender)\r\n{\r\n\tvolumeMultiplier = sender.Value;\r\n\tOwner.MainControl.Controls[\"VolumeMultiplierValue\"].Text = volumeMultiplier.ToString(\"F1\");\r\n};\r\n\r\n//SoundDataOutput\r\noriginalSoundDataOutputHeight = Owner.MainControl.Controls[\"SoundDataOutput\"].Size.Value.Y;\r\n\r\n"
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 37
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 37
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 38
+				code = "\r\n//update SoundDataOutput bar\r\nEControl control = Owner.MainControl.Controls[\"SoundDataOutput\"];\r\ncontrol.Size = new EControl.ScaleValue(EControl.ScaleType.Texture, \r\n\tnew Vec2(control.Size.Value.X, originalSoundDataOutputHeight * lastSoundOutputVolume));\r\n"
+				methodName = Tick
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = True
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 39
+				code = "DestroyOutputSound();\r\nRecordStop();\r\n"
+				methodName = Destroying
+				returnType = System.Void
+				parameters = 
+				isEntityEventMethod = True
+			}
+		}
+	}
+}
+entity
+{
+	type = Placard
+	uin = 40
+	classPrompt = GameGuiObject
+	relationships = 11
+	initialControl = Gui\SoundDemoPlacard.gui
+	position = 7.31068 13.5115 2.186873
+	rotation = 0 0 -0.7071068 0.7071068
+	name = Placard_RealChannels
+	logicClass = 11
+}
+entity
+{
+	type = Placard
+	uin = 41
+	classPrompt = GameGuiObject
+	relationships = 11 13
+	initialControl = Gui\SoundDemoPlacard.gui
+	position = -0.09816456 13.50044 2.186873
+	rotation = 0 0 -0.7071068 0.7071068
+	name = Placard_VirtualChannels
+	logicClass = 13
+}
+entity
+{
+	type = Box
+	uin = 42
+	classPrompt = Dynamic
+	position = -12 -5 1
+	name = Box_0
+}
+entity
+{
+	type = Box
+	uin = 43
+	classPrompt = Dynamic
+	position = -12 -3.5 1
+	name = Box_1
+}
+entity
+{
+	type = Box
+	uin = 44
+	classPrompt = Dynamic
+	position = -12 -2 1
+	name = Box_2
+}
+entity
+{
+	type = Box
+	uin = 45
+	classPrompt = Dynamic
+	position = -12 -0.5 1
+	name = Box_3
+}
+entity
+{
+	type = Box
+	uin = 46
+	classPrompt = Dynamic
+	position = -12 1 1
+	name = Box_4
+}
+entity
+{
+	type = Box
+	uin = 47
+	classPrompt = Dynamic
+	position = -12 -4.5 2.5
+	name = Box_5
+}
+entity
+{
+	type = Box
+	uin = 48
+	classPrompt = Dynamic
+	position = -12 -3 2.5
+	name = Box_6
+}
+entity
+{
+	type = Box
+	uin = 49
+	classPrompt = Dynamic
+	position = -12 -1.5 2.5
+	name = Box_7
+}
+entity
+{
+	type = Box
+	uin = 50
+	classPrompt = Dynamic
+	position = -12 0 2.5
+	name = Box_8
+}
+entity
+{
+	type = Box
+	uin = 51
+	classPrompt = Dynamic
+	position = -15.5 -5 1
+	name = Box_9
+}
+entity
+{
+	type = Box
+	uin = 52
+	classPrompt = Dynamic
+	position = -15.5 -3.5 1
+	name = Box_10
+}
+entity
+{
+	type = Box
+	uin = 53
+	classPrompt = Dynamic
+	position = -15.5 -2 1
+	name = Box_11
+}
+entity
+{
+	type = Box
+	uin = 54
+	classPrompt = Dynamic
+	position = -15.5 -0.5 1
+	name = Box_12
+}
+entity
+{
+	type = Box
+	uin = 55
+	classPrompt = Dynamic
+	position = -15.5 -4.5 2.5
+	name = Box_13
+}
+entity
+{
+	type = Box
+	uin = 56
+	classPrompt = Dynamic
+	position = -15.5 -3 2.5
+	name = Box_14
+}
+entity
+{
+	type = Box
+	uin = 57
+	classPrompt = Dynamic
+	position = -15.5 -1.5 2.5
+	name = Box_15
+}
+entity
+{
+	type = Box
+	uin = 58
+	classPrompt = Dynamic
+	position = -15.5 0 2.5
+	name = Box_16
+}
+entity
+{
+	type = Box
+	uin = 59
+	classPrompt = Dynamic
+	position = -15.5 1 1
+	name = Box_17
+}
+entity
+{
+	type = Box
+	uin = 60
+	classPrompt = Dynamic
+	position = -10 -5 1
+	name = Box_18
+}
+entity
+{
+	type = Box
+	uin = 61
+	classPrompt = Dynamic
+	position = -10 -3.5 1
+	name = Box_19
+}
+entity
+{
+	type = Box
+	uin = 62
+	classPrompt = Dynamic
+	position = -10 -2 1
+	name = Box_20
+}
+entity
+{
+	type = Box
+	uin = 63
+	classPrompt = Dynamic
+	position = -10 -0.5 1
+	name = Box_21
+}
+entity
+{
+	type = Box
+	uin = 64
+	classPrompt = Dynamic
+	position = -10 -4.5 2.5
+	name = Box_22
+}
+entity
+{
+	type = Box
+	uin = 65
+	classPrompt = Dynamic
+	position = -10 -3 2.5
+	name = Box_23
+}
+entity
+{
+	type = Box
+	uin = 66
+	classPrompt = Dynamic
+	position = -10 -1.5 2.5
+	name = Box_24
+}
+entity
+{
+	type = Box
+	uin = 67
+	classPrompt = Dynamic
+	position = -13.5 -5 1
+	name = Box_25
+}
+entity
+{
+	type = Box
+	uin = 68
+	classPrompt = Dynamic
+	position = -13.5 -3.5 1
+	name = Box_26
+}
+entity
+{
+	type = Box
+	uin = 69
+	classPrompt = Dynamic
+	position = -13.5 -2 1
+	name = Box_27
+}
+entity
+{
+	type = Box
+	uin = 70
+	classPrompt = Dynamic
+	position = -13.5 -0.5 1
+	name = Box_28
+}
+entity
+{
+	type = Box
+	uin = 71
+	classPrompt = Dynamic
+	position = -13.5 -4.5 2.5
+	name = Box_29
+}
+entity
+{
+	type = Box
+	uin = 72
+	classPrompt = Dynamic
+	position = -13.5 -3 2.5
+	name = Box_30
+}
+entity
+{
+	type = Box
+	uin = 73
+	classPrompt = Dynamic
+	position = -13.5 -1.5 2.5
+	name = Box_31
+}
+entity
+{
+	type = Box
+	uin = 74
+	classPrompt = Dynamic
+	position = -13.5 0 2.5
+	name = Box_32
+}
+entity
+{
+	type = Box
+	uin = 75
+	classPrompt = Dynamic
+	position = -10 0 2.5
+	name = Box_33
+}
+entity
+{
+	type = Box
+	uin = 76
+	classPrompt = Dynamic
+	position = -10 1 1
+	name = Box_34
+}
+entity
+{
+	type = Box
+	uin = 77
+	classPrompt = Dynamic
+	position = -13.5 1 1
+	name = Box_35
+}
+entity
+{
+	type = Placard
+	uin = 78
+	classPrompt = GameGuiObject
+	relationships = 13 15
+	initialControl = Gui\SoundDemoPlacard.gui
+	position = -7.598165 13.50044 2.186873
+	rotation = 0 0 -0.7071068 0.7071068
+	name = Placard_LoadedSounds
+	logicClass = 15
+}
+entity
+{
+	type = Terminal
+	uin = 79
+	classPrompt = GameGuiObject
+	relationships = 17
+	initialControl = Gui\SoundDemoTerminal.gui
+	position = 13.8122 11.53607 1.747315
+	rotation = 0 0 -0.8660254 0.5
+	name = Terminal_Main
+	logicClass = 17
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 80
+	classPrompt = MapObject
+	relationships = 25
+	position = 0 0 0
+	name = StaticSoundTest_Moving
+	logicClass = 25
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 81
+	classPrompt = MapObject
+	relationships = 30
+	position = 16.56222 -16.23644 0
+	name = StaticSoundTest_15
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 82
+	classPrompt = MapObject
+	relationships = 30
+	position = 9.402552 -14.26408 0
+	name = StaticSoundTest_0
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 83
+	classPrompt = MapObject
+	relationships = 30
+	position = 2.200511 -15.53805 0
+	name = StaticSoundTest_1
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 84
+	classPrompt = MapObject
+	relationships = 30
+	position = -4.554965 -14.00008 0
+	name = StaticSoundTest_2
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 85
+	classPrompt = MapObject
+	relationships = 30
+	position = -15.18613 -13.83896 0
+	name = StaticSoundTest_4
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 86
+	classPrompt = MapObject
+	relationships = 30
+	position = -19.24543 -9.66165 0
+	name = StaticSoundTest_6
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 87
+	classPrompt = MapObject
+	relationships = 30
+	position = -19.9656 -2.98958 0
+	name = StaticSoundTest_7
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 88
+	classPrompt = MapObject
+	relationships = 30
+	position = -18.55871 7.939527 0
+	name = StaticSoundTest_9
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 89
+	classPrompt = MapObject
+	relationships = 30
+	position = -13.1181 10.38991 0
+	name = StaticSoundTest_10
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 90
+	classPrompt = MapObject
+	relationships = 30
+	position = -8.11076 8.146295 0
+	name = StaticSoundTest_11
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 91
+	classPrompt = MapObject
+	relationships = 30
+	position = -3.123122 10.67767 0
+	name = StaticSoundTest_12
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 92
+	classPrompt = MapObject
+	relationships = 30
+	position = 1.20577 7.954845 0
+	name = StaticSoundTest_13
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 93
+	classPrompt = MapObject
+	relationships = 30
+	position = 4.806862 10.40708 0
+	name = StaticSoundTest_14
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 94
+	classPrompt = MapObject
+	relationships = 30
+	position = 10.24576 7.86998 0
+	name = StaticSoundTest_16
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 95
+	classPrompt = MapObject
+	relationships = 30
+	position = 17.54385 7.824365 0
+	name = StaticSoundTest_17
+	textUserData = StaticSound
+	logicClass = 30
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 96
+	classPrompt = MapObject
+	relationships = 30
+	position = 18.74431 2.110607 0
+	name = StaticSoundTest_18
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 97
+	classPrompt = MapObject
+	relationships = 30
+	position = 15.95544 -2.482311 0
+	name = StaticSoundTest_19
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 98
+	classPrompt = MapObject
+	relationships = 30
+	position = 19.02003 -7.776287 0
+	name = StaticSoundTest_20
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 99
+	classPrompt = MapObject
+	relationships = 30
+	position = 8.996923 -8.190363 0
+	name = StaticSoundTest_21
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 100
+	classPrompt = MapObject
+	relationships = 30
+	position = 12.42832 2.701457 0
+	name = StaticSoundTest_22
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 101
+	classPrompt = MapObject
+	relationships = 30
+	position = -13.78371 4.107228 0
+	name = StaticSoundTest_23
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 102
+	classPrompt = MapObject
+	relationships = 30
+	position = -10.69514 -10.03589 0
+	name = StaticSoundTest_24
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 103
+	classPrompt = MapObject
+	relationships = 30
+	position = 1.411899 -9.810394 0
+	name = StaticSoundTest_25
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 104
+	classPrompt = MapObject
+	relationships = 30
+	position = 5.462784 4.547997 0
+	name = StaticSoundTest_26
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 105
+	classPrompt = MapObject
+	relationships = 30
+	position = -5.88083 -5.949306 0
+	name = StaticSoundTest_27
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 106
+	classPrompt = MapObject
+	relationships = 30
+	position = -5.657686 3.235505 0
+	name = StaticSoundTest_28
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = StaticSoundTest
+	uin = 107
+	classPrompt = MapObject
+	relationships = 30
+	position = 6.403149 -3.192356 0
+	name = StaticSoundTest_29
+	textUserData = StaticSound
+	logicClass = 30
+	editorLayer = Root\StaticSounds
+}
+entity
+{
+	type = Terminal
+	uin = 108
+	classPrompt = GameGuiObject
+	relationships = 17 35
+	initialControl = Gui\SoundRecordDemoTerminal.gui
+	position = 17.33063 7.579495 1.747315
+	rotation = 0 0 -0.9728876 0.2312787
+	name = Terminal_Record
+	logicClass = 35
+}
+entity
+{
+	type = StaticMesh
+	uin = 109
+	classPrompt = StaticMesh
+	position = 0 0 0
+	editorLayer = Root\StaticGeometry
+	meshName = Models\Rooms\Rooms.mesh
+	splitGeometry = True
+	splitGeometryPieceSize = 30 30 30
+	allowDecals = All
+	castDynamicShadows = True
+}

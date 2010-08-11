@@ -1,0 +1,60 @@
+type SubmachineGun
+{
+	class = Gun
+	reloadTime = 1
+	soundReload = Types\Weapons\SubmachineGun\Reload.ogg
+	soundEmpty = Types\Weapons\SubmachineGun\Empty.ogg
+	fpsMeshMaterialName = SubmachineGun_FPS
+	networkType = Synchronized
+	normalMode
+	{
+		bulletType = SubmachineGunBullet
+		bulletCapacity = 3000
+		magazineCapacity = 30
+		dispersionAngle = 3
+		betweenFireTime = 0.1
+		soundFire = Types\Weapons\SubmachineGun\Fire.ogg
+		startOffsetPosition = 1 0 0
+		fireTimes = 
+		fireAnimationName = fire
+		fireObjects
+		{
+			light
+			{
+				diffuseColor = 1 1 0.4
+				specularColor = 1 1 1
+				attenuationQuadric = 0.5
+				castShadows = False
+				position = 1 0 0
+				attachToOwner = True
+				lifeTime = 0.04
+			}
+			mesh
+			{
+				meshName = Types\Weapons\SubmachineGun\SubmachineGunFire.mesh
+				position = 0.9 -0.03 0.08
+				scale = 1.3 1.3 1.3
+				attachToOwner = True
+				lifeTime = 0.05
+			}
+		}
+	}
+	alternativeMode
+	{
+		bulletType = SubmachineGunGrenade
+		bulletCapacity = 1000
+		betweenFireTime = 0.7
+		soundFire = Types\Weapons\SubmachineGun\AlternativeFire.ogg
+		startOffsetPosition = 1 0 0
+		fireTimes = 
+		fireAnimationName = fire
+	}
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\Weapons\SubmachineGun\SubmachineGun.mesh
+			castDynamicShadows = True
+		}
+	}
+}

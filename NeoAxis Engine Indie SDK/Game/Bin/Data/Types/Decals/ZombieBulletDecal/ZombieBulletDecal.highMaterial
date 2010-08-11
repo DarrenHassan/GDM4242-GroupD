@@ -1,0 +1,12 @@
+highLevelMaterial ZombieBulletDecal
+{
+	template = ShaderBaseMaterial
+	blending = AlphaAdd
+	useNormals = False
+	diffuseScaleDynamic = True
+	diffuse1Map
+	{
+		texture = Types\Decals\ZombieBulletDecal\ZombieBulletDecal.dds
+		clamp = True
+	}
+}

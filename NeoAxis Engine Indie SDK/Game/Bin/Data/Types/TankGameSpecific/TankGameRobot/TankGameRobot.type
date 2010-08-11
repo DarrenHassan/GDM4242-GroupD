@@ -1,0 +1,59 @@
+type TankGameRobot
+{
+	class = GameCharacter
+	optimalAttackDistanceRange = 0 100
+	idleAnimationName = idleAgressive
+	walkAnimationName = walkAgressive
+	walkAnimationVelocityMultiplier = 0.6
+	height = 3
+	radius = 0.6
+	mass = 3
+	walkMaxVelocity = 2
+	walkForce = 16000
+	flyControlMaxVelocity = 3
+	flyControlForce = 700
+	initialAI = DefaultGameCharacterAI
+	viewRadius = 120
+	fpsCameraOffset = 0.4 0 1.2
+	lifeMax = 150
+	targetPriority = 1
+	substance = Metal
+	allowEditorCreate = True
+	networkType = Synchronized
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\Units\Robot\Robot.mesh
+			castDynamicShadows = True
+			position = 0 0 -1.75
+		}
+		mapObject
+		{
+			type = TankGameRobotGun
+			position = 0.6 -0.3 -0.15
+		}
+	}
+	dieObjects
+	{
+		mapObject
+		{
+			type = RobotDead
+			copyVelocitiesFromParent = True
+			position = 0 0 -1.4
+		}
+		particle
+		{
+			particleName = ExplosionParticle
+		}
+		sound
+		{
+			soundName = Sounds\Explode.ogg
+			priority = 0.7
+		}
+		mapObject
+		{
+			type = ExplosionBarrelExplosion
+		}
+	}
+}

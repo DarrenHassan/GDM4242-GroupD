@@ -1,0 +1,19 @@
+type Box
+{
+	class = Dynamic
+	targetPriority = 1
+	soundCollision = Types\Dynamic\Box\Collision.ogg
+	soundCollisionMinVelocity = 2
+	physicsModel = Types\Dynamic\Box\Box.physics
+	allowEditorCreate = True
+	networkType = Synchronized
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\Dynamic\Box\Box.mesh
+			castDynamicShadows = True
+			body = main
+		}
+	}
+}

@@ -1,0 +1,19 @@
+type Fir
+{
+	class = Dynamic
+	physicsModel = "Types\\StaticObjects\\Fir\\Fir.physics"
+	allowEditorCreate = True
+	allowEmptyName = False
+	influenceSlotNames
+	{
+	}
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = "Types\\StaticObjects\\Fir\\Fir.mesh"
+			castShadows = True
+			linkBonesToBodies = True
+		}
+	}
+}

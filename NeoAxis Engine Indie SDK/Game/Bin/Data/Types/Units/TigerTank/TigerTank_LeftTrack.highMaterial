@@ -1,0 +1,28 @@
+highLevelMaterial TigerTank/LeftTrack
+{
+	template = ShaderBaseMaterial
+	specularShininess = 20
+	diffuse1Map
+	{
+		texture = Types\Units\TigerTank\Diffuse.dds
+		transform
+		{
+			dynamicParameters = True
+		}
+	}
+	specularMap
+	{
+		transform
+		{
+			dynamicParameters = True
+		}
+	}
+	normalMap
+	{
+		texture = Types\Units\TigerTank\Normal.dds
+		transform
+		{
+			dynamicParameters = True
+		}
+	}
+}

@@ -1,0 +1,10 @@
+highLevelMaterial SubmachineGun_FPS
+{
+	template = FPSWeaponMaterial
+	specularScale = 1 1 1
+	specularShininess = 20
+	diffuse1Map
+	{
+		texture = Types\Weapons\SubmachineGun\SubmachineGun.dds
+	}
+}

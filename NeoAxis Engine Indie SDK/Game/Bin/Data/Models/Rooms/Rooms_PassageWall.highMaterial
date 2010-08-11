@@ -1,0 +1,8 @@
+highLevelMaterial Rooms/PassageWall
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Models\Rooms\PassageWall.dds
+	}
+}

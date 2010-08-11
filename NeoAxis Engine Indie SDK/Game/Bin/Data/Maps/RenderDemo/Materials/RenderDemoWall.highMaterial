@@ -1,0 +1,22 @@
+highLevelMaterial RenderDemoWall
+{
+	template = ShaderBaseMaterial
+	emissionScale = 1 1 1
+	specularScale = 1 1 1
+	diffuse1Map
+	{
+		texture = Maps\RenderDemo\Textures\WallDiffuse.dds
+	}
+	emissionMap
+	{
+		texture = Maps\RenderDemo\Textures\WallEmissive.dds
+	}
+	specularMap
+	{
+		texture = Maps\RenderDemo\Textures\WallSpecular.dds
+	}
+	normalMap
+	{
+		texture = Maps\RenderDemo\Textures\WallNormals.dds
+	}
+}

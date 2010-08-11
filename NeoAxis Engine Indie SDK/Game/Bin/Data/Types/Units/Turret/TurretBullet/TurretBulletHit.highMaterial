@@ -1,0 +1,11 @@
+highLevelMaterial TurretBulletHit
+{
+	template = ShaderBaseMaterial
+	blending = AlphaAdd
+	lighting = False
+	diffuseVertexColor = True
+	diffuse1Map
+	{
+		texture = Types\Units\Turret\TurretBullet\TurretBulletHit.tga
+	}
+}

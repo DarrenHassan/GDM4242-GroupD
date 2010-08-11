@@ -1,0 +1,9 @@
+highLevelMaterial JigsawPuzzleImage
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = JigsawPuzzleGame\Image.jpg
+		clamp = True
+	}
+}

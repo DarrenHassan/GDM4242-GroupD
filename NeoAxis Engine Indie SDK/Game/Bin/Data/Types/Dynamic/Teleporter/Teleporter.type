@@ -1,0 +1,15 @@
+type Teleporter
+{
+	class = Teleporter
+	allowEditorCreate = True
+	allowEmptyName = False
+	networkType = Network
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = "Types\\Dynamic\\Teleporter\\Teleporter.mesh"
+			castShadows = True
+		}
+	}
+}

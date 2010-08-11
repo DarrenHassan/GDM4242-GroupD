@@ -1,0 +1,22 @@
+type Firework
+{
+	class = Firework
+	allowEditorCreate = True
+	allowEmptyName = False
+	influenceSlotNames
+	{
+	}
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = "Types\\Dynamic\\Ball\\Ball.mesh"
+			scale = "0.3 0.3 0.3"
+		}
+		sound
+		{
+			soundName = "Types\\Dynamic\\Firework\\Firework.ogg"
+			volume = 0.25
+		}
+	}
+}

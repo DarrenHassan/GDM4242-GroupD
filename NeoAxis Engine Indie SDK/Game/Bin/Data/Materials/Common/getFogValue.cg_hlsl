@@ -1,0 +1,49 @@
+// Copyright (C) 2006-2010 NeoAxis Group Ltd.
+
+#ifdef FOG_ENABLED
+
+float getFogValue(float eyeDistance, float4 fogParams)
+{
+	float fog;
+
+#ifdef FOG_LINEAR
+	fog = ( fogParams.z - eyeDistance ) * fogParams.w; // / ( fogParams.z - fogParams.y );
+#endif
+
+#ifdef FOG_EXP
+	float fogDensity = fogParams.x;
+	fog = 1.0f / exp( ( eyeDistance * fogDensity ) * log( 2.718281828f ) );
+#endif
+
+#ifdef FOG_EXP2
+	float fogDensity = fogParams.x;
+	float m = eyeDistance * fogDensity;
+	fog = 1.0f / exp( ( m * m ) * log( 2.718281828f ) );
+#endif
+
+	return /*1 - */saturate(fog);
+}
+
+half getFogValue(half eyeDistance, half4 fogParams)
+{
+	half fog;
+
+#ifdef FOG_LINEAR
+	fog = ( fogParams.z - eyeDistance ) * fogParams.w; // / ( fogParams.z - fogParams.y );
+#endif
+
+#ifdef FOG_EXP
+	half fogDensity = fogParams.x;
+	fog = 1.0h / exp( ( eyeDistance * fogDensity ) * log( 2.718281828h ) );
+#endif
+
+#ifdef FOG_EXP2
+	half fogDensity = fogParams.x;
+	half m = eyeDistance * fogDensity;
+	fog = 1.0h / exp( ( m * m ) * log( 2.718281828h ) );
+#endif
+
+	return /*1 - */saturate(fog);
+}
+
+#endif

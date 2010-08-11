@@ -1,0 +1,51 @@
+// Copyright (C) 2006-2010 NeoAxis Group Ltd.
+
+void shadowCaster_vp(
+	uniform float4x4 worldMatrix, //instancing specific: initialized from instance data.
+	uniform float4x4 viewProjMatrix,
+	uniform float4 texelOffsets,
+
+#ifdef INSTANCING
+	uniform float instancing,
+	//hardware instancing. instance data
+	float4 instancingWorldMatrix0 : TEXCOORD5,
+	float4 instancingWorldMatrix1 : TEXCOORD6,
+	float4 instancingWorldMatrix2 : TEXCOORD7,
+#endif
+
+	float4 position : POSITION,
+
+	out float oDepth : TEXCOORD0,
+	out float4 oPosition : POSITION
+	)
+{
+#ifdef INSTANCING
+	//hardware instancing
+	if(instancing > 0)
+	{
+		worldMatrix = float4x4(
+			instancingWorldMatrix0,
+			instancingWorldMatrix1,
+			instancingWorldMatrix2,
+			float4(0,0,0,1));
+	}
+#endif
+
+	float4 worldPosition = mul(worldMatrix, position);
+	oPosition = mul(viewProjMatrix, worldPosition);
+	oPosition.xy += texelOffsets.zw * oPosition.w;
+	oDepth = oPosition.z;
+}
+
+void shadowCaster_fp(
+	uniform float farClipDistance,
+
+	float depth : TEXCOORD0,
+
+	out float oDepth : DEPTH,
+	out float4 oColor : COLOR )
+{
+	float normalizedDepth = depth / farClipDistance;
+	oColor = float4(0, 0, 0, 1);
+	oDepth = normalizedDepth;
+}

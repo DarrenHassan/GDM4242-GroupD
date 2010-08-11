@@ -1,0 +1,14 @@
+type WallLamp
+{
+	class = MapObject
+	allowEditorCreate = True
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = "Types\\StaticObjects\\WallLamp\\WallLamp.mesh"
+			castShadows = True
+			toCollision = True
+		}
+	}
+}

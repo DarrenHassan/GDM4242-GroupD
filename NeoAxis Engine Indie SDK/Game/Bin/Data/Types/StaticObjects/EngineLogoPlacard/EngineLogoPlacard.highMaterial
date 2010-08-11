@@ -1,0 +1,38 @@
+highLevelMaterial EngineLogoPlacard
+{
+	template = ShaderBaseMaterial
+	diffuseColor = 0.9375001 0.9375001 1
+	diffusePower = 3.137255
+	emissionColor = 0.1960784 0.1960784 0.1960784
+	heightFromNormalMapAlpha = True
+	diffuse1Map
+	{
+		texture = Gui\Various\Engine.png
+		transform
+		{
+			animation
+			{
+				scrollSpeed = 0 0.1
+			}
+		}
+	}
+	diffuse2Map
+	{
+		texture = Gui\Various\Console.dds
+	}
+	emissionMap
+	{
+		texture = Gui\Various\Engine.png
+		transform
+		{
+			animation
+			{
+				scrollSpeed = 0 0.1
+			}
+		}
+	}
+	normalMap
+	{
+		texture = Types\StaticObjects\OgreHead\OgreHead_NormalHeight.png
+	}
+}

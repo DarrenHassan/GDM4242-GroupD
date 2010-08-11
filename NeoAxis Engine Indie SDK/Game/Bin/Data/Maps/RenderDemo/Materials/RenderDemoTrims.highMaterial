@@ -1,0 +1,22 @@
+highLevelMaterial RenderDemoTrims
+{
+	template = ShaderBaseMaterial
+	emissionScale = 1 1 1
+	specularScale = 1 1 1
+	diffuse1Map
+	{
+		texture = Maps\RenderDemo\Textures\TrimsDiffuse.dds
+	}
+	emissionMap
+	{
+		texture = Maps\RenderDemo\Textures\TrimsEmissive.dds
+	}
+	specularMap
+	{
+		texture = Maps\RenderDemo\Textures\TrimsSpecular.dds
+	}
+	normalMap
+	{
+		texture = Maps\RenderDemo\Textures\TrimsNormals.dds
+	}
+}

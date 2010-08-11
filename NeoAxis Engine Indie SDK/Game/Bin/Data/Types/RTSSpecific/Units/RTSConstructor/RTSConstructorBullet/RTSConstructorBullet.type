@@ -1,0 +1,31 @@
+type RTSConstructorBullet
+{
+	class = Bullet
+	velocity = 10
+	damage = -2
+	lifeTime = 1
+	networkType = Network
+	influenceSlotNames
+	{
+	}
+	attachedObjects
+	{
+		billboard
+		{
+			color = "0 1 0"
+			materialName = ItemParticle
+			size = "2 2"
+		}
+	}
+	dieObjects
+	{
+		particle
+		{
+			particleName = RTSConstructorBulletHit
+		}
+		sound
+		{
+			soundName = "Types\\RTSSpecific\\Units\\RTSConstructor\\RTSConstructorBullet\\Hit.ogg"
+		}
+	}
+}

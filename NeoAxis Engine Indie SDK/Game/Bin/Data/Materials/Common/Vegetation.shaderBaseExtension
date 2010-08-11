@@ -1,0 +1,39 @@
+// Copyright (C) 2006-2010 NeoAxis Group Ltd.
+
+#ifdef VERTEX_HEADER
+
+	#ifdef RECEIVE_OBJECTS_POSITIONS_FROM_VERTICES
+		float3 texCoord4 : TEXCOORD4,
+	#endif
+
+#endif
+
+
+#ifdef VERTEX_BODY_BEGIN
+
+	float3 objectWorldPosition;
+	float3 localPosition;
+
+	#ifdef RECEIVE_OBJECTS_POSITIONS_FROM_VERTICES
+		objectWorldPosition = texCoord4;
+		localPosition = position.xyz - objectWorldPosition;
+	#else
+		objectWorldPosition = float3(worldMatrix[0][3], worldMatrix[1][3], worldMatrix[2][3]);
+		localPosition = position.xyz;
+	#endif
+
+	float s;
+	float c;
+	sincos(time + objectWorldPosition.x + objectWorldPosition.y, s, c);
+
+	float2 waveCoefficient = float2(.02f, .03f);
+
+	#ifdef WAVE_ONLY_IN_VERTICAL_POSITION
+		float zCoefficient = (mul((float3x3)worldMatrix, float3(0,0,1))).z;
+		waveCoefficient *= saturate((zCoefficient - cos(3.14 / 4)) / (1 - cos(3.14 / 4)));
+	#endif
+
+	position.x += c * localPosition.z * waveCoefficient.x;
+	position.y += s * localPosition.z * waveCoefficient.y;
+
+#endif

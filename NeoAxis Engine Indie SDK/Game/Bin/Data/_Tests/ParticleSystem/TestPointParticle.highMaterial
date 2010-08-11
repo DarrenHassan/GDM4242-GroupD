@@ -1,0 +1,11 @@
+highLevelMaterial TestPointParticle
+{
+	template = ShaderBaseMaterial
+	blending = AlphaAdd
+	lighting = False
+	diffuseVertexColor = True
+	diffuse1Map
+	{
+		texture = _Tests\ParticleSystem\TestPointParticle.tga
+	}
+}

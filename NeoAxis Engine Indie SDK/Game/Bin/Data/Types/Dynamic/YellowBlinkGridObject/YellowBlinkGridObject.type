@@ -1,0 +1,53 @@
+type YellowBlinkGridObject
+{
+	class = MapObject
+	allowEditorCreate = True
+	attachedObjects
+	{
+		mapObject
+		{
+			type = YellowBlinkGrid
+			position = 0.03542761 0 0
+			scale = 1 2.22 1
+		}
+		mesh
+		{
+			meshName = Models\DefaultBox\DefaultBox.mesh
+			forceMaterial = Black
+			toCollision = True
+			scale = 0.04 2.2 1
+		}
+		mesh
+		{
+			meshName = Models\DefaultBox\DefaultBox.mesh
+			forceMaterial = Rooms/FloorHall
+			toCollision = True
+			position = 0.0205275 0 0.5264582
+			scale = 0.08 2.2 0.05
+		}
+		mesh
+		{
+			meshName = Models\DefaultBox\DefaultBox.mesh
+			forceMaterial = Rooms/FloorHall
+			toCollision = True
+			position = 0.0205275 0 -0.5221343
+			scale = 0.08 2.2 0.05
+		}
+		mesh
+		{
+			meshName = Models\DefaultBox\DefaultBox.mesh
+			forceMaterial = Rooms/FloorHall
+			toCollision = True
+			position = 0.0205275 -1.124115 0
+			scale = 0.08 0.05 1.1
+		}
+		mesh
+		{
+			meshName = Models\DefaultBox\DefaultBox.mesh
+			forceMaterial = Rooms/FloorHall
+			toCollision = True
+			position = 0.0205275 1.123472 0
+			scale = 0.08 0.05 1.1
+		}
+	}
+}

@@ -1,0 +1,8 @@
+highLevelMaterial FpsDemoHouse/WallMetal
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Maps\PortalSystemDemo\StaticGeometry\House\WallMetal.dds
+	}
+}

@@ -1,0 +1,14 @@
+highLevelMaterial Palm
+{
+	template = VegetationMaterial
+	culling = False
+	receiveShadows = False
+	alphaRejectFunction = Greater
+	alphaRejectValue = 80
+	diffuseScale = 0.7843138 1 0.5882353
+	diffuse1Map
+	{
+		texture = Types\StaticObjects\Palm\Palm.dds
+		clamp = True
+	}
+}

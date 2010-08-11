@@ -1,0 +1,81 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FF283204-5114-4EC3-8323-EC239B30836A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WindowsAppFramework</RootNamespace>
+    <AssemblyName>WindowsAppFramework</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EngineApp, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="EntitySystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="FileSystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="Log, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="MapSystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="MathEx, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="Renderer, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="SoundSystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="UISystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="Utils, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderTargetUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RenderTargetUserControl.Designer.cs">
+      <DependentUpon>RenderTargetUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WindowsAppEngineApp.cs" />
+    <Compile Include="WindowsAppWorld.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="RenderTargetUserControl.resx">
+      <DependentUpon>RenderTargetUserControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

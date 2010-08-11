@@ -1,0 +1,15 @@
+type CubemapZone
+{
+	class = CubemapZone
+	allowEditorCreate = True
+	networkType = ClientOnly
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\Base\CubemapZone\CubemapZone.mesh
+			useOwnerScale = False
+			onlyForEditor = True
+		}
+	}
+}

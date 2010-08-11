@@ -1,0 +1,27 @@
+type TechDoor
+{
+	class = AutomaticOpenDoor
+	openDoorBodyOffset = 0 0 2.8
+	openTime = 1.8
+	soundOpen = Types\Dynamic\Door\Open.ogg
+	soundClose = Types\Dynamic\Door\Close.ogg
+	physicsModel = Types\Dynamic\TechDoor\TechDoor.physics
+	allowEditorCreate = True
+	networkType = Synchronized
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Maps\RenderDemo\Meshes\Door.mesh
+			body = door
+			position = 0.06761584 0 0
+		}
+		mapObject
+		{
+			type = Occluder
+			body = door
+			position = 0 -0.02455793 0.1924334
+			scale = 4.832862 0.2481942 3.42916
+		}
+	}
+}

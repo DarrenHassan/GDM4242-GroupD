@@ -1,0 +1,14 @@
+type Palm
+{
+	class = MapObject
+	physicsModel = Types\StaticObjects\Palm\Palm.physics
+	allowEditorCreate = True
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\StaticObjects\Palm\Palm.mesh
+			castShadows = True
+		}
+	}
+}

@@ -1,0 +1,19 @@
+sampler RT : register(s0);
+
+float4 main_fp(float2 texCoord : TEXCOORD0) : COLOR
+{	
+	float2 center = float2(0.5f, 0.5f); 
+	float blurWidth = -0.1f; 
+	int samples = 8;
+
+	float4 color = 0;
+
+	for(int n = 0; n < samples; n++) 
+	{ 
+		float scale = 1.0f + blurWidth * (n / (float)(samples - 1));
+		color += tex2D(RT, (texCoord - center) * scale + center ); 
+	} 
+	color /= samples; 
+
+	return color;
+}

@@ -1,0 +1,15 @@
+highLevelMaterial Beam
+{
+	template = ShaderBaseMaterial
+	diffuseVertexColor = True
+	specularColor = 1 1 1
+	specularShininess = 10.153
+	diffuse1Map
+	{
+		texture = Models\Beam\Beam.dds
+	}
+	specularMap
+	{
+		texture = Models\Beam\Beam_SPEC.dds
+	}
+}

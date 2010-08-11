@@ -1,0 +1,18 @@
+highLevelMaterial TigerTank/Base
+{
+	template = ShaderBaseMaterial
+	specularScale = 1 1 1
+	specularShininess = 20
+	diffuse1Map
+	{
+		texture = Types\Units\TigerTank\Diffuse.dds
+	}
+	specularMap
+	{
+		texture = Types\Units\TigerTank\Specular.dds
+	}
+	normalMap
+	{
+		texture = Types\Units\TigerTank\Normal.dds
+	}
+}

@@ -1,0 +1,1289 @@
+type = GameMap
+uin = 2
+classPrompt = GameMap
+ambientLight = 0.2 0.2 0.2
+editorCameraPosition = 12.91959 -6.53898 14.6999
+editorCameraDirection = 2.517189 -0.2632248
+shadowColor = 1 1 1
+shadowFarDistance = 100
+fov = 80
+logicSystemManager = 11
+name = GameMap_0
+rootEditorLayer
+{
+	layer
+	{
+		name = StaticGeometry
+		allowEdit = False
+	}
+}
+entity
+{
+	type = MapChangeRegion
+	uin = 3
+	classPrompt = MapChangeRegion
+	mapName = Maps\MainDemo\Map.map
+	spawnPointName = SpawnPoint_FromRagdollDemo
+	shapeType = Box
+	filter = OnlyDynamicBodies
+	position = 17.56403 -32.00097 0.2226906
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 3 6 6.933166
+	name = MapChangeRegion_0
+	checkType = Bounds
+}
+entity
+{
+	type = Door
+	uin = 4
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = True
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 17.58513 -36.38088 0.2063458
+	name = Door_1
+}
+entity
+{
+	type = Door
+	uin = 5
+	classPrompt = AutomaticOpenDoor
+	noAutomaticOpen = False
+	opened = False
+	needOpen = False
+	openDoorOffsetCoefficient = 0
+	position = 17.61415 -20.05266 0.2205143
+	name = Door_0
+}
+entity
+{
+	type = Terminal
+	uin = 6
+	classPrompt = GameGuiObject
+	relationships = 13
+	initialControl = Gui\RagdollDemoTerminal.gui
+	position = -4.26505 6.840276 1.753296
+	rotation = 0 0 -0.5436337 0.8393226
+	name = Terminal_0
+	logicClass = 13
+}
+entity
+{
+	type = Light
+	uin = 7
+	classPrompt = Light
+	lightType = Spot
+	diffuseColor = 1.098039 1.098039 1.294118
+	specularColor = 1.372549 1.372549 1.392157
+	attenuationRangeAutomatic = True
+	attenuationRange = Infinity
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0
+	spotlightInnerAngle = 80
+	spotlightOuterAngle = 120
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	position = 0 0 22
+	rotation = 0 -0.7071068 0 -0.7071068
+	name = Light_0
+}
+entity
+{
+	type = SpawnPoint
+	uin = 8
+	classPrompt = SpawnPoint
+	defaultPoint = True
+	position = 17.56403 -24.6 0.2202166
+	rotation = 0 0 -0.7071068 -0.7071068
+	name = SpawnPoint_0
+}
+entity
+{
+	type = SubmachineGunItem
+	uin = 9
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = 16.6557 -14.48188 0.4603885
+	rotation = 0 0 0.7450681 0.6669884
+}
+entity
+{
+	type = ShotgunItem
+	uin = 10
+	classPrompt = WeaponItem
+	respawnTime = 10
+	position = 18.88097 -13.95745 0.4000949
+	rotation = 0 0 0.6314997 -0.7753761
+}
+entity
+{
+	type = LogicSystemManager
+	uin = 11
+	mapClassManager = 12
+	entity
+	{
+		type = LogicClassManager
+		uin = 12
+		entity
+		{
+			type = LogicEntityClass
+			uin = 13
+			relationships = 6
+			entityClassName = GameGuiObject
+			className = Terminal_0
+			customScriptCodeCreated = False
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 14
+				code = "//CreateRagdoll button\r\n((EButton)Owner.MainControl.Controls[\"CreateRagdoll\"]).Click += delegate(EButton sender)\r\n{\r\n\tCreateEntity(\"GirlDead\", (SpawnPoint)Entities.Instance.GetByName(\"SpawnPoint_Ragdoll\"));\r\n};\r\n\r\n//CreateCharacter button\r\n((EButton)Owner.MainControl.Controls[\"CreateCharacter\"]).Click += delegate(EButton sender)\r\n{\r\n\tCreateEntity(\"Girl\", (SpawnPoint)Entities.Instance.GetByName(\"SpawnPoint_Character\"));\r\n};\r\n\r\n//Clear button\r\n((EButton)Owner.MainControl.Controls[\"Clear\"]).Click += delegate(EButton sender)\r\n{\r\n\tforeach( Entity entity in Map.Instance.Children )\r\n\t{\r\n\t\tif(entity.Type.Name == \"GirlDead\" || entity.Type.Name == \"Girl\")\r\n\t\t\tentity.SetDeleted();\r\n\t}\r\n};\r\n"
+				methodName = PostCreated
+				returnType = System.Void
+				parameters = 15
+				isEntityEventMethod = True
+				entity
+				{
+					type = LogicParameter
+					uin = 15
+					parameterType = System.Boolean
+					parameterName = loaded
+				}
+			}
+			entity
+			{
+				type = LogicScriptMethod
+				uin = 16
+				code = "bool free = true;\r\n\r\nBounds bounds = new Bounds(spawnPoint.Position);\r\nbounds.Expand(new Vec3(.5f, .5f, 1));\r\n\r\nMap.Instance.GetObjects(bounds, delegate( MapObject o )\r\n{\r\n\tif( o.PhysicsModel != null )\r\n\t\tfree = false;\r\n} );\r\nif(!free)\r\n\treturn;\r\n\r\nMapObject obj = (MapObject)Entities.Instance.Create( typeName, Map.Instance );\r\nobj.Position = spawnPoint.Position;\r\nobj.Rotation = spawnPoint.Rotation;\r\nobj.PostCreate();\r\n"
+				methodName = CreateEntity
+				returnType = System.Void
+				parameters = 17 18
+				isEntityEventMethod = False
+				entity
+				{
+					type = LogicParameter
+					uin = 17
+					parameterType = System.String
+					parameterName = typeName
+				}
+				entity
+				{
+					type = LogicParameter
+					uin = 18
+					parameterType = GameEntities.SpawnPoint
+					parameterName = spawnPoint
+				}
+			}
+		}
+	}
+}
+entity
+{
+	type = Girl
+	uin = 19
+	classPrompt = GameCharacter
+	position = 1.5 12.5 1.412185
+	rotation = 0 0 0.6962904 -0.7177602
+	name = Girl_1
+}
+entity
+{
+	type = SpawnPoint
+	uin = 20
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = -20.3281 6.25 16.55
+	name = SpawnPoint_Ragdoll
+}
+entity
+{
+	type = SpawnPoint
+	uin = 21
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = 0 13 2
+	rotation = 0 0 -0.7069529 0.7072606
+	name = SpawnPoint_Character
+}
+entity
+{
+	type = ExplosionBarrel
+	uin = 22
+	classPrompt = Dynamic
+	position = -0.4395519 -14.75 0.5316144
+	rotation = 0.7095895 0 0 0.7046154
+	name = ExplosionBarrel_0
+}
+entity
+{
+	type = ExplosionBarrel
+	uin = 23
+	classPrompt = Dynamic
+	position = -1.5 -14.75 0.5316144
+	rotation = 0.7095895 0 0 0.7046154
+	name = ExplosionBarrel_1
+}
+entity
+{
+	type = ExplosionBarrel
+	uin = 24
+	classPrompt = Dynamic
+	position = -2.547242 -14.75 0.5316144
+	rotation = 0.7095895 0 0 0.7046154
+	name = ExplosionBarrel_2
+}
+entity
+{
+	type = ExplosionBarrel
+	uin = 25
+	classPrompt = Dynamic
+	position = -2.047936 -14.75 1.477756
+	rotation = 0.7095895 0 0 0.7046154
+	name = ExplosionBarrel_3
+}
+entity
+{
+	type = ExplosionBarrel
+	uin = 26
+	classPrompt = Dynamic
+	position = -1 -14.75 1.429912
+	rotation = 0.7095895 0 0 0.7046154
+	name = ExplosionBarrel_4
+}
+entity
+{
+	type = Box
+	uin = 27
+	classPrompt = Dynamic
+	position = 0.609997 -15.30587 0.5
+	name = Box_0
+}
+entity
+{
+	type = Box
+	uin = 28
+	classPrompt = Dynamic
+	position = -3.579425 -15.25259 0.5
+	name = Box_1
+}
+entity
+{
+	type = GirlDead
+	uin = 29
+	classPrompt = Dynamic
+	position = -1.753567 -14.73112 2.226609
+	rotation = -0.07043044 0.717264 0.07328251 -0.6893488
+	name = GirlDead_0
+}
+entity
+{
+	type = Box
+	uin = 30
+	classPrompt = Dynamic
+	position = -3.579425 -14.14704 0.5
+	name = Box_2
+}
+entity
+{
+	type = Box
+	uin = 31
+	classPrompt = Dynamic
+	position = 0.609997 -14.20563 0.5
+	name = Box_3
+}
+entity
+{
+	type = Girl
+	uin = 32
+	classPrompt = GameCharacter
+	position = 5.25 12.5 1.445609
+	rotation = 0 0 0.6962904 -0.7177602
+	name = Girl_2
+}
+entity
+{
+	type = ExplosionBarrel
+	uin = 33
+	classPrompt = Dynamic
+	position = 6.25 12.75 0.7174039
+	rotation = -0.7086797 0 0 0.7055304
+	name = ExplosionBarrel_5
+}
+entity
+{
+	type = HangingCable
+	uin = 34
+	classPrompt = Dynamic
+	position = 19.44135 3.4567 2.777398
+	name = HangingCable_0
+}
+entity
+{
+	type = HangingCable
+	uin = 35
+	classPrompt = Dynamic
+	position = 19.44135 2.375807 2.777398
+	name = HangingCable_1
+}
+entity
+{
+	type = HangingCable
+	uin = 36
+	classPrompt = Dynamic
+	position = 19.44135 1.301613 2.777398
+	name = HangingCable_2
+}
+entity
+{
+	type = SwitchBox
+	uin = 37
+	classPrompt = MapObject
+	position = 19.42713 5.069965 1.472688
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 1.18 1.18 1.18
+	name = SwitchBox_0
+}
+entity
+{
+	type = SwitchBox
+	uin = 38
+	classPrompt = MapObject
+	position = 19.42713 -0.5181494 1.472688
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 1.18 1.18 1.18
+	name = SwitchBox_1
+}
+entity
+{
+	type = ParkingBarrier
+	uin = 39
+	classPrompt = MapObject
+	position = 19.46159 2.27309 2.902211
+	rotation = 0 0 -0.7071068 0.7071068
+	scale = 1.549985 1 0.6267621
+	name = ParkingBarrier_0
+}
+entity
+{
+	type = PipeDirect4
+	uin = 40
+	classPrompt = MapObject
+	position = -16.7 1.9 0.5000001
+	rotation = 0 0 -1 0
+	name = PipeDirect4_53
+}
+entity
+{
+	type = PipeDirect4
+	uin = 41
+	classPrompt = MapObject
+	position = -20.7 1.9 0.5000001
+	rotation = 0 0 -1 0
+	name = PipeDirect4_57
+}
+entity
+{
+	type = PipeDirect4
+	uin = 42
+	classPrompt = MapObject
+	position = -14.7 4.4 1.4
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_64
+}
+entity
+{
+	type = PipeDirect4
+	uin = 43
+	classPrompt = MapObject
+	position = -14.7 8.4 1.4
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_71
+}
+entity
+{
+	type = PipeCorner
+	uin = 44
+	classPrompt = MapObject
+	position = -14.7 1.9 1.4
+	rotation = 0.5000001 0.5000001 0.5000001 0.5000001
+	name = PipeCorner_30
+}
+entity
+{
+	type = PipeDirect4
+	uin = 45
+	classPrompt = MapObject
+	position = -17.2 1.9 1.4
+	rotation = 0 0 -1 0
+	name = PipeDirect4_78
+}
+entity
+{
+	type = PipeDirect4
+	uin = 46
+	classPrompt = MapObject
+	position = -21.2 1.9 1.4
+	rotation = 0 0 -1 0
+	name = PipeDirect4_85
+}
+entity
+{
+	type = PipeDirect4
+	uin = 47
+	classPrompt = MapObject
+	position = -15.2 4.4 2.3
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_92
+}
+entity
+{
+	type = PipeDirect4
+	uin = 48
+	classPrompt = MapObject
+	position = -15.2 8.4 2.3
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_99
+}
+entity
+{
+	type = PipeCorner
+	uin = 49
+	classPrompt = MapObject
+	position = -15.2 1.9 2.3
+	rotation = 0.5000001 0.5000001 0.5000001 0.5000001
+	name = PipeCorner_31
+}
+entity
+{
+	type = PipeDirect4
+	uin = 50
+	classPrompt = MapObject
+	position = -17.7 1.9 2.3
+	rotation = 0 0 -1 0
+	name = PipeDirect4_103
+}
+entity
+{
+	type = PipeDirect4
+	uin = 51
+	classPrompt = MapObject
+	position = -21.7 1.9 2.3
+	rotation = 0 0 -1 0
+	name = PipeDirect4_106
+}
+entity
+{
+	type = PipeDirect4
+	uin = 52
+	classPrompt = MapObject
+	position = -15.7 4.4 3.2
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_109
+}
+entity
+{
+	type = PipeDirect4
+	uin = 53
+	classPrompt = MapObject
+	position = -15.7 8.4 3.2
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_110
+}
+entity
+{
+	type = PipeCorner
+	uin = 54
+	classPrompt = MapObject
+	position = -15.7 1.9 3.2
+	rotation = 0.5000001 0.5000001 0.5000001 0.5000001
+	name = PipeCorner_32
+}
+entity
+{
+	type = PipeDirect4
+	uin = 55
+	classPrompt = MapObject
+	position = -18.2 1.9 3.2
+	rotation = 0 0 -1 0
+	name = PipeDirect4_113
+}
+entity
+{
+	type = PipeDirect4
+	uin = 56
+	classPrompt = MapObject
+	position = -22.2 1.9 3.2
+	rotation = 0 0 -1 0
+	name = PipeDirect4_116
+}
+entity
+{
+	type = PipeDirect4
+	uin = 57
+	classPrompt = MapObject
+	position = -16.2 4.4 4.1
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_117
+}
+entity
+{
+	type = PipeDirect4
+	uin = 58
+	classPrompt = MapObject
+	position = -16.2 8.4 4.1
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_120
+}
+entity
+{
+	type = PipeCorner
+	uin = 59
+	classPrompt = MapObject
+	position = -16.2 1.9 4.1
+	rotation = 0.5000001 0.5000001 0.5000001 0.5000001
+	name = PipeCorner_33
+}
+entity
+{
+	type = PipeDirect4
+	uin = 60
+	classPrompt = MapObject
+	position = -18.7 1.9 4.1
+	rotation = 0 0 -1 0
+	name = PipeDirect4_123
+}
+entity
+{
+	type = PipeDirect4
+	uin = 61
+	classPrompt = MapObject
+	position = -22.7 1.9 4.1
+	rotation = 0 0 -1 0
+	name = PipeDirect4_124
+}
+entity
+{
+	type = PipeDirect4
+	uin = 62
+	classPrompt = MapObject
+	position = -16.7 4.4 5
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_127
+}
+entity
+{
+	type = PipeDirect4
+	uin = 63
+	classPrompt = MapObject
+	position = -16.7 8.4 5
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_130
+}
+entity
+{
+	type = PipeCorner
+	uin = 64
+	classPrompt = MapObject
+	position = -16.7 1.9 5
+	rotation = 0.5000001 0.5000001 0.5000001 0.5000001
+	name = PipeCorner_34
+}
+entity
+{
+	type = PipeDirect4
+	uin = 65
+	classPrompt = MapObject
+	position = -19.2 1.9 5
+	rotation = 0 0 -1 0
+	name = PipeDirect4_131
+}
+entity
+{
+	type = PipeDirect4
+	uin = 66
+	classPrompt = MapObject
+	position = -23.2 1.9 5
+	rotation = 0 0 -1 0
+	name = PipeDirect4_134
+}
+entity
+{
+	type = PipeDirect4
+	uin = 67
+	classPrompt = MapObject
+	position = -17.2 4.4 5.9
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_137
+}
+entity
+{
+	type = PipeDirect4
+	uin = 68
+	classPrompt = MapObject
+	position = -17.2 8.4 5.9
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_138
+}
+entity
+{
+	type = PipeCorner
+	uin = 69
+	classPrompt = MapObject
+	position = -17.2 1.9 5.9
+	rotation = 0.5000001 0.5000001 0.5000001 0.5000001
+	name = PipeCorner_35
+}
+entity
+{
+	type = PipeDirect4
+	uin = 70
+	classPrompt = MapObject
+	position = -19.7 1.9 5.9
+	rotation = 0 0 -1 0
+	name = PipeDirect4_141
+}
+entity
+{
+	type = PipeDirect4
+	uin = 71
+	classPrompt = MapObject
+	position = -17.7 4.4 6.8
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_145
+}
+entity
+{
+	type = PipeDirect4
+	uin = 72
+	classPrompt = MapObject
+	position = -17.7 8.4 6.8
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_148
+}
+entity
+{
+	type = PipeCorner
+	uin = 73
+	classPrompt = MapObject
+	position = -17.7 1.9 6.8
+	rotation = 0.5000001 0.5000001 0.5000001 0.5000001
+	name = PipeCorner_36
+}
+entity
+{
+	type = PipeDirect4
+	uin = 74
+	classPrompt = MapObject
+	position = -20.2 1.9 6.8
+	rotation = 0 0 -1 0
+	name = PipeDirect4_151
+}
+entity
+{
+	type = PipeDirect4
+	uin = 75
+	classPrompt = MapObject
+	position = -18.2 4.4 7.699998
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_152
+}
+entity
+{
+	type = PipeDirect4
+	uin = 76
+	classPrompt = MapObject
+	position = -18.2 8.4 7.699998
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_153
+}
+entity
+{
+	type = PipeCorner
+	uin = 77
+	classPrompt = MapObject
+	position = -18.2 1.9 7.699998
+	rotation = 0.5000001 0.5000001 0.5000001 0.5000001
+	name = PipeCorner_37
+}
+entity
+{
+	type = PipeDirect4
+	uin = 78
+	classPrompt = MapObject
+	position = -20.7 1.9 7.699998
+	rotation = 0 0 -1 0
+	name = PipeDirect4_154
+}
+entity
+{
+	type = PipeDirect4
+	uin = 79
+	classPrompt = MapObject
+	position = -18.7 4.4 8.599998
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_155
+}
+entity
+{
+	type = PipeDirect4
+	uin = 80
+	classPrompt = MapObject
+	position = -18.7 8.4 8.599998
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_156
+}
+entity
+{
+	type = PipeCorner
+	uin = 81
+	classPrompt = MapObject
+	position = -18.7 1.9 8.599998
+	rotation = 0.5000001 0.5000001 0.5000001 0.5000001
+	name = PipeCorner_38
+}
+entity
+{
+	type = PipeDirect4
+	uin = 82
+	classPrompt = MapObject
+	position = -21.2 1.9 8.599998
+	rotation = 0 0 -1 0
+	name = PipeDirect4_157
+}
+entity
+{
+	type = PipeDirect4
+	uin = 83
+	classPrompt = MapObject
+	position = -19.2 4.4 9.499997
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_158
+}
+entity
+{
+	type = PipeDirect4
+	uin = 84
+	classPrompt = MapObject
+	position = -19.2 8.4 9.499997
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_159
+}
+entity
+{
+	type = PipeCorner
+	uin = 85
+	classPrompt = MapObject
+	position = -19.2 1.9 9.499997
+	rotation = 0.5000001 0.5000001 0.5000001 0.5000001
+	name = PipeCorner_39
+}
+entity
+{
+	type = PipeDirect4
+	uin = 86
+	classPrompt = MapObject
+	position = -21.7 1.9 9.499997
+	rotation = 0 0 -1 0
+	name = PipeDirect4_160
+}
+entity
+{
+	type = PipeDirect4
+	uin = 87
+	classPrompt = MapObject
+	position = -19.7 4.4 10.4
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_161
+}
+entity
+{
+	type = PipeDirect4
+	uin = 88
+	classPrompt = MapObject
+	position = -19.7 8.4 10.4
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_162
+}
+entity
+{
+	type = PipeCorner
+	uin = 89
+	classPrompt = MapObject
+	position = -19.7 1.9 10.4
+	rotation = 0.5000001 0.5000001 0.5000001 0.5000001
+	name = PipeCorner_40
+}
+entity
+{
+	type = PipeDirect4
+	uin = 90
+	classPrompt = MapObject
+	position = -22.2 1.9 10.4
+	rotation = 0 0 -1 0
+	name = PipeDirect4_163
+}
+entity
+{
+	type = PipeDirect4
+	uin = 91
+	classPrompt = MapObject
+	position = -20.2 4.4 11.3
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_164
+}
+entity
+{
+	type = PipeDirect4
+	uin = 92
+	classPrompt = MapObject
+	position = -20.2 8.4 11.3
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_165
+}
+entity
+{
+	type = PipeCorner
+	uin = 93
+	classPrompt = MapObject
+	position = -20.2 1.9 11.3
+	rotation = 0.5000001 0.5000001 0.5000001 0.5000001
+	name = PipeCorner_41
+}
+entity
+{
+	type = PipeDirect4
+	uin = 94
+	classPrompt = MapObject
+	position = -22.7 1.9 11.3
+	rotation = 0 0 -1 0
+	name = PipeDirect4_166
+}
+entity
+{
+	type = PipeDirect4
+	uin = 95
+	classPrompt = MapObject
+	position = -20.7 4.4 12.2
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_167
+}
+entity
+{
+	type = PipeDirect4
+	uin = 96
+	classPrompt = MapObject
+	position = -20.7 8.4 12.2
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_168
+}
+entity
+{
+	type = PipeCorner
+	uin = 97
+	classPrompt = MapObject
+	position = -20.7 1.9 12.2
+	rotation = 0.5000001 0.5000001 0.5000001 0.5000001
+	name = PipeCorner_42
+}
+entity
+{
+	type = PipeDirect4
+	uin = 98
+	classPrompt = MapObject
+	position = -23.2 1.9 12.2
+	rotation = 0 0 -1 0
+	name = PipeDirect4_169
+}
+entity
+{
+	type = PipeDirect4
+	uin = 99
+	classPrompt = MapObject
+	position = -21.2 4.4 13.1
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_170
+}
+entity
+{
+	type = PipeDirect4
+	uin = 100
+	classPrompt = MapObject
+	position = -21.2 8.4 13.1
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_171
+}
+entity
+{
+	type = PipeCorner
+	uin = 101
+	classPrompt = MapObject
+	position = -21.2 1.9 13.1
+	rotation = 0.5000001 0.5000001 0.5000001 0.5000001
+	name = PipeCorner_43
+}
+entity
+{
+	type = PipeDirect4
+	uin = 102
+	classPrompt = MapObject
+	position = -16.7 10.9 0.5000001
+	rotation = 0 0 -1 0
+	name = PipeDirect4_173
+}
+entity
+{
+	type = PipeDirect4
+	uin = 103
+	classPrompt = MapObject
+	position = -20.7 10.9 0.5000001
+	rotation = 0 0 -1 0
+	name = PipeDirect4_174
+}
+entity
+{
+	type = PipeCorner
+	uin = 104
+	classPrompt = MapObject
+	position = -14.7 10.9 1.4
+	rotation = 0.5000002 -0.4999999 0.5000002 -0.5
+	name = PipeCorner_44
+}
+entity
+{
+	type = PipeDirect4
+	uin = 105
+	classPrompt = MapObject
+	position = -17.2 10.9 1.4
+	rotation = 0 0 -1 0
+	name = PipeDirect4_175
+}
+entity
+{
+	type = PipeDirect4
+	uin = 106
+	classPrompt = MapObject
+	position = -21.2 10.9 1.4
+	rotation = 0 0 -1 0
+	name = PipeDirect4_176
+}
+entity
+{
+	type = PipeCorner
+	uin = 107
+	classPrompt = MapObject
+	position = -15.2 10.9 2.3
+	rotation = 0.5000002 -0.4999999 0.5000002 -0.5
+	name = PipeCorner_45
+}
+entity
+{
+	type = PipeDirect4
+	uin = 108
+	classPrompt = MapObject
+	position = -17.7 10.9 2.3
+	rotation = 0 0 -1 0
+	name = PipeDirect4_177
+}
+entity
+{
+	type = PipeDirect4
+	uin = 109
+	classPrompt = MapObject
+	position = -21.7 10.9 2.3
+	rotation = 0 0 -1 0
+	name = PipeDirect4_178
+}
+entity
+{
+	type = PipeCorner
+	uin = 110
+	classPrompt = MapObject
+	position = -15.7 10.9 3.2
+	rotation = 0.5000002 -0.4999999 0.5000002 -0.5
+	name = PipeCorner_46
+}
+entity
+{
+	type = PipeDirect4
+	uin = 111
+	classPrompt = MapObject
+	position = -18.2 10.9 3.2
+	rotation = 0 0 -1 0
+	name = PipeDirect4_179
+}
+entity
+{
+	type = PipeDirect4
+	uin = 112
+	classPrompt = MapObject
+	position = -22.2 10.9 3.2
+	rotation = 0 0 -1 0
+	name = PipeDirect4_180
+}
+entity
+{
+	type = PipeCorner
+	uin = 113
+	classPrompt = MapObject
+	position = -16.2 10.9 4.1
+	rotation = 0.5000002 -0.4999999 0.5000002 -0.5
+	name = PipeCorner_47
+}
+entity
+{
+	type = PipeDirect4
+	uin = 114
+	classPrompt = MapObject
+	position = -18.7 10.9 4.1
+	rotation = 0 0 -1 0
+	name = PipeDirect4_181
+}
+entity
+{
+	type = PipeDirect4
+	uin = 115
+	classPrompt = MapObject
+	position = -22.7 10.9 4.1
+	rotation = 0 0 -1 0
+	name = PipeDirect4_182
+}
+entity
+{
+	type = PipeCorner
+	uin = 116
+	classPrompt = MapObject
+	position = -16.7 10.9 5
+	rotation = 0.5000002 -0.4999999 0.5000002 -0.5
+	name = PipeCorner_48
+}
+entity
+{
+	type = PipeDirect4
+	uin = 117
+	classPrompt = MapObject
+	position = -19.2 10.9 5
+	rotation = 0 0 -1 0
+	name = PipeDirect4_183
+}
+entity
+{
+	type = PipeDirect4
+	uin = 118
+	classPrompt = MapObject
+	position = -23.2 10.9 5
+	rotation = 0 0 -1 0
+	name = PipeDirect4_184
+}
+entity
+{
+	type = PipeCorner
+	uin = 119
+	classPrompt = MapObject
+	position = -17.2 10.9 5.9
+	rotation = 0.5000002 -0.4999999 0.5000002 -0.5
+	name = PipeCorner_49
+}
+entity
+{
+	type = PipeDirect4
+	uin = 120
+	classPrompt = MapObject
+	position = -19.7 10.9 5.9
+	rotation = 0 0 -1 0
+	name = PipeDirect4_185
+}
+entity
+{
+	type = PipeDirect4
+	uin = 121
+	classPrompt = MapObject
+	position = -23.7 10.9 5.8
+	rotation = 0 0 -1 0
+	name = PipeDirect4_186
+}
+entity
+{
+	type = PipeCorner
+	uin = 122
+	classPrompt = MapObject
+	position = -17.7 10.9 6.8
+	rotation = 0.5000002 -0.4999999 0.5000002 -0.5
+	name = PipeCorner_50
+}
+entity
+{
+	type = PipeDirect4
+	uin = 123
+	classPrompt = MapObject
+	position = -20.2 10.9 6.8
+	rotation = 0 0 -1 0
+	name = PipeDirect4_187
+}
+entity
+{
+	type = PipeCorner
+	uin = 124
+	classPrompt = MapObject
+	position = -18.2 10.9 7.699998
+	rotation = 0.5000002 -0.4999999 0.5000002 -0.5
+	name = PipeCorner_51
+}
+entity
+{
+	type = PipeDirect4
+	uin = 125
+	classPrompt = MapObject
+	position = -20.7 10.9 7.699998
+	rotation = 0 0 -1 0
+	name = PipeDirect4_189
+}
+entity
+{
+	type = PipeCorner
+	uin = 126
+	classPrompt = MapObject
+	position = -18.7 10.9 8.599998
+	rotation = 0.5000002 -0.4999999 0.5000002 -0.5
+	name = PipeCorner_52
+}
+entity
+{
+	type = PipeDirect4
+	uin = 127
+	classPrompt = MapObject
+	position = -21.2 10.9 8.599998
+	rotation = 0 0 -1 0
+	name = PipeDirect4_190
+}
+entity
+{
+	type = PipeCorner
+	uin = 128
+	classPrompt = MapObject
+	position = -19.2 10.9 9.499997
+	rotation = 0.5000002 -0.4999999 0.5000002 -0.5
+	name = PipeCorner_53
+}
+entity
+{
+	type = PipeDirect4
+	uin = 129
+	classPrompt = MapObject
+	position = -21.7 10.9 9.499997
+	rotation = 0 0 -1 0
+	name = PipeDirect4_191
+}
+entity
+{
+	type = PipeCorner
+	uin = 130
+	classPrompt = MapObject
+	position = -19.7 10.9 10.4
+	rotation = 0.5000002 -0.4999999 0.5000002 -0.5
+	name = PipeCorner_54
+}
+entity
+{
+	type = PipeDirect4
+	uin = 131
+	classPrompt = MapObject
+	position = -22.2 10.9 10.4
+	rotation = 0 0 -1 0
+	name = PipeDirect4_192
+}
+entity
+{
+	type = PipeCorner
+	uin = 132
+	classPrompt = MapObject
+	position = -20.2 10.9 11.3
+	rotation = 0.5000002 -0.4999999 0.5000002 -0.5
+	name = PipeCorner_55
+}
+entity
+{
+	type = PipeDirect4
+	uin = 133
+	classPrompt = MapObject
+	position = -22.7 10.9 11.3
+	rotation = 0 0 -1 0
+	name = PipeDirect4_193
+}
+entity
+{
+	type = PipeCorner
+	uin = 134
+	classPrompt = MapObject
+	position = -20.7 10.9 12.2
+	rotation = 0.5000002 -0.4999999 0.5000002 -0.5
+	name = PipeCorner_56
+}
+entity
+{
+	type = PipeDirect4
+	uin = 135
+	classPrompt = MapObject
+	position = -23.2 10.9 12.2
+	rotation = 0 0 -1 0
+	name = PipeDirect4_194
+}
+entity
+{
+	type = PipeCorner
+	uin = 136
+	classPrompt = MapObject
+	position = -21.2 10.9 13.1
+	rotation = 0.5000002 -0.4999999 0.5000002 -0.5
+	name = PipeCorner_57
+}
+entity
+{
+	type = PipeDirect4
+	uin = 137
+	classPrompt = MapObject
+	position = -14.2 4.4 0.5000001
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_196
+}
+entity
+{
+	type = PipeDirect4
+	uin = 138
+	classPrompt = MapObject
+	position = -14.2 8.4 0.5000001
+	rotation = 0 0 -0.7071068 0.7071068
+	name = PipeDirect4_197
+}
+entity
+{
+	type = PipeCorner
+	uin = 139
+	classPrompt = MapObject
+	position = -14.2 1.9 0.5000001
+	rotation = 0.5000001 0.5000001 0.5000001 0.5000001
+	name = PipeCorner_58
+}
+entity
+{
+	type = PipeCorner
+	uin = 140
+	classPrompt = MapObject
+	position = -14.2 10.9 0.5000001
+	rotation = 0.5000002 -0.4999999 0.5000002 -0.5
+	name = PipeCorner_59
+}
+entity
+{
+	type = StaticMesh
+	uin = 141
+	classPrompt = StaticMesh
+	position = 0 0 0
+	editorLayer = Root\StaticGeometry
+	meshName = Models\Rooms\Rooms.mesh
+	splitGeometry = True
+	splitGeometryPieceSize = 30 30 30
+	allowDecals = All
+	castDynamicShadows = True
+}
