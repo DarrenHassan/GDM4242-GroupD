@@ -25,6 +25,7 @@ namespace GameEntities
 		[FieldSerialize]
 		float radius = radiusDefault;
 
+        // Max velocity per second
 		const float maxVelocityDefault = 5;
 		[FieldSerialize]
 		float maxVelocity = maxVelocityDefault;
@@ -95,6 +96,7 @@ namespace GameEntities
 		Vec2 pathFoundedToPosition = new Vec2( float.NaN, float.NaN );
 
 		[FieldSerialize( FieldSerializeSerializationTypes.World )]
+        // A list of 2d coordinates describing a path 
 		List<Vec2> path = new List<Vec2>();
 
 		float pathFindWaitTime;
@@ -107,19 +109,22 @@ namespace GameEntities
 		RTSCharacterType _type = null; public new RTSCharacterType Type { get { return _type; } }
 
 		/// <summary>Overridden from <see cref="Engine.EntitySystem.Entity.OnPostCreate(Boolean)"/>.</summary>
+        /// Called immediately after this object is created
 		protected override void OnPostCreate( bool loaded )
 		{
 			base.OnPostCreate( loaded );
 
 			pathFindWaitTime = World.Instance.Random.NextFloat();
-
+            // Create a physics model for this object
 			CreatePhysicsModel();
 
 			Body body = PhysicsModel.CreateBody();
 			mainBody = body;
 			body.Name = "main";
 			body.Static = true;
+            // Set this object's position
 			body.Position = Position;
+            // Set this object's rotation
 			body.Rotation = Rotation;
 
 			float length = Type.Height - Type.Radius * 2;
@@ -132,7 +137,7 @@ namespace GameEntities
 			shape.Length = length;
 			shape.Radius = Type.Radius;
 			shape.ContactGroup = (int)ContactGroup.Dynamic;
-
+            // Notificiation of OnTick() events
 			AddTimer();
 
 			//!!!!!need?
@@ -200,7 +205,7 @@ namespace GameEntities
 
 			const int maxFieldsDistance = 1000;
 			const int maxFieldsToCheck = 100000;
-
+            // Find a path to the specified position
 			bool found = GridPathFindSystem.Instance.DoFind( Type.Radius * 2 * 1.1f, Position.ToVec2(),
 				MovePosition.ToVec2(), maxFieldsDistance, maxFieldsToCheck, true, false, path );
 
@@ -263,7 +268,7 @@ namespace GameEntities
 			//line movement to path[ 0 ]
 			{
 				Vec2 destPoint = path[ 0 ];
-
+                // The difference between the first point in the path and this object's current position
 				Vec2 diff = destPoint - Position.ToVec2();
 
 				if( diff == Vec2.Zero )
@@ -277,15 +282,18 @@ namespace GameEntities
 				float halfAngle = dir * 0.5f;
 				Quat rot = new Quat( new Vec3( 0, 0, MathFunctions.Sin16( halfAngle ) ),
 					MathFunctions.Cos16( halfAngle ) );
+                // Rotate the object
 				Rotation = rot;
-
+                // Normalise the difference vector
 				Vec2 dirVector = diff.GetNormalizeFast();
+                // The difference vector multiplied by the velocity per 1/30 second
 				Vec2 dirStep = dirVector * ( Type.MaxVelocity * TickDelta );
-
+                // Calculate the object's new position
 				Vec2 newPos = Position.ToVec2() + dirStep;
-
+                // If the first point in the path is less than the direction step
 				if( Math.Abs( diff.X ) <= Math.Abs( dirStep.X ) && Math.Abs( diff.Y ) <= Math.Abs( dirStep.Y ) )
 				{
+                    // then move to the first position in the path
 					//unit at point
 					newPos = path[ 0 ];
 					path.RemoveAt( 0 );
@@ -306,6 +314,7 @@ namespace GameEntities
 				if( free )
 				{
 					float newZ = GridPathFindSystem.Instance.GetMotionMapHeight( newPos ) + Type.Height * .5f;
+                    // Set the object's position
 					Position = new Vec3( newPos.X, newPos.Y, newZ );
 				}
 				else
