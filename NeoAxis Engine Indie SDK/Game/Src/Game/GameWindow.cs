@@ -77,6 +77,11 @@ namespace Game
 				return true;
 			}
 
+            if (e.Key == EKeys.F5)
+            {
+                Engine.Utils.DebugWindow.Instance.Show();
+            }
+
 			//simulation pause 
 			if( e.Key == EKeys.F8 )
 			{

@@ -48,6 +48,7 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DebugWindow, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="DecorativeObjectManager, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
     <Reference Include="EngineApp, Version=0.8.5.2, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="EntitySystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=MSIL" />
@@ -63,6 +64,7 @@
     <Reference Include="SoundSystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="UISystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Utils, Version=0.8.5.2, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
