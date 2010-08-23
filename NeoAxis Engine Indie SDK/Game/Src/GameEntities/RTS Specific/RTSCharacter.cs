@@ -105,7 +105,7 @@ namespace GameEntities
 		Vec3 mainBodyVelocity;
 
 		//
-
+        // A field needed by the resource editor
 		RTSCharacterType _type = null; public new RTSCharacterType Type { get { return _type; } }
 
 		/// <summary>Overridden from <see cref="Engine.EntitySystem.Entity.OnPostCreate(Boolean)"/>.</summary>
@@ -122,9 +122,9 @@ namespace GameEntities
 			mainBody = body;
 			body.Name = "main";
 			body.Static = true;
-            // Set this object's position
+            // Set this object's initial position on the map
 			body.Position = Position;
-            // Set this object's rotation
+            // Set this object's initial rotation on the map
 			body.Rotation = Rotation;
 
 			float length = Type.Height - Type.Radius * 2;

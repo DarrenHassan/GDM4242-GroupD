@@ -369,6 +369,7 @@ namespace Game
 						}
 						break;
 
+                    // Could be relavent for the building of ant structures?
 					//BuildBuilding
 					case RTSUnitAI.Task.Types.BuildBuilding:
 						{

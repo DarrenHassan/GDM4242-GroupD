@@ -1,0 +1,264 @@
+type = GameMap
+uin = 2
+classPrompt = GameMap
+gameType = RTS
+gameMusic = Sounds\Music\Game.ogg
+ambientLight = 0.2 0.2 0.2
+editorCameraPosition = 268.55 306.3976 33.80911
+editorCameraDirection = 0.4506089 -0.431613
+shadowColor = 1 1 1
+logicSystemManager = 3
+name = GameMap_0
+shadowTechnique = ShadowmapMedium
+rootEditorLayer
+{
+}
+entity
+{
+	type = LogicSystemManager
+	uin = 3
+	mapClassManager = 4
+	entity
+	{
+		type = LogicClassManager
+		uin = 4
+	}
+}
+entity
+{
+	type = HeightmapTerrain
+	uin = 5
+	classPrompt = HeightmapTerrain
+	position = 0 0 -100
+	horizontalSize = 1000
+	verticalSize = 200
+	dataDirectory = HeightmapTerrain
+	masksSize = 1024
+	detailMapsDistance = 200
+	renderQueueGroup = WorldGeometry1
+	collisionMaterialName = Default
+	bottomClipHeight = -10000
+	castDynamicShadows = False
+	receiveStaticShadows = True
+	simpleRendering = False
+	tileSize = 16
+	layers
+	{
+		item
+		{
+			name = Sand Golden
+			baseMap = Types\Base\HeightmapTerrain\DefaultLayer1Base.jpg
+			baseScale = 10
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
+			detailScale = 25
+		}
+		item
+		{
+			name = Mud Cracked
+			baseMap = Types\Base\HeightmapTerrain\MudBase2.jpg
+			baseScale = 30
+			detailMap = Types\Base\HeightmapTerrain\MudDetailDrkGreen.jpg
+			detailScale = 75
+			normalMap = " "
+		}
+		item
+		{
+			name = Mud Wet
+			baseMap = Types\Base\HeightmapTerrain\MudBase2DARKDARKblue.jpg
+			baseScale = 10
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
+			detailScale = 10
+			normalMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
+		}
+		item
+		{
+			name = Moss
+			baseMap = Types\Base\HeightmapTerrain\MossBaseBrownMixSmooth4.jpg
+			baseScale = 50
+			detailMap = Types\Base\HeightmapTerrain\MossDetailNew2.jpg
+			detailScale = 50
+		}
+		item
+		{
+			name = Sand Chestnut
+			baseMap = Types\Base\HeightmapTerrain\SandDarkBase.jpg
+			baseScale = 25
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
+			detailScale = 25
+		}
+		item
+		{
+			name = Sand Beige
+			baseMap = Types\Base\HeightmapTerrain\SandDarkGreyBase.jpg
+			baseScale = 25
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
+			detailScale = 25
+		}
+		item
+		{
+			name = Rocky Ground
+			baseMap = Types\Base\HeightmapTerrain\SandDarkGreyBase2.jpg
+			baseScale = 30
+			detailMap = Types\Base\HeightmapTerrain\RockyGroundDetail.jpg
+			detailScale = 50
+		}
+		item
+		{
+			name = Rocky Ground Dark
+			baseMap = Types\Base\HeightmapTerrain\SandDarkBase.jpg
+			baseScale = 10
+			detailMap = Types\Base\HeightmapTerrain\RockyGroundDetail.jpg
+			detailScale = 50
+		}
+		item
+		{
+			name = Rocky Ground Dark 2
+			baseMap = Types\Base\HeightmapTerrain\MudBase2.jpg
+			baseScale = 50
+			detailMap = Types\Base\HeightmapTerrain\RockyGroundDetail.jpg
+			detailScale = 50
+		}
+	}
+}
+entity
+{
+	type = Light
+	uin = 6
+	classPrompt = Light
+	lightType = Directional
+	diffuseColor = 0.9921569 1 0.5686275
+	diffusePower = 1.505
+	specularColor = 0 0 0
+	specularPower = 1
+	attenuationRangeAutomatic = True
+	attenuationRange = Infinity
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0
+	spotlightInnerAngle = 30
+	spotlightOuterAngle = 40
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	allowDynamicLighting = True
+	position = 82.15356 -8.709808 538.7281
+	rotation = 0.5567204 -0.2506999 -0.7737664 -0.1688121
+	name = Light_0
+}
+entity
+{
+	type = WaterPlane
+	uin = 7
+	classPrompt = WaterPlane
+	size = 550 500
+	position = 230 -250 -15
+	segments = 20 20
+	renderQueueGroup = Queue3
+	reflectionLevel = OnlyModels
+	physicsHeight = 0
+	deepColor = 0 0.3 0.5
+	shallowColor = 0 1 1
+	reflectionColor = 1 1 1
+	reflectionTextureSize = HalfOfFrameBuffer
+	visible = True
+	fixedPipelineMap = Types\Special\WaterPlane\WaterFixedPipeline.jpg
+	fixedPipelineMapTiling = 10
+	fixedPipelineColor = 0 0.3 0.5
+}
+entity
+{
+	type = RTSRobot
+	uin = 8
+	classPrompt = RTSCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 343.6115 346.1906 1.730464
+	name = RTSRobot_0
+}
+entity
+{
+	type = RTSRobot
+	uin = 9
+	classPrompt = RTSCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 332.7122 353.7491 1.727629
+	name = RTSRobot_1
+}
+entity
+{
+	type = RTSFactionManager
+	uin = 10
+	classPrompt = RTSFactionManager
+	factions
+	{
+		item
+		{
+			factionType = GoodFaction
+			money = 1000
+		}
+		item
+		{
+			factionType = BadFaction
+			money = 500
+		}
+	}
+}
+entity
+{
+	type = RTSGridPathFindSystem
+	uin = 11
+	classPrompt = RTSGridPathFindSystem
+	heightByTerrainOnly = False
+	debugDrawDistance = 100
+}
+entity
+{
+	type = RTSConstructor
+	uin = 12
+	classPrompt = RTSCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = BadFaction
+	position = 210.1888 280.7484 32.23239
+	name = RTSConstructor_0
+}
+entity
+{
+	type = RTSConstructor
+	uin = 13
+	classPrompt = RTSCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = BadFaction
+	position = 210.567 287.3235 32.23414
+	name = RTSConstructor_1
+}
+entity
+{
+	type = RTSRobot
+	uin = 14
+	classPrompt = RTSCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = BadFaction
+	position = 213.118 270.9177 32.22973
+	name = RTSRobot_2
+}
+entity
+{
+	type = RTSFactory
+	uin = 15
+	classPrompt = RTSBuilding
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 344.5082 334.5306 3.019239
+	name = RTSFactory_0
+}
+entity
+{
+	type = RTSFactory
+	uin = 16
+	classPrompt = RTSBuilding
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = BadFaction
+	position = 210.6741 374.5731 4.611359
+	name = RTSFactory_1
+}
