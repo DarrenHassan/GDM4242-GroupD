@@ -138,7 +138,19 @@ Maps will consist of different types of terrain.
  While the map is blackened its state can change, for example, an area of
  the map that had previously contained a food source could be replaced by
  a human foot print when next revealed.
- Characteristics common to all maps will include:
+ 
+\end_layout
+
+\begin_layout Standard
+During the course of a game the map will transition from dawn to dusk and
+ eventually night.
+ The progression of a day will be achieved by moving the light source, in
+ an arc, across the map, which will cause different shadows to be cast as
+ the game progresses.
+\end_layout
+
+\begin_layout Standard
+Characteristics common to all maps will include:
 \end_layout
 
 \begin_layout Itemize
@@ -547,6 +559,20 @@ A
 barracks
 \emph default
  for housing and training warrior ants.
+ 
+\end_layout
+
+\begin_layout Subsection
+Flying Ants
+\end_layout
+
+\begin_layout Standard
+A colony also possess flying ants.
+ Flying ant are ideal for reconnaissance mission, as they are able to see
+ further than the other ant guilds and travel faster.
+ However, flying ants are weak and must land often to recoup their energy.
+ When grounded, flying ant are very vulnerable and easily killed by enemy
+ ants.
  
 \end_layout
 
