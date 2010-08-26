@@ -1,0 +1,106 @@
+type = GameMap
+uin = 2
+classPrompt = GameMap
+gameMusic = Sounds\Music\Game.ogg
+ambientLight = 0.2 0.2 0.2
+editorCameraPosition = -141.5136 -204.4597 276.5822
+editorCameraDirection = 0.8700429 -1.112942
+shadowColor = 1 1 1
+logicSystemManager = 3
+shadowTechnique = ShadowmapMedium
+rootEditorLayer
+{
+}
+entity
+{
+	type = LogicSystemManager
+	uin = 3
+	mapClassManager = 4
+	entity
+	{
+		type = LogicClassManager
+		uin = 4
+	}
+}
+entity
+{
+	type = HeightmapTerrain
+	uin = 5
+	classPrompt = HeightmapTerrain
+	position = 0 0 -50
+	horizontalSize = 1000
+	verticalSize = 100
+	dataDirectory = HeightmapTerrain
+	masksSize = 1024
+	detailMapsDistance = 200
+	renderQueueGroup = WorldGeometry1
+	collisionMaterialName = Default
+	bottomClipHeight = -10000
+	castDynamicShadows = False
+	receiveStaticShadows = True
+	simpleRendering = False
+	tileSize = 16
+	layers
+	{
+		item
+		{
+			name = base
+			baseMap = Types\Base\HeightmapTerrain\DefaultLayer0Base.jpg
+			baseScale = 10
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer0Detail.jpg
+			detailScale = 2
+		}
+		item
+		{
+			name = second
+			baseMap = Types\Base\HeightmapTerrain\DefaultLayer1Base.jpg
+			baseScale = 10
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
+			detailScale = 2
+		}
+	}
+}
+entity
+{
+	type = Light
+	uin = 6
+	classPrompt = Light
+	lightType = Point
+	diffuseColor = 1 1 1
+	diffusePower = 1
+	specularColor = 0 0 0
+	specularPower = 1
+	attenuationRangeAutomatic = True
+	attenuationRange = Infinity
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0
+	spotlightInnerAngle = 30
+	spotlightOuterAngle = 40
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	allowDynamicLighting = True
+	position = -48.9899 88.74218 324.8924
+	name = Light_0
+}
+entity
+{
+	type = WaterPlane
+	uin = 7
+	classPrompt = WaterPlane
+	size = 300 300
+	position = -70 40 -10
+	segments = 20 20
+	renderQueueGroup = Queue3
+	reflectionLevel = OnlyModels
+	physicsHeight = 0
+	deepColor = 0 0.3 0.5
+	shallowColor = 0 1 1
+	reflectionColor = 1 1 1
+	reflectionTextureSize = HalfOfFrameBuffer
+	visible = True
+	fixedPipelineMap = Types\Special\WaterPlane\WaterFixedPipeline.jpg
+	fixedPipelineMapTiling = 10
+	fixedPipelineColor = 0 0.3 0.5
+}
