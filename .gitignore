@@ -3,7 +3,7 @@
 #Thumbs.db
 #Ignore files built by Visual Studio
 
-*.obj
+#*.obj
 ##### *.exe
 *.pdb
 *.user
@@ -62,3 +62,5 @@ _Temp/
 /NeoAxis Engine Indie SDK/Game/Src/UpgradeLog.XML
 
 /NeoAxis Engine Indie SDK/Game/Bin/UserSettings
+
+/NeoAxis Engine Indie SDK/*.obj
