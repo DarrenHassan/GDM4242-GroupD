@@ -1,0 +1,10 @@
+highLevelMaterial AntRTSMap
+{
+	template = ShaderBaseMaterial
+	specularColor = 0.227451 0.227451 0.227451
+	specularShininess = 14.73
+	diffuse1Map
+	{
+		texture = Models\AntRTSMap1\AntRTSMapDiffuse.dds
+	}
+}
