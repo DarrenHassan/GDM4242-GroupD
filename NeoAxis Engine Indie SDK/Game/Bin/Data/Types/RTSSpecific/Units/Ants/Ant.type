@@ -1,0 +1,17 @@
+type Ant
+{
+	class = Ant
+	initialAI = DefaultRTSUnitAI
+	lifeMax = 150
+	substance = Metal
+	allowEditorCreate = True
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Models\Ant\ant2.mesh
+			castDynamicShadows = True
+			rotation = -0.3001245 0 0 0.9539
+		}
+	}
+}

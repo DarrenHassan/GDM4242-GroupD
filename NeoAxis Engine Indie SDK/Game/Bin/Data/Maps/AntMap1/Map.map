@@ -4,8 +4,8 @@ classPrompt = GameMap
 gameType = RTS
 gameMusic = Sounds\Music\Game.ogg
 ambientLight = 0.2 0.2 0.2
-editorCameraPosition = 268.55 306.3976 33.80911
-editorCameraDirection = 0.4506089 -0.431613
+editorCameraPosition = 291.0177 309.1768 1.557383
+editorCameraDirection = 0.3779578 -0.03909215
 shadowColor = 1 1 1
 logicSystemManager = 3
 name = GameMap_0
@@ -167,28 +167,8 @@ entity
 }
 entity
 {
-	type = RTSRobot
-	uin = 8
-	classPrompt = RTSCharacter
-	intellectShouldDeleteAfterDetach = False
-	initialFaction = GoodFaction
-	position = 343.6115 346.1906 1.730464
-	name = RTSRobot_0
-}
-entity
-{
-	type = RTSRobot
-	uin = 9
-	classPrompt = RTSCharacter
-	intellectShouldDeleteAfterDetach = False
-	initialFaction = GoodFaction
-	position = 332.7122 353.7491 1.727629
-	name = RTSRobot_1
-}
-entity
-{
 	type = RTSFactionManager
-	uin = 10
+	uin = 8
 	classPrompt = RTSFactionManager
 	factions
 	{
@@ -207,58 +187,48 @@ entity
 entity
 {
 	type = RTSGridPathFindSystem
-	uin = 11
+	uin = 9
 	classPrompt = RTSGridPathFindSystem
 	heightByTerrainOnly = False
 	debugDrawDistance = 100
 }
 entity
 {
-	type = RTSConstructor
-	uin = 12
-	classPrompt = RTSCharacter
-	intellectShouldDeleteAfterDetach = False
-	initialFaction = BadFaction
-	position = 210.1888 280.7484 32.23239
-	name = RTSConstructor_0
-}
-entity
-{
-	type = RTSConstructor
-	uin = 13
-	classPrompt = RTSCharacter
-	intellectShouldDeleteAfterDetach = False
-	initialFaction = BadFaction
-	position = 210.567 287.3235 32.23414
-	name = RTSConstructor_1
-}
-entity
-{
-	type = RTSRobot
-	uin = 14
-	classPrompt = RTSCharacter
-	intellectShouldDeleteAfterDetach = False
-	initialFaction = BadFaction
-	position = 213.118 270.9177 32.22973
-	name = RTSRobot_2
-}
-entity
-{
-	type = RTSFactory
-	uin = 15
-	classPrompt = RTSBuilding
+	type = Ant
+	uin = 10
+	classPrompt = Ant
 	intellectShouldDeleteAfterDetach = False
 	initialFaction = GoodFaction
-	position = 344.5082 334.5306 3.019239
-	name = RTSFactory_0
+	position = 323.5895 313.5332 1.512382
+	name = Ant_0
 }
 entity
 {
-	type = RTSFactory
-	uin = 16
-	classPrompt = RTSBuilding
+	type = Ant
+	uin = 11
+	classPrompt = Ant
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 316.549 327.6627 1.512751
+	name = Ant_1
+}
+entity
+{
+	type = Ant
+	uin = 12
+	classPrompt = Ant
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 303.1047 317.9817 1.510686
+	name = Ant_2
+}
+entity
+{
+	type = Ant
+	uin = 13
+	classPrompt = Ant
 	intellectShouldDeleteAfterDetach = False
 	initialFaction = BadFaction
-	position = 210.6741 374.5731 4.611359
-	name = RTSFactory_1
+	position = 106.1488 288.5212 3.714667
+	name = Ant_3
 }

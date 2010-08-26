@@ -259,7 +259,7 @@
 		<boneparent bone="Bone.027" parent="Bone.026" />
 	</bonehierarchy>
 	<animations>
-		<animation name="Walk" length="0.421053">
+		<animation name="walk" length="0.421053">
 			<tracks>
 				<track bone="Bone.001">
 					<keyframes>
