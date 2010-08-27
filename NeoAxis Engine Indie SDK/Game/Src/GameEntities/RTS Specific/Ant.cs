@@ -7,16 +7,6 @@ namespace GameEntities.RTS_Specific
 {
     public class AntType : RTSCharacterType
     {
-        /*[FieldSerialize]
-        [DefaultValue("Walk")]
-        string walkAnimationName = "Walk";
-        
-        [DefaultValue("Walk")]
-        public new string WalkAnimationName
-        {
-            get { return walkAnimationName; }
-            set { walkAnimationName = value; }
-        }*/
     }
     public class Ant : RTSCharacter
     {
