@@ -1,0 +1,36 @@
+type RTS_Ant
+{
+	class = RTSCharacter
+	maxVelocity = 15
+	walkAnimationName = Walk
+	walkAnimationVelocityMultiplier = 0.07
+	buildCost = 10
+	allowPlayerControl = True
+	initialAI = DefaultRTSUnitAI
+	viewRadius = 5
+	lifeMax = 200
+	substance = Flesh
+	physicsModel = Types\Units\Bug\BugDead\BugDead.physics
+	allowEditorCreate = True
+	networkType = Synchronized
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Models\Ant\ant2.mesh
+			castDynamicShadows = True
+			forceMaterial = ant2
+			collision = True
+			castStaticShadows = True
+			receiveStaticShadows = True
+			position = -0.6781096 -0.6822622 2.288435
+			rotation = -0.2123751 -0.2165558 0.6870239 0.6603019
+		}
+		mesh
+		{
+			meshName = Types\Weapons\SubmachineGun\SubmachineGun.mesh
+			position = 0.6623755 -0.6583437 2.984032
+			rotation = 0 0 -0.02476925 -0.9996932
+		}
+	}
+}
