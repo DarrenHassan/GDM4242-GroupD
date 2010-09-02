@@ -667,6 +667,7 @@ namespace GameEntities
 		{
 			List<UserControlPanelTask> list = new List<UserControlPanelTask>();
 
+            // Adds these task to the control panel by default
 			list.Add( new UserControlPanelTask( new Task( Task.Types.Stop ), currentTask.Type == Task.Types.Stop ) );
 			list.Add( new UserControlPanelTask( new Task( Task.Types.Move ),
 				currentTask.Type == Task.Types.Move || currentTask.Type == Task.Types.BreakableMove ) );
@@ -679,6 +680,7 @@ namespace GameEntities
 
 				RTSBuildingType buildingType;
 
+                // Adds these task to the control panel if the entity selected is an RTSConstructor
 				buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName( "RTSHeadquaters" );
 				list.Add( new UserControlPanelTask( new Task( Task.Types.BuildBuilding, buildingType ),
 					CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType ) );

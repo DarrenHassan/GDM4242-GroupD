@@ -57,7 +57,9 @@
     <Reference Include="Renderer, Version=0.8.5.2, Culture=neutral, processorArchitecture=x86" />
     <Reference Include="SoundSystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
     <Reference Include="UISystem, Version=0.8.5.2, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Utils, Version=0.8.5.2, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
