@@ -4,8 +4,8 @@ classPrompt = GameMap
 gameType = RTS
 gameMusic = Sounds\Music\Game.ogg
 ambientLight = 0.2 0.2 0.2
-editorCameraPosition = 291.0177 309.1768 1.557383
-editorCameraDirection = 0.3779578 -0.03909215
+editorCameraPosition = 274.8798 287.7758 124.6541
+editorCameraDirection = 2.312256 -1.360796
 shadowColor = 1 1 1
 logicSystemManager = 3
 name = GameMap_0
@@ -194,41 +194,83 @@ entity
 }
 entity
 {
-	type = Ant
+	type = GenericAnt
 	uin = 10
-	classPrompt = Ant
+	classPrompt = GenericAntCharacter
 	intellectShouldDeleteAfterDetach = False
+	initialAI = DefaultRTSUnitAI
 	initialFaction = GoodFaction
-	position = 323.5895 313.5332 1.512382
-	name = Ant_0
+	position = 339.0028 353.8297 1.44843
+	name = GenericAnt_0
 }
 entity
 {
-	type = Ant
+	type = GenericAnt
 	uin = 11
-	classPrompt = Ant
-	intellectShouldDeleteAfterDetach = False
-	initialFaction = GoodFaction
-	position = 316.549 327.6627 1.512751
-	name = Ant_1
-}
-entity
-{
-	type = Ant
-	uin = 12
-	classPrompt = Ant
-	intellectShouldDeleteAfterDetach = False
-	initialFaction = GoodFaction
-	position = 303.1047 317.9817 1.510686
-	name = Ant_2
-}
-entity
-{
-	type = Ant
-	uin = 13
-	classPrompt = Ant
+	classPrompt = GenericAntCharacter
 	intellectShouldDeleteAfterDetach = False
 	initialFaction = BadFaction
-	position = 106.1488 288.5212 3.714667
-	name = Ant_3
+	position = 197.6515 309.6121 31.95283
+	name = GenericAnt_2
+}
+entity
+{
+	type = GenericAnt
+	uin = 12
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = BadFaction
+	position = 204.9428 289.9612 31.95388
+	name = GenericAnt_3
+}
+entity
+{
+	type = GenericAnt
+	uin = 13
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialAI = DefaultRTSUnitAI
+	initialFaction = GoodFaction
+	position = 338.1174 367.3427 1.448691
+	name = GenericAnt_1
+}
+entity
+{
+	type = RTSConstructor
+	uin = 14
+	classPrompt = RTSCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 349.2862 365.8245 1.727503
+	name = RTSConstructor_0
+}
+entity
+{
+	type = RTSRobot
+	uin = 15
+	classPrompt = RTSCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 327.9037 357.9964 1.730461
+	name = RTSRobot_0
+}
+entity
+{
+	type = RTSConstructor
+	uin = 16
+	classPrompt = RTSCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = BadFaction
+	position = 197.7177 299.4461 32.23564
+	name = RTSConstructor_1
+}
+entity
+{
+	type = RTSRobot
+	uin = 17
+	classPrompt = RTSCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = BadFaction
+	position = 208.107 280.129 32.23202
+	name = RTSRobot_1
 }
