@@ -13,7 +13,7 @@ namespace GameEntities.RTS_Specific
 {
     public class GenericAntCharacterType : RTSUnitType
     {
-        const float heightDefault = 7.0f;
+        const float heightDefault = 3.0f;
         [FieldSerialize]
         float height = heightDefault;
 
@@ -126,16 +126,16 @@ namespace GameEntities.RTS_Specific
             body.Static = true;
             body.Position = Position;
             body.Rotation = Rotation;
-            float AntLength = Type.Height - Type.AntRadius * 2;
+            /*float AntLength = Type.Height - Type.AntRadius * 2;
             if (AntLength < 0)
             {
                 Log.Error("Error: Length < 0");
                 return;
-            }
+            }*/
             CapsuleShape shape = body.CreateCapsuleShape();
             //CylinderShape shape = body.CreateCylinderShape();
             //BoxShape shape = body.CreateBoxShape();
-            shape.Length = AntLength;
+            shape.Length = Type.Height;
             shape.Radius = Type.AntRadius;
             shape.ContactGroup = (int)ContactGroup.Dynamic;
 
