@@ -187,7 +187,7 @@ namespace GameEntities.RTS_Specific
             Dynamic targetObj = null;
             {
                 //not true because use Intellect
-                RTSUnitAI ai = Intellect as RTSUnitAI;
+                AntUnitAI ai = Intellect as AntUnitAI;
                 if (ai != null)
                     targetObj = ai.CurrentTask.Entity;
             }
@@ -235,6 +235,7 @@ namespace GameEntities.RTS_Specific
 
         void TickMove()
         {
+
             //path find control
             {
                 if (pathFindWaitTime != 0)
@@ -244,13 +245,16 @@ namespace GameEntities.RTS_Specific
                         pathFindWaitTime = 0;
                 }
 
+                // If a path has not been found to the target and the time to wait is zero
                 if (pathFoundedToPosition != MovePosition.ToVec2() && pathFindWaitTime == 0)
                     path.Clear();
 
+                // If we don't have a path
                 if (path.Count == 0)
                 {
                     if (pathFindWaitTime == 0)
                     {
+                        // Find a path to move position
                         if (DoPathFind())
                         {
                             pathFoundedToPosition = MovePosition.ToVec2();
@@ -258,6 +262,7 @@ namespace GameEntities.RTS_Specific
                         }
                         else
                         {
+                            // If a path has not been found, re-try in 1 second
                             pathFindWaitTime = 1.0f;
                         }
                     }

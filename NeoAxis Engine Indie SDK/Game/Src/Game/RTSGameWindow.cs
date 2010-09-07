@@ -14,6 +14,7 @@ using Engine.FileSystem;
 using Engine.Utils;
 using GameCommon;
 using GameEntities;
+using GameEntities.RTS_Specific;
 
 namespace Game
 {
@@ -313,36 +314,37 @@ namespace Game
 			return base.OnMouseUp( button );
 		}
 
-		bool IsEnableTaskTypeInTasks( List<RTSUnitAI.UserControlPanelTask> tasks, RTSUnitAI.Task.Types taskType )
+		bool IsEnableTaskTypeInTasks( List<AntUnitAI.UserControlPanelTask> tasks, AntUnitAI.Task.Types taskType )
 		{
 			if( tasks == null )
 				return false;
-			foreach( RTSUnitAI.UserControlPanelTask task in tasks )
+			foreach( AntUnitAI.UserControlPanelTask task in tasks )
 				if( task.Task.Type == taskType && task.Enable )
 					return true;
 			return false;
 		}
 
+        // Called when selecting an object to perform a task
 		void DoTaskTargetChooseTasks( Vec3 mouseMapPos, Unit mouseOnObject )
 		{
 			//Do task after task target choose
 
 			bool toQueue = EngineApp.Instance.IsKeyPressed( EKeys.Shift );
 
-			List<RTSUnitAI.UserControlPanelTask> tasks = GetControlTasks();
+			List<AntUnitAI.UserControlPanelTask> tasks = GetControlTasks();
 			int index = TaskTargetChooseIndex;
 
 			if( tasks != null && index < tasks.Count && tasks[ index ].Enable )
 			{
 				foreach( Unit unit in selectedUnits )
 				{
-					RTSUnitAI intellect = unit.Intellect as RTSUnitAI;
+					AntUnitAI intellect = unit.Intellect as AntUnitAI;
 					if( intellect == null )
 						continue;
 
-					RTSUnitAI.Task.Types taskType = tasks[ index ].Task.Type;
+					AntUnitAI.Task.Types taskType = tasks[ index ].Task.Type;
 
-					List<RTSUnitAI.UserControlPanelTask> aiTasks = intellect.GetControlPanelTasks();
+					List<AntUnitAI.UserControlPanelTask> aiTasks = intellect.GetControlPanelTasks();
 
 					if( !IsEnableTaskTypeInTasks( aiTasks, taskType ) )
 						continue;
@@ -350,20 +352,22 @@ namespace Game
 					switch( taskType )
 					{
 					//Move, Attack, Repair
-					case RTSUnitAI.Task.Types.Move:
-					case RTSUnitAI.Task.Types.Attack:
-					case RTSUnitAI.Task.Types.Repair:
-						if( mouseOnObject != null )
-							intellect.DoTask( new RTSUnitAI.Task( taskType, mouseOnObject ), toQueue );
+					case AntUnitAI.Task.Types.Move:
+					case AntUnitAI.Task.Types.Attack:
+					case AntUnitAI.Task.Types.Repair:
+						if( mouseOnObject != null ) 
+                            // An entity has been selected
+							intellect.DoTask( new AntUnitAI.Task( taskType, mouseOnObject ), toQueue );
 						else
 						{
-							if( taskType == RTSUnitAI.Task.Types.Move )
-								intellect.DoTask( new RTSUnitAI.Task( taskType, mouseMapPos ), toQueue );
+                            // The position on the map has been clicked
+							if( taskType == AntUnitAI.Task.Types.Move )
+								intellect.DoTask( new AntUnitAI.Task( taskType, mouseMapPos ), toQueue );
 
-							if( taskType == RTSUnitAI.Task.Types.Attack ||
-								taskType == RTSUnitAI.Task.Types.Repair )
+							if( taskType == AntUnitAI.Task.Types.Attack ||
+								taskType == AntUnitAI.Task.Types.Repair )
 							{
-								intellect.DoTask( new RTSUnitAI.Task( RTSUnitAI.Task.Types.BreakableMove,
+								intellect.DoTask( new AntUnitAI.Task( AntUnitAI.Task.Types.BreakableMove,
 									mouseMapPos ), toQueue );
 							}
 						}
@@ -371,7 +375,7 @@ namespace Game
 
                     // Could be relavent for the building of ant structures?
 					//BuildBuilding
-					case RTSUnitAI.Task.Types.BuildBuilding:
+					case AntUnitAI.Task.Types.BuildBuilding:
 						{
 							if( !taskTargetBuildSceneNode.Visible )
 								return;
@@ -402,7 +406,7 @@ namespace Game
 
 							if( IsFreeForBuildTaskTargetBuild( pos ) )
 							{
-								intellect.DoTask( new RTSUnitAI.Task( taskType, pos,
+								intellect.DoTask( new AntUnitAI.Task( taskType, pos,
 									tasks[ index ].Task.EntityType ), toQueue );
 
 								GameEngineApp.Instance.ControlManager.PlaySound(
@@ -428,46 +432,46 @@ namespace Game
 
 			foreach( Unit unit in selectedUnits )
 			{
-				RTSUnitAI intellect = unit.Intellect as RTSUnitAI;
+				AntUnitAI intellect = unit.Intellect as AntUnitAI;
 				if( intellect == null )
 					continue;
 
 				if( intellect.Faction != playerFaction )
 					continue;
 
-				List<RTSUnitAI.UserControlPanelTask> tasks = intellect.GetControlPanelTasks();
+				List<AntUnitAI.UserControlPanelTask> tasks = intellect.GetControlPanelTasks();
 
 				if( mouseOnObject != null )
 				{
 					bool tasked = false;
 
-					if( IsEnableTaskTypeInTasks( tasks, RTSUnitAI.Task.Types.Attack ) &&
+					if( IsEnableTaskTypeInTasks( tasks, AntUnitAI.Task.Types.Attack ) &&
 						mouseOnObject.Intellect != null &&
 						intellect.Faction != null && mouseOnObject.Intellect.Faction != null &&
 						intellect.Faction != mouseOnObject.Intellect.Faction )
 					{
-						intellect.DoTask( new RTSUnitAI.Task( RTSUnitAI.Task.Types.Attack,
+						intellect.DoTask( new AntUnitAI.Task( AntUnitAI.Task.Types.Attack,
 							mouseOnObject ), toQueue );
 						tasked = true;
 					}
 
-					if( IsEnableTaskTypeInTasks( tasks, RTSUnitAI.Task.Types.Repair ) &&
+					if( IsEnableTaskTypeInTasks( tasks, AntUnitAI.Task.Types.Repair ) &&
 						mouseOnObject.Intellect != null &&
 						intellect.Faction != null && mouseOnObject.Intellect.Faction != null &&
 						intellect.Faction == mouseOnObject.Intellect.Faction )
 					{
-						intellect.DoTask( new RTSUnitAI.Task( RTSUnitAI.Task.Types.Repair,
+						intellect.DoTask( new AntUnitAI.Task( AntUnitAI.Task.Types.Repair,
 							mouseOnObject ), toQueue );
 						tasked = true;
 					}
 
-					if( !tasked && IsEnableTaskTypeInTasks( tasks, RTSUnitAI.Task.Types.Move ) )
-						intellect.DoTask( new RTSUnitAI.Task( RTSUnitAI.Task.Types.Move, mouseOnObject ), toQueue );
+					if( !tasked && IsEnableTaskTypeInTasks( tasks, AntUnitAI.Task.Types.Move ) )
+						intellect.DoTask( new AntUnitAI.Task( AntUnitAI.Task.Types.Move, mouseOnObject ), toQueue );
 				}
 				else
 				{
-					if( IsEnableTaskTypeInTasks( tasks, RTSUnitAI.Task.Types.Move ) )
-						intellect.DoTask( new RTSUnitAI.Task( RTSUnitAI.Task.Types.Move, mouseMapPos ), toQueue );
+					if( IsEnableTaskTypeInTasks( tasks, AntUnitAI.Task.Types.Move ) )
+						intellect.DoTask( new AntUnitAI.Task( AntUnitAI.Task.Types.Move, mouseMapPos ), toQueue );
 				}
 			}
 		}
@@ -943,10 +947,10 @@ namespace Game
 						FactionType faction = unit.Intellect.Faction;
 						text += string.Format( "- Faction: {0}\n", faction != null ? faction.ToString() : "null" );
 
-						RTSUnitAI rtsUnitAI = unit.Intellect as RTSUnitAI;
-						if( rtsUnitAI != null )
+						AntUnitAI antUnitAI = unit.Intellect as AntUnitAI;
+						if( antUnitAI != null )
 						{
-							text += string.Format( "- CurrentTask: {0}\n", rtsUnitAI.CurrentTask.ToString() );
+							text += string.Format( "- CurrentTask: {0}\n", antUnitAI.CurrentTask.ToString() );
 						}
 					}
 					else
@@ -1003,9 +1007,9 @@ namespace Game
 			return GridPathFindSystem.Instance.IsFreeInMapMotion( rect );
 		}
 
-		List<RTSUnitAI.UserControlPanelTask> GetControlTasks()
+		List<AntUnitAI.UserControlPanelTask> GetControlTasks()
 		{
-			List<RTSUnitAI.UserControlPanelTask> tasks = null;
+			List<AntUnitAI.UserControlPanelTask> tasks = null;
 
 			if( selectedUnits.Count != 0 )
 			{
@@ -1017,10 +1021,10 @@ namespace Game
 				{
 					foreach( Unit unit in selectedUnits )
 					{
-						RTSUnitAI intellect = unit.Intellect as RTSUnitAI;
+						AntUnitAI intellect = unit.Intellect as AntUnitAI;
 						if( intellect != null )
 						{
-							List<RTSUnitAI.UserControlPanelTask> t = intellect.GetControlPanelTasks();
+							List<AntUnitAI.UserControlPanelTask> t = intellect.GetControlPanelTasks();
 							if( tasks == null )
 							{
 								tasks = t;
@@ -1036,16 +1040,16 @@ namespace Game
 										continue;
 									if( t[ n ].Active )
 									{
-										tasks[ n ] = new RTSUnitAI.UserControlPanelTask(
+										tasks[ n ] = new AntUnitAI.UserControlPanelTask(
 											tasks[ n ].Task, true, tasks[ n ].Enable );
 									}
 
-									if( tasks[ n ].Task.Type == RTSUnitAI.Task.Types.ProductUnit ||
-										tasks[ n ].Task.Type == RTSUnitAI.Task.Types.BuildBuilding )
+									if( tasks[ n ].Task.Type == AntUnitAI.Task.Types.ProductUnit ||
+										tasks[ n ].Task.Type == AntUnitAI.Task.Types.BuildBuilding )
 									{
 										if( tasks[ n ].Task.EntityType != t[ n ].Task.EntityType )
-											tasks[ n ] = new RTSUnitAI.UserControlPanelTask(
-												new RTSUnitAI.Task( RTSUnitAI.Task.Types.None ) );
+											tasks[ n ] = new AntUnitAI.UserControlPanelTask(
+												new AntUnitAI.Task( AntUnitAI.Task.Types.None ) );
 									}
 								}
 							}
@@ -1074,33 +1078,34 @@ namespace Game
 
 			TaskTargetChooseIndex = -1;
 
-			List<RTSUnitAI.UserControlPanelTask> tasks = GetControlTasks();
+			List<AntUnitAI.UserControlPanelTask> tasks = GetControlTasks();
 
 			if( tasks == null || index >= tasks.Count )
 				return;
 			if( !tasks[ index ].Enable )
 				return;
 
-			RTSUnitAI.Task.Types taskType = tasks[ index ].Task.Type;
+			AntUnitAI.Task.Types taskType = tasks[ index ].Task.Type;
 
 			switch( taskType )
 			{
 			//Stop, SelfDestroy
-			case RTSUnitAI.Task.Types.Stop:
-			case RTSUnitAI.Task.Types.SelfDestroy:
+			case AntUnitAI.Task.Types.Stop:
+			case AntUnitAI.Task.Types.SelfDestroy:
 				foreach( Unit unit in selectedUnits )
 				{
-					RTSUnitAI intellect = unit.Intellect as RTSUnitAI;
+					AntUnitAI intellect = unit.Intellect as AntUnitAI;
 					if( intellect == null )
 						continue;
 
 					if( IsEnableTaskTypeInTasks( intellect.GetControlPanelTasks(), taskType ) )
-						intellect.DoTask( new RTSUnitAI.Task( taskType ), false );
+						intellect.DoTask( new AntUnitAI.Task( taskType ), false );
 				}
 				break;
 
+            /*
 			//ProductUnit
-			case RTSUnitAI.Task.Types.ProductUnit:
+			case AntUnitAI.Task.Types.ProductUnit:
 				foreach( Unit unit in selectedUnits )
 				{
 					RTSBuildingAI intellect = unit.Intellect as RTSBuildingAI;
@@ -1108,24 +1113,24 @@ namespace Game
 						continue;
 
 					if( IsEnableTaskTypeInTasks( intellect.GetControlPanelTasks(), taskType ) )
-						intellect.DoTask( new RTSUnitAI.Task( taskType, tasks[ index ].Task.EntityType ), false );
+						intellect.DoTask( new AntUnitAI.Task( taskType, tasks[ index ].Task.EntityType ), false );
 				}
-				break;
+				break; */
 
 			//Move, Attack, Repair
-			case RTSUnitAI.Task.Types.Move:
-			case RTSUnitAI.Task.Types.Attack:
-			case RTSUnitAI.Task.Types.Repair:
+			case AntUnitAI.Task.Types.Move:
+			case AntUnitAI.Task.Types.Attack:
+			case AntUnitAI.Task.Types.Repair:
 				//do taskTargetChoose
 				TaskTargetChooseIndex = index;
 				break;
 
 			//BuildBuilding
-			case RTSUnitAI.Task.Types.BuildBuilding:
+			case AntUnitAI.Task.Types.BuildBuilding:
 				if( selectedUnits.Count == 1 )
 				{
 					Unit unit = selectedUnits[ 0 ];
-					RTSUnitAI intellect = unit.Intellect as RTSUnitAI;
+					AntUnitAI intellect = unit.Intellect as AntUnitAI;
 					if( intellect != null )
 					{
 						//do taskTargetChoose
@@ -1161,7 +1166,7 @@ namespace Game
 
 		void UpdateControlPanel()
 		{
-			List<RTSUnitAI.UserControlPanelTask> tasks = GetControlTasks();
+			List<AntUnitAI.UserControlPanelTask> tasks = GetControlTasks();
 
 			//check for need reset taskTargetChooseIndex
 			if( TaskTargetChooseIndex != -1 )
@@ -1180,7 +1185,7 @@ namespace Game
 				control.Visible = tasks != null && n < tasks.Count;
 
 				if( control.Visible )
-					if( tasks[ n ].Task.Type == RTSUnitAI.Task.Types.None )
+					if( tasks[ n ].Task.Type == AntUnitAI.Task.Types.None )
 						control.Visible = false;
 
 				if( control.Visible )

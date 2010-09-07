@@ -4,8 +4,8 @@ classPrompt = GameMap
 gameType = RTS
 gameMusic = Sounds\Music\Game.ogg
 ambientLight = 0.2 0.2 0.2
-editorCameraPosition = 356.8928 308.2358 82.00158
-editorCameraDirection = 3.131859 -0.9174944
+editorCameraPosition = 355.3498 323.8061 7.699127
+editorCameraDirection = 2.55279 0.06070021
 shadowColor = 1 1 1
 logicSystemManager = 3
 name = GameMap_0
@@ -271,4 +271,24 @@ entity
 	initialFaction = BadFaction
 	position = 208.107 280.129 32.23202
 	name = RTSRobot_1
+}
+entity
+{
+	type = WarriorAnt
+	uin = 18
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 345.993 341.2045 1.5
+	name = WarriorAnt_0
+}
+entity
+{
+	type = WarriorAnt
+	uin = 19
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 337.8094 337.7094 1.5
+	name = WarriorAnt_1
 }

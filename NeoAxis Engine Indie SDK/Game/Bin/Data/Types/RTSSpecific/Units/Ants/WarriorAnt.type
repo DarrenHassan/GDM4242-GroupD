@@ -1,8 +1,9 @@
-type GenericAnt
+type WarriorAnt
 {
 	class = GenericAntCharacter
 	maxVelocity = 15
 	walkAnimationVelocityMultiplier = 0.07
+	optimalAttackDistanceRange = 0 1
 	buildCost = 10
 	allowPlayerControl = True
 	initialAI = DefaultAntUnitAI
