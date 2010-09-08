@@ -336,13 +336,37 @@ namespace Game
 
 			if( tasks != null && index < tasks.Count && tasks[ index ].Enable )
 			{
+
+                // Have more than one ant been selected to move
+                AntUnitAI.Task.Types taskType = tasks[ index ].Task.Type;
+                if (taskType == AntUnitAI.Task.Types.Move &&
+                    selectedUnits.Count > 1)
+                {
+                    // Find the destination
+                    Vec2 destination;
+                    if (mouseOnObject != null)
+                        destination = mouseOnObject.Position.ToVec2();
+                    else 
+                        destination = mouseMapPos.ToVec2();
+
+                    // Order the selected units by distance to the destination
+                    selectedUnits.Sort(delegate(Unit u1, Unit u2)
+                    {
+                        float u1Distance = (u1.Position.ToVec2() - destination).LengthFast();
+                        float u2Distance = (u2.Position.ToVec2() - destination).LengthFast();
+                        return u1Distance.CompareTo(u2Distance);
+                    });
+                }
+
+                // The last ant to be moved in the group of selected ants
+                Unit lastUnit = null;
 				foreach( Unit unit in selectedUnits )
 				{
 					AntUnitAI intellect = unit.Intellect as AntUnitAI;
 					if( intellect == null )
 						continue;
 
-					AntUnitAI.Task.Types taskType = tasks[ index ].Task.Type;
+					//AntUnitAI.Task.Types taskType = tasks[ index ].Task.Type;
 
 					List<AntUnitAI.UserControlPanelTask> aiTasks = intellect.GetControlPanelTasks();
 
@@ -351,8 +375,23 @@ namespace Game
 
 					switch( taskType )
 					{
-					//Move, Attack, Repair
+					//Move
 					case AntUnitAI.Task.Types.Move:
+                        if (lastUnit == null)
+                        {
+                            // This is the first ant to be moved in the group of selected ants
+                            if (mouseOnObject != null)
+                                intellect.DoTask(new AntUnitAI.Task(taskType, mouseOnObject), toQueue);
+                            else
+                                intellect.DoTask(new AntUnitAI.Task(taskType, mouseMapPos), toQueue);
+                        }
+                        else
+                            // This is one of the following ants
+                            intellect.DoTask(new AntUnitAI.Task(taskType, lastUnit), toQueue);
+                        // The next ant will follow this ant
+                        lastUnit = unit;
+                        break;
+                    // Attack, Repair
 					case AntUnitAI.Task.Types.Attack:
 					case AntUnitAI.Task.Types.Repair:
 						if( mouseOnObject != null ) 

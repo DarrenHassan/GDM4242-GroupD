@@ -17,7 +17,7 @@ namespace GameEntities.RTS_Specific
         [FieldSerialize]
         float height = heightDefault;
 
-        const float antRadiusDefault = 3.0f;
+        const float antRadiusDefault = 4.0f;
         [FieldSerialize]
         float antRadius = antRadiusDefault;
 

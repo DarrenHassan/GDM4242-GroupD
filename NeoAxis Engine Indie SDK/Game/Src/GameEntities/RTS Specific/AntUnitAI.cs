@@ -378,6 +378,18 @@ namespace GameEntities.RTS_Specific
 
 			//Move
 			case Task.Types.Move:
+                if (currentTask.Entity != null)
+                {
+                    // Move to within a certain distance of the entity we're moving to
+                    if ((controlledObj.Position.ToVec2() - currentTask.Entity.Position.ToVec2()).LengthFast() > 10f)
+                        controlledObj.Move(currentTask.Entity.Position);
+                    else
+                        // but no closer
+                        controlledObj.Stop();
+                }
+                else
+                    controlledObj.Move(currentTask.Position);
+                break;
 			case Task.Types.BreakableMove:
 				if( currentTask.Entity != null )
 				{
