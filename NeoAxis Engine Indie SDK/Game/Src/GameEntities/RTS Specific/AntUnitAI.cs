@@ -50,6 +50,7 @@ namespace GameEntities.RTS_Specific
 				Stop,
 				BreakableAttack,//for automatic attacks
 				Hold,
+                TrailMove,
 				Move,
 				BreakableMove,//for automatic attacks
 				Attack,
@@ -377,7 +378,7 @@ namespace GameEntities.RTS_Specific
 				break;
 
 			//Move
-			case Task.Types.Move:
+			case Task.Types.TrailMove:
                 if (currentTask.Entity != null)
                 {
                     // Move to within a certain distance of the entity we're moving to
@@ -390,6 +391,7 @@ namespace GameEntities.RTS_Specific
                 else
                     controlledObj.Move(currentTask.Position);
                 break;
+            case Task.Types.Move:
 			case Task.Types.BreakableMove:
 				if( currentTask.Entity != null )
 				{
@@ -698,6 +700,7 @@ namespace GameEntities.RTS_Specific
 			list.Add( new UserControlPanelTask( new Task( Task.Types.Stop ), currentTask.Type == Task.Types.Stop ) );
 			list.Add( new UserControlPanelTask( new Task( Task.Types.Move ),
 				currentTask.Type == Task.Types.Move || currentTask.Type == Task.Types.BreakableMove ) );
+            list.Add(new UserControlPanelTask( new Task(Task.Types.TrailMove), currentTask.Type == Task.Types.TrailMove));
 
 			//RTSConstructor specific
 			if( ControlledObject.Type.Name == "RTSConstructor" )

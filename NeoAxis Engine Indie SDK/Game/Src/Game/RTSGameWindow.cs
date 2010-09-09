@@ -339,7 +339,7 @@ namespace Game
 
                 // Have more than one ant been selected to move
                 AntUnitAI.Task.Types taskType = tasks[ index ].Task.Type;
-                if (taskType == AntUnitAI.Task.Types.Move &&
+                if (taskType == AntUnitAI.Task.Types.TrailMove &&
                     selectedUnits.Count > 1)
                 {
                     // Find the destination
@@ -375,8 +375,8 @@ namespace Game
 
 					switch( taskType )
 					{
-					//Move
-					case AntUnitAI.Task.Types.Move:
+					// TrailMove
+					case AntUnitAI.Task.Types.TrailMove:
                         if (lastUnit == null)
                         {
                             // This is the first ant to be moved in the group of selected ants
@@ -391,7 +391,8 @@ namespace Game
                         // The next ant will follow this ant
                         lastUnit = unit;
                         break;
-                    // Attack, Repair
+                    // Move, Attack, Repair
+                    case AntUnitAI.Task.Types.Move:
 					case AntUnitAI.Task.Types.Attack:
 					case AntUnitAI.Task.Types.Repair:
 						if( mouseOnObject != null ) 
@@ -1156,8 +1157,9 @@ namespace Game
 				}
 				break; */
 
-			//Move, Attack, Repair
+			//Move, TrailMove, Attack, Repair
 			case AntUnitAI.Task.Types.Move:
+            case AntUnitAI.Task.Types.TrailMove:
 			case AntUnitAI.Task.Types.Attack:
 			case AntUnitAI.Task.Types.Repair:
 				//do taskTargetChoose
