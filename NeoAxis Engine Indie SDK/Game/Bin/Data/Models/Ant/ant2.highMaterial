@@ -1,0 +1,11 @@
+highLevelMaterial ant2
+{
+	template = ShaderBaseMaterial
+	diffuseVertexColor = True
+	specularColor = 0.2784314 0.2784314 0.2784314
+	specularShininess = 10.153
+	diffuse1Map
+	{
+		texture = Models\Ant\ant2.bmp
+	}
+}
