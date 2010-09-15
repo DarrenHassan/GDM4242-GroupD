@@ -72,6 +72,8 @@
     <Compile Include="BooleanSwitch.cs" />
     <Compile Include="BlinkGrid.cs" />
     <Compile Include="Action Specific\Tank.cs" />
+    <Compile Include="RTS Specific\AntUnitAI.cs" />
+    <Compile Include="RTS Specific\ForagerAntUnitAI.cs" />
     <Compile Include="RTS Specific\GenericAntCharacter.cs" />
     <Compile Include="SimpleMap.cs" />
     <Compile Include="Terminal.cs" />

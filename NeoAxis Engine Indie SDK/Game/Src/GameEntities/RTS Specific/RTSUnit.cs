@@ -60,8 +60,6 @@ namespace GameEntities
 		[DefaultValue( typeof( Vec3 ), "0 0 0" )]
 		Vec3 movePosition;
 
-		//
-
 		RTSUnitType _type = null; public new RTSUnitType Type { get { return _type; } }
 
 		public void Stop()
@@ -92,6 +90,7 @@ namespace GameEntities
 		protected override void OnPostCreate( bool loaded )
 		{
 			base.OnPostCreate( loaded );
+            
 			UpdateSkin();
 		}
 

@@ -10,26 +10,15 @@ using Engine.PhysicsSystem;
 
 namespace GameEntities.RTS_Specific
 {
-    public class AntUnitAIType : AIType
+    public class ForagerAntUnitAIType : AIType
     {
     }
-    public class AntUnitAI : AI
+    public class ForagerAntUnitAI : AI
     {
-
-        //protected abstract IEnumerable<Vec2> BehaveSeqGen();  // Implemented via "yield" in subclasses
-        IEnumerator<Vec3> behaveSeq;
-
-        protected Vec3 lastVec = Vec3.Zero;           // Stores the force vector from the last tick.
-        protected bool failed = false;      // Set by behaviours that fail to achieve their purpose 
-
         //optimization
 		//List<Weapon> initialWeapons;
 
-        float inactiveFindTaskTimer;
-
-        public GenericAntCharacter Controlled { get; set; }
-      
-
+		float inactiveFindTaskTimer;
 
 		[FieldSerialize]
 		Task currentTask = new Task( Task.Types.Stop );
@@ -61,7 +50,6 @@ namespace GameEntities.RTS_Specific
 				Stop,
 				BreakableAttack,//for automatic attacks
 				Hold,
-                Collect,
                 TrailMove,
 				Move,
 				BreakableMove,//for automatic attacks
@@ -194,9 +182,9 @@ namespace GameEntities.RTS_Specific
 
 		///////////////////////////////////////////
 
-		AntUnitAIType _type = null; public new AntUnitAIType Type { get { return _type; } }
+		ForagerAntUnitAIType _type = null; public new ForagerAntUnitAIType Type { get { return _type; } }
 
-		public AntUnitAI()
+		public ForagerAntUnitAI()
 		{
 			inactiveFindTaskTimer = World.Instance.Random.NextFloat() * 2;
 		}
@@ -206,8 +194,6 @@ namespace GameEntities.RTS_Specific
 		{
 			base.OnPostCreate( loaded );
 			AddTimer();
-            Controlled = (GenericAntCharacter)base.ControlledObject;
-            behaveSeq = BehaveSeqGen().GetEnumerator();
 		}
 
 		/// <summary>Overridden from <see cref="Engine.EntitySystem.Entity.OnDestroy()"/>.</summary>
@@ -375,39 +361,7 @@ namespace GameEntities.RTS_Specific
 						inactiveFindTaskTimer += .5f;
 				}
 			}
-
 		}
-
-        protected IEnumerable<Vec3> BehaveSeqGen() // Adds 
-        {
-            //while (Target == null) yield return Vec2.Zero;
-            
-
-            while (true)
-            {
-                {
-                    if (Controlled.Resources < Controlled.Type.ResourcesMax) {
-                        Controlled.Resources += 8;
-                        //Log.Warning("Collected 10 units of resources");
-                        yield return Vec3.Zero;
-                    }
-                    else if (Controlled.Resources >= Controlled.Type.ResourcesMax)
-                    {
-                        //Log.Warning("Success: Reached capacity");
-                       // Vec3 depo_pos = new Vec3(Controlled.Depot.Position.X,Controlled.Depot.Position.Y,Controlled.Depot.Position.Z);
-                        yield return new Vec3(337.80f,337.70f,0.01f);
-                           // ToVec2();
-                            //new Vec2(Controlled.Depot.X,Controlled.Depot.Y);
-                    }
-                    else
-                    {
-                        Log.Warning("Error");
-                    }
-                }
-            }
-            
-           
-        }
 
 		protected virtual void TickTasks()
 		{
@@ -422,46 +376,6 @@ namespace GameEntities.RTS_Specific
 			case Task.Types.Stop:
 				controlledObj.Stop();
 				break;
-
-
-            //Collect
-            case Task.Types.Collect:
-              if (currentTask.Entity != null)
-                {
-                    if (Controlled.Resources == Controlled.Type.ResourcesMax)
-                    {
-                        if (Controlled.Depot != null)
-                        {
-                            controlledObj.Move(Controlled.Depot.Position);
-                        }
-                        else
-                        {
-                            controlledObj.Move(new Vec3(337.80f, 337.70f, 0.01f));
-                        }
-                    }
-                    else
-                    {
-                        Vec3 pos = currentTask.Entity.Position;
-
-                        if ((controlledObj.Position.ToVec2() - currentTask.Entity.Position.ToVec2()).LengthFast() < 11f)
-                        {
-                            behaveSeq.MoveNext();
-                        }
-                        else
-                        {
-                            controlledObj.Move(pos);
-                        }
-                    }
-                  
-                    
-                }
-                else
-                {
-                    Log.Warning("uhoh");
-                    //controlledObj.Move(currentTask.Position);
-                }
-                break;
-                
 
 			//Move
 			case Task.Types.TrailMove:
@@ -786,9 +700,8 @@ namespace GameEntities.RTS_Specific
 			list.Add( new UserControlPanelTask( new Task( Task.Types.Stop ), currentTask.Type == Task.Types.Stop ) );
 			list.Add( new UserControlPanelTask( new Task( Task.Types.Move ),
 				currentTask.Type == Task.Types.Move || currentTask.Type == Task.Types.BreakableMove ) );
-            list.Add(new UserControlPanelTask(new Task(Task.Types.Collect), currentTask.Type == Task.Types.Collect));
             list.Add(new UserControlPanelTask( new Task(Task.Types.TrailMove), currentTask.Type == Task.Types.TrailMove));
-            
+
 			//RTSConstructor specific
 			if( ControlledObject.Type.Name == "RTSConstructor" )
 			{

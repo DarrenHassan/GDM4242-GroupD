@@ -392,6 +392,28 @@ namespace Game
                         lastUnit = unit;
                         break;
                     // Move, Attack, Repair
+                    case AntUnitAI.Task.Types.Collect:
+                        //Log.Warning("RTSGameWindow: Collect");
+                        if (mouseOnObject != null)
+                        {
+                            // An entity has been selected
+                            if (mouseOnObject.Type.Name == "RTSMine")
+                            {
+                                intellect.DoTask(new AntUnitAI.Task(taskType, mouseOnObject), toQueue);
+                                //Log.Warning("Thats an RTSMine");
+                            }
+                            else
+                            {
+                                //Log.Warning("Not an RTSMine");
+                                intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Move, mouseOnObject), toQueue);
+                            }
+                        }
+                        else
+                        {
+                            intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Move, mouseMapPos), toQueue);
+                        }
+                        break;
+
                     case AntUnitAI.Task.Types.Move:
 					case AntUnitAI.Task.Types.Attack:
 					case AntUnitAI.Task.Types.Repair:
@@ -975,11 +997,18 @@ namespace Game
 				if( selectedUnits.Count == 1 )
 				{
 					Unit unit = selectedUnits[ 0 ];
-
+                    
+                  
 					text += unit.ToString() + "\n";
 					text += "\n";
 					text += string.Format( "Life: {0}/{1}\n", unit.Life, unit.Type.LifeMax );
+                    if (unit.Type is GenericAntCharacterType)
+                    {
+                        GenericAntCharacter ant = unit as GenericAntCharacter;
+                        text += string.Format("Resources: {0}/{1}\n", ant.Resources, ant.Type.ResourcesMax);
+                    }
 
+                        
 					text += "Intellect:\n";
 					if( unit.Intellect != null )
 					{
@@ -1160,6 +1189,7 @@ namespace Game
 			//Move, TrailMove, Attack, Repair
 			case AntUnitAI.Task.Types.Move:
             case AntUnitAI.Task.Types.TrailMove:
+            case AntUnitAI.Task.Types.Collect:
 			case AntUnitAI.Task.Types.Attack:
 			case AntUnitAI.Task.Types.Repair:
 				//do taskTargetChoose
