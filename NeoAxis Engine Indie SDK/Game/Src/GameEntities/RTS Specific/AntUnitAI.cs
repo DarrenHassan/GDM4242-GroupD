@@ -278,7 +278,6 @@ namespace GameEntities.RTS_Specific
 		{			
             //if( initialWeapons.Count == 0 )
 			//	return false;
-            //Log.Warning("AntUnitAI::InactiveFindTask()");
 
 			RTSUnit controlledObj = ControlledObject;
 			if( controlledObj == null )
