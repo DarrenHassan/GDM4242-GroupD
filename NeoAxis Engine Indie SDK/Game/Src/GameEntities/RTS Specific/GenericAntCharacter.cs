@@ -13,6 +13,10 @@ namespace GameEntities.RTS_Specific
 {
     public class GenericAntCharacterType : RTSUnitType
     {
+        const float resourcesMaxDefault = 1000.0f;
+        [FieldSerialize]
+        float resourcesMax = resourcesMaxDefault;
+
         const float heightDefault = 3.0f;
         [FieldSerialize]
         float height = heightDefault;
@@ -90,12 +94,20 @@ namespace GameEntities.RTS_Specific
             get { return walkAnimationVelocityMultiplier; }
             set { walkAnimationVelocityMultiplier = value; }
         }
+
+        [DefaultValue(1000.0f)]
+        public float ResourcesMax
+        {
+            get { return resourcesMax; }
+            set { resourcesMax = value; }
+        }
     }
 
 
     public class GenericAntCharacter : RTSUnit
-    {        
-        Body mainBody;
+    {
+        
+       Body mainBody;
 
         [FieldSerialize(FieldSerializeSerializationTypes.World)]
         Vec2 pathFoundedToPosition = new Vec2(float.NaN, float.NaN);
@@ -110,6 +122,34 @@ namespace GameEntities.RTS_Specific
         Vec3 mainBodyVelocity;
 
         GenericAntCharacterType _type = null; public new GenericAntCharacterType Type { get { return _type; } }
+
+        [FieldSerialize(FieldSerializeSerializationTypes.World)]
+        RTSMine depot;
+
+        public RTSMine Depot
+        {
+            get { return depot; }
+            set { depot = value; }
+        }
+
+        [FieldSerialize(FieldSerializeSerializationTypes.World)]
+        float resources;
+
+        public float Resources
+        {
+            get { return resources; }
+            set
+            {
+
+                if (resources == value)
+                    return;
+
+                resources = value;
+
+                if (resources > Type.ResourcesMax)
+                    resources = Type.ResourcesMax;
+            }
+        }
 
         /// <summary>Overridden from <see cref="Engine.EntitySystem.Entity.OnPostCreate(Boolean)"/>.</summary>
         /// Called immediately after this object is created
@@ -126,6 +166,8 @@ namespace GameEntities.RTS_Specific
             body.Static = true;
             body.Position = Position;
             body.Rotation = Rotation;
+
+
             /*float AntLength = Type.Height - Type.AntRadius * 2;
             if (AntLength < 0)
             {
@@ -144,6 +186,8 @@ namespace GameEntities.RTS_Specific
             Vec3 p = Position;
             Position = p;
 
+            Resources = 0;
+            
             PhysicsModel.PushToWorld();
 
             if (mainBody != null)
@@ -257,12 +301,14 @@ namespace GameEntities.RTS_Specific
                         // Find a path to move position
                         if (DoPathFind())
                         {
+                           // Log.Warning("Success");
                             pathFoundedToPosition = MovePosition.ToVec2();
                             pathFindWaitTime = .5f;
                         }
                         else
                         {
                             // If a path has not been found, re-try in 1 second
+                            //Log.Warning("Blocked");
                             pathFindWaitTime = 1.0f;
                         }
                     }

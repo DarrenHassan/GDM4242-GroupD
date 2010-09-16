@@ -14,9 +14,9 @@ namespace GameEntities
 	public class RTSMineType : RTSBuildingType
 	{
 		[FieldSerialize]
-		float moneyPerSecond = 1.0f;
+		float moneyPerSecond = 0.0f;
 
-		[DefaultValue( 1.0f )]
+		[DefaultValue( 0.0f )]
 		public float MoneyPerSecond
 		{
 			get { return moneyPerSecond; }
