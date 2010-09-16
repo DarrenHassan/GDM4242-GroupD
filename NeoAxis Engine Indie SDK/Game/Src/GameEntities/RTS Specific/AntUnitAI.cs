@@ -264,6 +264,7 @@ namespace GameEntities.RTS_Specific
 		{			
             //if( initialWeapons.Count == 0 )
 			//	return false;
+            //Log.Warning("AntUnitAI::InactiveFindTask()");
 
 			RTSUnit controlledObj = ControlledObject;
 			if( controlledObj == null )
@@ -442,18 +443,61 @@ namespace GameEntities.RTS_Specific
 
 					float distance = ( controlledObj.Position - targetPos ).LengthFast();
 
+                    // Is this ant within attack range
                     if (distance <= maxAttackDistance)
                     {
-                        //stop
+                        //Yes, stop
                         controlledObj.Stop();
 
+                        // Turn to face victim
                         GenericAntCharacter character = controlledObj as GenericAntCharacter;
                         if (character != null)
                             character.SetLookDirection(targetPos);
+
+
+                        if (currentTask.Type == Task.Types.Attack ||
+                            currentTask.Type == Task.Types.BreakableAttack)
+                        {
+
+                            Ray ray = new Ray(controlledObj.Position, 
+                                controlledObj.Position - currentTask.Entity.Position);
+
+                            RayCastResult[] piercingResult = PhysicsWorld.Instance.RayCastPiercing(
+									ray, (int)ContactGroup.CastOnlyContact );
+
+                            foreach(RayCastResult result in piercingResult)
+                            {
+                                MapObject obj = MapSystemWorld.GetMapObjectByBody( result.Shape.Body );
+
+                                if (obj != null)
+                                {
+                                    float impulse = 10.0f;
+                                    if (impulse != 0 && obj.PhysicsModel != null)
+                                    {
+                                        result.Shape.Body.AddForce(ForceType.GlobalAtGlobalPos, 0,
+                                            currentTask.Entity.Rotation.GetForward() * impulse,
+                                            currentTask.Entity.Position);
+                                    }
+
+                                    Dynamic dynamic = currentTask.Entity as Dynamic;
+
+                                    if (dynamic != null)
+                                    {
+                                        // TODO: Calculate damage based on Ant type
+                                        float damage = 1.0f;
+                                        if (damage != 0)
+                                        {
+                                            dynamic.DoDamage(controlledObj, currentTask.Entity.Position,
+                                                result.Shape, damage, true);
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                     else
                     {
-                        //move to target
+                        // No - move to target
                         controlledObj.Move(targetPos);
                     }
 

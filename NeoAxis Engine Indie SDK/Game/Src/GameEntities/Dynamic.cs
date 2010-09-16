@@ -333,6 +333,12 @@ namespace GameEntities
 				Damage( this, prejudicial, pos, realDamage );
 		}
 
+        /*
+         * prejudicial: The entity causing harm.
+         * pos: The position of the harmed entity.
+         * shape: The shape of the harmed entity.
+         * damage: The reduction in the harmed entity's health.
+         */
 		public void DoDamage( MapObject prejudicial, Vec3 pos, Shape shape, float damage,
 			bool allowMoveDamageToParent )
 		{
