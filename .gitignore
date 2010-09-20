@@ -3,8 +3,6 @@
 #Thumbs.db
 #Ignore files built by Visual Studio
 
-#*.obj
-##### *.exe
 *.pdb
 *.user
 *.aps
@@ -40,10 +38,17 @@ _Temp/
 
 ### If you'll generally recompile often, consider ignoring .dll and .exe's 
 
-## /NeoAxis Engine Indie SDK/Game/Bin/GameCommon.dll
-## /NeoAxis Engine Indie SDK/Game/Bin/GameEntities.dll
-## /NeoAxis Engine Indie SDK/Game/Bin/WindowsAppFramework.dll
-## /NeoAxis Engine Indie SDK/Game/Bin/Game.exe
+/NeoAxis Engine Indie SDK/Game/Bin/GameCommon.dll
+/NeoAxis Engine Indie SDK/Game/Bin/GameEntities.dll
+/NeoAxis Engine Indie SDK/Game/Bin/WindowsAppFramework.dll
+/NeoAxis Engine Indie SRD/Game/Bin/ZipArchive.dll
+/NeoAxis Engine Indie SDK/Game/Bin/Game.exe
+/NeoAxis Engine Indie SRD/Game/Bin/ChatExample.exe
+/NeoAxis Engine Indie SRD/Game/Bin/Configurator.exe
+/NeoAxis Engine Indie SRD/Game/Bin/DedicatedServer.exe
+/NeoAxis Engine Indie SRD/Game/Bin/WindowsAppExample.exe
+/NeoAxis Engine Indie SRD/Game/Src/GameEntities/GameEntities.csproj
+/NeoAxis Engine Indie SDK/*.obj
 
 
 ### Ignoring the xml's means each person has their own settings.
@@ -62,5 +67,3 @@ _Temp/
 /NeoAxis Engine Indie SDK/Game/Src/UpgradeLog.XML
 
 /NeoAxis Engine Indie SDK/Game/Bin/UserSettings
-
-/NeoAxis Engine Indie SDK/*.obj

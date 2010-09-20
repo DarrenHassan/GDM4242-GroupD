@@ -306,6 +306,7 @@ namespace GameEntities
 				{
 					MapObject obj = MapSystemWorld.GetMapObjectByBody( result.Shape.Body );
 
+                    // Is the MapObject the ray hit the entity that fired the bullet
 					if( obj != null )
 					{
 						Dynamic dynamic = obj as Dynamic;
