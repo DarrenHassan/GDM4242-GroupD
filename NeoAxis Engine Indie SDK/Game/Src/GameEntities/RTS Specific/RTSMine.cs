@@ -57,11 +57,11 @@ namespace GameEntities
 			}
 
 			//Rotation propeller
-			if( BuildedProgress == 1 )
-			{
-				float angle = -Entities.Instance.TickTime * 500;
-				AttachedObjects[ 3 ].RotationOffset = new Angles( 0, 0, angle ).ToQuat();
-			}
+			//if( BuildedProgress == 1 )
+			//{
+			//	float angle = -Entities.Instance.TickTime * 500;
+			//	AttachedObjects[ 3 ].RotationOffset = new Angles( 0, 0, angle ).ToQuat();
+			//}
 		}
 	}
 }

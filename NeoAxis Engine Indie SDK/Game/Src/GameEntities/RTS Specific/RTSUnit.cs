@@ -115,7 +115,7 @@ namespace GameEntities
 						( mapObject.AttachedObjects[ 0 ] as MapObjectAttachedMesh ).MeshObject.
 							SubObjects[ 0 ].MaterialName = badFaction ? "Robot2" : "Robot";
 					}
-					else if( Type.Name == "RTSConstructor" )
+                    else if (Type.Name == "RTSConstructor" || Type.Name == "BuilderAnt" )
 					{
 						( mapObject.AttachedObjects[ 0 ] as MapObjectAttachedMesh ).MeshObject.
 							SubObjects[ 0 ].MaterialName = badFaction ? "Red" : "Blue";
@@ -149,12 +149,12 @@ namespace GameEntities
 				( AttachedObjects[ 0 ] as MapObjectAttachedMesh ).MeshObject.
 					SubObjects[ 0 ].MaterialName = badFaction ? "Robot2" : "Robot";
 			}
-			else if( Type.Name == "RTSConstructor" )
+            else if (Type.Name == "RTSConstructor" || Type.Name == "BuilderAnt" )
 			{
 				( AttachedObjects[ 0 ] as MapObjectAttachedMesh ).MeshObject.
 					SubObjects[ 0 ].MaterialName = badFaction ? "Red" : "Blue";
 			}
-			else if( Type.Name == "RTSMine" || Type.Name == "RTSHeadquaters" )
+            else if (Type.Name == "RTSMine" || Type.Name == "AntStorage" || Type.Name == "RTSHeadquaters" || Type.Name == "AntColmena" )
 			{
 				foreach( MapObjectAttachedObject attachedObject in AttachedObjects )
 				{
@@ -171,7 +171,7 @@ namespace GameEntities
 					}
 				}
 			}
-			else if( Type.Name == "RTSFactory" )
+			else if( Type.Name == "RTSFactory" || Type.Name == "AntBarrack" )
 			{
 				foreach( MapObjectAttachedObject attachedObject in AttachedObjects )
 				{

@@ -375,95 +375,101 @@ namespace Game
 
 					switch( taskType )
 					{
-					// TrailMove
-					case AntUnitAI.Task.Types.TrailMove:
-                        if (lastUnit == null)
+					    // TrailMove
+                        case AntUnitAI.Task.Types.TrailMove:
                         {
-                            // This is the first ant to be moved in the group of selected ants
-                            if (mouseOnObject != null)
-                                intellect.DoTask(new AntUnitAI.Task(taskType, mouseOnObject), toQueue);
-                            else
-                                intellect.DoTask(new AntUnitAI.Task(taskType, mouseMapPos), toQueue);
-                        }
-                        else
-                            // This is one of the following ants
-                            intellect.DoTask(new AntUnitAI.Task(taskType, lastUnit), toQueue);
-                        // The next ant will follow this ant
-                        lastUnit = unit;
-                        break;
-                    // Move, Attack, Repair
-                    case AntUnitAI.Task.Types.Move:
-					case AntUnitAI.Task.Types.Attack:
-					case AntUnitAI.Task.Types.Repair:
-						if( mouseOnObject != null ) 
-                            // An entity has been selected
-							intellect.DoTask( new AntUnitAI.Task( taskType, mouseOnObject ), toQueue );
-						else
-						{
-                            // The position on the map has been clicked
-							if( taskType == AntUnitAI.Task.Types.Move )
-								intellect.DoTask( new AntUnitAI.Task( taskType, mouseMapPos ), toQueue );
+                                if (lastUnit == null)
+                                {
+                                    // This is the first ant to be moved in the group of selected ants
+                                    if (mouseOnObject != null)
+                                        intellect.DoTask(new AntUnitAI.Task(taskType, mouseOnObject), toQueue);
+                                    else
+                                        intellect.DoTask(new AntUnitAI.Task(taskType, mouseMapPos), toQueue);
+                                }
+                                else
+                                    // This is one of the following ants
+                                    intellect.DoTask(new AntUnitAI.Task(taskType, lastUnit), toQueue);
+                                // The next ant will follow this ant
+                                lastUnit = unit;
+                         }
+                         break;
 
-							if( taskType == AntUnitAI.Task.Types.Attack ||
-								taskType == AntUnitAI.Task.Types.Repair )
-							{
-								intellect.DoTask( new AntUnitAI.Task( AntUnitAI.Task.Types.BreakableMove,
+                         // Move, Attack, Repair
+                         case AntUnitAI.Task.Types.Move :
+					     case AntUnitAI.Task.Types.Attack :
+					     case AntUnitAI.Task.Types.Repair :
+                         {
+                             if( mouseOnObject != null ) 
+                             // An entity has been selected
+							 intellect.DoTask( new AntUnitAI.Task( taskType, mouseOnObject ), toQueue );
+						   else
+						   {
+                             // The position on the map has been clicked
+							 if( taskType == AntUnitAI.Task.Types.Move )
+						       intellect.DoTask( new AntUnitAI.Task( taskType, mouseMapPos ), toQueue );
+
+							 if( taskType == AntUnitAI.Task.Types.Attack ||
+							   taskType == AntUnitAI.Task.Types.Repair )
+							 {
+						       intellect.DoTask( new AntUnitAI.Task( AntUnitAI.Task.Types.BreakableMove,
 									mouseMapPos ), toQueue );
-							}
-						}
-						break;
+							 }
+						   }
+                         }
+						 break;
 
-                    // Could be relavent for the building of ant structures?
-					//BuildBuilding
-					case AntUnitAI.Task.Types.BuildBuilding:
-						{
-							if( !taskTargetBuildSceneNode.Visible )
-								return;
+                         // Could be relavent for the building of ant structures?
+					     //BuildBuilding
+					     case AntUnitAI.Task.Types.BuildBuilding :
+						 {
+                             //if( !taskTargetBuildSceneNode.Visible )
+						     //return;
+						  
+                             Vec3 pos = taskTargetBuildSceneNode.Position;
 
-							Vec3 pos = taskTargetBuildSceneNode.Position;
+						   
+                             //RTSMine specific						   
+                             //bool mineFound = false;						   
+                             
+                             //if( taskTargetBuildingType is RTSMineType )						   
+                             //{						 
+                                 //Bounds bounds = new Bounds( pos - new Vec3( 2, 2, 2 ), pos + new Vec3( 2, 2, 2 ) );							 
+                                 //Map.Instance.GetObjects( bounds, delegate( MapObject obj )							    
+                                 //{									
+                                     //if( obj.Type.Name == "RTSGeyser" )									
+                                     //{										
+                                         //mineFound = true;										
+                                         //mouseMapPos = obj.Position;									
+                                     //}							 
+                                 //} );
 
-							//RTSMine specific
-							bool mineFound = false;
-							if( taskTargetBuildingType is RTSMineType )
-							{
-								Bounds bounds = new Bounds( pos - new Vec3( 2, 2, 2 ),
-									pos + new Vec3( 2, 2, 2 ) );
-								Map.Instance.GetObjects( bounds, delegate( MapObject obj )
-								{
-									if( obj.Type.Name == "RTSGeyser" )
-									{
-										mineFound = true;
-										mouseMapPos = obj.Position;
-									}
-								} );
+						     //if( !mineFound )
+							 //{
+							   //no mine for build
+							   //return;
+							 //}
+						   //}
 
-								if( !mineFound )
-								{
-									//no mine for build
-									return;
-								}
-							}
-
-							if( IsFreeForBuildTaskTargetBuild( pos ) )
-							{
+						   //if( IsFreeForBuildTaskTargetBuild( pos ) )
+							//{
 								intellect.DoTask( new AntUnitAI.Task( taskType, pos,
 									tasks[ index ].Task.EntityType ), toQueue );
 
 								GameEngineApp.Instance.ControlManager.PlaySound(
 									"Sounds\\Feedback\\RTSBuildBuilding.ogg" );
-							}
-							else
-							{
+							//}
+							//else
+							//{
 								//no free for build
-								return;
-							}
+								//return;
+							//}
 						}
 						break;
 
 					}
 				}
 			}
-			TaskTargetChooseIndex = -1;
+		    TaskTargetChooseIndex = -1;
 		}
 
 		void DoRightClickTasks( Vec3 mouseMapPos, Unit mouseOnObject )
@@ -930,20 +936,20 @@ namespace Game
 							(int)( mouseMapPos.Y + .5f ), mouseMapPos.Z );
 
 						//RTSMine specific
-						bool mineFound = false;
-						if( taskTargetBuildingType is RTSMineType )
-						{
-							Bounds bounds = new Bounds( mouseMapPos - new Vec3( 2, 2, 2 ),
-								mouseMapPos + new Vec3( 2, 2, 2 ) );
-							Map.Instance.GetObjects( bounds, delegate( MapObject obj )
-							{
-								if( obj.Type.Name == "RTSGeyser" )
-								{
-									mineFound = true;
-									mouseMapPos = obj.Position;
-								}
-							} );
-						}
+						//bool mineFound = false;
+						//if( taskTargetBuildingType is RTSMineType )
+						//{
+							//Bounds bounds = new Bounds( mouseMapPos - new Vec3( 2, 2, 2 ),
+								//mouseMapPos + new Vec3( 2, 2, 2 ) );
+							//Map.Instance.GetObjects( bounds, delegate( MapObject obj )
+							//{
+								//if( obj.Type.Name == "RTSGeyser" )
+								//{
+									//mineFound = true;
+									//mouseMapPos = obj.Position;
+								//}
+							//} );
+						//}
 
 						taskTargetBuildSceneNode.Position = mouseMapPos;
 						taskTargetBuildSceneNode.Visible = true;
@@ -952,9 +958,9 @@ namespace Game
 						bool free = IsFreeForBuildTaskTargetBuild( mouseMapPos );
 
 						//RTSMine specific
-						if( taskTargetBuildingType is RTSMineType )
-							if( !mineFound )
-								free = false;
+						//if( taskTargetBuildingType is RTSMineType )
+							//if( !mineFound )
+								//free = false;
 
 						foreach( MeshObject.SubObject subMesh in taskTargetBuildMeshObject.SubObjects )
 							subMesh.MaterialName = free ? "Green" : "Red";
@@ -1143,7 +1149,7 @@ namespace Game
 				}
 				break;
 
-            /*
+            
 			//ProductUnit
 			case AntUnitAI.Task.Types.ProductUnit:
 				foreach( Unit unit in selectedUnits )
@@ -1155,7 +1161,7 @@ namespace Game
 					if( IsEnableTaskTypeInTasks( intellect.GetControlPanelTasks(), taskType ) )
 						intellect.DoTask( new AntUnitAI.Task( taskType, tasks[ index ].Task.EntityType ), false );
 				}
-				break; */
+				break;
 
 			//Move, TrailMove, Attack, Repair
 			case AntUnitAI.Task.Types.Move:

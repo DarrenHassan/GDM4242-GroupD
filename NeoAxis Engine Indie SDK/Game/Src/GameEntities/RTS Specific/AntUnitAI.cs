@@ -234,8 +234,8 @@ namespace GameEntities.RTS_Specific
 			if( obj.Intellect == null )
 				return 0;
 
-			//RTSConstructor specific
-			if( ControlledObject.Type.Name == "RTSConstructor" )
+			//RTSConstructor specific BuilderAnt specific
+            if (ControlledObject.Type.Name == "RTSConstructor" || ControlledObject.Type.Name == "BuilderAnt" )
 			{
 				if( Faction == obj.Intellect.Faction )
 				{
@@ -264,6 +264,7 @@ namespace GameEntities.RTS_Specific
 		{			
             //if( initialWeapons.Count == 0 )
 			//	return false;
+            //Log.Warning("AntUnitAI::InactiveFindTask()");
 
 			RTSUnit controlledObj = ControlledObject;
 			if( controlledObj == null )
@@ -298,8 +299,8 @@ namespace GameEntities.RTS_Specific
 
 			if( newTaskAttack != null )
 			{
-				//RTSConstructor specific
-				if( ControlledObject.Type.Name == "RTSConstructor" )
+				//RTSConstructor specific Builder Specific
+                if (ControlledObject.Type.Name == "RTSConstructor" || ControlledObject.Type.Name == "BuilderAnt" )
 					DoTask( new Task( Task.Types.BreakableRepair, newTaskAttack ), false );
 				else
 					DoTask( new Task( Task.Types.BreakableAttack, newTaskAttack ), false );
@@ -442,18 +443,61 @@ namespace GameEntities.RTS_Specific
 
 					float distance = ( controlledObj.Position - targetPos ).LengthFast();
 
+                    // Is this ant within attack range
                     if (distance <= maxAttackDistance)
                     {
-                        //stop
+                        //Yes, stop
                         controlledObj.Stop();
 
+                        // Turn to face victim
                         GenericAntCharacter character = controlledObj as GenericAntCharacter;
                         if (character != null)
                             character.SetLookDirection(targetPos);
+
+
+                        if (currentTask.Type == Task.Types.Attack ||
+                            currentTask.Type == Task.Types.BreakableAttack)
+                        {
+
+                            Ray ray = new Ray(controlledObj.Position, 
+                                controlledObj.Position - currentTask.Entity.Position);
+
+                            RayCastResult[] piercingResult = PhysicsWorld.Instance.RayCastPiercing(
+									ray, (int)ContactGroup.CastOnlyContact );
+
+                            foreach(RayCastResult result in piercingResult)
+                            {
+                                MapObject obj = MapSystemWorld.GetMapObjectByBody( result.Shape.Body );
+
+                                if (obj != null)
+                                {
+                                    float impulse = 10.0f;
+                                    if (impulse != 0 && obj.PhysicsModel != null)
+                                    {
+                                        result.Shape.Body.AddForce(ForceType.GlobalAtGlobalPos, 0,
+                                            currentTask.Entity.Rotation.GetForward() * impulse,
+                                            currentTask.Entity.Position);
+                                    }
+
+                                    Dynamic dynamic = currentTask.Entity as Dynamic;
+
+                                    if (dynamic != null)
+                                    {
+                                        // TODO: Calculate damage based on Ant type
+                                        float damage = 1.0f;
+                                        if (damage != 0)
+                                        {
+                                            dynamic.DoDamage(controlledObj, currentTask.Entity.Position,
+                                                result.Shape, damage, true);
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                     else
                     {
-                        //move to target
+                        // No - move to target
                         controlledObj.Move(targetPos);
                     }
 
@@ -586,7 +630,7 @@ namespace GameEntities.RTS_Specific
 						{
 							float cost = ( (RTSBuildingType)currentTask.EntityType ).BuildCost;
 
-							if( factionItem.Money - cost < 0 )
+							if( ( factionItem.Money - cost ) < 0 )
 							{
 								//No money
 								DoNextTask();
@@ -603,8 +647,8 @@ namespace GameEntities.RTS_Specific
 						building.InitialFaction = Faction;
 
 						building.PostCreate();
-						building.BuildedProgress = 0;
-						building.Life = 1;
+						building.BuildedProgress = 1;
+						building.Life = 100;
 
 						//Repair
 						DoTaskInternal( new Task( Task.Types.Repair, building ) );
@@ -703,7 +747,7 @@ namespace GameEntities.RTS_Specific
             list.Add(new UserControlPanelTask( new Task(Task.Types.TrailMove), currentTask.Type == Task.Types.TrailMove));
 
 			//RTSConstructor specific
-			if( ControlledObject.Type.Name == "RTSConstructor" )
+            if (ControlledObject.Type.Name == "RTSConstructor" || ControlledObject.Type.Name == "BuilderAnt" )
 			{
 				list.Add( new UserControlPanelTask( new Task( Task.Types.Repair ),
 					currentTask.Type == Task.Types.Repair || currentTask.Type == Task.Types.BreakableRepair ) );
@@ -711,23 +755,28 @@ namespace GameEntities.RTS_Specific
 				RTSBuildingType buildingType;
 
                 // Adds these task to the control panel if the entity selected is an RTSConstructor
-				buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName( "RTSHeadquaters" );
+				buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName( "AntStorage" );
 				list.Add( new UserControlPanelTask( new Task( Task.Types.BuildBuilding, buildingType ),
 					CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType ) );
 
-				buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName( "RTSMine" );
+				buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName( "AntBarrack" );
 				list.Add( new UserControlPanelTask( new Task( Task.Types.BuildBuilding, buildingType ),
 					CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType ) );
 
-				buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName( "RTSFactory" );
-				list.Add( new UserControlPanelTask( new Task( Task.Types.BuildBuilding, buildingType ),
-					CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType ) );
+				//buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName( "RTSFactory" );
+				//list.Add( new UserControlPanelTask( new Task( Task.Types.BuildBuilding, buildingType ),
+					//CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType ) );
 			}
-            else if (ControlledObject.Type.Name == "WarriorAnt")
+            else if ( ControlledObject.Type.Name == "WarriorAnt" )
 			{
-				list.Add( new UserControlPanelTask( new Task( Task.Types.Attack ),
-					currentTask.Type == Task.Types.Attack || currentTask.Type == Task.Types.BreakableAttack ) );
+				//list.Add( new UserControlPanelTask( new Task( Task.Types.Attack ),
+					//currentTask.Type == Task.Types.Attack || currentTask.Type == Task.Types.BreakableAttack ) );
 			}
+            else if (ControlledObject.Type.Name == "AntColmena" )
+            {
+                list.Add( new UserControlPanelTask( new Task( Task.Types.Attack ),
+                currentTask.Type == Task.Types.Attack || currentTask.Type == Task.Types.BreakableAttack ) );
+            }
 
 			return list;
 		}
