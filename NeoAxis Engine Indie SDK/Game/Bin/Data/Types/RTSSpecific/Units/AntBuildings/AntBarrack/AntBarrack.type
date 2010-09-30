@@ -1,0 +1,17 @@
+type AntBarrack
+{
+	class = RTSBuilding
+	buildCost = 200
+	initialAI = DefaultRTSBuildingAI
+	lifeMax = 250
+	substance = Metal
+	physicsModel = Types\RTSSpecific\Units\RTSFactory\RTSFactory.physics
+	allowEditorCreate = True
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\RTSSpecific\Units\RTSFactory\RTSFactory.mesh
+		}
+	}
+}
