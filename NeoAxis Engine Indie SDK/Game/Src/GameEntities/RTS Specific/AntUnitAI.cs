@@ -207,7 +207,8 @@ namespace GameEntities.RTS_Specific
         {
             base.OnPostCreate(loaded);
             AddTimer();
-            Controlled = (GenericAntCharacter)base.ControlledObject;
+            if (base.ControlledObject.Type.Name == "GenericAntCharacter")
+                Controlled = (GenericAntCharacter)base.ControlledObject;
             behaveSeq = BehaveSeqGen().GetEnumerator();
         }
 
