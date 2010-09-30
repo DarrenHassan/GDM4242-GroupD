@@ -816,7 +816,8 @@ namespace Game
                         AntUnitAI intellect = unit.Intellect as AntUnitAI;
                         if (intellect == null)
                             continue;
-                        intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Move, new Vec3(0, 0, 0)), false);
+                        //intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Move, new Vec3(0, 0, 0)), false);
+                        intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Wander, 5, 50, 10), false);
                     }
                 }
             }

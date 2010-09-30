@@ -55,6 +55,15 @@ namespace GameEntities.RTS_Specific
             [FieldSerialize]
             Dynamic entity;
 
+            [FieldSerialize]
+            float wanderRadius;
+
+            [FieldSerialize]
+            float wanderDistance;
+
+            [FieldSerialize]
+            float wanderJitter;
+
             public enum Types
             {
                 None,
@@ -80,6 +89,9 @@ namespace GameEntities.RTS_Specific
                 this.position = new Vec3(float.NaN, float.NaN, float.NaN);
                 this.entityType = null;
                 this.entity = null;
+                this.wanderRadius = float.NaN;
+                this.wanderDistance = float.NaN;
+                this.wanderJitter = float.NaN;
             }
 
             public Task(Types type, Vec3 position)
@@ -88,6 +100,9 @@ namespace GameEntities.RTS_Specific
                 this.position = position;
                 this.entityType = null;
                 this.entity = null;
+                this.wanderRadius = float.NaN;
+                this.wanderDistance = float.NaN;
+                this.wanderJitter = float.NaN;
             }
 
             public Task(Types type, DynamicType entityType)
@@ -96,6 +111,9 @@ namespace GameEntities.RTS_Specific
                 this.position = new Vec3(float.NaN, float.NaN, float.NaN);
                 this.entityType = entityType;
                 this.entity = null;
+                this.wanderRadius = float.NaN;
+                this.wanderDistance = float.NaN;
+                this.wanderJitter = float.NaN;
             }
 
             public Task(Types type, Vec3 position, DynamicType entityType)
@@ -104,6 +122,9 @@ namespace GameEntities.RTS_Specific
                 this.position = position;
                 this.entityType = entityType;
                 this.entity = null;
+                this.wanderRadius = float.NaN;
+                this.wanderDistance = float.NaN;
+                this.wanderJitter = float.NaN;
             }
 
             public Task(Types type, Dynamic entity)
@@ -112,7 +133,22 @@ namespace GameEntities.RTS_Specific
                 this.position = new Vec3(float.NaN, float.NaN, float.NaN);
                 this.entityType = null;
                 this.entity = entity;
+                this.wanderRadius = float.NaN;
+                this.wanderDistance = float.NaN;
+                this.wanderJitter = float.NaN;
             }
+
+            public Task(Types type, float wanderRadius, float wanderDistance, float wanderJitter)
+            {
+                this.type = type;
+                this.position = new Vec3(float.NaN, float.NaN, float.NaN);
+                this.entityType = null;
+                this.entity = null;
+                this.wanderRadius = wanderRadius;
+                this.wanderDistance = wanderDistance;
+                this.wanderJitter = wanderJitter;
+            }
+
 
             public Types Type
             {
@@ -132,6 +168,21 @@ namespace GameEntities.RTS_Specific
             public Dynamic Entity
             {
                 get { return entity; }
+            }
+
+            public float WanderRadius
+            {
+                get { return wanderRadius; }
+            }
+
+            public float WanderDistance
+            {
+                get { return wanderDistance; }
+            }
+
+            public float WanderJitter
+            {
+                get { return wanderJitter; }
             }
 
             public override string ToString()
@@ -399,7 +450,8 @@ namespace GameEntities.RTS_Specific
             if ((currentTask.Type == Task.Types.Stop ||
                 currentTask.Type == Task.Types.BreakableMove ||
                 currentTask.Type == Task.Types.BreakableAttack ||
-                currentTask.Type == Task.Types.BreakableRepair
+                currentTask.Type == Task.Types.BreakableRepair ||
+                currentTask.Type == Task.Types.Wander 
                 ) && tasks.Count == 0)
             {
                 inactiveFindTaskTimer -= TickDelta;
@@ -534,6 +586,28 @@ namespace GameEntities.RTS_Specific
                     }
                     break;
 
+                // Wander
+                case Task.Types.Wander:
+                    Random rand = new Random();
+
+                    Vec3 wanderTargetPos = controlledObj.Position;
+
+                    //first, add a small random vector to the target's position
+                    wanderTargetPos +=
+                        Vec3.Construct((float)(rand.NextDouble() * 2f - 1f) * currentTask.WanderJitter, ((float)rand.NextDouble() * 2f - 1f) * currentTask.WanderJitter, 0f);
+
+                    //reproject this new vector back on to the circle
+                    wanderTargetPos = Vec3.Normalize(wanderTargetPos) * currentTask.WanderRadius;
+
+                    //move the target into a position WanderDist in front of the agent
+                    Vec3 moveTargetPos = wanderTargetPos + new Vec3(currentTask.WanderDistance, 0f, 0f);
+
+                    //convert the target coordinates into world space instead of relative to the owner.
+                    Vec3 targetWorldPos = (controlledObj.GetTransform() * new Vec4(moveTargetPos, 0f)).ToVec3();
+
+                    //and steer towards it
+                    controlledObj.Move(targetWorldPos);
+                    break;
                 //Attack, Repair
                 case Task.Types.Attack:
                 case Task.Types.BreakableAttack:
