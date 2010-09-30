@@ -464,7 +464,7 @@ namespace Game
                                         //no mine for build
                                         //return;
                                     //}
-                                }
+                                //}
 
                                 if (IsFreeForBuildTaskTargetBuild(pos))
                                 {
@@ -487,7 +487,7 @@ namespace Game
             }
             TaskTargetChooseIndex = -1;
         }
-
+    
         void DoRightClickTasks(Vec3 mouseMapPos, Unit mouseOnObject)
         {
             bool toQueue = EngineApp.Instance.IsKeyPressed(EKeys.Shift);
@@ -1172,7 +1172,7 @@ namespace Game
                     }
                     break;
 
-                /*
+                
                 //ProductUnit
                 case AntUnitAI.Task.Types.ProductUnit:
                     foreach( Unit unit in selectedUnits )
@@ -1184,7 +1184,7 @@ namespace Game
                         if( IsEnableTaskTypeInTasks( intellect.GetControlPanelTasks(), taskType ) )
                             intellect.DoTask( new AntUnitAI.Task( taskType, tasks[ index ].Task.EntityType ), false );
                     }
-                    break; */
+                    break;
 
                 //Move, TrailMove, Attack, Repair
                 case AntUnitAI.Task.Types.Move:
