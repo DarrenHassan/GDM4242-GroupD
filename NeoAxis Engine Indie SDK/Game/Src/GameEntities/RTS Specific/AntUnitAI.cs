@@ -611,8 +611,8 @@ namespace GameEntities.RTS_Specific
                 //Attack, Repair
                 case Task.Types.Attack:
                 case Task.Types.BreakableAttack:
-                case Task.Types.Repair:
-                case Task.Types.BreakableRepair:
+                //case Task.Types.Repair:
+                //case Task.Types.BreakableRepair:
                     {
                         //healed
                         if ((currentTask.Type == Task.Types.Repair ||
@@ -675,7 +675,7 @@ namespace GameEntities.RTS_Specific
                                         }
 
                                         Dynamic dynamic = currentTask.Entity as Dynamic;
-
+                                        
                                         if (dynamic != null)
                                         {
                                             // TODO: Calculate damage based on Ant type
@@ -778,6 +778,48 @@ namespace GameEntities.RTS_Specific
                     }
                     break;
 
+                case Task.Types.Repair:
+                case Task.Types.BreakableRepair:
+                    {
+                        if ( ( currentTask.Entity != null ) && ( currentTask.Entity.Life == currentTask.Entity.Type.LifeMax ) )
+                        {
+                            DoNextTask();
+                            break;
+                        }
+
+                        float maxAttackDistance = controlledObj.Type.OptimalAttackDistanceRange.Maximum;
+
+                        // Find the position of the target entity
+                        Vec3 targetPos;
+                        if (currentTask.Entity != null)
+                            targetPos = currentTask.Entity.Position;
+                        else
+                            targetPos = currentTask.Position;
+
+                        float distance = (controlledObj.Position - targetPos).LengthFast();
+
+                        // Is this ant within attack range
+                        if (distance <= maxAttackDistance)
+                        {
+                            //Yes, stop
+                            controlledObj.Stop();
+
+                            // Turn to face victim
+                            GenericAntCharacter character = controlledObj as GenericAntCharacter;
+                            if (character != null)
+                                character.SetLookDirection(targetPos);
+
+                            currentTask.Entity.Life += 1;
+                        }
+                        else
+                        {
+                            // No - move to target
+                            controlledObj.Move(targetPos);
+                        }
+ 
+                    }
+                    break;
+
                 //BuildBuilding
                 case Task.Types.BuildBuilding:
                     {
@@ -794,30 +836,30 @@ namespace GameEntities.RTS_Specific
                             //get to
 
                             //check free area for build
-                            bool free;
-                            {
-                                Bounds bounds;
-                                {
-                                    PhysicsModel physicsModel = PhysicsWorld.Instance.LoadPhysicsModel(
-                                        currentTask.EntityType.PhysicsModel);
-                                    if (physicsModel == null)
-                                        Log.Fatal(string.Format("No physics model for \"{0}\"",
-                                            currentTask.EntityType.ToString()));
-                                    bounds = physicsModel.GetGlobalBounds();
+                            //bool free;
+                            //{
+                            //    Bounds bounds;
+                            //    {
+                            //        PhysicsModel physicsModel = PhysicsWorld.Instance.LoadPhysicsModel(
+                            //            currentTask.EntityType.PhysicsModel);
+                            //        if (physicsModel == null)
+                            //            Log.Fatal(string.Format("No physics model for \"{0}\"",
+                            //                currentTask.EntityType.ToString()));
+                            //        bounds = physicsModel.GetGlobalBounds();
 
-                                    bounds += targetPos;
-                                }
+                            //        bounds += targetPos;
+                            //    }
 
-                                Rect rect = new Rect(bounds.Minimum.ToVec2(), bounds.Maximum.ToVec2());
-                                free = GridPathFindSystem.Instance.IsFreeInMapMotion(rect);
-                            }
+                            //    Rect rect = new Rect(bounds.Minimum.ToVec2(), bounds.Maximum.ToVec2());
+                            //    free = GridPathFindSystem.Instance.IsFreeInMapMotion(rect);
+                            //}
 
-                            if (!free)
-                            {
+                            //if (!free)
+                            //{
                                 //not free
-                                DoNextTask();
-                                break;
-                            }
+                            //    DoNextTask();
+                            //    break;
+                            //}
 
                             //check cost
                             RTSFactionManager.FactionItem factionItem = RTSFactionManager.Instance.GetFactionItemByType(Faction);
@@ -952,21 +994,21 @@ namespace GameEntities.RTS_Specific
                 RTSBuildingType buildingType;
 
                 // Adds these task to the control panel if the entity selected is an RTSConstructor
-                buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName("RTSHeadquaters");
-                list.Add(new UserControlPanelTask(new Task(Task.Types.BuildBuilding, buildingType),
-                    CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType));
+                //buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName("RTSHeadquaters");
+                //list.Add(new UserControlPanelTask(new Task(Task.Types.BuildBuilding, buildingType),
+                    //CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType));
 
-                buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName("RTSMine");
-                list.Add(new UserControlPanelTask(new Task(Task.Types.BuildBuilding, buildingType),
-                    CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType));
+                //buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName("RTSMine");
+                //list.Add(new UserControlPanelTask(new Task(Task.Types.BuildBuilding, buildingType),
+                    //CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType));
 
-                buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName("RTSFactory");
-                list.Add(new UserControlPanelTask(new Task(Task.Types.BuildBuilding, buildingType),
-                    CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType));
+                //buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName("RTSFactory");
+                //list.Add(new UserControlPanelTask(new Task(Task.Types.BuildBuilding, buildingType),
+                    //CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType));
 
-                buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName("AntStorage");
-                list.Add(new UserControlPanelTask(new Task(Task.Types.BuildBuilding, buildingType),
-                    CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType));
+                //buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName("AntStorage");
+                //list.Add(new UserControlPanelTask(new Task(Task.Types.BuildBuilding, buildingType),
+                    //CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType));
 
                 buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName("AntBarrack");
                 list.Add(new UserControlPanelTask(new Task(Task.Types.BuildBuilding, buildingType),
