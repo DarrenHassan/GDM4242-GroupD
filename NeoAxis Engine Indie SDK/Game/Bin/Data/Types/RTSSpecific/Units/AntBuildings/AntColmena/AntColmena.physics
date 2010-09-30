@@ -4,6 +4,7 @@ physicsModel
 {
 	body body1
 	{
+		static = True
 		position = 0 0 1
 		shape
 		{
