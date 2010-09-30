@@ -65,6 +65,7 @@ namespace GameEntities.RTS_Specific
                 TrailMove,
                 Move,
                 BreakableMove,//for automatic attacks
+                Wander,
                 Attack,
                 Repair,
                 BreakableRepair,//for automatic repair
