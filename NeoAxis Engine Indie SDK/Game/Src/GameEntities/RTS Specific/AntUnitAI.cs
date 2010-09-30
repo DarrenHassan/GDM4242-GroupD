@@ -276,42 +276,75 @@ namespace GameEntities.RTS_Specific
             return 0;
         }
 
-        bool InactiveFindTask()
-        {
+		bool InactiveFindTask()
+		{			
             //if( initialWeapons.Count == 0 )
-            //	return false;
-
-
-            RTSUnit controlledObj = ControlledObject;
-            if (controlledObj == null)
-                return false;
-
-            Dynamic newTaskAttack = null;
-            float attackObjectPriority = 0;
+			//	return false;
+			RTSUnit controlledObj = ControlledObject;
+			if( controlledObj == null )
+				return false;
 
             Vec3 controlledObjPos = controlledObj.Position;
             float radius = controlledObj./*Type.*/ViewRadius;
 
+            // Look for a health item with the ant's view radius
+            Item healthItem = null;
             Map.Instance.GetObjects(new Sphere(controlledObjPos, radius),
-                GameFilterGroups.UnitFilterGroup, delegate(MapObject mapObject)
+            GameFilterGroups.HealthFilterGroup, delegate(MapObject mapObject)
+            {
+                HealthItem obj = (HealthItem)mapObject;
+                // TODO: update the health items for ants
+                if (obj.Type.Name == "SmallHealthItem")
                 {
-                    Unit obj = (Unit)mapObject;
+                    healthItem = obj;
+                }
+            });
 
-                    Vec3 objPos = obj.Position;
-
-                    //check distance
-                    Vec3 diff = objPos - controlledObjPos;
-                    float objDistance = diff.LengthFast();
-                    if (objDistance > radius)
-                        return;
-
-                    float priority = GetAttackObjectPriority(obj);
-                    if (priority != 0 && priority > attackObjectPriority)
+            // Has a health item been seen?
+            if (healthItem != null) 
+            {
+                //  Is the ant hurt
+                Unit unit = controlledObj as Unit;
+                if (controlledObj.Life < unit.Type.LifeMax)
+                {              
+                    // Yes 
+                    float distanceToHealth = (controlledObj.Position - healthItem.Position).LengthFast();
+                    if (distanceToHealth > 2.0f)
                     {
-                        attackObjectPriority = priority;
-                        newTaskAttack = obj;
+                        // Go to the health iteam
+                        DoTask(new Task(Task.Types.BreakableMove, healthItem), false);
                     }
-                });
+                    else
+                    {
+                        // When at the health item take it
+                        healthItem.Take(unit);
+                    }
+                    return true;
+                }
+            }
+
+            // Attack nearby enemies
+			Dynamic newTaskAttack = null;
+			float attackObjectPriority = 0;
+			Map.Instance.GetObjects( new Sphere( controlledObjPos, radius ),
+				GameFilterGroups.UnitFilterGroup, delegate( MapObject mapObject )
+			{
+				Unit obj = (Unit)mapObject;
+				Vec3 objPos = obj.Position;
+
+				//check distance
+				Vec3 diff = objPos - controlledObjPos;
+				float objDistance = diff.LengthFast();
+				if( objDistance > radius )
+					return;
+
+				float priority = GetAttackObjectPriority( obj );
+				if( priority != 0 && priority > attackObjectPriority )
+				{
+					attackObjectPriority = priority;
+					newTaskAttack = obj;
+				}
+			} );
 
             if (newTaskAttack != null)
             {
@@ -320,12 +353,11 @@ namespace GameEntities.RTS_Specific
                     DoTask(new Task(Task.Types.BreakableRepair, newTaskAttack), false);
                 else
                     DoTask(new Task(Task.Types.BreakableAttack, newTaskAttack), false);
-
                 return true;
             }
+			return false;
+		}
 
-            return false;
-        }
 
         [Browsable(false)]
         public new RTSUnit ControlledObject

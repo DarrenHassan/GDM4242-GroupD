@@ -65,6 +65,7 @@ namespace Game
         float timeForUpdateGameStatus;
 
         //
+		double elapsedGameTime = 0;
 
         protected override void OnAttach()
         {
@@ -444,27 +445,33 @@ namespace Game
 
                                 Vec3 pos = taskTargetBuildSceneNode.Position;
 
-                                //RTSMine specific
-                                //bool mineFound = false;
-                                //if (taskTargetBuildingType is RTSMineType)
-                                //{
-                                    //Bounds bounds = new Bounds(pos - new Vec3(2, 2, 2),
-                                        //pos + new Vec3(2, 2, 2));
-                                    //Map.Instance.GetObjects(bounds, delegate(MapObject obj)
-                                    //{
-                                        //if (obj.Type.Name == "RTSGeyser")
-                                        //{
-                                            //mineFound = true;
-                                            //mouseMapPos = obj.Position;
-                                        //}
-                                    //});
+							/*RTSMine specific
+							bool mineFound = false;
+							if( taskTargetBuildingType is RTSMineType )
+							{
 
-                                    //if (!mineFound)
-                                    //{
-                                        //no mine for build
-                                        //return;
-                                    //}
-                                //}
+								Bounds bounds = new Bounds( pos - new Vec3( 2, 2, 2 ),
+									pos + new Vec3( 2, 2, 2 ) );
+								Map.Instance.GetObjects( bounds, delegate( MapObject obj )
+								{
+
+									if( obj.Type.Name == "RTSGeyser" )
+									{
+
+										mineFound = true;
+										mouseMapPos = obj.Position;
+									}
+								} );
+
+
+
+								if( !mineFound )
+								{
+
+									//no mine for build
+									return;
+								}
+							}*/
 
                                 if (IsFreeForBuildTaskTargetBuild(pos))
                                 {
@@ -488,6 +495,7 @@ namespace Game
             TaskTargetChooseIndex = -1;
         }
     
+        // Enables right-click actions, such as move, attack
         void DoRightClickTasks(Vec3 mouseMapPos, Unit mouseOnObject)
         {
             bool toQueue = EngineApp.Instance.IsKeyPressed(EKeys.Shift);
@@ -683,6 +691,7 @@ namespace Game
         protected override void OnTick(float delta)
         {
             base.OnTick(delta);
+            elapsedGameTime += delta;
 
             //If atop openly any window to not process
             if (Controls.Count != 1)
@@ -792,6 +801,25 @@ namespace Game
 
             }
 
+            // Control the bad faction
+            if (elapsedGameTime > 10f && elapsedGameTime < 11f)
+            {
+                foreach (Entity entity in Map.Instance.Children)
+                {
+                    RTSUnit unit = entity as RTSUnit;
+                    if (unit == null)
+                        continue;
+                    if (unit.Intellect == null)
+                        continue;
+                    if (unit.Intellect.Faction != playerFaction)
+                    {
+                        AntUnitAI intellect = unit.Intellect as AntUnitAI;
+                        if (intellect == null)
+                            continue;
+                        intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Move, new Vec3(0, 0, 0)), false);
+                    }
+                }
+            }
 
             //gameStatus
             if (string.IsNullOrEmpty(hudControl.Controls["GameStatus"].Text))

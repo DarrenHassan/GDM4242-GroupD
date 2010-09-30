@@ -9,7 +9,7 @@ type WarriorAnt
 	initialAI = DefaultAntUnitAI
 	viewRadius = 50
 	fpsCameraOffset = 0.4 0 1.2
-	lifeMax = 200
+	lifeMax = 150
 	substance = Flesh
 	allowEditorCreate = True
 	attachedObjects
