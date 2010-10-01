@@ -618,8 +618,8 @@ namespace GameEntities.RTS_Specific
                         else
                         {
                             //Log.Warning("Not in range");
-                            Controlled.Move(Controlled.Depot.Position);
-                            //Controlled.Move(new Vec3(newPos.X + 4.0f, newPos.Y - 2.0f, newPos.Z));
+                            //Controlled.Move(Controlled.Depot.Position);
+                            Controlled.Move(new Vec3(newPos.X + 4.0f, newPos.Y - 2.0f, newPos.Z));
                             //Controlled.Move(new Vec3(80.0f,-40.0f,4.499237f));
                         }
 
