@@ -27,11 +27,12 @@ namespace GameEntities
 	public class RTSMine : RTSBuilding
 	{
 		RTSMineType _type = null; public new RTSMineType Type { get { return _type; } }
-
-		/// <summary>Overridden from <see cref="Engine.EntitySystem.Entity.OnPostCreate(Boolean)"/>.</summary>
+        
+        /// <summary>Overridden from <see cref="Engine.EntitySystem.Entity.OnPostCreate(Boolean)"/>.</summary>
 		protected override void OnPostCreate( bool loaded )
 		{
 			base.OnPostCreate( loaded );
+            FilterGroups |= GameFilterGroups.MineFilterGroup;
 			AddTimer();
 		}
 

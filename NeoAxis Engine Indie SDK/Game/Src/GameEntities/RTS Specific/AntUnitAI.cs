@@ -18,6 +18,7 @@ namespace GameEntities.RTS_Specific
 
         //protected abstract IEnumerable<Vec2> BehaveSeqGen();  // Implemented via "yield" in subclasses
         IEnumerator<Vec3> behaveSeq;
+        IEnumerator<Vec3> depositSeq;
 
         protected Vec3 lastVec = Vec3.Zero;           // Stores the force vector from the last tick.
         protected bool failed = false;      // Set by behaviours that fail to achieve their purpose 
@@ -27,7 +28,7 @@ namespace GameEntities.RTS_Specific
 
         float inactiveFindTaskTimer;
 
-        public GenericAntCharacter Controlled { get; set; }
+        //public ForagerAnt Forager { get; set; }
       
 
 
@@ -61,6 +62,7 @@ namespace GameEntities.RTS_Specific
 				Stop,
 				BreakableAttack,//for automatic attacks
 				Hold,
+                Deposit,
                 Collect,
                 TrailMove,
 				Move,
@@ -206,8 +208,12 @@ namespace GameEntities.RTS_Specific
 		{
 			base.OnPostCreate( loaded );
 			AddTimer();
-            Controlled = (GenericAntCharacter)base.ControlledObject;
+            /*if (base.ControlledObject.Type is ForagerAntType)
+                Controlled = (ForagerAnt)base.ControlledObject;
+            else
+                Controlled = (GenericAntCharacter)base.ControlledObject;*/ 
             behaveSeq = BehaveSeqGen().GetEnumerator();
+            depositSeq = DepositSeqGen().GetEnumerator();
 		}
 
 		/// <summary>Overridden from <see cref="Engine.EntitySystem.Entity.OnDestroy()"/>.</summary>
@@ -377,11 +383,59 @@ namespace GameEntities.RTS_Specific
 			}
 
 		}
+        protected IEnumerable<Vec3> DepositSeqGen() // Adds 
+        {
+            //while (Target == null) yield return Vec2.Zero;
 
+            ForagerAnt Controlled = (ForagerAnt)base.ControlledObject;
+
+            while (true)
+            {
+                {
+                    if (Controlled.Resources > 0)
+                    {
+                        // add money to faction
+                        if (RTSFactionManager.Instance != null)
+                        {
+                            if (Controlled.InitialFaction != null)
+                            {
+                                RTSFactionManager.FactionItem factionItem = RTSFactionManager.Instance.
+                                    GetFactionItemByType(Controlled.InitialFaction);
+
+                                if (factionItem != null)
+                                    factionItem.Money += 50;
+
+                                // empty money
+                                Controlled.Resources -= 50;
+
+                                // lets go back to collecting
+
+                            }
+                        }
+                        
+                        //Log.Warning("Collected 10 units of resources");
+                        yield return Vec3.Zero;
+                    }
+                    else if (Controlled.Resources <= 0)
+                    {
+
+                         yield return new Vec3(337.80f, 337.70f, 0.01f);
+
+                    }
+                    else
+                    {
+                        Log.Warning("Error");
+                    }
+                }
+            }
+
+
+        }
         protected IEnumerable<Vec3> BehaveSeqGen() // Adds 
         {
             //while (Target == null) yield return Vec2.Zero;
-            
+
+            ForagerAnt Controlled = (ForagerAnt)base.ControlledObject;
 
             while (true)
             {
@@ -393,11 +447,10 @@ namespace GameEntities.RTS_Specific
                     }
                     else if (Controlled.Resources >= Controlled.Type.ResourcesMax)
                     {
-                        //Log.Warning("Success: Reached capacity");
-                       // Vec3 depo_pos = new Vec3(Controlled.Depot.Position.X,Controlled.Depot.Position.Y,Controlled.Depot.Position.Z);
+                                               
+                        
                         yield return new Vec3(337.80f,337.70f,0.01f);
-                           // ToVec2();
-                            //new Vec2(Controlled.Depot.X,Controlled.Depot.Y);
+                        
                     }
                     else
                     {
@@ -425,36 +478,140 @@ namespace GameEntities.RTS_Specific
 
 
             //Collect
-            case Task.Types.Collect:
-              if (currentTask.Entity != null)
+            case Task.Types.Deposit:
+
+                
+                ForagerAnt Controlled = (ForagerAnt)base.ControlledObject;
+                
+                // check to see if we have a deposit set
+
+                if (Controlled.Depot == null)
                 {
-                    if (Controlled.Resources == Controlled.Type.ResourcesMax)
+                    Log.Warning("No depot set");
+
+                    Vec3 controlledObjPos = Controlled.Position;
+                    float radius = Controlled./*Type.*/ViewRadius;
+                    //int count = 0;
+                    float minDistance = 0f;
+                    Map.Instance.GetObjects(new Sphere(controlledObjPos, radius),
+                    GameFilterGroups.MineFilterGroup, delegate(MapObject mapObject)
                     {
-                        if (Controlled.Depot != null)
+                        if (mapObject.Type.Name == "RTSDepot")
                         {
-                            controlledObj.Move(Controlled.Depot.Position);
+                            RTSMine obj = (RTSMine)mapObject;
+                            if (minDistance == 0)
+                            {
+                                Log.Warning("First one...");
+                                Controlled.Depot = obj;
+                                minDistance = (controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast();
+                            }
+                            else if ((controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast() < minDistance)
+                            {
+                                Log.Warning("New best...");
+                                Controlled.Depot = obj;
+                                minDistance = (controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast();
+                            }
+
+                            //controlledObj.Stop();
+                            //break;
+                        }
+                        //Log.Warning("...");
+                    });
+                    //DoTask(new Task(Task.Types.Deposit), false);
+                }
+                else
+                {
+
+                    if (Controlled.Resources > 0) // then we have something to deposit
+                    {
+                        Vec3 objPos = Controlled.Depot.Position;
+                        Vec3 newPos = new Vec3(objPos.X, objPos.Y, 4.499237f);
+
+                        // we're within range...
+                        if ((controlledObj.Position.ToVec2() - objPos.ToVec2()).LengthFast() < 8f)
+                        {
+                            // check building is still there...
+                            if (Controlled.Depot.Died == false)
+                                depositSeq.MoveNext();
+                            else
+                                DoNextTask();
                         }
                         else
                         {
-                            controlledObj.Move(new Vec3(337.80f, 337.70f, 0.01f));
+                            //Log.Warning("Not in range");
+                            Controlled.Move(Controlled.Depot.Position);
+                            //Controlled.Move(new Vec3(newPos.X + 4.0f, newPos.Y - 2.0f, newPos.Z));
+                            //Controlled.Move(new Vec3(80.0f,-40.0f,4.499237f));
                         }
+
                     }
                     else
                     {
+                        DoTask(new Task(Task.Types.Collect, Controlled.CurrentMine), false);
+                    }
+                }
+                //Controlled.Stop();
+                break;    
+                
+
+            case Task.Types.Collect:
+                ForagerAnt ControlledCollect = (ForagerAnt)base.ControlledObject;
+                ControlledCollect.CurrentMine = (RTSMine)currentTask.Entity;
+                if (currentTask.Entity != null)
+                {
+                    if (ControlledCollect.Resources == ControlledCollect.Type.ResourcesMax)
+                    {
+                        Vec3 controlledObjPos = ControlledCollect.Position;
+                        float radius = ControlledCollect./*Type.*/ViewRadius;
+                        //int count = 0;
+                        float minDistance = 0f;
+                        //ControlledCollect.Depot = null;
+                        Map.Instance.GetObjects(new Sphere(controlledObjPos, radius),
+                        GameFilterGroups.MineFilterGroup, delegate(MapObject mapObject)
+                        {
+                            if (mapObject.Type.Name == "RTSDepot")
+                            {
+                                RTSMine obj = (RTSMine)mapObject;
+                                if (minDistance == 0)
+                                {
+                                    //Log.Warning("First one...");
+                                    ControlledCollect.Depot = obj;
+                                    minDistance = (controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast();
+                                }
+                                else if ((controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast() < minDistance)
+                                {
+                                    Log.Warning("New best...");
+                                    ControlledCollect.Depot = obj;
+                                    minDistance = (controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast();
+                                }
+
+                                //controlledObj.Stop();
+                                //break;
+                            }
+                            //Log.Warning("...");
+                        });
+                        if (ControlledCollect.Depot != null)
+                            DoTask(new Task(Task.Types.Deposit), false);
+                        else
+                            DoNextTask();
+                    }
+                    else
+                    {
+
                         Vec3 pos = currentTask.Entity.Position;
 
                         if ((controlledObj.Position.ToVec2() - currentTask.Entity.Position.ToVec2()).LengthFast() < 11f)
                         {
-                            behaveSeq.MoveNext();
+                            ControlledCollect.Resources += 8;
+                            //behaveSeq.MoveNext();
                         }
                         else
                         {
                             controlledObj.Move(pos);
                         }
                     }
-                  
-                    
                 }
+        
                 else
                 {
                     Log.Warning("uhoh");
@@ -829,9 +986,11 @@ namespace GameEntities.RTS_Specific
 			list.Add( new UserControlPanelTask( new Task( Task.Types.Stop ), currentTask.Type == Task.Types.Stop ) );
 			list.Add( new UserControlPanelTask( new Task( Task.Types.Move ),
 				currentTask.Type == Task.Types.Move || currentTask.Type == Task.Types.BreakableMove ) );
-            list.Add(new UserControlPanelTask(new Task(Task.Types.Collect), currentTask.Type == Task.Types.Collect));
             list.Add(new UserControlPanelTask( new Task(Task.Types.TrailMove), currentTask.Type == Task.Types.TrailMove));
-            
+            if (ControlledObject.Type is ForagerAntType)
+            {
+                list.Add(new UserControlPanelTask(new Task(Task.Types.Collect), currentTask.Type == Task.Types.Collect));
+            }
 			//RTSConstructor specific
 			if( ControlledObject.Type.Name == "RTSConstructor" )
 			{

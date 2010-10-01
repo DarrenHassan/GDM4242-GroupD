@@ -527,6 +527,34 @@ namespace Game
 						tasked = true;
 					}
 
+                    // Collect
+                    if (unit.Type is ForagerAntType)
+                    {
+                        // Log Warnign
+                        ForagerAnt temp = (ForagerAnt)unit;
+                        
+                        if (temp.Resources < temp.Type.ResourcesMax)
+                        {
+
+                            if (IsEnableTaskTypeInTasks(tasks, AntUnitAI.Task.Types.Collect) &&
+                                mouseOnObject.Intellect != null &&
+                                intellect.Faction != null && mouseOnObject.Intellect.Faction != null &&
+                                intellect.Faction == mouseOnObject.Intellect.Faction)
+                            {
+                                intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Collect,
+                                    mouseOnObject), toQueue);
+                                tasked = true;
+                            }
+
+                        }
+                        else
+                        {
+                            if (!tasked && IsEnableTaskTypeInTasks(tasks, AntUnitAI.Task.Types.Move))
+                                intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Move, mouseOnObject), toQueue);
+                        }
+
+                    }
+
 					if( !tasked && IsEnableTaskTypeInTasks( tasks, AntUnitAI.Task.Types.Move ) )
 						intellect.DoTask( new AntUnitAI.Task( AntUnitAI.Task.Types.Move, mouseOnObject ), toQueue );
 				}
@@ -1002,10 +1030,12 @@ namespace Game
 					text += unit.ToString() + "\n";
 					text += "\n";
 					text += string.Format( "Life: {0}/{1}\n", unit.Life, unit.Type.LifeMax );
-                    if (unit.Type is GenericAntCharacterType)
+                    if (unit.Type is ForagerAntType)
                     {
-                        GenericAntCharacter ant = unit as GenericAntCharacter;
+                        ForagerAnt ant = unit as ForagerAnt;
                         text += string.Format("Resources: {0}/{1}\n", ant.Resources, ant.Type.ResourcesMax);
+
+                       // text += string.Format("Depot: {0}\n",ant.Depot);
                     }
 
                         
