@@ -32,6 +32,7 @@ namespace GameEntities
         protected override void OnPostCreate(bool loaded)
         {
             base.OnPostCreate(loaded);
+            FilterGroups |= GameFilterGroups.MineFilterGroup;
             AddTimer();
         }
 

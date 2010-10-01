@@ -238,3 +238,43 @@ entity
 	position = 132.8994 -64.32742 7.534317
 	name = AntBarrack_0
 }
+entity
+{
+	type = RTSMine
+	uin = 22
+	classPrompt = RTSMine
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 4.223571 -124.4765 6.499926
+	name = RTSMine_0
+}
+entity
+{
+	type = RTSDepot
+	uin = 23
+	classPrompt = RTSMine
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 29.21083 -136.9805 6.500993
+	name = RTSDepot_0
+}
+entity
+{
+	type = ForagerAnt
+	uin = 24
+	classPrompt = ForagerAnt
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 73.2424 -110.4801 10.00093
+	name = ForagerAnt_0
+}
+entity
+{
+	type = ForagerAnt
+	uin = 25
+	classPrompt = ForagerAnt
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 63.22462 -119.3495 10.00136
+	name = ForagerAnt_1
+}
