@@ -13,10 +13,6 @@ namespace GameEntities.RTS_Specific
 {
     public class GenericAntCharacterType : RTSUnitType
     {
-        const float resourcesMaxDefault = 1000.0f;
-        [FieldSerialize]
-        float resourcesMax = resourcesMaxDefault;
-
         const float heightDefault = 3.0f;
         [FieldSerialize]
         float height = heightDefault;
@@ -56,12 +52,24 @@ namespace GameEntities.RTS_Specific
         float maxVelocity = maxVelocityDefault;
 
         [FieldSerialize]
-        [DefaultValue("idle")]
-        string idleAnimationName = "idle";
+        [DefaultValue("Idle")]
+        string idleAnimationName = "Idle";
 
         [FieldSerialize]
-        [DefaultValue("walk")]
-        string walkAnimationName = "walk";
+        [DefaultValue("Walk")]
+        string walkAnimationName = "Walk";
+
+        [FieldSerialize]
+        [DefaultValue("Death")]
+        string deathAnimationName = "Death";
+
+        [FieldSerialize]
+        [DefaultValue("Dead")]
+        string deadAnimationName = "Dead";
+
+        [FieldSerialize]
+        [DefaultValue("Attack")]
+        string fightingAnimationName = "Attack";
 
         [FieldSerialize]
         [DefaultValue(1.0f)]
@@ -74,18 +82,39 @@ namespace GameEntities.RTS_Specific
             set { maxVelocity = value; }
         }
 
-        [DefaultValue("idle")]
+        [DefaultValue("Idle")]
         public string IdleAnimationName
         {
             get { return idleAnimationName; }
             set { idleAnimationName = value; }
         }
 
-        [DefaultValue("walk")]
+        [DefaultValue("Walk")]
         public string WalkAnimationName
         {
             get { return walkAnimationName; }
             set { walkAnimationName = value; }
+        }
+
+        [DefaultValue("Death")]
+        public string DeathAnimationName
+        {
+            get { return deathAnimationName; }
+            set { deathAnimationName = value; }
+        }
+
+        [DefaultValue("Dead")]
+        public string DeadAnimationName
+        {
+            get { return deadAnimationName; }
+            set { deadAnimationName = value; }
+        }
+
+        [DefaultValue("Attack")]
+        public string FightingAnimationName
+        {
+            get { return fightingAnimationName; }
+            set { fightingAnimationName = value; }
         }
 
         [DefaultValue(1.0f)]
@@ -93,13 +122,6 @@ namespace GameEntities.RTS_Specific
         {
             get { return walkAnimationVelocityMultiplier; }
             set { walkAnimationVelocityMultiplier = value; }
-        }
-
-        [DefaultValue(1000.0f)]
-        public float ResourcesMax
-        {
-            get { return resourcesMax; }
-            set { resourcesMax = value; }
         }
     }
 
@@ -121,35 +143,11 @@ namespace GameEntities.RTS_Specific
         Vec3 oldMainBodyPosition;
         Vec3 mainBodyVelocity;
 
+        // Animation state variables
+        bool dead;
+        public bool fighting;
+
         GenericAntCharacterType _type = null; public new GenericAntCharacterType Type { get { return _type; } }
-
-        [FieldSerialize(FieldSerializeSerializationTypes.World)]
-        RTSMine depot;
-
-        public RTSMine Depot
-        {
-            get { return depot; }
-            set { depot = value; }
-        }
-
-        [FieldSerialize(FieldSerializeSerializationTypes.World)]
-        float resources;
-
-        public float Resources
-        {
-            get { return resources; }
-            set
-            {
-
-                if (resources == value)
-                    return;
-
-                resources = value;
-
-                if (resources > Type.ResourcesMax)
-                    resources = Type.ResourcesMax;
-            }
-        }
 
         /// <summary>Overridden from <see cref="Engine.EntitySystem.Entity.OnPostCreate(Boolean)"/>.</summary>
         /// Called immediately after this object is created
@@ -186,7 +184,9 @@ namespace GameEntities.RTS_Specific
             Vec3 p = Position;
             Position = p;
 
-            Resources = 0;
+            // Initialise animation state variables
+            dead = false;
+            fighting = false;
             
             PhysicsModel.PushToWorld();
 
@@ -301,14 +301,12 @@ namespace GameEntities.RTS_Specific
                         // Find a path to move position
                         if (DoPathFind())
                         {
-                           // Log.Warning("Success");
                             pathFoundedToPosition = MovePosition.ToVec2();
                             pathFindWaitTime = .5f;
                         }
                         else
                         {
                             // If a path has not been found, re-try in 1 second
-                            //Log.Warning("Blocked");
                             pathFindWaitTime = 1.0f;
                         }
                     }
@@ -385,6 +383,30 @@ namespace GameEntities.RTS_Specific
                 float velocity = (Rotation.GetInverse() * mainBodyVelocity).X *
                     Type.WalkAnimationVelocityMultiplier;
                 UpdateBaseAnimation(Type.WalkAnimationName, true, true, velocity);
+                return;
+            }
+
+            if (this.Life == 0)
+            {
+                if (!dead)
+                {
+                    // Death animation
+                    UpdateBaseAnimation(Type.DeathAnimationName, false, false, 1);
+                    dead = true;
+                    return;
+                }
+                else
+                {
+                    // Dead animation
+                    UpdateBaseAnimation(Type.DeadAnimationName, false, false, 1);
+                    return;
+                }
+            }
+
+            if (fighting)
+            {
+                UpdateBaseAnimation(Type.FightingAnimationName, true, true, 1);
+                fighting = false;
                 return;
             }
 

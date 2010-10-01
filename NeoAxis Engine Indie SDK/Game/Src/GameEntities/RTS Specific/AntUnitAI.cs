@@ -757,25 +757,12 @@ namespace GameEntities.RTS_Specific
                     //and steer towards it
                     controlledObj.Move(targetWorldPos);
                     break;
-                //Attack, Repair
+                // Attack
                 case Task.Types.Attack:
                 case Task.Types.BreakableAttack:
-                //case Task.Types.Repair:
-                //case Task.Types.BreakableRepair:
+                    GenericAntCharacter warrior = controlledObj as GenericAntCharacter;
+                    if (warrior != null)
                     {
-                        //healed
-                        if ((currentTask.Type == Task.Types.Repair ||
-                            currentTask.Type == Task.Types.BreakableRepair)
-                            && currentTask.Entity != null)
-                        {
-                            if (currentTask.Entity.Life == currentTask.Entity.Type.LifeMax)
-                            {
-                                DoNextTask();
-                                break;
-                            }
-                        }
-
-                        //float needDistance = controlledObj.Type.OptimalAttackDistanceRange.Maximum;
                         float maxAttackDistance = controlledObj.Type.OptimalAttackDistanceRange.Maximum;
 
                         // Find the position of the target entity
@@ -793,47 +780,40 @@ namespace GameEntities.RTS_Specific
                             //Yes, stop
                             controlledObj.Stop();
 
-                            // Turn to face victim
-                            GenericAntCharacter character = controlledObj as GenericAntCharacter;
-                            if (character != null)
-                                character.SetLookDirection(targetPos);
+                            warrior.SetLookDirection(targetPos);
 
+                            Ray ray = new Ray(controlledObj.Position,
+                                controlledObj.Position - currentTask.Entity.Position);
 
-                            if (currentTask.Type == Task.Types.Attack ||
-                                currentTask.Type == Task.Types.BreakableAttack)
+                            RayCastResult[] piercingResult = PhysicsWorld.Instance.RayCastPiercing(
+                                    ray, (int)ContactGroup.CastOnlyContact);
+
+                            foreach (RayCastResult result in piercingResult)
                             {
+                                MapObject obj = MapSystemWorld.GetMapObjectByBody(result.Shape.Body);
 
-                                Ray ray = new Ray(controlledObj.Position,
-                                    controlledObj.Position - currentTask.Entity.Position);
-
-                                RayCastResult[] piercingResult = PhysicsWorld.Instance.RayCastPiercing(
-                                        ray, (int)ContactGroup.CastOnlyContact);
-
-                                foreach (RayCastResult result in piercingResult)
-                                {
-                                    MapObject obj = MapSystemWorld.GetMapObjectByBody(result.Shape.Body);
-
-                                    if (obj != null)
+                                if (obj != null)
+                                {                                    
+                                    float impulse = 10.0f;
+                                    if (impulse != 0 && obj.PhysicsModel != null)
                                     {
-                                        float impulse = 10.0f;
-                                        if (impulse != 0 && obj.PhysicsModel != null)
-                                        {
-                                            result.Shape.Body.AddForce(ForceType.GlobalAtGlobalPos, 0,
-                                                currentTask.Entity.Rotation.GetForward() * impulse,
-                                                currentTask.Entity.Position);
-                                        }
+                                        result.Shape.Body.AddForce(ForceType.GlobalAtGlobalPos, 0,
+                                            currentTask.Entity.Rotation.GetForward() * impulse,
+                                            currentTask.Entity.Position);
+                                    }
 
-                                        Dynamic dynamic = currentTask.Entity as Dynamic;
-                                        
-                                        if (dynamic != null)
+                                    Dynamic dynamicVictim = currentTask.Entity as Dynamic;
+                                    
+                                    if (dynamicVictim != null && dynamicVictim.Life > 0)
+                                    {
+                                        // Animation state variable
+                                        warrior.fighting = true;
+                                        // TODO: Calculate damage based on Ant type
+                                        float damage = 1.0f;
+                                        if (damage != 0)
                                         {
-                                            // TODO: Calculate damage based on Ant type
-                                            float damage = 1.0f;
-                                            if (damage != 0)
-                                            {
-                                                dynamic.DoDamage(controlledObj, currentTask.Entity.Position,
-                                                    result.Shape, damage, true);
-                                            }
+                                            dynamicVictim.DoDamage(controlledObj, currentTask.Entity.Position,
+                                                result.Shape, damage, true);
                                         }
                                     }
                                 }
@@ -844,86 +824,6 @@ namespace GameEntities.RTS_Specific
                             // No - move to target
                             controlledObj.Move(targetPos);
                         }
-
-
-                        /*
-                        if( distance != 0 )
-                        {
-                            bool lineVisibility = false;
-                            {
-                                if( distance < needDistance )
-                                {
-                                    lineVisibility = true;
-
-                                    //direct line visibility check 
-
-                                    //!!!!!!slowly. it is necessary to check less often
-                                    Vec3 start = initialWeapons[ 0 ].Position;
-                                    Ray ray = new Ray( start, targetPos - start );
-
-                                    RayCastResult[] piercingResult = PhysicsWorld.Instance.RayCastPiercing(
-                                        ray, (int)ContactGroup.CastOnlyContact );
-
-                                    foreach( RayCastResult result in piercingResult )
-                                    {
-                                        MapObject obj = MapSystemWorld.GetMapObjectByBody( result.Shape.Body );
-
-                                        if( obj != null && obj == currentTask.Entity )
-                                            break;
-
-                                        if( obj != controlledObj )
-                                        {
-                                            lineVisibility = false;
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-
-                            //movement control 
-                            if( lineVisibility )
-                            {
-                                //stop
-                                controlledObj.Stop();
-
-                                //RTSCharacter character = controlledObj as RTSCharacter;
-                                GenericAntCharacter character = controlledObj as GenericAntCharacter;
-                                if( character != null )
-                                    character.SetLookDirection( targetPos );
-                            }
-                            else
-                            {
-                                //move to target
-                                controlledObj.Move( targetPos );
-                            }
-
-                            //weapons control
-                            if( lineVisibility )
-                            {
-                                foreach( Weapon weapon in initialWeapons )
-                                {
-                                    Vec3 pos = targetPos;
-                                    Gun gun = weapon as Gun;
-                                    if( gun != null && currentTask.Entity != null )
-                                        gun.GetAdvanceAttackTargetPosition( false, currentTask.Entity, false, out pos );
-                                    weapon.SetForceFireRotationLookTo( pos );
-
-                                    if( weapon.Ready )
-                                    {
-                                        Range range;
-
-                                        range = weapon.Type.WeaponNormalMode.UseDistanceRange;
-                                        if( distance >= range.Minimum && distance <= range.Maximum )
-                                            weapon.TryFire( false );
-
-                                        range = weapon.Type.WeaponAlternativeMode.UseDistanceRange;
-                                        if( distance >= range.Minimum && distance <= range.Maximum )
-                                            weapon.TryFire( true );
-                                    }
-                                }
-                            }
-                        }*/
-
                     }
                     break;
 
