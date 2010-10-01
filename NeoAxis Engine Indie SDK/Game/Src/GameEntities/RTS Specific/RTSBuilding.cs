@@ -188,19 +188,49 @@ namespace GameEntities
 		{
 			RTSUnit unit = (RTSUnit)Entities.Instance.Create( productUnitType, Map.Instance );
 
-            GenericAntCharacter character = unit as GenericAntCharacter;
-			if( character == null )
-				Log.Fatal( "RTSBuilding: CreateProductedUnit: character == null" );
+            if (unit.Type.Name == "ForagerAnt")
+            {
+                ForagerAnt character;
+                character = unit as ForagerAnt;
 
-			Vec2 p = GridPathFindSystem.Instance.GetNearestFreePosition( Position.ToVec2(),
-				character.Type.Radius * 2 );
-			unit.Position = new Vec3( p.X, p.Y, GridPathFindSystem.Instance.GetMotionMapHeight( p ) +
-				character.Type.Height * .5f );
+                if (character == null)
+                {
+                    Log.Fatal("RTSBuilding: CreateProductedUnit: character == null");
+                }
 
-			if( Intellect != null )
-				unit.InitialFaction = Intellect.Faction;
+                Vec2 p = GridPathFindSystem.Instance.GetNearestFreePosition(Position.ToVec2(),
+                    character.Type.Radius * 2);
+                unit.Position = new Vec3(p.X, p.Y, GridPathFindSystem.Instance.GetMotionMapHeight(p) +
+                    character.Type.Height * .5f);
 
-			unit.PostCreate();
+                if (Intellect != null)
+                    unit.InitialFaction = Intellect.Faction;
+
+                unit.PostCreate();
+
+            }
+            else 
+            {
+                GenericAntCharacter character;
+                character = unit as GenericAntCharacter;
+
+                if (character == null)
+                {
+                    Log.Fatal("RTSBuilding: CreateProductedUnit: character == null");
+                }
+
+                Vec2 p = GridPathFindSystem.Instance.GetNearestFreePosition(Position.ToVec2(),
+                    character.Type.Radius * 2);
+                unit.Position = new Vec3(p.X, p.Y, GridPathFindSystem.Instance.GetMotionMapHeight(p) +
+                    character.Type.Height * .5f);
+
+                if (Intellect != null)
+                    unit.InitialFaction = Intellect.Faction;
+
+                unit.PostCreate(); 
+            }
+            //GenericAntCharacter character = unit as GenericAntCharacter;
+
 		}
 
 		[DefaultValue( 1.0f )]

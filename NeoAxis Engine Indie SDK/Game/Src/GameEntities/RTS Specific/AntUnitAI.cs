@@ -1158,9 +1158,9 @@ namespace GameEntities.RTS_Specific
                 //list.Add(new UserControlPanelTask(new Task(Task.Types.BuildBuilding, buildingType),
                     //CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType));
 
-                //buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName("AntStorage");
-                //list.Add(new UserControlPanelTask(new Task(Task.Types.BuildBuilding, buildingType),
-                    //CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType));
+                buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName("RTSDepot");
+                list.Add(new UserControlPanelTask(new Task(Task.Types.BuildBuilding, buildingType),
+                    CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType));
 
                 buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName("AntBarrack");
                 list.Add(new UserControlPanelTask(new Task(Task.Types.BuildBuilding, buildingType),
