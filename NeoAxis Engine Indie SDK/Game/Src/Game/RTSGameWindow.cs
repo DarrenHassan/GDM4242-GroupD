@@ -65,7 +65,7 @@ namespace Game
         float timeForUpdateGameStatus;
 
         //
-		double elapsedGameTime = 0;
+        double elapsedGameTime = 0;
 
         protected override void OnAttach()
         {
@@ -445,33 +445,33 @@ namespace Game
 
                                 Vec3 pos = taskTargetBuildSceneNode.Position;
 
-							/*RTSMine specific
-							bool mineFound = false;
-							if( taskTargetBuildingType is RTSMineType )
-							{
+                                /*RTSMine specific
+                                bool mineFound = false;
+                                if( taskTargetBuildingType is RTSMineType )
+                                {
 
-								Bounds bounds = new Bounds( pos - new Vec3( 2, 2, 2 ),
-									pos + new Vec3( 2, 2, 2 ) );
-								Map.Instance.GetObjects( bounds, delegate( MapObject obj )
-								{
+                                    Bounds bounds = new Bounds( pos - new Vec3( 2, 2, 2 ),
+                                        pos + new Vec3( 2, 2, 2 ) );
+                                    Map.Instance.GetObjects( bounds, delegate( MapObject obj )
+                                    {
 
-									if( obj.Type.Name == "RTSGeyser" )
-									{
+                                        if( obj.Type.Name == "RTSGeyser" )
+                                        {
 
-										mineFound = true;
-										mouseMapPos = obj.Position;
-									}
-								} );
+                                            mineFound = true;
+                                            mouseMapPos = obj.Position;
+                                        }
+                                    } );
 
 
 
-								if( !mineFound )
-								{
+                                    if( !mineFound )
+                                    {
 
-									//no mine for build
-									return;
-								}
-							}*/
+                                        //no mine for build
+                                        return;
+                                    }
+                                }*/
 
                                 if (IsFreeForBuildTaskTargetBuild(pos))
                                 {
@@ -494,7 +494,7 @@ namespace Game
             }
             TaskTargetChooseIndex = -1;
         }
-    
+
         // Enables right-click actions, such as move, attack
         void DoRightClickTasks(Vec3 mouseMapPos, Unit mouseOnObject)
         {
@@ -540,7 +540,7 @@ namespace Game
                     {
                         // Log Warnign
                         ForagerAnt temp = (ForagerAnt)unit;
-                        
+
                         if (temp.Resources < temp.Type.ResourcesMax)
                         {
 
@@ -556,12 +556,12 @@ namespace Game
                         }
                         else
                         {
-							if (!tasked && IsEnableTaskTypeInTasks(tasks, AntUnitAI.Task.Types.Move))
-								intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Move, mouseOnObject), toQueue);
-						}
+                            if (!tasked && IsEnableTaskTypeInTasks(tasks, AntUnitAI.Task.Types.Move))
+                                intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Move, mouseOnObject), toQueue);
+                        }
                     }
-					if( !tasked && IsEnableTaskTypeInTasks( tasks, AntUnitAI.Task.Types.Move ) )
-						intellect.DoTask( new AntUnitAI.Task( AntUnitAI.Task.Types.Move, mouseOnObject ), toQueue );						
+                    if (!tasked && IsEnableTaskTypeInTasks(tasks, AntUnitAI.Task.Types.Move))
+                        intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Move, mouseOnObject), toQueue);
                 }
                 else
                 {
@@ -1059,9 +1059,10 @@ namespace Game
                     if (unit.Type is ForagerAntType)
                     {
                         ForagerAnt ant = unit as ForagerAnt;
+
                         text += string.Format("Resources: {0}/{1}\n", ant.Resources, ant.Type.ResourcesMax);
 
-                       // text += string.Format("Depot: {0}\n",ant.Depot);
+                        // text += string.Format("Depot: {0}\n",ant.Depot);
                     }
 
 
@@ -1228,19 +1229,22 @@ namespace Game
                     }
                     break;
 
-	            /*
-				//ProductUnit
-				case AntUnitAI.Task.Types.ProductUnit:
-					foreach( Unit unit in selectedUnits )
-					{
-						RTSBuildingAI intellect = unit.Intellect as RTSBuildingAI;
-						if( intellect == null )
-							continue;
 
-						if( IsEnableTaskTypeInTasks( intellect.GetControlPanelTasks(), taskType ) )
-							intellect.DoTask( new AntUnitAI.Task( taskType, tasks[ index ].Task.EntityType ), false );
-					}
-					break; */
+
+                //ProductUnit
+                case AntUnitAI.Task.Types.ProductUnit:
+                    foreach (Unit unit in selectedUnits)
+                    {
+
+                        RTSBuildingAI intellect = unit.Intellect as RTSBuildingAI;
+                        if (intellect == null)
+                            continue;
+
+                        if (IsEnableTaskTypeInTasks(intellect.GetControlPanelTasks(), taskType))
+                            intellect.DoTask(new AntUnitAI.Task(taskType, tasks[index].Task.EntityType), false);
+                    }
+
+                    break;
 
                 //Move, TrailMove, Attack, Repair
                 case AntUnitAI.Task.Types.Move:

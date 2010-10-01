@@ -28,9 +28,6 @@ namespace GameEntities.RTS_Specific
 
         float inactiveFindTaskTimer;
 
-
-
-
         [FieldSerialize]
         Task currentTask = new Task(Task.Types.Stop);
 
@@ -1045,23 +1042,10 @@ namespace GameEntities.RTS_Specific
 
                 RTSBuildingType buildingType;
 
-                // Adds these task to the control panel if the entity selected is an RTSConstructor
-                //buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName("RTSHeadquaters");
-                //list.Add(new UserControlPanelTask(new Task(Task.Types.BuildBuilding, buildingType),
-                    //CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType));
-
-                //buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName("RTSMine");
-                //list.Add(new UserControlPanelTask(new Task(Task.Types.BuildBuilding, buildingType),
-                    //CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType));
-
-                //buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName("RTSFactory");
-                //list.Add(new UserControlPanelTask(new Task(Task.Types.BuildBuilding, buildingType),
-                    //CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType));
-
-                //buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName("AntStorage");
-                //list.Add(new UserControlPanelTask(new Task(Task.Types.BuildBuilding, buildingType),
-                    //CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType));
-
+                buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName("RTSDepot");
+                list.Add(new UserControlPanelTask(new Task(Task.Types.BuildBuilding, buildingType),
+                    CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType));					
+										
                 buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName("AntBarrack");
                 list.Add(new UserControlPanelTask(new Task(Task.Types.BuildBuilding, buildingType),
                     CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType));
@@ -1081,4 +1065,5 @@ namespace GameEntities.RTS_Specific
             return list;
         }
     }
+
 }
