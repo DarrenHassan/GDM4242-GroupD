@@ -29,5 +29,6 @@ namespace GameEntities
 		//see "Unit" class constructor in Unit.cs. There you can found initialization of this group.
 		public const Map.FilterGroups UnitFilterGroup = Map.FilterGroups.Group1;
         public const Map.FilterGroups MineFilterGroup = Map.FilterGroups.Group2;
+        public const Map.FilterGroups HealthFilterGroup = Map.FilterGroups.Group3;
 	}
 }

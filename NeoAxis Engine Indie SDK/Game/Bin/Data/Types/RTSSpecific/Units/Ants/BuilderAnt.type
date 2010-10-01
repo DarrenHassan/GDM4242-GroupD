@@ -1,0 +1,22 @@
+type BuilderAnt
+{
+	class = GenericAntCharacter
+	maxVelocity = 15
+	walkAnimationVelocityMultiplier = 0.07
+	optimalAttackDistanceRange = 0 11
+	buildCost = 30
+	initialAI = DefaultAntUnitAI
+	viewRadius = 60
+	lifeMax = 100
+	substance = Flesh
+	allowEditorCreate = True
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\RTSSpecific\Units\Ants\ant2.mesh
+			position = 1 0 1
+			rotation = -0.2123752 -0.2165555 0.6870241 0.6603016
+		}
+	}
+}

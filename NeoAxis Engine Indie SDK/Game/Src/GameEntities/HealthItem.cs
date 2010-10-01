@@ -31,6 +31,10 @@ namespace GameEntities
 	{
 		HealthItemType _type = null; public new HealthItemType Type { get { return _type; } }
 
+        public HealthItem()
+        {
+            FilterGroups |= GameFilterGroups.HealthFilterGroup;
+        }
 		protected override bool OnTake( Unit unit )
 		{
 			bool take = base.OnTake( unit );

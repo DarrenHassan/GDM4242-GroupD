@@ -239,7 +239,7 @@ namespace GameEntities
 				return 0;
 
 			//RTSConstructor specific
-			if( ControlledObject.Type.Name == "RTSConstructor" )
+            if (ControlledObject.Type.Name == "RTSConstructor" || ControlledObject.Type.Name == "BuilderAnt" )
 			{
 				if( Faction == obj.Intellect.Faction )
 				{
@@ -303,7 +303,7 @@ namespace GameEntities
 			if( newTaskAttack != null )
 			{
 				//RTSConstructor specific
-				if( ControlledObject.Type.Name == "RTSConstructor" )
+                if (ControlledObject.Type.Name == "RTSConstructor" || ControlledObject.Type.Name == "BuilderAnt" )
 					DoTask( new Task( Task.Types.BreakableRepair, newTaskAttack ), false );
 				else
 					DoTask( new Task( Task.Types.BreakableAttack, newTaskAttack ), false );
@@ -672,8 +672,8 @@ namespace GameEntities
 			list.Add( new UserControlPanelTask( new Task( Task.Types.Move ),
 				currentTask.Type == Task.Types.Move || currentTask.Type == Task.Types.BreakableMove ) );
 
-			//RTSConstructor specific
-			if( ControlledObject.Type.Name == "RTSConstructor" )
+			//RTSConstructor specific BuilderAnt specific
+            if (ControlledObject.Type.Name == "RTSConstructor" || ControlledObject.Type.Name == "BuilderAnt" )
 			{
 				list.Add( new UserControlPanelTask( new Task( Task.Types.Repair ),
 					currentTask.Type == Task.Types.Repair || currentTask.Type == Task.Types.BreakableRepair ) );
@@ -682,6 +682,7 @@ namespace GameEntities
 
                 // Adds these task to the control panel if the entity selected is an RTSConstructor
 				buildingType = (RTSBuildingType)EntityTypes.Instance.GetByName( "RTSHeadquaters" );
+
 				list.Add( new UserControlPanelTask( new Task( Task.Types.BuildBuilding, buildingType ),
 					CurrentTask.Type == Task.Types.BuildBuilding && CurrentTask.EntityType == buildingType ) );
 

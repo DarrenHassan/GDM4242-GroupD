@@ -4,8 +4,8 @@ classPrompt = GameMap
 gameType = RTS
 gameMusic = Sounds\Music\Game.ogg
 ambientLight = 0.2 0.2 0.2
-editorCameraPosition = 355.3498 323.8061 7.699127
-editorCameraDirection = 2.55279 0.06070021
+editorCameraPosition = 404.1094 276.5179 105.1397
+editorCameraDirection = 2.217373 -0.8502704
 shadowColor = 1 1 1
 logicSystemManager = 3
 name = GameMap_0
@@ -194,83 +194,82 @@ entity
 }
 entity
 {
-	type = GenericAnt
+	type = SpawnPoint
 	uin = 10
-	classPrompt = GenericAntCharacter
-	intellectShouldDeleteAfterDetach = False
-	initialFaction = GoodFaction
-	position = 339.0028 353.8297 1.44843
-	name = GenericAnt_0
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = 383.2602 336.8586 0.04818476
+	name = SpawnPoint_0
 }
 entity
 {
-	type = GenericAnt
+	type = WarriorAnt
 	uin = 11
 	classPrompt = GenericAntCharacter
 	intellectShouldDeleteAfterDetach = False
 	initialFaction = BadFaction
-	position = 197.6515 309.6121 31.95283
-	name = GenericAnt_2
+	position = 344.5922 310.9008 1.5
+	name = WarriorAnt_0
 }
 entity
 {
-	type = GenericAnt
+	type = WarriorAnt
 	uin = 12
 	classPrompt = GenericAntCharacter
 	intellectShouldDeleteAfterDetach = False
 	initialFaction = BadFaction
-	position = 204.9428 289.9612 31.95388
-	name = GenericAnt_3
+	position = 355.8637 309.4649 1.5
+	name = WarriorAnt_5
 }
 entity
 {
-	type = GenericAnt
+	type = WarriorAnt
 	uin = 13
 	classPrompt = GenericAntCharacter
 	intellectShouldDeleteAfterDetach = False
-	initialFaction = GoodFaction
-	position = 338.1174 367.3427 1.448691
-	name = GenericAnt_1
+	initialFaction = BadFaction
+	position = 346.7501 301.049 1.5
+	name = WarriorAnt_6
 }
 entity
 {
-	type = RTSConstructor
+	type = WarriorAnt
 	uin = 14
-	classPrompt = RTSCharacter
+	classPrompt = GenericAntCharacter
 	intellectShouldDeleteAfterDetach = False
-	initialFaction = GoodFaction
-	position = 349.2862 365.8245 1.727503
-	name = RTSConstructor_0
+	initialFaction = BadFaction
+	position = 357.6422 301.464 1.5
+	name = WarriorAnt_7
 }
 entity
 {
-	type = RTSRobot
+	type = WarriorAnt
 	uin = 15
-	classPrompt = RTSCharacter
+	classPrompt = GenericAntCharacter
 	intellectShouldDeleteAfterDetach = False
-	initialFaction = GoodFaction
-	position = 327.9037 357.9964 1.730461
-	name = RTSRobot_0
+	initialFaction = BadFaction
+	position = 370.066 307.7782 1.5
+	name = WarriorAnt_8
 }
 entity
 {
-	type = RTSConstructor
+	type = WarriorAnt
 	uin = 16
-	classPrompt = RTSCharacter
+	classPrompt = GenericAntCharacter
 	intellectShouldDeleteAfterDetach = False
 	initialFaction = BadFaction
-	position = 197.7177 299.4461 32.23564
-	name = RTSConstructor_1
+	position = 357.9586 288.0458 1.5
+	name = WarriorAnt_9
 }
 entity
 {
-	type = RTSRobot
+	type = WarriorAnt
 	uin = 17
-	classPrompt = RTSCharacter
+	classPrompt = GenericAntCharacter
 	intellectShouldDeleteAfterDetach = False
 	initialFaction = BadFaction
-	position = 208.107 280.129 32.23202
-	name = RTSRobot_1
+	position = 369.123 293.7427 1.5
+	name = WarriorAnt_10
 }
 entity
 {
@@ -279,8 +278,8 @@ entity
 	classPrompt = GenericAntCharacter
 	intellectShouldDeleteAfterDetach = False
 	initialFaction = GoodFaction
-	position = 345.993 341.2045 1.5
-	name = WarriorAnt_0
+	position = 395.4544 394.328 1.5
+	name = WarriorAnt_1
 }
 entity
 {
@@ -289,6 +288,56 @@ entity
 	classPrompt = GenericAntCharacter
 	intellectShouldDeleteAfterDetach = False
 	initialFaction = GoodFaction
-	position = 337.8094 337.7094 1.5
-	name = WarriorAnt_1
+	position = 411.9469 385.3029 1.5
+	name = WarriorAnt_2
+}
+entity
+{
+	type = WarriorAnt
+	uin = 20
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 426.3401 375.9589 1.5
+	name = WarriorAnt_3
+}
+entity
+{
+	type = WarriorAnt
+	uin = 21
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 442.8148 385.6707 1.5
+	name = WarriorAnt_4
+}
+entity
+{
+	type = WarriorAnt
+	uin = 22
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 431.3929 396.7283 1.5
+	name = WarriorAnt_11
+}
+entity
+{
+	type = WarriorAnt
+	uin = 23
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 409.7036 408.3149 1.5
+	name = WarriorAnt_12
+}
+entity
+{
+	type = WarriorAnt
+	uin = 24
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 389.1884 421.5082 1.5
+	name = WarriorAnt_13
 }

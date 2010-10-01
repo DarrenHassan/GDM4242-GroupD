@@ -10,6 +10,8 @@ using Engine.MathEx;
 using Engine.Renderer;
 using Engine.PhysicsSystem;
 
+using GameEntities.RTS_Specific;
+
 namespace GameEntities
 {
 	/// <summary>
@@ -154,7 +156,7 @@ namespace GameEntities
 
 			productUnitAttachedMesh.ScaleOffset = meshScale;
 
-			if( Type.Name == "RTSHeadquaters" )
+			if( Type.Name == "RTSHeadquaters" || Type.Name == "AntColmena" )
 			{
 				foreach( MeshObject.SubObject subMesh in productUnitAttachedMesh.MeshObject.SubObjects )
 					subMesh.MaterialName = "RTSBuildMaterial";
@@ -186,7 +188,7 @@ namespace GameEntities
 		{
 			RTSUnit unit = (RTSUnit)Entities.Instance.Create( productUnitType, Map.Instance );
 
-			RTSCharacter character = unit as RTSCharacter;
+            GenericAntCharacter character = unit as GenericAntCharacter;
 			if( character == null )
 				Log.Fatal( "RTSBuilding: CreateProductedUnit: character == null" );
 
