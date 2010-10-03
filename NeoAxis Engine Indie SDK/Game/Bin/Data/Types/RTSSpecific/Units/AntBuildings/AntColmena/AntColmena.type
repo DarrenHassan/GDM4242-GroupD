@@ -1,0 +1,17 @@
+type AntColmena
+{
+	class = RTSBuilding
+	buildCost = 300
+	initialAI = DefaultRTSBuildingAI
+	lifeMax = 500
+	substance = Metal
+	physicsModel = Types\RTSSpecific\Units\AntBuildings\AntColmena\AntColmena.physics
+	allowEditorCreate = True
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Types\RTSSpecific\Units\RTSHeadquaters\RTSHeadquaters.mesh
+		}
+	}
+}

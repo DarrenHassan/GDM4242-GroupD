@@ -1,0 +1,280 @@
+type = GameMap
+uin = 2
+classPrompt = GameMap
+gameType = RTS
+gameMusic = Sounds\Music\Game.ogg
+ambientLight = 0.2 0.2 0.2
+editorCameraPosition = 153.3153 -120.5995 41.87033
+editorCameraDirection = 2.521525 -0.5950646
+shadowColor = 1 1 1
+logicSystemManager = 3
+shadowTechnique = ShadowmapMedium
+rootEditorLayer
+{
+}
+entity
+{
+	type = LogicSystemManager
+	uin = 3
+	mapClassManager = 4
+	entity
+	{
+		type = LogicClassManager
+		uin = 4
+	}
+}
+entity
+{
+	type = HeightmapTerrain
+	uin = 5
+	classPrompt = HeightmapTerrain
+	position = 0 0 -45.5
+	horizontalSize = 300
+	verticalSize = 100
+	dataDirectory = HeightmapTerrain
+	masksSize = 1024
+	detailMapsDistance = 50
+	renderQueueGroup = WorldGeometry1
+	collisionMaterialName = Default
+	bottomClipHeight = -10000
+	castDynamicShadows = False
+	receiveStaticShadows = True
+	simpleRendering = False
+	tileSize = 16
+	layers
+	{
+		item
+		{
+			name = base
+			baseMap = Types\Base\HeightmapTerrain\DefaultLayer0Base.jpg
+			baseScale = 10
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer0Detail.jpg
+			detailScale = 2
+		}
+		item
+		{
+			name = second
+			baseMap = Types\Base\HeightmapTerrain\DefaultLayer1Base.jpg
+			baseScale = 10
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
+			detailScale = 2
+		}
+	}
+}
+entity
+{
+	type = Light
+	uin = 6
+	classPrompt = Light
+	lightType = Point
+	diffuseColor = 1 1 1
+	diffusePower = 1
+	specularColor = 0 0 0
+	specularPower = 1
+	attenuationRangeAutomatic = True
+	attenuationRange = Infinity
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0
+	spotlightInnerAngle = 30
+	spotlightOuterAngle = 40
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	allowDynamicLighting = True
+	position = 0 0 100
+	rotation = 0 -0.7071068 0 -0.7071068
+	name = Light_0
+}
+entity
+{
+	type = RTSFactionManager
+	uin = 7
+	classPrompt = RTSFactionManager
+	factions
+	{
+		item
+		{
+			factionType = GoodFaction
+			money = 1000
+		}
+		item
+		{
+			factionType = BadFaction
+			money = 1000
+		}
+	}
+}
+entity
+{
+	type = RTSGridPathFindSystem
+	uin = 8
+	classPrompt = RTSGridPathFindSystem
+	heightByTerrainOnly = False
+	debugDrawDistance = 100
+}
+entity
+{
+	type = WarriorAnt
+	uin = 9
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 111.4372 -112.2551 5.503802
+	name = WarriorAnt_0
+}
+entity
+{
+	type = WarriorAnt
+	uin = 10
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 129.632 -87.57371 5.503802
+	name = WarriorAnt_1
+}
+entity
+{
+	type = WarriorAnt
+	uin = 11
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 95.2244 -92.74461 5.500649
+	name = WarriorAnt_2
+}
+entity
+{
+	type = WarriorAnt
+	uin = 12
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 90.64004 -122.363 5.50663
+	name = WarriorAnt_3
+}
+entity
+{
+	type = WarriorAnt
+	uin = 13
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = BadFaction
+	position = -51.52153 58.89103 5.500746
+	name = WarriorAnt_4
+}
+entity
+{
+	type = WarriorAnt
+	uin = 14
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = BadFaction
+	position = -88.91105 22.97193 5.501158
+	name = WarriorAnt_5
+}
+entity
+{
+	type = WarriorAnt
+	uin = 15
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = BadFaction
+	position = 33.51446 76.74744 5.500853
+	name = WarriorAnt_6
+}
+entity
+{
+	type = WarriorAnt
+	uin = 16
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = BadFaction
+	position = -38.78345 94.38461 5.500448
+	name = WarriorAnt_7
+}
+entity
+{
+	type = SmallHealthItem
+	uin = 17
+	classPrompt = HealthItem
+	respawnTime = 10
+	position = 132.6518 -111.9304 4.499239
+}
+entity
+{
+	type = SmallHealthItem
+	uin = 18
+	classPrompt = HealthItem
+	respawnTime = 10
+	position = -93.99104 67.53443 4.499987
+}
+entity
+{
+	type = SpawnPoint
+	uin = 19
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = 36.94154 -25.83712 4.542684
+	name = SpawnPoint_0
+}
+entity
+{
+	type = AntColmena
+	uin = 20
+	classPrompt = RTSBuilding
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 120.0034 -125.9964 5.242041
+	name = AntColmena_0
+}
+entity
+{
+	type = AntBarrack
+	uin = 21
+	classPrompt = RTSBuilding
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 132.8994 -64.32742 7.534317
+	name = AntBarrack_0
+}
+entity
+{
+	type = RTSMine
+	uin = 22
+	classPrompt = RTSMine
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 4.223571 -124.4765 6.499926
+	name = RTSMine_0
+}
+entity
+{
+	type = RTSDepot
+	uin = 23
+	classPrompt = RTSMine
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 29.21083 -136.9805 6.500993
+	name = RTSDepot_0
+}
+entity
+{
+	type = ForagerAnt
+	uin = 24
+	classPrompt = ForagerAnt
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 73.2424 -110.4801 10.00093
+	name = ForagerAnt_0
+}
+entity
+{
+	type = ForagerAnt
+	uin = 25
+	classPrompt = ForagerAnt
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 63.22462 -119.3495 10.00136
+	name = ForagerAnt_1
+}

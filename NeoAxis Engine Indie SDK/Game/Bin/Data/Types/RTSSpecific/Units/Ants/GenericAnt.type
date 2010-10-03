@@ -5,7 +5,7 @@ type GenericAnt
 	walkAnimationVelocityMultiplier = 0.07
 	buildCost = 10
 	allowPlayerControl = True
-	initialAI = DefaultRTSUnitAI
+	initialAI = DefaultAntUnitAI
 	viewRadius = 5
 	fpsCameraOffset = 0.4 0 1.2
 	lifeMax = 200
@@ -17,7 +17,7 @@ type GenericAnt
 		{
 			meshName = Types\RTSSpecific\Units\Ants\ant2.mesh
 			castDynamicShadows = True
-			position = -0.6781096 -0.6822622 2.288435
+			position = 1 0 1
 			rotation = -0.2123753 -0.2165556 0.6870241 0.6603016
 		}
 	}

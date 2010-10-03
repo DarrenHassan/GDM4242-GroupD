@@ -7,23 +7,23 @@ using Engine.MathEx;
 using Engine.EntitySystem;
 using Engine.MapSystem;
 
-namespace GameEntities
+namespace GameEntities.RTS_Specific
 {
 	/// <summary>
 	/// Defines the <see cref="RTSBuildingAI"/> entity type.
 	/// </summary>
-	public class RTSBuildingAIType : RTSUnitAIType
+    public class RTSBuildingAIType : AntUnitAIType
 	{
 	}
 
-	public class RTSBuildingAI : RTSUnitAI
+	public class RTSBuildingAI : AntUnitAI
 	{
 
 		//
 
 		RTSBuildingAIType _type = null; public new RTSBuildingAIType Type { get { return _type; } }
 
-		public override List<RTSUnitAI.UserControlPanelTask> GetControlPanelTasks()
+		public override List<AntUnitAI.UserControlPanelTask> GetControlPanelTasks()
 		{
 			List<UserControlPanelTask> list = new List<UserControlPanelTask>();
 
@@ -32,17 +32,21 @@ namespace GameEntities
 				if( ControlledObject.BuildUnitType == null )
 				{
 					//RTSHeadquaters specific
-					if( ControlledObject.Type.Name == "RTSHeadquaters" )
+                    if ( ControlledObject.Type.Name == "RTSHeadquaters" || ControlledObject.Type.Name == "AntColmena" )
 					{
-						RTSUnitType unitType = (RTSUnitType)EntityTypes.Instance.GetByName( "RTSConstructor" );
+						RTSUnitType unitType = (RTSUnitType)EntityTypes.Instance.GetByName( "BuilderAnt" );
 						list.Add( new UserControlPanelTask( new Task( Task.Types.ProductUnit, unitType ),
 							CurrentTask.Type == Task.Types.ProductUnit ) );
+
+                        unitType = (RTSUnitType)EntityTypes.Instance.GetByName( "ForagerAnt" );
+                        list.Add(new UserControlPanelTask(new Task(Task.Types.ProductUnit, unitType),
+                            CurrentTask.Type == Task.Types.ProductUnit));
 					}
 
 					//RTSFactory specific
-					if( ControlledObject.Type.Name == "RTSFactory" )
+                    if ( ControlledObject.Type.Name == "RTSFactory" || ControlledObject.Type.Name == "AntBarrack" )
 					{
-						RTSUnitType unitType = (RTSUnitType)EntityTypes.Instance.GetByName( "RTSRobot" );
+                        RTSUnitType unitType = (RTSUnitType)EntityTypes.Instance.GetByName( "WarriorAnt" );
 						list.Add( new UserControlPanelTask( new Task( Task.Types.ProductUnit, unitType ),
 							CurrentTask.Type == Task.Types.ProductUnit ) );
 					}
@@ -89,7 +93,7 @@ namespace GameEntities
 
 		}
 
-		protected override void DoTaskInternal( RTSUnitAI.Task task )
+		protected override void DoTaskInternal( AntUnitAI.Task task )
 		{
 			if( task.Type != Task.Types.ProductUnit )
 				ControlledObject.StopProductUnit();
