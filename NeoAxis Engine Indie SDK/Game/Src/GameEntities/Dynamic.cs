@@ -948,24 +948,42 @@ namespace GameEntities
 
 			if( currentAnimationItem != null )
 			{
-				if( currentAnimationItem.Removed ||
-					currentAnimationItem.AnimationBaseName != animationBaseName ||
-					currentAnimationItem.AllowRandomAnimationNumber != allowRandomAnimationNumber ||
-					currentAnimationItem.Loop != loop )
-				{
-					animationController.Remove( currentAnimationItem );
-					currentAnimationItem = null;
-				}
+                if (currentAnimationItem.Loop == true)
+                {
+                     // The new animation is different from the last animations
+                     if(currentAnimationItem.Removed ||
+                        currentAnimationItem.AnimationBaseName != animationBaseName ||
+                        currentAnimationItem.AllowRandomAnimationNumber != allowRandomAnimationNumber ||
+                        currentAnimationItem.Loop != loop)
+                    {
+                        animationController.Remove(currentAnimationItem);
+                        currentAnimationItem = null;
+                    }
+                }
+                else
+                {
+                    if (// The new animation is different from the last animations
+                        (currentAnimationItem.Removed ||
+                        currentAnimationItem.AnimationBaseName != animationBaseName ||
+                        currentAnimationItem.AllowRandomAnimationNumber != allowRandomAnimationNumber ||
+                        currentAnimationItem.Loop != loop) &&
+                        // and the animation has stopped playing
+                        currentAnimationItem.TimePosition == currentAnimationItem.Length)
+                    {
+                        animationController.Remove(currentAnimationItem);
+                        currentAnimationItem = null;
+                    }
+                }
 			}
 
 			if( currentAnimationItem == null )
 			{
 				currentAnimationItem = animationController.Add( animationBaseName,
 					allowRandomAnimationNumber, loop );
-			}
 
-			if( currentAnimationItem != null )
-				currentAnimationItem.Velocity = velocity;
+                if (currentAnimationItem != null)
+                    currentAnimationItem.Velocity = velocity;
+			}
 		}
 
 		protected int GetRandomAnimationNumber( string animationBaseName,
