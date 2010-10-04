@@ -298,16 +298,23 @@ namespace GameEntities.RTS_Specific
             if (obj.Intellect == null)
                 return 0;
 
-            //RTSConstructor specific
-            if (ControlledObject.Type.Name == "RTSConstructor" || ControlledObject.Type.Name == "BuilderAnt")
+            //BuilderAnt specific
+            if (ControlledObject.Type.Name == "BuilderAnt")
             {
+                // Is the entity on the same faction
                 if (Faction == obj.Intellect.Faction)
                 {
-                    if (obj.Life < obj.Type.LifeMax)
+                    // Is the entity a building
+                    if (obj.Type.Name == "AntColmena" || obj.Type.Name == "AntBarrack")
                     {
-                        Vec3 distance = obj.Position - ControlledObject.Position;
-                        float len = distance.LengthFast();
-                        return 1.0f / len + 1.0f;
+                        // Is the building damaged
+                        if (obj.Life < obj.Type.LifeMax)
+                        {
+                            // Favour closer damaged buildings
+                            Vec3 distance = obj.Position - ControlledObject.Position;
+                            float len = distance.LengthFast();
+                            return 1.0f / len + 1.0f;
+                        }
                     }
                 }
             }
@@ -315,6 +322,7 @@ namespace GameEntities.RTS_Specific
             {
                 if (Faction != null && obj.Intellect.Faction != null && Faction != obj.Intellect.Faction)
                 {
+                    // Favour closer entities
                     Vec3 distance = obj.Position - ControlledObject.Position;
                     float len = distance.LengthFast();
                     return 1.0f / len + 1.0f;
@@ -396,10 +404,12 @@ namespace GameEntities.RTS_Specific
 
             if (newTaskAttack != null)
             {
-                //RTSConstructor specific
-                if (ControlledObject.Type.Name == "RTSConstructor" || ControlledObject.Type.Name == "BuilderAnt")
+                //BuilderAnt specific
+                if (ControlledObject.Type.Name == "BuilderAnt")
+                    // Repair buildings
                     DoTask(new Task(Task.Types.BreakableRepair, newTaskAttack), false);
                 else
+                    // Attack enemy ants
                     DoTask(new Task(Task.Types.BreakableAttack, newTaskAttack), false);
                 return true;
             }
@@ -757,10 +767,10 @@ namespace GameEntities.RTS_Specific
                 // Attack
                 case Task.Types.Attack:
                 case Task.Types.BreakableAttack:
-                    GenericAntCharacter warrior = controlledObj as GenericAntCharacter;
-                    if (warrior != null)
+                    GenericAntCharacter warrior = controlledObj as GenericAntCharacter;                   
+                    if (warrior != null && warrior.Life > 0)
                     {
-                        float maxAttackDistance = controlledObj.Type.OptimalAttackDistanceRange.Maximum;
+                        float maxAttackDistance = warrior.Type.OptimalAttackDistanceRange.Maximum;
 
                         // Find the position of the target entity
                         Vec3 targetPos;
@@ -769,7 +779,7 @@ namespace GameEntities.RTS_Specific
                         else
                             targetPos = currentTask.Position;
 
-                        float distance = (controlledObj.Position - targetPos).LengthFast();
+                        float distance = (warrior.Position - targetPos).LengthFast();
 
                         // Is this ant within attack range
                         if (distance <= maxAttackDistance)
@@ -819,7 +829,7 @@ namespace GameEntities.RTS_Specific
                         else
                         {
                             // No - move to target
-                            controlledObj.Move(targetPos);
+                            warrior.Move(targetPos);
                         }
                     }
                     break;
