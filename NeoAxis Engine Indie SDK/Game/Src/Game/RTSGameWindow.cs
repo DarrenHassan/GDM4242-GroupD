@@ -64,8 +64,10 @@ namespace Game
 
         float timeForUpdateGameStatus;
 
-        //
+        // The game time
         double elapsedGameTime = 0;
+        // The bad player
+        BadFactionPlayer badPlayer;
 
         protected override void OnAttach()
         {
@@ -150,6 +152,9 @@ namespace Game
             EngineApp.Instance.RenderScene();
 
             EngineApp.Instance.MousePosition = new Vec2(.5f, .5f);
+
+            // Initialise the bad player
+            badPlayer = new BadFactionPlayer();
         }
 
         public override void OnBeforeWorldSave()
@@ -826,26 +831,8 @@ namespace Game
 
             }
 
-            // Control the bad faction
-            if (elapsedGameTime > 10f && elapsedGameTime < 11f)
-            {
-                foreach (Entity entity in Map.Instance.Children)
-                {
-                    RTSUnit unit = entity as RTSUnit;
-                    if (unit == null)
-                        continue;
-                    if (unit.Intellect == null)
-                        continue;
-                    if (unit.Intellect.Faction != playerFaction)
-                    {
-                        AntUnitAI intellect = unit.Intellect as AntUnitAI;
-                        if (intellect == null)
-                            continue;
-                        //intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Move, new Vec3(0, 0, 0)), false);
-                        intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Wander, 5, 50, 10), false);
-                    }
-                }
-            }
+            // The bad factions actions
+            badPlayer.PerformAction(elapsedGameTime, Map.Instance.Children);
 
             //gameStatus
             if (string.IsNullOrEmpty(hudControl.Controls["GameStatus"].Text))

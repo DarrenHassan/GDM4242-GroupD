@@ -334,10 +334,9 @@ namespace GameEntities.RTS_Specific
 
 		bool InactiveFindTask()
 		{			
-            //if( initialWeapons.Count == 0 )
-			//	return false;
 			RTSUnit controlledObj = ControlledObject;
-			if( controlledObj == null )
+            // Ensure only alive ants perform tasks
+			if( controlledObj == null || controlledObj.Life == 0)
 				return false;
 
             Vec3 controlledObjPos = controlledObj.Position;
@@ -551,7 +550,8 @@ namespace GameEntities.RTS_Specific
         protected virtual void TickTasks()
         {
             RTSUnit controlledObj = ControlledObject;
-            if (controlledObj == null)
+            // Ensure only alive ants perform tasks
+            if (controlledObj == null || controlledObj.Life == 0)
                 return;
 
             switch (currentTask.Type)

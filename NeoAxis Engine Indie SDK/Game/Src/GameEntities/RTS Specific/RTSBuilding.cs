@@ -91,6 +91,7 @@ namespace GameEntities
 			//check cost
 			RTSFactionManager.FactionItem factionItem = RTSFactionManager.Instance.
 				GetFactionItemByType( Intellect.Faction );
+            // Reduce the factions money by the unit's cost
 			if( factionItem != null )
 			{
 				float cost = unitType.BuildCost;

@@ -145,6 +145,7 @@ namespace GameEntities
 
             bool badFaction = InitialFaction.Name == "BadFaction";
 
+            // Set the robot's material
             if (Type.Name == "RTSRobot")
             {
                 (AttachedObjects[0] as MapObjectAttachedMesh).MeshObject.

@@ -2,6 +2,8 @@ type ForagerAnt
 {
 	class = ForagerAnt
 	maxVelocity = 15
+	idleAnimationName = Idle
+	walkAnimationName = Walk
 	walkAnimationVelocityMultiplier = 0.07
 	optimalAttackDistanceRange = 0 10
 	buildCost = 10
@@ -15,10 +17,10 @@ type ForagerAnt
 	{
 		mesh
 		{
-			meshName = Types\RTSSpecific\Units\Ants\ant2.mesh
+			meshName = Models\Ants\worker\worker_final.mesh
 			castDynamicShadows = True
 			position = 1 0 1
-			rotation = -0.2123752 -0.2165555 0.6870241 0.6603016
+			rotation = 0.7071068 -0.7071068 3.090862E-08 -3.090862E-08
 		}
 	}
 }
