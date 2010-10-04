@@ -5,7 +5,7 @@ highLevelMaterial RockBig
 	specularShininess = 14.73
 	diffuse1Map
 	{
-		texture = Models\RockBig\RockBigDiffuse.dds
+		texture = Models\RockBig\RockBigSpecular.dds
 	}
 	specularMap
 	{

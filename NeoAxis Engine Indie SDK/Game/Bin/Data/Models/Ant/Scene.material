@@ -1,9 +1,0 @@
-material BaseWhite2
-{
-	technique
-	{
-		pass
-		{
-		}
-	}
-}
