@@ -1,5 +1,0 @@
-highLevelMaterial NewMaterial
-{
-	template = SimpleExampleMaterial
-	diffuseMap = Models\Ants\warrior\Warrior_Ant_Red_Tex.tga
-}

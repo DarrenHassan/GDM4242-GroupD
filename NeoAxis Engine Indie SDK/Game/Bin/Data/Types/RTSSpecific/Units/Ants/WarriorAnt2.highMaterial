@@ -1,0 +1,5 @@
+highLevelMaterial WarriorAnt2
+{
+	template = SimpleExampleMaterial
+	diffuseMap = Models\Ants\warrior\Warrior_Ant_Red_Tex.tga
+}

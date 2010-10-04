@@ -1,0 +1,8 @@
+highLevelMaterial WarriorAnt3
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Models\Ants\warrior\Warrior_Ant_Green_Tex.tga
+	}
+}

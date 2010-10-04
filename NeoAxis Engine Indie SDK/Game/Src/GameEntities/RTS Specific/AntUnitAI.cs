@@ -573,8 +573,7 @@ namespace GameEntities.RTS_Specific
 
                 if (Controlled.Depot == null)
                 {
-                    Log.Warning("No depot set");
-
+                    
                     Vec3 controlledObjPos = Controlled.Position;
                     float radius = Controlled./*Type.*/ViewRadius;
                     //int count = 0;
@@ -587,13 +586,11 @@ namespace GameEntities.RTS_Specific
                             RTSMine obj = (RTSMine)mapObject;
                             if (minDistance == 0)
                             {
-                                Log.Warning("First one...");
                                 Controlled.Depot = obj;
                                 minDistance = (controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast();
                             }
                             else if ((controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast() < minDistance)
                             {
-                                Log.Warning("New best...");
                                 Controlled.Depot = obj;
                                 minDistance = (controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast();
                             }
@@ -667,7 +664,6 @@ namespace GameEntities.RTS_Specific
                                 }
                                 else if ((controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast() < minDistance)
                                 {
-                                    Log.Warning("New best...");
                                     ControlledCollect.Depot = obj;
                                     minDistance = (controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast();
                                 }

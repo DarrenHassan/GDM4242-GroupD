@@ -156,6 +156,11 @@ namespace GameEntities
                 (AttachedObjects[0] as MapObjectAttachedMesh).MeshObject.
                     SubObjects[0].MaterialName = badFaction ? "Red" : "Blue";
             }
+            else if (Type.Name == "WarriorAnt")
+            {
+                (AttachedObjects[0] as MapObjectAttachedMesh).MeshObject.
+                    SubObjects[0].MaterialName = badFaction ? "WarriorAnt2" : "WarriorAnt";
+            }
             else if (Type.Name == "RTSMine" || Type.Name == "AntStorage" || Type.Name == "RTSHeadquaters" || Type.Name == "AntColmena")
             {
                 foreach (MapObjectAttachedObject attachedObject in AttachedObjects)

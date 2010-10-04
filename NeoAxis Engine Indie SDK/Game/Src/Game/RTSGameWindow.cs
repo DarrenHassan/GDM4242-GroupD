@@ -540,13 +540,13 @@ namespace Game
                         tasked = true;
                     }
 
-                    // Collect
+                    
                     if (unit.Type is ForagerAntType)
                     {
-                        // Log Warnign
                         ForagerAnt temp = (ForagerAnt)unit;
-
-                        if (temp.Resources < temp.Type.ResourcesMax)
+                        
+                        // COLLECT
+                        if ((mouseOnObject.Type.Name == "RTSMine") && (temp.Resources < temp.Type.ResourcesMax))
                         {
 
                             if (IsEnableTaskTypeInTasks(tasks, AntUnitAI.Task.Types.Collect) &&
@@ -559,14 +559,17 @@ namespace Game
                                 tasked = true;
                             }
                         }
-                        else
+                        
+                        // DEPOSIT
+                        if ((mouseOnObject.Type.Name == "RTSDepot") && (temp.Resources > 0))
                         {
-                            if (!tasked && IsEnableTaskTypeInTasks(tasks, AntUnitAI.Task.Types.Move))
-                                intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Move, mouseOnObject), toQueue);
-                        }
+                         intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Deposit,
+                             mouseOnObject), toQueue);
+                         tasked = true;
+                         }
                     }
                     if (!tasked && IsEnableTaskTypeInTasks(tasks, AntUnitAI.Task.Types.Move))
-                        intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Move, mouseOnObject), toQueue);
+                       intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Move, mouseOnObject), toQueue);
                 }
                 else
                 {
