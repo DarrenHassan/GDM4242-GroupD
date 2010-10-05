@@ -20,32 +20,69 @@ namespace GameEntities.RTS_Specific
     {
         //Player Faction
         FactionType badFaction;
-        // Lists of ant types
-        LinkedList<AntUnitAI> builderAnts;
-        LinkedList<AntUnitAI> foragerAnts;
-        LinkedList<AntUnitAI> warriorAnts;
+        Action currentAction;
+
+        enum Action
+        {
+            Idle,
+            CreateBuilder,
+        }
         
         public BadFactionPlayer()
         {
             //set playerFaction
             if (RTSFactionManager.Instance != null && RTSFactionManager.Instance.Factions.Count != 1)
                 badFaction = RTSFactionManager.Instance.Factions[1].FactionType;
+            currentAction = Action.CreateBuilder;
         }
 
         public void PerformAction(double elapsedGameTime, LinkedList<Entity> mapChildren)
         {
-            // Cause all the ants to wander 
-            if (elapsedGameTime > 10f && elapsedGameTime < 11f)
+            switch (currentAction)
             {
-                //foreach (Entity entity in Map.Instance.Children)
-                foreach(Entity entity in mapChildren)
+                case Action.Idle:
+                    IdleAction(mapChildren);
+                    break;
+                case Action.CreateBuilder:
+                    CreateBuilder(mapChildren);
+                    currentAction = Action.Idle;
+                    break;
+            }
+        }
+
+        // Create a builder ant
+        void CreateBuilder(LinkedList<Entity> mapChildren)
+        {
+            foreach (Entity entity in mapChildren)
+            {
+                RTSBuilding building = entity as RTSBuilding;
+                if (building == null)
+                    continue;
+                if (building.Intellect == null)
+                    continue;
+                if (building.Intellect.Faction == badFaction)
                 {
-                    RTSUnit unit = entity as RTSUnit;
-                    if (unit == null)
-                        continue;
-                    if (unit.Intellect == null)
-                        continue;
-                    if (unit.Intellect.Faction == badFaction)
+                    RTSBuildingAI intellect = building.Intellect as RTSBuildingAI;
+                    intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.ProductUnit, (RTSUnitType)EntityTypes.Instance.GetByName( "BuilderAnt" )), false);
+                }
+            }
+        }
+
+        // Cause the warrior ants to wander
+        void IdleAction(LinkedList<Entity> mapChildren)
+        {
+            // Cycle through all the entities 
+            foreach(Entity entity in mapChildren)
+            {
+                GenericAntCharacter unit = entity as GenericAntCharacter;
+                if (unit == null)
+                    continue;
+                if (unit.Intellect == null)
+                    continue;
+                if (unit.Intellect.Faction == badFaction)
+                {
+                    // Cause only the warrior ants to wander
+                    if (unit.Type.Name == "WarriorAnt")
                     {
                         AntUnitAI intellect = unit.Intellect as AntUnitAI;
                         if (intellect == null)
