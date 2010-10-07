@@ -24,7 +24,7 @@ namespace GameEntities.RTS_Specific
 
         enum Action
         {
-            Idle,
+            WarriorsExplore,
             CreateBuilder,
         }
         
@@ -40,12 +40,12 @@ namespace GameEntities.RTS_Specific
         {
             switch (currentAction)
             {
-                case Action.Idle:
-                    IdleAction(mapChildren);
+                case Action.WarriorsExplore:
+                    WarriorsExplore(mapChildren);
                     break;
                 case Action.CreateBuilder:
                     CreateBuilder(mapChildren);
-                    currentAction = Action.Idle;
+                    currentAction = Action.WarriorsExplore;
                     break;
             }
         }
@@ -68,8 +68,8 @@ namespace GameEntities.RTS_Specific
             }
         }
 
-        // Cause the warrior ants to wander
-        void IdleAction(LinkedList<Entity> mapChildren)
+        // Cause the warrior ants to explore
+        void WarriorsExplore(LinkedList<Entity> mapChildren)
         {
             // Cycle through all the entities 
             foreach(Entity entity in mapChildren)
