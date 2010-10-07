@@ -101,9 +101,40 @@ namespace GameEntities.RTS_Specific
 
         public void PerformAction(double elapsedGameTime, LinkedList<Entity> mapChildren)
         {
-            // Identify the bad faction's entities
+            // Only perform actions every 5 seconds
+            if ((int)elapsedGameTime % 5 == 0)
+            {
+                // Idensitfy the bad faction's characters
+                IdentifyCharacters(mapChildren);
+
+                // Move the strategy on to the next action
+                openingStrategy.MoveNext();
+                currentAction = openingStrategy.Current;
+
+                switch (currentAction)
+                {
+                    case Action.WarriorsExplore:
+                        WarriorsExplore(mapChildren);
+                        break;
+                    case Action.CreateBuilder:
+                        CreateBuilder(); ;
+                        break;
+                    case Action.BuildBarracks:
+                        BuildBarracks();
+                        break;
+                    case Action.Null:
+                        break;
+                }
+            }
+        }
+
+        // Identify the bad faction's entities
+        private void IdentifyCharacters(LinkedList<Entity> mapChildren)
+        {
+            // For each map entity            
             foreach (Entity entity in mapChildren)
             {
+                // Is this a GenericAntCharacter entity
                 GenericAntCharacter unit = entity as GenericAntCharacter;
                 if (unit != null)
                 {
@@ -127,6 +158,7 @@ namespace GameEntities.RTS_Specific
                 }
                 else
                 {
+                    // Is this a RTSBuilding entity
                     RTSBuilding building = entity as RTSBuilding;
                     if (building != null)
                     {
@@ -161,29 +193,10 @@ namespace GameEntities.RTS_Specific
                     }
                 }
             }
-
-            // Move the strategy on to the next action
-            openingStrategy.MoveNext();
-            currentAction = openingStrategy.Current;            
-
-            switch (currentAction)
-            {
-                case Action.WarriorsExplore:
-                    WarriorsExplore(mapChildren);
-                    break;
-                case Action.CreateBuilder:
-                    CreateBuilder();;
-                    break;
-                case Action.BuildBarracks:
-                    BuildBarracks();
-                    break;
-                case Action.Null:
-                    break;
-            }
         }
 
         // Create a builder ant
-        void CreateBuilder()
+        private void CreateBuilder()
         {
             if (hiveAI != null)
             {
@@ -193,7 +206,7 @@ namespace GameEntities.RTS_Specific
         }
 
         // Build a barracks
-        void BuildBarracks()
+        private void BuildBarracks()
         {
             if (builderAI != null)
             {
@@ -238,7 +251,7 @@ namespace GameEntities.RTS_Specific
         }
 
         // Task all the warrior ants with exploring
-        void WarriorsExplore(LinkedList<Entity> mapChildren)
+        private void WarriorsExplore(LinkedList<Entity> mapChildren)
         {
             // Cycle through all the entities 
             foreach(Entity entity in mapChildren)
@@ -264,7 +277,7 @@ namespace GameEntities.RTS_Specific
         }
 
         // Is the location free for building
-        bool IsFreeForBuildTaskTargetBuild(Vec3 pos)
+        private bool IsFreeForBuildTaskTargetBuild(Vec3 pos)
         {
             Bounds bounds;
             {
