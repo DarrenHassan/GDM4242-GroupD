@@ -23,7 +23,7 @@ namespace GameEntities.RTS_Specific
         FactionType badFaction;
         // The current action the bad faction is performing
         protected Action currentAction;
-        int actionInterval = 10;
+        int actionInterval = 5;
         double lastActionTime = 0;
 
         IEnumerator<Action> openingStrategy;
@@ -40,11 +40,14 @@ namespace GameEntities.RTS_Specific
         RTSBuilding barrack;
 
         // Wander paramters
+        static int maxWanderDistance = 200;
+        static int minWanderDistance = 50;
+        static int wanderIncrement = 10;
         int wanderRadius = 1;
-        int wanderDistance = 100;
-        int wanderJitter = 1;
-        int wanderIncrement = 10;
+        int wanderDistance = minWanderDistance;
+        int wanderJitter = 1;        
 
+        // Good faction's location
         bool goodFactionPositionFound = false;
         Vec3 goodFactionPosition;
 
@@ -58,7 +61,7 @@ namespace GameEntities.RTS_Specific
             CreateBuilder,
             BuildBarracks,
             CreateWarrior,
-            AttackPosition,
+            WarriorsAttackPosition,
             WarriorStop,
         }
         
@@ -123,15 +126,18 @@ namespace GameEntities.RTS_Specific
                     // Has the good faction's position been found
                     if (!goodFactionPositionFound)
                     {
-                        // No - explore a wider area                       
-                        wanderDistance += wanderIncrement;
+                        // No - explore a wider area
+                        if (wanderDistance >= maxWanderDistance)
+                            wanderDistance = minWanderDistance;
+                        else
+                            wanderDistance += wanderIncrement;
                         yield return Action.WarriorsExplore;
                         strategyIterator = 3;
                     }
                     else
                     {
                         // Yes - move to the good faction's position
-                        yield return Action.AttackPosition;
+                        yield return Action.WarriorsAttackPosition;
                     }
                 }
                 else if (strategyIterator == 5)
@@ -172,8 +178,8 @@ namespace GameEntities.RTS_Specific
                     case Action.CreateWarrior:
                         CreateWarrior();
                         break;
-                    case Action.AttackPosition:
-                        AttackPosition(mapChildren);
+                    case Action.WarriorsAttackPosition:
+                        WarriorsAttackPosition(mapChildren);
                         break;
                     case Action.WarriorStop:
                         WarriorStop(mapChildren);
@@ -316,7 +322,7 @@ namespace GameEntities.RTS_Specific
             }
         }
 
-        // Task all the warrior ants with exploring
+        // Task all the warrior ants with exploring, looking for the good faction
         private void WarriorsExplore(LinkedList<Entity> mapChildren)
         {
             // Cycle through all the entities 
@@ -327,6 +333,8 @@ namespace GameEntities.RTS_Specific
                     continue;
                 if (unit.Intellect == null)
                     continue;
+                if (unit.Life == 0)
+                    continue;
                 if (unit.Intellect.Faction == badFaction)
                 {
                     // Cause only the warrior ants to wander
@@ -336,9 +344,11 @@ namespace GameEntities.RTS_Specific
                         if (intellect == null)
                             continue;
 
-                        // Has this warrior ant found the good faction
-                        if (intellect.CurrentTask.Type == AntUnitAI.Task.Types.BreakableAttack)
+                        // Has this warrior ant found an alive member of the good faction
+                        if (intellect.CurrentTask.Type == AntUnitAI.Task.Types.BreakableAttack && 
+                            intellect.CurrentTask.Entity != null && !goodFactionPositionFound)
                         {
+                            // Yes - record where the good faction was seen
                             goodFactionPositionFound = true;
                             goodFactionPosition = intellect.CurrentTask.Entity.Position;
                         }
@@ -351,33 +361,40 @@ namespace GameEntities.RTS_Specific
             }
         }
 
-        private void AttackPosition(LinkedList<Entity> mapChildren)
+        // Move all the warrior ants to where the good faction was seen
+        private void WarriorsAttackPosition(LinkedList<Entity> mapChildren)
         {
-            // Cycle through all the entities 
-            foreach (Entity entity in mapChildren)
+            if (goodFactionPositionFound)
             {
-                GenericAntCharacter unit = entity as GenericAntCharacter;
-                if (unit == null)
-                    continue;
-                if (unit.Intellect == null)
-                    continue;
-                if (unit.Intellect.Faction == badFaction)
+                // Cycle through all the entities 
+                foreach (Entity entity in mapChildren)
                 {
-                    // Cause only the warrior ants to wander
-                    if (unit.Type.Name == "WarriorAnt")
+                    GenericAntCharacter unit = entity as GenericAntCharacter;
+                    if (unit == null)
+                        continue;
+                    if (unit.Intellect == null)
+                        continue;
+                    if (unit.Intellect.Faction == badFaction)
                     {
-                        AntUnitAI intellect = unit.Intellect as AntUnitAI;
-                        if (intellect == null)
-                            continue;                        
+                        // Cause only the warrior ants to wander
+                        if (unit.Type.Name == "WarriorAnt")
+                        {
+                            AntUnitAI intellect = unit.Intellect as AntUnitAI;
+                            if (intellect == null)
+                                continue;
 
-                        // Move to the location the good faction was seen
-                        intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.BreakableMove,
-                            goodFactionPosition), false);
+                            // Move to the location the good faction was seen
+                            intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.BreakableAttack,
+                                goodFactionPosition), false);
+                        }
                     }
                 }
+                // Forget the good faction's position
+                goodFactionPositionFound = false;
             }
         }
 
+        // Cause all the warrior ants to stop
         private void WarriorStop(LinkedList<Entity> mapChildren)
         {
             // Cycle through all the entities 
@@ -397,7 +414,7 @@ namespace GameEntities.RTS_Specific
                         if (intellect == null)
                             continue;
 
-                        // Move to the location the good faction was seen
+                        // Stop
                         intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Stop), false);
                     }
                 }

@@ -34,6 +34,7 @@ namespace GameEntities.RTS_Specific
         [FieldSerialize]
         List<Task> tasks = new List<Task>();
 
+
         ///////////////////////////////////////////
 
         public struct Task
@@ -408,7 +409,7 @@ namespace GameEntities.RTS_Specific
                     // Repair buildings
                     DoTask(new Task(Task.Types.BreakableRepair, newTaskAttack), false);
                 else
-                    // Attack enemy ants
+                    // Attack enemy ants                               
                     DoTask(new Task(Task.Types.BreakableAttack, newTaskAttack), false);
                 return true;
             }
@@ -786,7 +787,7 @@ namespace GameEntities.RTS_Specific
                             warrior.SetLookDirection(targetPos);
 
                             Ray ray = new Ray(controlledObj.Position,
-                                controlledObj.Position - currentTask.Entity.Position);
+                                controlledObj.Position - targetPos);
 
                             RayCastResult[] piercingResult = PhysicsWorld.Instance.RayCastPiercing(
                                     ray, (int)ContactGroup.CastOnlyContact);
@@ -797,13 +798,13 @@ namespace GameEntities.RTS_Specific
 
                                 if (obj != null)
                                 {                                    
-                                    float impulse = 10.0f;
+                                    /*float impulse = 10.0f;
                                     if (impulse != 0 && obj.PhysicsModel != null)
                                     {
                                         result.Shape.Body.AddForce(ForceType.GlobalAtGlobalPos, 0,
                                             currentTask.Entity.Rotation.GetForward() * impulse,
                                             currentTask.Entity.Position);
-                                    }
+                                    }*/
 
                                     Dynamic dynamicVictim = currentTask.Entity as Dynamic;
                                     
@@ -815,7 +816,7 @@ namespace GameEntities.RTS_Specific
                                         float damage = 1.0f;
                                         if (damage != 0)
                                         {
-                                            dynamicVictim.DoDamage(controlledObj, currentTask.Entity.Position,
+                                            dynamicVictim.DoDamage(controlledObj, targetPos,
                                                 result.Shape, damage, true);
                                         }
                                     }
