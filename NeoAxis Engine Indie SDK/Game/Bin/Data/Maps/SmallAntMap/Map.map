@@ -4,8 +4,8 @@ classPrompt = GameMap
 gameType = RTS
 gameMusic = Sounds\Music\Game.ogg
 ambientLight = 0.2 0.2 0.2
-editorCameraPosition = 153.3153 -120.5995 41.87033
-editorCameraDirection = 2.521525 -0.5950646
+editorCameraPosition = -57.73056 63.76554 58.03891
+editorCameraDirection = 2.584026 -0.4766853
 shadowColor = 1 1 1
 logicSystemManager = 3
 shadowTechnique = ShadowmapMedium
@@ -277,4 +277,14 @@ entity
 	initialFaction = GoodFaction
 	position = 63.22462 -119.3495 10.00136
 	name = ForagerAnt_1
+}
+entity
+{
+	type = AntColmena
+	uin = 26
+	classPrompt = RTSBuilding
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = BadFaction
+	position = -92.02164 88.99495 5.241543
+	name = AntColmena_1
 }
