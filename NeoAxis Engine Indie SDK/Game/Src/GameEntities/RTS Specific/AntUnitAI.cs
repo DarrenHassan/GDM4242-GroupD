@@ -564,108 +564,38 @@ namespace GameEntities.RTS_Specific
                     break;
 
 
-            //Collect
-            case Task.Types.Deposit:
+                //Collect
+                case Task.Types.Deposit:
 
-                
-                ForagerAnt Controlled = (ForagerAnt)base.ControlledObject;
-                
-                // check to see if we have a deposit set
+                    //Log.Warning("Deposit");
+                    ForagerAnt Controlled = (ForagerAnt)base.ControlledObject;
 
-                if (Controlled.Depot == null)
-                {
-                    
-                    Vec3 controlledObjPos = Controlled.Position;
-                    float radius = Controlled./*Type.*/ViewRadius;
-                    //int count = 0;
-                    float minDistance = 0f;
-                    Map.Instance.GetObjects(new Sphere(controlledObjPos, radius),
-                    GameFilterGroups.MineFilterGroup, delegate(MapObject mapObject)
+                    // check to see if we have a deposit set
+
+                    if (Controlled.Depot == null)
                     {
-                        if (mapObject.Type.Name == "RTSDepot")
-                        {
-                            RTSMine obj = (RTSMine)mapObject;
-                            if (minDistance == 0)
-                            {
-                                Controlled.Depot = obj;
-                                minDistance = (controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast();
-                            }
-                            else if ((controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast() < minDistance)
-                            {
-                                Controlled.Depot = obj;
-                                minDistance = (controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast();
-                            }
-
-                            //controlledObj.Stop();
-                            //break;
-                        }
-                        //Log.Warning("...");
-                    });
-                    //DoTask(new Task(Task.Types.Deposit), false);
-                }
-                else
-                {
-
-                    if (Controlled.Resources > 0) // then we have something to deposit
-                    {
-                        Vec3 objPos = Controlled.Depot.Position;
-                        Vec3 newPos = new Vec3(objPos.X, objPos.Y, 4.499237f);
-
-                        // we're within range...
-                        if ((controlledObj.Position.ToVec2() - objPos.ToVec2()).LengthFast() < 8f)
-                        {
-                            // check building is still there...
-                            if (Controlled.Depot.Died == false)
-                                depositSeq.MoveNext();
-                            else
-                                DoNextTask();
-                        }
-                        else
-                        {
-                            //Log.Warning("Not in range");
-                            //Controlled.Move(Controlled.Depot.Position);
-                            Controlled.Move(new Vec3(newPos.X + 4.0f, newPos.Y - 2.0f, newPos.Z));
-                            //Controlled.Move(new Vec3(80.0f,-40.0f,4.499237f));
-                        }
-
-                    }
-                    else
-                    {
-                        DoTask(new Task(Task.Types.Collect, Controlled.CurrentMine), false);
-                    }
-                }
-                //Controlled.Stop();
-                break;    
-                
-
-            case Task.Types.Collect:
-                ForagerAnt ControlledCollect = (ForagerAnt)base.ControlledObject;
-                ControlledCollect.CurrentMine = (RTSMine)currentTask.Entity;
-                if (currentTask.Entity != null)
-                {
-                    if (ControlledCollect.Resources == ControlledCollect.Type.ResourcesMax)
-                    {
-
-                        Vec3 controlledObjPos = ControlledCollect.Position;
-                        float radius = ControlledCollect./*Type.*/ViewRadius;
+                        //Log.Warning("Depot == null");
+                        Vec3 controlledObjPos = Controlled.Position;
+                        float radius = Controlled./*Type.*/ViewRadius * 3;
                         //int count = 0;
                         float minDistance = 0f;
-                        //ControlledCollect.Depot = null;
                         Map.Instance.GetObjects(new Sphere(controlledObjPos, radius),
                         GameFilterGroups.MineFilterGroup, delegate(MapObject mapObject)
                         {
-                            if (mapObject.Type.Name == "RTSDepot")
+                            Unit unit = (Unit)mapObject;
+                            // RTSFactionManager.Instance.Factions[1].FactionType;
+                            if ((mapObject.Type.Name == "RTSDepot"))
                             {
+                                //Log.Warning("Found a depot");
                                 RTSMine obj = (RTSMine)mapObject;
                                 if (minDistance == 0)
                                 {
-                                    //Log.Warning("First one...");
-                                    ControlledCollect.Depot = obj;
+                                    Controlled.Depot = obj;
                                     minDistance = (controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast();
                                 }
                                 else if ((controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast() < minDistance)
                                 {
-                                    ControlledCollect.Depot = obj;
+                                    Controlled.Depot = obj;
                                     minDistance = (controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast();
                                 }
 
@@ -674,34 +604,143 @@ namespace GameEntities.RTS_Specific
                             }
                             //Log.Warning("...");
                         });
-                        if (ControlledCollect.Depot != null)
-                            DoTask(new Task(Task.Types.Deposit), false);
-                        else
-                            DoNextTask();
+                        //DoTask(new Task(Task.Types.Deposit), false);
                     }
                     else
                     {
 
-                        Vec3 pos = currentTask.Entity.Position;
-
-                        if ((controlledObj.Position.ToVec2() - currentTask.Entity.Position.ToVec2()).LengthFast() < 11f)
+                        if (Controlled.Resources > 0) // then we have something to deposit
                         {
-                            ControlledCollect.Resources += 8;
-                            //behaveSeq.MoveNext();
+                            Vec3 objPos = Controlled.Depot.Position;
+                            Vec3 newPos = new Vec3(objPos.X, objPos.Y, 4.499237f);
+
+                            // we're within range...
+                            if ((controlledObj.Position.ToVec2() - objPos.ToVec2()).LengthFast() < 8f)
+                            {
+                                // check building is still there...
+                                if (Controlled.Depot.Died == false)
+                                    depositSeq.MoveNext();
+                                else
+                                    DoNextTask();
+                            }
+                            else
+                            {
+                                //Log.Warning("Not in range");
+                                //Controlled.Move(Controlled.Depot.Position);
+                                Controlled.Move(new Vec3(newPos.X + 4.0f, newPos.Y - 2.0f, newPos.Z));
+                                //Controlled.Move(new Vec3(80.0f,-40.0f,4.499237f));
+                            }
+
                         }
                         else
                         {
-                            controlledObj.Move(pos);
+                            DoTask(new Task(Task.Types.Collect, Controlled.CurrentMine), false);
                         }
                     }
-                }
-        
-                else
-                {
-                    Log.Warning("uhoh");
-                    //controlledObj.Move(currentTask.Position);
-                }
-                break;
+                    //Controlled.Stop();
+                    break;
+
+
+                case Task.Types.Collect:
+                    ForagerAnt ControlledCollect = (ForagerAnt)base.ControlledObject;
+                    //ControlledCollect.CurrentMine = (RTSMine)currentTask.Entity;
+                    if (ControlledCollect.CurrentMine == null)
+                        ControlledCollect.CurrentMine = (RTSMine)currentTask.Entity;
+                    if (currentTask.Entity != null)
+                    {
+                        if (ControlledCollect.Resources == ControlledCollect.Type.ResourcesMax)
+                        {
+                            if (ControlledCollect.Depot == null)
+                            {
+                                LinkedList<Entity> mapChildren = Map.Instance.Children;
+                                foreach (Entity entity in mapChildren)
+                                {
+
+                                    if (entity.Type.Name == "RTSDepot")
+                                    {
+                                        RTSMine mine = entity as RTSMine;
+                                        if (mine != null)
+                                        {
+                                            if (mine.Intellect != null)
+                                            {
+                                                if (mine.Intellect.Faction == Faction)
+                                                {
+                                                    ControlledCollect.Depot = mine;
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                }
+
+                            }
+                            if (ControlledCollect.Depot != null)
+                                DoTask(new Task(Task.Types.Deposit), false);
+                            else
+                                DoNextTask();
+
+
+                            /*//Log.Warning("ResourceMax");
+                            Vec3 controlledObjPos = ControlledCollect.Position;
+                            float radius = ControlledCollect./*Type.ViewRadius*5;
+                            //int count = 0;
+                            float minDistance = 0f;
+                            //ControlledCollect.Depot = null;
+                        
+                        
+                            Map.Instance.GetObjects(new Sphere(controlledObjPos, radius),
+                            GameFilterGroups.MineFilterGroup, delegate(MapObject mapObject)
+                            {
+                                Unit unit = (Unit)mapObject;
+                                if (mapObject.Type.Name == "RTSDepot")
+                                {
+                                   // if (unit.Intellect.Faction == RTSFactionManager.Instance.Factions[1].FactionType)
+                                    //{
+                                        //Log.Warning("Found RTSDepot");
+                                        RTSMine obj = (RTSMine)mapObject;
+                                        if (minDistance == 0)
+                                        {
+                                            //Log.Warning("First one...");
+                                            ControlledCollect.Depot = obj;
+                                            minDistance = (controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast();
+                                        }
+                                        else if ((controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast() < minDistance)
+                                        {
+                                            ControlledCollect.Depot = obj;
+                                            minDistance = (controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast();
+                                        }
+
+                                        //controlledObj.Stop();
+                                        //break;
+                                   // }
+                                }
+                                //Log.Warning("...");
+                            });
+                            */
+                        }
+                        else
+                        {
+
+                            Vec3 pos = currentTask.Entity.Position;
+
+                            if ((controlledObj.Position.ToVec2() - currentTask.Entity.Position.ToVec2()).LengthFast() < 11f)
+                            {
+                                ControlledCollect.Resources += 8;
+                                //behaveSeq.MoveNext();
+                            }
+                            else
+                            {
+                                controlledObj.Move(pos);
+                            }
+                        }
+                    }
+
+                    else
+                    {
+                        Log.Warning("uhoh");
+                        //controlledObj.Move(currentTask.Position);
+                    }
+                    break;
                 
 
                 //Move

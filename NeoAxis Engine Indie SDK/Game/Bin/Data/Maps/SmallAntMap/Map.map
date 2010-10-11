@@ -4,7 +4,7 @@ classPrompt = GameMap
 gameType = RTS
 gameMusic = Sounds\Music\Game.ogg
 ambientLight = 0.2 0.2 0.2
-editorCameraPosition = -57.73056 63.76554 58.03891
+editorCameraPosition = -45.2985 56.01333 65.60479
 editorCameraDirection = 2.584026 -0.4766853
 shadowColor = 1 1 1
 logicSystemManager = 3
@@ -287,4 +287,38 @@ entity
 	initialFaction = BadFaction
 	position = -92.02164 88.99495 5.241543
 	name = AntColmena_1
+}
+entity
+{
+	type = SkyDome
+	uin = 27
+	classPrompt = SkyDome
+	horizonMap = Types\Base\SkyDome\DefaultSkyDomeHorizon.png
+	color = 1 1 1
+	power = 1
+	diffuse1Map
+	{
+		texture = Types\Base\SkyDome\DefaultSkyDome.jpg
+		tiling = 5
+		scrollSpeed = 0.005 0
+	}
+	diffuse2Map
+	{
+		blending = Add
+		texture = Types\Base\SkyDome\DefaultSkyDome2.jpg
+		tiling = 4
+		scrollSpeed = 0.018 0
+	}
+	diffuse3Map
+	{
+		blending = Add
+		tiling = 10
+		scrollSpeed = 0 0
+	}
+	diffuse4Map
+	{
+		blending = Add
+		tiling = 10
+		scrollSpeed = 0 0
+	}
 }

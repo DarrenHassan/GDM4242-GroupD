@@ -28,7 +28,12 @@ namespace GameEntities.RTS_Specific
 
         IEnumerator<Action> openingStrategy;
         int strategyIterator;
+        IEnumerator<Action> foragerStrategy;
+        int foragerIterator;
 
+        // The forager ant
+        AntUnitAI foragerAI;
+        ForagerAnt forager;
         // The builder ant
         AntUnitAI builderAI;
         GenericAntCharacter builder;
@@ -38,6 +43,8 @@ namespace GameEntities.RTS_Specific
         // The barracks
         RTSBuildingAI barrackAI;
         RTSBuilding barrack;
+        RTSBuildingAI depotAI;
+        RTSMine depot;
 
         // Wander paramters
         static int maxWanderDistance = 200;
@@ -59,6 +66,9 @@ namespace GameEntities.RTS_Specific
             Null,
             WarriorsExplore,
             CreateBuilder,
+            CreateForager,
+            BuildDepot,
+            StartCollecting,
             BuildBarracks,
             CreateWarrior,
             WarriorsAttackPosition,
@@ -68,12 +78,16 @@ namespace GameEntities.RTS_Specific
         public BadFactionPlayer()
         {
             // Initialise the bad faction's characters
+            foragerAI = null;
+            forager = null;
             builderAI = null;
             builder = null;
             hiveAI = null;
             hive = null;
             barrackAI = null;
             barrack = null;
+            depotAI = null;
+            depot = null;
 
             // Set the computer's faction
             if (RTSFactionManager.Instance != null && RTSFactionManager.Instance.Factions.Count != 1)
@@ -82,46 +96,71 @@ namespace GameEntities.RTS_Specific
             // Initialise the opening strategy
             openingStrategy = OpeningStrategy().GetEnumerator();
             strategyIterator = 0;
+            foragerStrategy = ForagerStrategy().GetEnumerator();
+            foragerIterator = 0;
             // Initalise the first action
             currentAction = Action.Null;
         }
 
+
         // The open strategy
         protected IEnumerable<Action> OpeningStrategy()
         {
-            while (hiveAI != null)
+            while (true)
             {
                 if (strategyIterator == 0)
                 {
-                    strategyIterator = 1;
-                    yield return Action.CreateBuilder;
+                    if (hiveAI != null)
+                    {
+                        if (hiveAI.CurrentTask.Type == AntUnitAI.Task.Types.Stop)
+                        {
+                            strategyIterator = 1;
+                            yield return Action.CreateBuilder;
+                        }
+                        else
+                        {
+                            strategyIterator = 1;
+                            //yield return Action.Null;
+                        }
+                    }
                 }
                 else if (strategyIterator == 1)
                 {
-                    strategyIterator = 2;
-                    yield return Action.WarriorsExplore;
+                    if (builderAI != null)
+                    {
+                        if (builderAI.CurrentTask.Type == AntUnitAI.Task.Types.Stop)
+                        {
+                            strategyIterator = 2;
+                            yield return Action.BuildBarracks;
+                        }
+                        else
+                        {
+                            // The builder is busy
+                            strategyIterator = 2;
+                            //yield return Action.Null;
+                        }
+                    }
+                    else
+                    {
+                        strategyIterator = 0;
+                        yield return Action.Null;
+                    }
+
                 }
                 else if (strategyIterator == 2)
                 {
-                    if (builderAI != null)
-                    {
-                        strategyIterator = 3;
-                        yield return Action.BuildBarracks;
-                    }
-                    else
-                        yield return Action.Null;
-                }
-                else if (strategyIterator == 3)
-                {
                     if (barrackAI != null)
                     {
-                        strategyIterator = 4;
+                        strategyIterator = 3;
                         yield return Action.CreateWarrior;
                     }
                     else
+                    {
+                        strategyIterator = 1;
                         yield return Action.Null;
+                    }
                 }
-                else if (strategyIterator == 4)
+                else if (strategyIterator == 3)
                 {
                     // Has the good faction's position been found
                     if (!goodFactionPositionFound)
@@ -132,7 +171,7 @@ namespace GameEntities.RTS_Specific
                         else
                             wanderDistance += wanderIncrement;
                         yield return Action.WarriorsExplore;
-                        strategyIterator = 3;
+                        strategyIterator = 2;
                     }
                     else
                     {
@@ -140,16 +179,76 @@ namespace GameEntities.RTS_Specific
                         yield return Action.WarriorsAttackPosition;
                     }
                 }
-                else if (strategyIterator == 5)
+                else if (strategyIterator == 4)
                 {
-                    strategyIterator = 4;
+                    strategyIterator = 3;
                     yield return Action.WarriorStop;
                 }
-                else if (strategyIterator == 6)
-                    yield return Action.Null;
             }
         }
 
+        protected IEnumerable<Action> ForagerStrategy()
+        {
+            while (true)
+            {
+                if (foragerIterator == 0)
+                {
+                    if (hiveAI.CurrentTask.Type == RTSBuildingAI.Task.Types.Stop)
+                    {
+                        foragerIterator = 1;
+                        yield return Action.CreateForager;
+                    }
+                    else
+                    {
+                        yield return Action.Null;
+                    }
+                }
+                else if (foragerIterator == 1)
+                {
+                    if (builderAI != null)
+                    {
+                        if (builderAI.CurrentTask.Type == AntUnitAI.Task.Types.Stop)
+                        {
+                            foragerIterator = 2;
+                            yield return Action.BuildDepot;
+                        }
+                        else
+                            yield return Action.Null;
+                    } 
+                    else
+                        yield return Action.Null;
+                }
+                else if (foragerIterator == 2)
+                {
+
+                    if ((foragerAI != null) && (foragerAI.CurrentTask.Type == AntUnitAI.Task.Types.Stop))
+                    {
+                        yield return Action.StartCollecting;
+                    } else
+                        yield return Action.Null;
+                }
+                /*else if (strategyIterator == 1)
+                {
+                    if (builderAI != null)
+                    {
+                        strategyIterator = 2;
+                        yield return Action.BuildBarracks;
+                    }
+                    else
+                        yield return Action.Null;
+                }
+                else if (strategyIterator == 2)
+                {
+                    if (builderAI != null)
+                    {
+                        strategyIterator = 3;
+                        yield return Action.BuildBarracks;
+                    }
+                    else
+                        yield return Action.Null;
+                }*/ 
+            }
+        }
         public void PerformAction(double elapsedGameTime, LinkedList<Entity> mapChildren)
         {
             // Only perform actions at discrete intervals
@@ -161,16 +260,18 @@ namespace GameEntities.RTS_Specific
                 IdentifyCharacters(mapChildren);
 
                 // Move the strategy on to the next action
+
+                
+                
                 openingStrategy.MoveNext();
                 currentAction = openingStrategy.Current;
-
                 switch (currentAction)
                 {
                     case Action.WarriorsExplore:
                         WarriorsExplore(mapChildren);
                         break;
                     case Action.CreateBuilder:
-                        CreateBuilder(); ;
+                        CreateBuilder();
                         break;
                     case Action.BuildBarracks:
                         BuildBarracks();
@@ -187,37 +288,119 @@ namespace GameEntities.RTS_Specific
                     case Action.Null:
                         break;
                 }
+                foragerStrategy.MoveNext();
+                currentAction = foragerStrategy.Current;
+
+                switch (currentAction)
+                {
+                    case Action.CreateForager:
+                        CreateForager();
+                        break;
+                    case Action.BuildDepot:
+                        BuildDepot();
+                        break;
+                    case Action.StartCollecting:
+                        StartCollecting();
+                        break;
+                }
             }
         }
 
         // Identify the bad faction's entities
         private void IdentifyCharacters(LinkedList<Entity> mapChildren)
         {
+
+            builderAI = null;
+            builder = null;
+            hiveAI = null;
+            hive = null;
+            barrackAI = null;
+            barrack = null;
+            depotAI = null;
+            depot = null;
+
             // For each map entity            
             foreach (Entity entity in mapChildren)
             {
                 // Is this a GenericAntCharacter entity
-                GenericAntCharacter unit = entity as GenericAntCharacter;
-                if (unit != null)
+                //GenericAntCharacter unit = entity as GenericAntCharacter;
+                //RTSUnit rtsunit = entity as RTSUnit;
+                if (entity.Type.Name == "ForagerAnt")
                 {
-                    if (unit.Intellect != null)
+                    ForagerAnt unit = entity as ForagerAnt;
+
+                    if (unit != null)
                     {
-                        if (unit.Intellect.Faction == badFaction)
+                        if (unit.Intellect != null)
                         {
-                            // Identify the builder ant if it has not already been found
-                            if (builderAI == null && unit.Type.Name == "BuilderAnt")
+                            if (unit.Intellect.Faction == badFaction)
                             {
-                                AntUnitAI intellect = unit.Intellect as AntUnitAI;
-                                if (intellect != null)
+                               if (foragerAI == null)
                                 {
-                                    // Builder ant found
-                                    builderAI = intellect;
-                                    builder = unit;
+                                    AntUnitAI intellect = unit.Intellect as AntUnitAI;
+                                    if (intellect != null)
+                                    {
+                                        foragerAI = intellect;
+                                        forager = unit;
+                                    }
                                 }
                             }
                         }
                     }
+
                 }
+                else if (entity.Type.Name == "BuilderAnt")
+                {
+                    GenericAntCharacter unit = entity as GenericAntCharacter;
+
+                        if (unit != null)
+                    {
+                        if (unit.Intellect != null)
+                        {
+                            if (unit.Intellect.Faction == badFaction)
+                            {
+                                // Identify the builder ant if it has not already been found
+                                if (builderAI == null)
+                                {
+                                    AntUnitAI intellect = unit.Intellect as AntUnitAI;
+                                    if (intellect != null)
+                                    {
+                                        // Builder ant found
+                                        builderAI = intellect;
+                                        builder = unit;
+                                    }
+                                }
+                               
+                            }
+                        }
+                    }
+                }
+                /*else if (entity.Type.Name == "RTSDepot")
+                {
+                    RTSMine mine = entity as RTSMine;
+                    if (mine != null)
+                    {
+                        if (mine.Intellect != null)
+                        {
+                            if (mine.Intellect.Faction == badFaction)
+                            {
+                                if (depotAI == null)
+                                {
+                                    RTSBuildingAI intellect = mine.Intellect as RTSBuildingAI;
+                                    if (intellect != null)
+                                    {
+                                        // barrack found
+                                        depotAI = intellect;
+                                        depot = mine;
+                                        Log.Warning("depot = (RTSMine)building");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                   
+
+                }*/ 
                 else
                 {
                     // Is this a RTSBuilding entity
@@ -250,11 +433,62 @@ namespace GameEntities.RTS_Specific
                                         barrack = building;
                                     }
                                 }
+                                
                             }
                         }
                     }
                 }
             }
+        }
+        // Create a forager ant
+        private void CreateForager()
+        {
+            if (hiveAI != null)
+            {
+                hiveAI.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.ProductUnit,
+                    (RTSUnitType)EntityTypes.Instance.GetByName("ForagerAnt")), false);
+            }
+        }
+        private void StartCollecting()
+        {
+            ForagerAnt Controlled = forager;
+            Vec3 controlledObjPos = Controlled.Position;
+            float radius = Controlled./*Type*/ViewRadius*3;
+            //int count = 0; 
+            float minDistance = 0f;
+            Map.Instance.GetObjects(new Sphere(controlledObjPos, radius),
+            GameFilterGroups.MineFilterGroup, delegate(MapObject mapObject)
+            {
+                if (mapObject.Type.Name == "RTSMine")
+                {
+                    //Log.Warning("Found a mine");
+                    RTSMine obj = (RTSMine)mapObject;
+                    if (minDistance == 0)
+                    {
+                        Controlled.CurrentMine = obj;
+                        minDistance = (controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast();
+                    }
+                    else if ((controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast() < minDistance)
+                    {
+                        Controlled.CurrentMine = obj;
+                        minDistance = (controlledObjPos.ToVec2() - obj.Position.ToVec2()).LengthFast();
+                    }
+
+                    //controlledObj.Stop();
+                    //break;
+                }
+                //Log.Warning("...");
+            });
+            //Log.Warning("StartCollecting");
+            if (Controlled.CurrentMine != null)
+            {
+                //Log.Warning("depot != null");
+                //Log.Warning("DoTask()");
+                //foragerAI.CurrentTask.Entity = Controlled.CurrentMine;
+                foragerAI.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Collect, Controlled.CurrentMine), false);
+
+            }
+             
         }
 
         // Create a builder ant
@@ -274,6 +508,50 @@ namespace GameEntities.RTS_Specific
             {
                 barrackAI.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.ProductUnit,
                     (RTSUnitType)EntityTypes.Instance.GetByName("WarriorAnt")), false);
+            }
+        }
+        // Build a depot
+        private void BuildDepot()
+        {
+            if (builderAI != null)
+            {
+                taskTargetBuildingType = (RTSBuildingType)EntityTypes.Instance.GetByName("RTSDepot");
+
+                string meshName = null;
+                {
+                    foreach (MapObjectTypeAttachedObject typeAttachedObject in
+                        taskTargetBuildingType.AttachedObjects)
+                    {
+                        MapObjectTypeAttachedMesh typeMeshAttachedObject = typeAttachedObject as
+                            MapObjectTypeAttachedMesh;
+                        if (typeMeshAttachedObject != null)
+                        {
+                            meshName = typeMeshAttachedObject.MeshName;
+                            break;
+                        }
+                    }
+                }
+
+                MeshObject taskTargetBuildMeshObject = SceneManager.Instance.CreateMeshObject(meshName);
+                SceneNode taskTargetBuildSceneNode = new SceneNode();
+                taskTargetBuildSceneNode.Attach(taskTargetBuildMeshObject);
+                taskTargetBuildSceneNode.Visible = false;
+
+                // Randomly generate positions within 25 units of the hive
+                Random rand = new Random();
+                Vec3 pos;
+                do
+                {
+                    pos = new Vec3(hive.Position.X + ((float)rand.NextDouble() * 50f - 25f),
+                        hive.Position.Y + ((float)rand.NextDouble() * 50f - 25f), hive.Position.Z);
+                } while (!IsFreeForBuildTaskTargetBuild(pos));
+
+                // Build the barracks
+                builderAI.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.BuildBuilding, pos,
+                    (RTSBuildingType)EntityTypes.Instance.GetByName("RTSDepot")), false);
+
+                GameEngineApp.Instance.ControlManager.PlaySound(
+                    "Sounds\\Feedback\\RTSBuildBuilding.ogg");
             }
         }
 
