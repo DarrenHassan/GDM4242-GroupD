@@ -1,0 +1,15 @@
+type AntSilo
+{
+	class = RTSBuilding
+	allowEditorCreate = True
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Models\AntBuildings\silo\silo.mesh
+			forceMaterial = NewMaterial2
+			position = 0 0 0.9742908
+			rotation = 0.999976 0 0 -0.00691992
+		}
+	}
+}

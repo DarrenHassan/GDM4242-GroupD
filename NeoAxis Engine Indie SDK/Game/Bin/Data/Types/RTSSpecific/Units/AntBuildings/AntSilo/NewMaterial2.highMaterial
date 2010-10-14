@@ -1,0 +1,5 @@
+highLevelMaterial NewMaterial2
+{
+	template = SimpleExampleMaterial
+	diffuseMap = Models\AntBuildings\silo\Silo_silo.tga
+}
