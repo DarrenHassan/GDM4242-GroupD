@@ -1,0 +1,108 @@
+type = GameMap
+uin = 2
+classPrompt = GameMap
+gameType = None
+gameMusic = Sounds\Music\Game.ogg
+ambientLight = 0.2 0.2 0.2
+editorCameraPosition = 24.95791 37.37159 20.55758
+editorCameraDirection = 4.028851 -0.4884549
+shadowColor = 0.75 0.75 0.75
+logicSystemManager = 3
+name = GameMap_0
+shadowTechnique = None
+rootEditorLayer
+{
+}
+entity
+{
+	type = LogicSystemManager
+	uin = 3
+	mapClassManager = 4
+	entity
+	{
+		type = LogicClassManager
+		uin = 4
+	}
+}
+entity
+{
+	type = Light
+	uin = 5
+	classPrompt = Light
+	lightType = Point
+	diffuseColor = 1 1 1
+	diffusePower = 1
+	specularColor = 1 1 1
+	specularPower = 1
+	attenuationRangeAutomatic = True
+	attenuationRange = Infinity
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0
+	spotlightInnerAngle = 30
+	spotlightOuterAngle = 40
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	allowDynamicLighting = True
+	position = 0.3874392 -1.393759 16.25432
+	name = Light_0
+}
+entity
+{
+	type = HeightmapTerrain
+	uin = 6
+	classPrompt = HeightmapTerrain
+	position = 0 0 -50
+	horizontalSize = 1000
+	verticalSize = 100
+	dataDirectory = HeightmapTerrain
+	masksSize = 1024
+	detailMapsDistance = 50
+	renderQueueGroup = WorldGeometry1
+	collisionMaterialName = Default
+	bottomClipHeight = -10000
+	castDynamicShadows = False
+	receiveStaticShadows = True
+	simpleRendering = False
+	tileSize = 16
+	layers
+	{
+		item
+		{
+			name = base
+			baseMap = Types\Base\HeightmapTerrain\DefaultLayer0Base.jpg
+			baseScale = 10
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer0Detail.jpg
+			detailScale = 2
+		}
+		item
+		{
+			name = second
+			baseMap = Types\Base\HeightmapTerrain\DefaultLayer1Base.jpg
+			baseScale = 10
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
+			detailScale = 2
+		}
+	}
+}
+entity
+{
+	type = WarriorAnt
+	uin = 7
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	position = 0 0 1.713715
+	name = WarriorAnt_0
+}
+entity
+{
+	type = WarriorAnt
+	uin = 8
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = BadFaction
+	position = 20 20 1.713
+	rotation = 0 0 -0.7071068 0.7071068
+	name = WarriorAnt_1
+}

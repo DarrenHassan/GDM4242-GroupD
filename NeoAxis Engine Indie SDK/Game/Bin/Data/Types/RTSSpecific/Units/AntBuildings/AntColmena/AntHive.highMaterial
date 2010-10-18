@@ -1,0 +1,5 @@
+highLevelMaterial AntHive
+{
+	template = SimpleExampleMaterial
+	diffuseMap = Models\AntBuildings\hive\Building_roof.tga
+}
