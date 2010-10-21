@@ -79,7 +79,8 @@ namespace GameEntities.RTS_Specific
                 BreakableRepair,//for automatic repair
                 BuildBuilding,
                 ProductUnit,
-                SelfDestroy,//for cancel build building               
+                SelfDestroy,//for cancel build building    
+                GatherPoint,
             }
 
             public Task(Types type)
@@ -563,6 +564,10 @@ namespace GameEntities.RTS_Specific
                     controlledObj.Stop();
                     break;
 
+                // Set gather point
+                case Task.Types.GatherPoint:
+                    Log.Warning("Setting gather point");
+                    break;
 
                 //Collect
                 case Task.Types.Deposit:

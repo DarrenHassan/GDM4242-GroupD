@@ -31,7 +31,7 @@ namespace Game
 
         [Config("Map", "drawPathMotionMap")]
         public static bool mapDrawPathMotionMap;
-
+        
         float cameraDistance = 23;
         SphereDir cameraDirection = new SphereDir(1.5f, .85f);
         Vec2 cameraPosition;
@@ -74,7 +74,7 @@ namespace Game
             base.OnAttach();
 
             EngineApp.Instance.KeysAndMouseButtonUpAll();
-
+            //GameMusic.MusicPlay("Sounds//Music//Bumps.ogg", true);
             //hudControl
             hudControl = ControlDeclarationManager.Instance.CreateControl("Gui\\RTSHUD.gui");
             Controls.Add(hudControl);
@@ -155,6 +155,7 @@ namespace Game
 
             // Initialise the bad player
             badPlayer = new BadFactionPlayer();
+            //GameMusic.MusicPlay("Sounds//Music//Bumps.ogg", true);
         }
 
         public override void OnBeforeWorldSave()
@@ -381,6 +382,11 @@ namespace Game
 
                     switch (taskType)
                     {
+
+                        // Set gather point
+                        case AntUnitAI.Task.Types.GatherPoint:
+                            intellect.DoTask(new AntUnitAI.Task(taskType, mouseMapPos), false);
+                            break;
                         // TrailMove
                         case AntUnitAI.Task.Types.TrailMove:
                             if (lastUnit == null)
@@ -1242,6 +1248,7 @@ namespace Game
                 case AntUnitAI.Task.Types.Collect:
                 case AntUnitAI.Task.Types.Attack:
                 case AntUnitAI.Task.Types.Repair:
+                case AntUnitAI.Task.Types.GatherPoint:
                     //do taskTargetChoose
                     TaskTargetChooseIndex = index;
                     break;

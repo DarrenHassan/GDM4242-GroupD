@@ -41,6 +41,9 @@ namespace GameEntities.RTS_Specific
                         unitType = (RTSUnitType)EntityTypes.Instance.GetByName( "ForagerAnt" );
                         list.Add(new UserControlPanelTask(new Task(Task.Types.ProductUnit, unitType),
                             CurrentTask.Type == Task.Types.ProductUnit));
+
+                        list.Add(new UserControlPanelTask(new Task(Task.Types.GatherPoint),
+                            CurrentTask.Type == Task.Types.GatherPoint));
 					}
 
 					//RTSFactory specific
