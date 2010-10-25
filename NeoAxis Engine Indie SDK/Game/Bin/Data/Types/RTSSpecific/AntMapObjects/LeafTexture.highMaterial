@@ -1,0 +1,8 @@
+highLevelMaterial LeafTexture
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Models\AntMapObjects\_Myleaf.tga
+	}
+}

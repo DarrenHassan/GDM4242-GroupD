@@ -1,0 +1,8 @@
+highLevelMaterial CoinTexture
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Models\AntMapObjects\_coin.tga
+	}
+}

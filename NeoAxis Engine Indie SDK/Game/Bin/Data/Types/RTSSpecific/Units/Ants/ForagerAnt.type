@@ -18,8 +18,6 @@ type ForagerAnt
 		mesh
 		{
 			meshName = Models\Ants\worker\worker_final.mesh
-			castDynamicShadows = True
-			position = 1 0 1
 			rotation = 0.7071068 -0.7071068 3.090862E-08 -3.090862E-08
 		}
 	}

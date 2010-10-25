@@ -154,12 +154,22 @@ namespace GameEntities
             else if (Type.Name == "RTSConstructor" || Type.Name == "BuilderAnt")
             {
                 (AttachedObjects[0] as MapObjectAttachedMesh).MeshObject.
-                    SubObjects[0].MaterialName = badFaction ? "Red" : "Blue";
+                    SubObjects[0].MaterialName = badFaction ? "BuilderAntRed" : "BuilderAntBlue";
+            }
+            else if (Type.Name == "ForagerAnt")
+            {
+                (AttachedObjects[0] as MapObjectAttachedMesh).MeshObject.
+                    SubObjects[0].MaterialName = badFaction ? "ForagerAntRed" : "ForagerAntBlue";                   
             }
             else if (Type.Name == "WarriorAnt")
             {
                 (AttachedObjects[0] as MapObjectAttachedMesh).MeshObject.
                     SubObjects[0].MaterialName = badFaction ? "WarriorAnt2" : "WarriorAnt";
+            }
+            else if (Type.Name == "QueenAnt")
+            {
+                (AttachedObjects[0] as MapObjectAttachedMesh).MeshObject.
+                    SubObjects[0].MaterialName = badFaction ? "QueenAntRed" : "QueenAntBlue";
             }
             else if (Type.Name == "RTSMine" || Type.Name == "AntStorage" || Type.Name == "RTSHeadquaters" || Type.Name == "AntColmena")
             {

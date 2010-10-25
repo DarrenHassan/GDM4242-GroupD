@@ -1,0 +1,16 @@
+type mushroom
+{
+	class = MapObject
+	allowEditorCreate = True
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Models\AntMapObjects\mushroomskin.mesh
+			forceMaterial = MushroomTexture
+			position = 0 0 6.029376
+			rotation = -0.7071068 0 0 -0.7071068
+			scale = 6 6 6
+		}
+	}
+}

@@ -1,0 +1,8 @@
+highLevelMaterial BuilderAntGreen
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Models\Ants\worker\Builder Ant Texture Green.tga
+	}
+}

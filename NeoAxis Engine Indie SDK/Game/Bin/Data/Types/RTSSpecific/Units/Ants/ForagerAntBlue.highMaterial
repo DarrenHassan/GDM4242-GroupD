@@ -1,0 +1,8 @@
+highLevelMaterial ForagerAntBlue
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Models\Ants\worker\Forager Ant Texture Blue.tga
+	}
+}

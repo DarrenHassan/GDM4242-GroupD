@@ -1,0 +1,8 @@
+highLevelMaterial Mushroom2Texture
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Models\AntMapObjects\_mushroomskin2.tga
+	}
+}

@@ -1,0 +1,8 @@
+highLevelMaterial barrackMaterial
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Models\AntBuildings\barracks\Castle.tga
+	}
+}

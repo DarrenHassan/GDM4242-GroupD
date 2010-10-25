@@ -1,0 +1,8 @@
+highLevelMaterial QueenAntRed
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Models\Ants\queen\Queen_Ant_Texture_Red.tga
+	}
+}

@@ -14,9 +14,9 @@ type BuilderAnt
 	{
 		mesh
 		{
-			meshName = Types\RTSSpecific\Units\Ants\ant2.mesh
-			position = 1 0 1
-			rotation = -0.2123752 -0.2165555 0.6870241 0.6603016
+			meshName = Models\Ants\worker\worker_final.mesh
+			rotation = 0.7071068 -0.7071068 3.090862E-08 3.090862E-08
+			scale = 2 2 2
 		}
 	}
 }

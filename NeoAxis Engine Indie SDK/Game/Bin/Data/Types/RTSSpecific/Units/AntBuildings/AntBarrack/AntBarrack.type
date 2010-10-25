@@ -11,7 +11,11 @@ type AntBarrack
 	{
 		mesh
 		{
-			meshName = Types\RTSSpecific\Units\RTSFactory\RTSFactory.mesh
+			meshName = Models\AntBuildings\barracks\Cube.mesh
+			forceMaterial = barrackMaterial
+			position = 7.639404 -4.586879 6
+			rotation = 3.090862E-08 -0.7071068 -0.7071068 -3.090862E-08
+			scale = 0.5 0.5 0.5
 		}
 	}
 }

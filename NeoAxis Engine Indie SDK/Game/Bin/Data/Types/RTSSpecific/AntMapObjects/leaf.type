@@ -1,0 +1,15 @@
+type leaf
+{
+	class = MapObject
+	allowEditorCreate = True
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Models\AntMapObjects\Myleaf.mesh
+			forceMaterial = LeafTexture
+			rotation = -0.7071068 0 0 -0.7071068
+			scale = 0.005 0.005 0.005
+		}
+	}
+}

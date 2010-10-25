@@ -1,0 +1,19 @@
+type QueenAnt
+{
+	class = GenericAntCharacter
+	walkAnimationName = Run
+	fightingAnimationName = Attack1
+	initialAI = DefaultAntUnitAI
+	lifeMax = 1000
+	allowEditorCreate = True
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Models\Ants\queen\queen_base.mesh
+			position = 0 0 0.3999501
+			rotation = 0.7071068 -0.7071068 3.090862E-08 3.090862E-08
+			scale = 5 5 5
+		}
+	}
+}

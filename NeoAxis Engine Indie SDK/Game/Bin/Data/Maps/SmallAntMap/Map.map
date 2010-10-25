@@ -4,8 +4,8 @@ classPrompt = GameMap
 gameType = RTS
 gameMusic = Sounds\Music\Game.ogg
 ambientLight = 0.2 0.2 0.2
-editorCameraPosition = -45.2985 56.01333 65.60479
-editorCameraDirection = 2.584026 -0.4766853
+editorCameraPosition = -78.51997 92.40363 137.5851
+editorCameraDirection = 5.480618 -1.067027
 shadowColor = 1 1 1
 logicSystemManager = 3
 shadowTechnique = ShadowmapMedium
@@ -321,4 +321,80 @@ entity
 		tiling = 10
 		scrollSpeed = 0 0
 	}
+}
+entity
+{
+	type = coin
+	uin = 28
+	classPrompt = MapObject
+	position = -26.8755 4.319691 4.713341
+	name = coin_0
+}
+entity
+{
+	type = coin
+	uin = 29
+	classPrompt = MapObject
+	position = -63.55085 -46.35519 4.712991
+	name = coin_1
+}
+entity
+{
+	type = leaf
+	uin = 30
+	classPrompt = MapObject
+	position = 32.87145 -58.62091 4.551285
+	name = leaf_0
+}
+entity
+{
+	type = mushroom
+	uin = 31
+	classPrompt = MapObject
+	position = -10.01516 49.91984 4.943598
+	name = mushroom_0
+}
+entity
+{
+	type = mushroom2
+	uin = 32
+	classPrompt = MapObject
+	position = 83.2037 22.56302 4.944341
+	name = mushroom2_0
+}
+entity
+{
+	type = mushroom2
+	uin = 33
+	classPrompt = MapObject
+	position = -104.1632 -15.39048 4.944347
+	name = mushroom2_1
+}
+entity
+{
+	type = mushroom
+	uin = 34
+	classPrompt = MapObject
+	position = 89.19032 105.4069 4.93887
+	name = mushroom_1
+}
+entity
+{
+	type = QueenAnt
+	uin = 35
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = BadFaction
+	position = -77.33109 77.93295 10.00372
+	name = QueenAnt_0
+}
+entity
+{
+	type = QueenAnt
+	uin = 36
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 56.22233 -92.89229 10.00178
+	name = QueenAnt_1
 }
