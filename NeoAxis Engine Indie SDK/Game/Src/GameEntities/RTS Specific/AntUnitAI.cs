@@ -566,7 +566,11 @@ namespace GameEntities.RTS_Specific
 
                 // Set gather point
                 case Task.Types.GatherPoint:
-                    Log.Warning("Setting gather point");
+                    RTSBuilding gatherBuilding = controlledObj as RTSBuilding;
+                    if (gatherBuilding != null)
+                    {
+                        gatherBuilding.GatherPoint = currentTask.Position;
+                    }
                     break;
 
                 //Collect

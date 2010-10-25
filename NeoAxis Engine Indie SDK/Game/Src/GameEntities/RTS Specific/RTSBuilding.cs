@@ -37,6 +37,11 @@ namespace GameEntities
 		[FieldSerialize]
 		float buildedProgress = 1;
 
+        // This building's gather point
+        [FieldSerialize]
+        [DefaultValue(typeof(Vec3), "0 0 0")]
+        Vec3 gatherPoint;
+
 		//
 
 		RTSBuildingType _type = null; public new RTSBuildingType Type { get { return _type; } }
@@ -60,6 +65,13 @@ namespace GameEntities
 			base.OnTick();
 			TickProductUnit();
 		}
+
+        [DefaultValue(typeof(Vec3), "0 0 0")]
+        public Vec3 GatherPoint
+        {
+            get { return gatherPoint; }
+            set { gatherPoint = value; }
+        }
 
 		void TickProductUnit()
 		{
@@ -208,6 +220,14 @@ namespace GameEntities
                     unit.InitialFaction = Intellect.Faction;
 
                 unit.PostCreate();
+                // Move the unit to the gather point
+                AntUnitAI intellect = unit.Intellect as AntUnitAI;
+                if (intellect != null &&
+                    this.GatherPoint.X != 0 && this.GatherPoint.Y != 0 && this.GatherPoint.Z != 0)
+                {
+                    intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Move, this.GatherPoint),
+                        false);
+                }
 
             }
             else 
@@ -228,10 +248,16 @@ namespace GameEntities
                 if (Intellect != null)
                     unit.InitialFaction = Intellect.Faction;
 
-                unit.PostCreate(); 
+                unit.PostCreate();
+                // Move the unit to the gather point
+                AntUnitAI intellect = unit.Intellect as AntUnitAI;
+                if (intellect != null && 
+                    this.GatherPoint.X != 0 && this.GatherPoint.Y != 0 && this.GatherPoint.Z != 0)
+                {
+                    intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Move, this.GatherPoint), 
+                        false);
+                }
             }
-            //GenericAntCharacter character = unit as GenericAntCharacter;
-
 		}
 
 		[DefaultValue( 1.0f )]

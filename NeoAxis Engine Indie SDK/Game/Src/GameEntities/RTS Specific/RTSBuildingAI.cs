@@ -52,6 +52,9 @@ namespace GameEntities.RTS_Specific
                         RTSUnitType unitType = (RTSUnitType)EntityTypes.Instance.GetByName( "WarriorAnt" );
 						list.Add( new UserControlPanelTask( new Task( Task.Types.ProductUnit, unitType ),
 							CurrentTask.Type == Task.Types.ProductUnit ) );
+
+                        list.Add(new UserControlPanelTask(new Task(Task.Types.GatherPoint),
+                            CurrentTask.Type == Task.Types.GatherPoint));
 					}
 				}
 				else
