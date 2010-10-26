@@ -23,7 +23,7 @@ namespace GameEntities.RTS_Specific
         FactionType badFaction;
         // The current action the bad faction is performing
         protected Action currentAction;
-        int actionInterval = 5;
+        int actionInterval = 10;
         double lastActionTime = 0;
 
         IEnumerator<Action> openingStrategy;
@@ -114,7 +114,7 @@ namespace GameEntities.RTS_Specific
                     {
                         if (hiveAI.CurrentTask.Type == AntUnitAI.Task.Types.Stop)
                         {
-                            strategyIterator = 1;
+                            strategyIterator = 0;
                             yield return Action.CreateBuilder;
                         }
                         else

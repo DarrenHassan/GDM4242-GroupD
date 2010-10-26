@@ -9,8 +9,15 @@ physicsModel
 		shape
 		{
 			type = box
+			position = 0 0 3
 			bounciness = 0
-			dimensions = 15.18686 14.66594 3.44489
+			dimensions = 12 8 12
+		}
+		shape
+		{
+			type = box
+			position = -10 0 4
+			dimensions = 20 17 12
 		}
 	}
 }

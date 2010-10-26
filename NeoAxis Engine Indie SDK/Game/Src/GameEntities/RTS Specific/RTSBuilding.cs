@@ -81,9 +81,13 @@ namespace GameEntities
 			productUnitProgress += TickDelta / productUnitType.BuildTime;
 
 			Degree angleDelta = TickDelta * 20;
+            float positionOffsetZ = 12;
 
-			if( productUnitAttachedMesh != null )
+			if( productUnitAttachedMesh != null ) 
+            {
 				productUnitAttachedMesh.RotationOffset *= new Angles( 0, 0, angleDelta ).ToQuat();
+                productUnitAttachedMesh.PositionOffset = new Vec3(0, 0, positionOffsetZ);
+            }
 
 			if( BuildUnitProgress >= 1 )
 			{
@@ -138,8 +142,9 @@ namespace GameEntities
 			Attach( productUnitAttachedMesh );
 
 			string meshName = null;
-			Vec3 meshOffset = Vec3.Zero;
-			Vec3 meshScale = new Vec3( 1, 1, 1 );
+			//Vec3 meshOffset = new Vec3(0,0,10);
+            Vec3 meshOffset = Vec3.Zero;
+			Vec3 meshScale = new Vec3( 1, 1, 1);
 			{
 				foreach( MapObjectTypeAttachedObject typeAttachedObject in 
 					productUnitType.AttachedObjects )

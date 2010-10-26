@@ -1,6 +1,7 @@
 type AntSilo
 {
 	class = RTSBuilding
+	physicsModel = Types\RTSSpecific\Units\AntBuildings\AntSilo\AntSiloPhy.physics
 	allowEditorCreate = True
 	attachedObjects
 	{

@@ -1,6 +1,7 @@
 type mushroom2
 {
 	class = MapObject
+	physicsModel = Types\RTSSpecific\AntMapObjects\mushroom2Phy.physics
 	allowEditorCreate = True
 	attachedObjects
 	{

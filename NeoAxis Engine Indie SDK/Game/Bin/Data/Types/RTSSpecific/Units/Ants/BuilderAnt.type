@@ -15,7 +15,7 @@ type BuilderAnt
 		mesh
 		{
 			meshName = Models\Ants\worker\worker_final.mesh
-			rotation = 0.7071068 -0.7071068 3.090862E-08 3.090862E-08
+			rotation = 0 0 -0.7071068 -0.7071068
 			scale = 2 2 2
 		}
 	}
