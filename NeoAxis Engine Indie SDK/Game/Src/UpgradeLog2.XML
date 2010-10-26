@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="IndieLicense">
+</Property><Property Name="Solution File" Value="C:\Users\Lorin\Documents\GDM4242-GroupD\NeoAxis Engine Indie SDK\Game\Src\IndieLicense.sln">
+</Property><Property Name="Date" Value="Monday, 25 October 2010">
+</Property><Property Name="Time" Value="15:30 PM">
+</Property><Property Name="Log Number" Value="2">
+</Property></Properties><Event ErrorLevel="0" Project="Configurator" Source="Configurator\Configurator.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="Configurator" Source="Configurator\Configurator.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="ZipArchive" Source="ZipArchive\ZipArchive.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="ZipArchive" Source="ZipArchive\ZipArchive.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="WindowsAppExample" Source="WindowsAppExample\WindowsAppExample.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="WindowsAppExample" Source="WindowsAppExample\WindowsAppExample.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="Game" Source="Game\Game.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="Game" Source="Game\Game.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="1" Project="GameEntities" Source="GameEntities\GameEntities.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="GameEntities" Source="GameEntities\GameEntities.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="GameEntities" Source="GameEntities\GameEntities.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="GameCommon" Source="GameCommon\GameCommon.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="GameCommon" Source="GameCommon\GameCommon.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="WindowsAppFramework" Source="WindowsAppFramework\WindowsAppFramework.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="WindowsAppFramework" Source="WindowsAppFramework\WindowsAppFramework.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="ChatExample" Source="ChatExample\ChatExample.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="ChatExample" Source="ChatExample\ChatExample.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="DedicatedServer" Source="DedicatedServer\DedicatedServer.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="DedicatedServer" Source="DedicatedServer\DedicatedServer.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="" Source="IndieLicense.sln" Description="The solution file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="" Source="IndieLicense.sln" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="GameEntities" Source="GameEntities\GameEntities.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>
