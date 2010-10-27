@@ -1,0 +1,136 @@
+type = GameMap
+uin = 2
+classPrompt = GameMap
+gameMusic = Sounds\Music\Game.ogg
+ambientLight = 0.2 0.2 0.2
+editorCameraPosition = 13.1099 -471.7622 569.357
+editorCameraDirection = 1.588004 -1.125889
+shadowColor = 1 1 1
+logicSystemManager = 3
+shadowTechnique = ShadowmapMedium
+rootEditorLayer
+{
+	layer
+	{
+		name = Map Objects
+	}
+	layer
+	{
+		name = Units
+		layer
+		{
+			name = GoodFaction
+		}
+		layer
+		{
+			name = BadFaction
+		}
+	}
+}
+entity
+{
+	type = LogicSystemManager
+	uin = 3
+	mapClassManager = 4
+	entity
+	{
+		type = LogicClassManager
+		uin = 4
+	}
+}
+entity
+{
+	type = HeightmapTerrain
+	uin = 5
+	classPrompt = HeightmapTerrain
+	position = 0 0 -50
+	horizontalSize = 1000
+	verticalSize = 100
+	dataDirectory = HeightmapTerrain
+	masksSize = 1024
+	detailMapsDistance = 50
+	renderQueueGroup = WorldGeometry1
+	collisionMaterialName = Default
+	bottomClipHeight = -10000
+	castDynamicShadows = False
+	receiveStaticShadows = True
+	simpleRendering = False
+	tileSize = 16
+	layers
+	{
+		item
+		{
+			name = Sand Golden
+			baseMap = Types\Base\HeightmapTerrain\DefaultLayer1Base.jpg
+			baseScale = 10
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
+			detailScale = 25
+		}
+		item
+		{
+			name = Mud Cracked
+			baseMap = Types\Base\HeightmapTerrain\MudBase2.jpg
+			baseScale = 30
+			detailMap = Types\Base\HeightmapTerrain\MudDetailDrkGreen.jpg
+			detailScale = 75
+			normalMap = " "
+		}
+		item
+		{
+			name = Mud Wet
+			baseMap = Types\Base\HeightmapTerrain\MudBase2DARKDARKblue.jpg
+			baseScale = 10
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
+			detailScale = 10
+			normalMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
+		}
+		item
+		{
+			name = Moss
+			baseMap = Types\Base\HeightmapTerrain\MossBaseBrownMixSmooth4.jpg
+			baseScale = 50
+			detailMap = Types\Base\HeightmapTerrain\MossDetailNew2.jpg
+			detailScale = 50
+		}
+		item
+		{
+			name = Sand Chestnut
+			baseMap = Types\Base\HeightmapTerrain\SandDarkBase.jpg
+			baseScale = 25
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
+			detailScale = 25
+		}
+		item
+		{
+			name = Sand Beige
+			baseMap = Types\Base\HeightmapTerrain\SandDarkGreyBase.jpg
+			baseScale = 25
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
+			detailScale = 25
+		}
+		item
+		{
+			name = Rocky Ground
+			baseMap = Types\Base\HeightmapTerrain\SandDarkGreyBase2.jpg
+			baseScale = 30
+			detailMap = Types\Base\HeightmapTerrain\RockyGroundDetail.jpg
+			detailScale = 50
+		}
+		item
+		{
+			name = Rocky Ground Dark
+			baseMap = Types\Base\HeightmapTerrain\SandDarkBase.jpg
+			baseScale = 10
+			detailMap = Types\Base\HeightmapTerrain\RockyGroundDetail.jpg
+			detailScale = 50
+		}
+		item
+		{
+			name = Rocky Ground Dark 2
+			baseMap = Types\Base\HeightmapTerrain\MudBase2.jpg
+			baseScale = 50
+			detailMap = Types\Base\HeightmapTerrain\RockyGroundDetail.jpg
+			detailScale = 50
+		}
+	}
+}

@@ -1,0 +1,415 @@
+type = GameMap
+uin = 2
+classPrompt = GameMap
+gameType = RTS
+gameMusic = Sounds\Music\Game.ogg
+ambientLight = 0.2 0.2 0.2
+editorCameraPosition = -126.0553 127.5985 101.6163
+editorCameraDirection = 5.567479 -0.7954558
+shadowColor = 1 1 1
+logicSystemManager = 3
+shadowTechnique = ShadowmapMedium
+rootEditorLayer
+{
+	layer
+	{
+		name = Map Objects
+	}
+}
+entity
+{
+	type = LogicSystemManager
+	uin = 3
+	mapClassManager = 4
+	entity
+	{
+		type = LogicClassManager
+		uin = 4
+	}
+}
+entity
+{
+	type = HeightmapTerrain
+	uin = 5
+	classPrompt = HeightmapTerrain
+	position = 0 0 -45.5
+	horizontalSize = 300
+	verticalSize = 100
+	dataDirectory = HeightmapTerrain
+	masksSize = 1024
+	detailMapsDistance = 50
+	renderQueueGroup = WorldGeometry1
+	collisionMaterialName = Default
+	bottomClipHeight = -10000
+	castDynamicShadows = False
+	receiveStaticShadows = True
+	simpleRendering = False
+	tileSize = 16
+	layers
+	{
+		item
+		{
+			name = base
+			baseMap = Types\Base\HeightmapTerrain\DefaultLayer0Base.jpg
+			baseScale = 10
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer0Detail.jpg
+			detailScale = 2
+		}
+		item
+		{
+			name = second
+			baseMap = Types\Base\HeightmapTerrain\DefaultLayer1Base.jpg
+			baseScale = 10
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
+			detailScale = 2
+		}
+	}
+}
+entity
+{
+	type = Light
+	uin = 6
+	classPrompt = Light
+	lightType = Point
+	diffuseColor = 1 1 1
+	diffusePower = 1
+	specularColor = 0 0 0
+	specularPower = 1
+	attenuationRangeAutomatic = True
+	attenuationRange = Infinity
+	attenuationConstant = 1
+	attenuationLinear = 0
+	attenuationQuadric = 0
+	spotlightInnerAngle = 30
+	spotlightOuterAngle = 40
+	spotlightFalloff = 1
+	castShadows = True
+	allowStaticLighting = False
+	allowDynamicLighting = True
+	position = 0 0 100
+	rotation = 0 -0.7071068 0 -0.7071068
+	name = Light_0
+}
+entity
+{
+	type = RTSFactionManager
+	uin = 7
+	classPrompt = RTSFactionManager
+	factions
+	{
+		item
+		{
+			factionType = GoodFaction
+			money = 1000
+		}
+		item
+		{
+			factionType = BadFaction
+			money = 1000
+		}
+	}
+}
+entity
+{
+	type = RTSGridPathFindSystem
+	uin = 8
+	classPrompt = RTSGridPathFindSystem
+	heightByTerrainOnly = False
+	debugDrawDistance = 100
+}
+entity
+{
+	type = SmallHealthItem
+	uin = 9
+	classPrompt = HealthItem
+	respawnTime = 10
+	position = 132.6518 -111.9304 4.499239
+}
+entity
+{
+	type = SmallHealthItem
+	uin = 10
+	classPrompt = HealthItem
+	respawnTime = 10
+	position = -93.99104 67.53443 4.499987
+}
+entity
+{
+	type = SpawnPoint
+	uin = 11
+	classPrompt = SpawnPoint
+	defaultPoint = False
+	position = 36.94154 -25.83712 4.542684
+	name = SpawnPoint_0
+}
+entity
+{
+	type = AntColmena
+	uin = 12
+	classPrompt = RTSBuilding
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 120.0034 -125.9964 5.242041
+	name = AntColmena_0
+}
+entity
+{
+	type = RTSMine
+	uin = 14
+	classPrompt = RTSMine
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = -128.5917 54.8658 6.499926
+	name = RTSMine_0
+}
+entity
+{
+	type = RTSDepot
+	uin = 15
+	classPrompt = RTSMine
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 29.21083 -136.9805 6.500993
+	name = RTSDepot_0
+}
+entity
+{
+	type = ForagerAnt
+	uin = 16
+	classPrompt = ForagerAnt
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = 73.2424 -110.4801 10.00093
+	name = ForagerAnt_0
+}
+entity
+{
+	type = AntColmena
+	uin = 17
+	classPrompt = RTSBuilding
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = BadFaction
+	position = -111.6888 118.6748 5.241543
+	name = AntColmena_1
+}
+entity
+{
+	type = SkyDome
+	uin = 18
+	classPrompt = SkyDome
+	horizonMap = Types\Base\SkyDome\DefaultSkyDomeHorizon.png
+	color = 1 1 1
+	power = 1
+	diffuse1Map
+	{
+		texture = Types\Base\SkyDome\DefaultSkyDome.jpg
+		tiling = 5
+		scrollSpeed = 0.005 0
+	}
+	diffuse2Map
+	{
+		blending = Add
+		texture = Types\Base\SkyDome\DefaultSkyDome2.jpg
+		tiling = 4
+		scrollSpeed = 0.018 0
+	}
+	diffuse3Map
+	{
+		blending = Add
+		tiling = 10
+		scrollSpeed = 0 0
+	}
+	diffuse4Map
+	{
+		blending = Add
+		tiling = 10
+		scrollSpeed = 0 0
+	}
+}
+entity
+{
+	type = BuilderAnt
+	uin = 27
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = -117.7516 92.81126 10.00445
+	name = BuilderAnt_0
+}
+entity
+{
+	type = ForagerAnt
+	uin = 28
+	classPrompt = ForagerAnt
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
+	position = -126.7226 85.71172 10.00487
+	name = ForagerAnt_2
+}
+entity
+{
+	type = BuilderAnt
+	uin = 29
+	classPrompt = GenericAntCharacter
+	intellectShouldDeleteAfterDetach = False
+	initialFaction = BadFaction
+	position = 71.78089 -119.7057 10.00252
+	name = BuilderAnt_1
+}
+entity
+{
+	type = WaterPlane
+	uin = 30
+	classPrompt = WaterPlane
+	size = 300 300
+	position = 0 0 0
+	segments = 20 20
+	renderQueueGroup = Queue3
+	reflectionLevel = OnlyModels
+	physicsHeight = 0
+	deepColor = 0 0.3 0.5
+	shallowColor = 0 1 1
+	reflectionColor = 1 1 1
+	reflectionTextureSize = HalfOfFrameBuffer
+	visible = True
+	fixedPipelineMap = Types\Special\WaterPlane\WaterFixedPipeline.jpg
+	fixedPipelineMapTiling = 10
+	fixedPipelineColor = 0 0.3 0.5
+}
+entity
+{
+	type = mushroom
+	uin = 13
+	classPrompt = MapObject
+	position = -70.2739 102.698 3.555573
+	scale = 3.757097 3.757097 3.757097
+	name = mushroom_0
+	editorLayer = Root Layer\Map Objects
+}
+entity
+{
+	type = mushroom
+	uin = 21
+	classPrompt = MapObject
+	position = -74.84559 94.13677 4.937165
+	rotation = 0 0 0.4297642 -0.9029411
+	scale = 1.460705 1.460705 1.460705
+	name = mushroom_1
+	editorLayer = Root Layer\Map Objects
+}
+entity
+{
+	type = mushroom2
+	uin = 24
+	classPrompt = MapObject
+	position = -82.39657 83.27029 4.817104
+	scale = 1.480736 1.480736 1.480736
+	name = mushroom2_0
+	editorLayer = Root Layer\Map Objects
+}
+entity
+{
+	type = mushroom
+	uin = 20
+	classPrompt = MapObject
+	position = -93.93571 102.6994 4.939233
+	rotation = 0 0 -0.8790922 -0.4766518
+	scale = 1.917031 3.031363 2.213835
+	name = mushroom_2
+}
+entity
+{
+	type = coin
+	uin = 25
+	classPrompt = MapObject
+	position = -107.8386 29.15413 2.904315
+	rotation = -0.006076984 -0.1279203 0.9762076 -0.1749806
+	scale = 1.530813 1.530813 1.530813
+	name = coin_0
+}
+entity
+{
+	type = mushroom
+	uin = 23
+	classPrompt = MapObject
+	position = -15.07496 3.758039 -3.048069
+	rotation = -0.06255189 -0.01193565 0.8438441 -0.5327963
+	scale = 2.33204 2.33204 3.079656
+	name = mushroom_3
+}
+entity
+{
+	type = mushroom
+	uin = 22
+	classPrompt = MapObject
+	position = 31.8218 -8.658798 4.936165
+	rotation = 0 0 0.9991047 -0.0423054
+	name = mushroom_4
+}
+entity
+{
+	type = mushroom
+	uin = 19
+	classPrompt = MapObject
+	position = -11.21036 8.545258 2.047707
+	rotation = 0 0.1483009 0 0.9889423
+	scale = 1.200307 1.200307 1.200307
+	name = mushroom_5
+}
+entity
+{
+	type = mushroom
+	uin = 26
+	classPrompt = MapObject
+	position = 38.25978 1.680211 3.824244
+	rotation = 0 0 0.8199995 0.5723643
+	scale = 3.128169 2.797258 3.018991
+	name = mushroom_6
+}
+entity
+{
+	type = mushroom2
+	uin = 31
+	classPrompt = MapObject
+	position = 30.27282 -32.45705 23.01048
+	rotation = 0.006144618 -0.002761677 0.9120896 -0.4099354
+	scale = 2.5305 4.81502 1.94282
+	name = mushroom2_1
+}
+entity
+{
+	type = mushroom2
+	uin = 32
+	classPrompt = MapObject
+	position = 17.89634 -39.21316 4.945047
+	scale = 1.957585 1.957585 1.957585
+	name = mushroom2_2
+}
+entity
+{
+	type = mushroom2
+	uin = 33
+	classPrompt = MapObject
+	position = 13.31807 0.8264949 4.951176
+	scale = 1.996387 1.996387 1.996387
+	name = mushroom2_3
+}
+entity
+{
+	type = mushroom
+	uin = 34
+	classPrompt = MapObject
+	position = 32.27911 -0.7691344 4.935892
+	rotation = 0 0 -0.9785128 -0.206186
+	scale = 1.470721 1.470721 1.470721
+	name = mushroom_7
+}
+entity
+{
+	type = leaf
+	uin = 35
+	classPrompt = MapObject
+	position = -65.99615 62.68822 4.270821
+	scale = 6.278426 6.278426 6.278426
+	name = leaf_0
+}

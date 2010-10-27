@@ -1,0 +1,8 @@
+highLevelMaterial Minimap
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Maps\AntRTS\SmallAntMap\Minimap\minimap.png
+	}
+}
