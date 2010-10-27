@@ -230,7 +230,12 @@ namespace GameEntities
                 if (intellect != null &&
                     this.GatherPoint.X != 0 && this.GatherPoint.Y != 0 && this.GatherPoint.Z != 0)
                 {
-                    intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Move, this.GatherPoint),
+                    // Paths cannot be found to locations on the map already occupied by another ant,
+                    // randomly generate a new gather point within 15 units of the original gather point                  
+                    Random rand = new Random();
+                    Vec3 newGatherPoint = new Vec3(this.GatherPoint.X + ((float)rand.NextDouble() * 30f - 15f),
+                        this.GatherPoint.Y + ((float)rand.NextDouble() * 30f - 15f), this.GatherPoint.Z);
+                    intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Move, newGatherPoint),
                         false);
                 }
 
@@ -258,8 +263,13 @@ namespace GameEntities
                 AntUnitAI intellect = unit.Intellect as AntUnitAI;
                 if (intellect != null && 
                     this.GatherPoint.X != 0 && this.GatherPoint.Y != 0 && this.GatherPoint.Z != 0)
-                {
-                    intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Move, this.GatherPoint), 
+                {      
+                    // Paths cannot be found to locations on the map already occupied by another ant,
+                    // randomly generate a new gather point within 15 units of the original gather point                  
+                    Random rand = new Random();
+                    Vec3 newGatherPoint = new Vec3(this.GatherPoint.X + ((float)rand.NextDouble() * 30f - 15f),
+                        this.GatherPoint.Y + ((float)rand.NextDouble() * 30f - 15f), this.GatherPoint.Z);
+                    intellect.DoTask(new AntUnitAI.Task(AntUnitAI.Task.Types.Move, newGatherPoint), 
                         false);
                 }
             }
