@@ -4,8 +4,8 @@ classPrompt = GameMap
 gameType = RTS
 gameMusic = Sounds\Music\Game.ogg
 ambientLight = 0.2 0.2 0.2
-editorCameraPosition = 79.59994 36.08591 125.5021
-editorCameraDirection = 0.6561679 -0.9350288
+editorCameraPosition = 140.7076 10.04805 36.52591
+editorCameraDirection = 4.145664 -0.5699978
 shadowColor = 1 1 1
 logicSystemManager = 3
 shadowTechnique = ShadowmapMedium
@@ -429,9 +429,9 @@ entity
 	type = mushroom2
 	uin = 31
 	classPrompt = MapObject
-	position = 30.27282 -32.45705 23.23098
+	position = 30.27282 -32.45705 4.523409
 	rotation = 0.006144618 -0.002761677 0.9120896 -0.4099354
-	scale = 2.5305 4.81502 1.94282
+	scale = 3 3 6
 	name = mushroom2_1
 }
 entity
@@ -471,4 +471,43 @@ entity
 	rotation = 0.05413919 -0.2730925 0.0153956 -0.9603397
 	scale = 6.278426 6.278426 6.278426
 	name = leaf_0
+}
+entity
+{
+	type = RTSDarkness
+	uin = 36
+	classPrompt = Darkness
+	mapDimension = 300 300
+	tileSize = 10 10 9
+	tileElevation = 8
+}
+entity
+{
+	type = leaf
+	uin = 37
+	classPrompt = MapObject
+	position = -91.16345 -72.19017 4.8018
+	rotation = 0.118576 0.2210698 -0.3195892 0.9137455
+	scale = 6 6 6
+	name = leaf_1
+}
+entity
+{
+	type = leaf
+	uin = 39
+	classPrompt = MapObject
+	position = -96.39478 -64.24072 7.201275
+	rotation = 0.07086266 -0.04525409 -0.8398159 0.5363206
+	scale = 4 4 4
+	name = leaf_2
+}
+entity
+{
+	type = coin
+	uin = 38
+	classPrompt = MapObject
+	position = 129.1483 -15.43721 7.038904
+	rotation = 0.9405277 0.1773745 -0.203283 -0.2064508
+	scale = 1.5 1.5 1.5
+	name = coin_1
 }
