@@ -1,0 +1,8 @@
+highLevelMaterial berryTexture
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Models\AntMapObjects\berries.tga
+	}
+}

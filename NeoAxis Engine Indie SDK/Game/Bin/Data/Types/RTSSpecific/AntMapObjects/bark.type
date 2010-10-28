@@ -1,6 +1,7 @@
 type bark
 {
 	class = MapObject
+	allowEditorCreate = True
 	attachedObjects
 	{
 		mesh

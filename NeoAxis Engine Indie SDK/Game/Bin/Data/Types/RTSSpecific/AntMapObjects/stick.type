@@ -1,6 +1,7 @@
 type stick
 {
 	class = MapObject
+	allowEditorCreate = True
 	attachedObjects
 	{
 		mesh
