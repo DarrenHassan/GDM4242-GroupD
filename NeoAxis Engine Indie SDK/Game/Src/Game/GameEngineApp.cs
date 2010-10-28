@@ -389,13 +389,13 @@ namespace Game
 							return true;
 					}
 
-					GameMusic.MusicPlay( "Sounds\\Music\\MainMenu.ogg", true );
+					GameMusic.MusicPlay( "Sounds\\Music\\Bumps.ogg", true );
 					controlManager.Controls.Add( new EngineLogoWindow() );
 				}
 			}
 			else
 			{
-				GameMusic.MusicPlay( "Sounds\\Music\\MainMenu.ogg", true );
+                GameMusic.MusicPlay("Sounds\\Music\\Bumps.ogg", true);
 				controlManager.Controls.Add( new EngineLogoWindow() );
 			}
 
@@ -723,7 +723,8 @@ namespace Game
 			if( !noChangeWindows )
 			{
 				if( GameMap.Instance != null )
-					GameMusic.MusicPlay( GameMap.Instance.GameMusic, true );
+                    GameMusic.MusicPlay("Sounds//Music//Ants.ogg", true);
+					//GameMusic.MusicPlay( GameMap.Instance.GameMusic, true );
 			}
 
 			EntitySystemWorld.Instance.ResetExecutedTime();
@@ -800,7 +801,8 @@ namespace Game
 
 			//play music
 			if( GameMap.Instance != null )
-				GameMusic.MusicPlay( GameMap.Instance.GameMusic, true );
+                GameMusic.MusicPlay("Sounds//Music//Ants.ogg", true);
+				//GameMusic.MusicPlay( GameMap.Instance.GameMusic, true );
 
 			return true;
 		}
@@ -937,7 +939,8 @@ namespace Game
 
 			//play music
 			if( GameMap.Instance != null )
-				GameMusic.MusicPlay( GameMap.Instance.GameMusic, true );
+                GameMusic.MusicPlay("Sounds//Music//Ants.ogg", true);
+				//GameMusic.MusicPlay( GameMap.Instance.GameMusic, true );
 
 			CreateGameWindowForMap();
 		}

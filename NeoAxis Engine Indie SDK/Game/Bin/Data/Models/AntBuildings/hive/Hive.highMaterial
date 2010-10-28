@@ -1,0 +1,8 @@
+highLevelMaterial Hive
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Models\AntBuildings\hive\Building_roof.tga
+	}
+}

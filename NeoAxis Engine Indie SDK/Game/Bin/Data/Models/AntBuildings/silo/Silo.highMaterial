@@ -1,0 +1,8 @@
+highLevelMaterial Silo
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Models\AntBuildings\silo\Silo_silo.tga
+	}
+}

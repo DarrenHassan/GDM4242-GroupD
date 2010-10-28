@@ -99,40 +99,40 @@ namespace Game
 			};
 		}
 
-		void listBox_SelectedIndexChanged( object sender )
-		{
-			Texture texture = null;
+        void listBox_SelectedIndexChanged(object sender)
+        {
+            Texture texture = null;
 
-			if( listBox.SelectedIndex != -1 )
-			{
-				string mapName = (string)listBox.SelectedItem;
-				if( mapName != dynamicMapExampleText )
-				{
-					string mapDirectory = Path.GetDirectoryName( mapName );
-					string textureName = mapDirectory + "\\Description\\Preview";
+            if (listBox.SelectedIndex != -1)
+            {
+                string mapName = (string)listBox.SelectedItem;
+                if (mapName != dynamicMapExampleText)
+                {
+                    string mapDirectory = Path.GetDirectoryName(mapName);
+                    string textureName = mapDirectory + "\\Description\\Preview";
 
-					string textureFileName = null;
+                    string textureFileName = null;
 
-					bool found = false;
+                    bool found = false;
 
-					string[] extensions = new string[] { "dds", "tga", "png", "jpg" };
-					foreach( string extension in extensions )
-					{
-						textureFileName = textureName + "." + extension;
-						if( VirtualFile.Exists( textureFileName ) )
-						{
-							found = true;
-							break;
-						}
-					}
+                    string[] extensions = new string[] { "dds", "tga", "png", "jpg" };
+                    foreach (string extension in extensions)
+                    {
+                        textureFileName = textureName + "." + extension;
+                        if (VirtualFile.Exists(textureFileName))
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
 
-					if( found )
-						texture = TextureManager.Instance.Load( textureFileName );
-				}
-			}
+                    if (found)
+                        texture = TextureManager.Instance.Load(textureFileName);
+                }
+            }
 
-			window.Controls[ "Preview" ].Controls[ "TexturePlacer" ].BackTexture = texture;
-		}
+            window.Controls["Preview"].Controls["TexturePlacer"].BackTexture = texture;
+        }
 
 		void RunMap( string name )
 		{

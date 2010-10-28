@@ -92,6 +92,7 @@
     <Compile Include="BlinkGrid.cs" />
     <Compile Include="Action Specific\Tank.cs" />
     <Compile Include="RTS Specific\AntUnitAI.cs" />
+    <Compile Include="RTS Specific\Darkness.cs" />
     <Compile Include="RTS Specific\ForagerAnt.cs" />
     <Compile Include="RTS Specific\GenericAntCharacter.cs" />
     <Compile Include="SimpleMap.cs" />

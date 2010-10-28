@@ -8,6 +8,7 @@ using Engine.Renderer;
 using Engine.MathEx;
 using Engine.SoundSystem;
 
+
 namespace Game
 {
 	/// <summary>
@@ -23,8 +24,7 @@ namespace Game
 		protected override void OnAttach()
 		{
 			base.OnAttach();
-
-			engineTexture = TextureManager.Instance.Load( "Gui\\Various\\Engine.png" );
+			engineTexture = TextureManager.Instance.Load( "Gui\\Various\\Splash.png" );
 
 			EngineApp.Instance.MouseRelativeMode = true;
 
@@ -77,8 +77,13 @@ namespace Game
 			else
 			{
 				//go to product logo window
-				GameEngineApp.Instance.ControlManager.Controls.Add( new ProductLogoWindow() );
-			}
+				//GameEngineApp.Instance.ControlManager.Controls.Add( new ProductLogoWindow() );
+                EngineApp.Instance.MouseRelativeMode = false;
+                EngineApp.Instance.MousePosition = new Vec2(.9f, .8f);
+
+                //go to main menu
+                GameEngineApp.Instance.ControlManager.Controls.Add(new MainMenuWindow());			       
+            }
 		}
 
 		protected override void OnRenderUI( GuiRenderer renderer )
@@ -89,7 +94,7 @@ namespace Game
 			size *= 1.0f + Time * .015f;
 			size /= new Vec2( 768.0f * renderer.AspectRatio, 768.0f );
 
-			Rect rectangle = new Rect( -size / 2, size / 2 ) + new Vec2( .5f, .5f );
+			Rect rectangle = new Rect( -size , size  ) + new Vec2( .5f, .5f );
 
 			float alpha = 0;
 
