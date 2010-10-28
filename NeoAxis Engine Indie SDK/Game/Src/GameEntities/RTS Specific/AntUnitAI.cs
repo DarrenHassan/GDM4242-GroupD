@@ -459,7 +459,7 @@ namespace GameEntities.RTS_Specific
                 currentTask.Type == Task.Types.BreakableMove ||
                 currentTask.Type == Task.Types.BreakableAttack ||
                 currentTask.Type == Task.Types.BreakableRepair ||
-                currentTask.Type == Task.Types.Wander 
+                currentTask.Type == Task.Types.Wander
                 ) && tasks.Count == 0)
             {
                 inactiveFindTaskTimer -= TickDelta;
@@ -815,66 +815,73 @@ namespace GameEntities.RTS_Specific
                     GenericAntCharacter warrior = controlledObj as GenericAntCharacter;                   
                     if (warrior != null && warrior.Life > 0)
                     {
-                        float maxAttackDistance = warrior.Type.OptimalAttackDistanceRange.Maximum;
-
-                        // Find the position of the target entity
-                        Vec3 targetPos;
-                        if (currentTask.Entity != null)
-                            targetPos = currentTask.Entity.Position;
-                        else
-                            targetPos = currentTask.Position;
-
-                        float distance = (warrior.Position - targetPos).LengthFast();
-
-                        // Is this ant within attack range
-                        if (distance <= maxAttackDistance)
+                        // Ensure the enemy is alive before we continue attacking
+                        if (currentTask.Entity != null && currentTask.Entity.Life > 0)
                         {
-                            //Yes, stop
-                            controlledObj.Stop();
+                            // Find the position of the target entity
+                            Vec3 targetPos;
+                            if (currentTask.Entity != null)
+                                targetPos = currentTask.Entity.Position;
+                            else
+                                targetPos = currentTask.Position;
 
-                            warrior.SetLookDirection(targetPos);
-
-                            Ray ray = new Ray(controlledObj.Position,
-                                controlledObj.Position - targetPos);
-
-                            RayCastResult[] piercingResult = PhysicsWorld.Instance.RayCastPiercing(
-                                    ray, (int)ContactGroup.CastOnlyContact);
-
-                            foreach (RayCastResult result in piercingResult)
+                            float distance = (warrior.Position - targetPos).LengthFast();
+                            float maxAttackDistance = warrior.Type.OptimalAttackDistanceRange.Maximum;
+                            // Is this ant within attack range
+                            if (distance <= maxAttackDistance)
                             {
-                                MapObject obj = MapSystemWorld.GetMapObjectByBody(result.Shape.Body);
+                                //Yes, stop
+                                controlledObj.Stop();
 
-                                if (obj != null)
-                                {                                    
-                                    /*float impulse = 10.0f;
-                                    if (impulse != 0 && obj.PhysicsModel != null)
-                                    {
-                                        result.Shape.Body.AddForce(ForceType.GlobalAtGlobalPos, 0,
-                                            currentTask.Entity.Rotation.GetForward() * impulse,
-                                            currentTask.Entity.Position);
-                                    }*/
+                                warrior.SetLookDirection(targetPos);
 
-                                    Dynamic dynamicVictim = currentTask.Entity as Dynamic;
-                                    
-                                    if (dynamicVictim != null && dynamicVictim.Life > 0)
+                                Ray ray = new Ray(controlledObj.Position,
+                                    controlledObj.Position - targetPos);
+
+                                RayCastResult[] piercingResult = PhysicsWorld.Instance.RayCastPiercing(
+                                        ray, (int)ContactGroup.CastOnlyContact);
+
+                                foreach (RayCastResult result in piercingResult)
+                                {
+                                    MapObject obj = MapSystemWorld.GetMapObjectByBody(result.Shape.Body);
+
+                                    if (obj != null)
                                     {
-                                        // Animation state variable
-                                        warrior.fighting = true;
-                                        // TODO: Calculate damage based on Ant type
-                                        float damage = 1.0f;
-                                        if (damage != 0)
+                                        /*float impulse = 10.0f;
+                                        if (impulse != 0 && obj.PhysicsModel != null)
                                         {
-                                            dynamicVictim.DoDamage(controlledObj, targetPos,
-                                                result.Shape, damage, true);
+                                            result.Shape.Body.AddForce(ForceType.GlobalAtGlobalPos, 0,
+                                                currentTask.Entity.Rotation.GetForward() * impulse,
+                                                currentTask.Entity.Position);
+                                        }*/
+
+                                        Dynamic dynamicVictim = currentTask.Entity as Dynamic;
+
+                                        if (dynamicVictim != null && dynamicVictim.Life > 0)
+                                        {
+                                            // Animation state variable
+                                            warrior.fighting = true;
+                                            // TODO: Calculate damage based on Ant type
+                                            float damage = 1.0f;
+                                            if (damage != 0)
+                                            {
+                                                dynamicVictim.DoDamage(controlledObj, targetPos,
+                                                    result.Shape, damage, true);
+                                            }
                                         }
                                     }
                                 }
                             }
+                            else
+                            {
+                                // No - move to target
+                                warrior.Move(targetPos);
+                            }
                         }
                         else
-                        {
-                            // No - move to target
-                            warrior.Move(targetPos);
+                        {     
+                            // The enemy is dead                   
+                            DoTask(new Task(Task.Types.Stop), false);
                         }
                     }
                     break;
