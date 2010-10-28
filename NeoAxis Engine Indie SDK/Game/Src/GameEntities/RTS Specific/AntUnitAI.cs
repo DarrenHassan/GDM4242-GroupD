@@ -324,10 +324,14 @@ namespace GameEntities.RTS_Specific
             {
                 if (Faction != null && obj.Intellect.Faction != null && Faction != obj.Intellect.Faction)
                 {
-                    // Favour closer entities
-                    Vec3 distance = obj.Position - ControlledObject.Position;
-                    float len = distance.LengthFast();
-                    return 1.0f / len + 1.0f;
+                    // Is the enemy alive
+                    if (obj.Life > 0)
+                    {
+                        // Favour closer entities
+                        Vec3 distance = obj.Position - ControlledObject.Position;
+                        float len = distance.LengthFast();
+                        return 1.0f / len + 1.0f;
+                    }
                 }
             }
 
