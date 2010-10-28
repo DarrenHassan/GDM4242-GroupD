@@ -1,0 +1,8 @@
+highLevelMaterial barkTexture
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Models\AntMapObjects\_Bark2.tga
+	}
+}

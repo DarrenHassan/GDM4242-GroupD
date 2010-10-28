@@ -1,0 +1,8 @@
+highLevelMaterial stickTexture
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Models\AntMapObjects\_Stick2.tga
+	}
+}

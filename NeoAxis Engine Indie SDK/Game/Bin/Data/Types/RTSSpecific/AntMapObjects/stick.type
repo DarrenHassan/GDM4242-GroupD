@@ -1,0 +1,15 @@
+type stick
+{
+	class = MapObject
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Models\AntMapObjects\Stick.mesh
+			forceMaterial = stickTexture
+			position = 0 0 0.4
+			rotation = 0 -0.7071068 0 -0.7071068
+			scale = 0.02 0.02 0.02
+		}
+	}
+}

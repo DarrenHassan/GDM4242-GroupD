@@ -1,0 +1,14 @@
+type bark
+{
+	class = MapObject
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Models\AntMapObjects\Bark.mesh
+			forceMaterial = barkTexture
+			rotation = 0.5 -0.5 -0.5 0.5
+			scale = 0.02 0.02 0.02
+		}
+	}
+}
