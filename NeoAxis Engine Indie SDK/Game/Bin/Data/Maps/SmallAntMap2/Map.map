@@ -4,8 +4,8 @@ classPrompt = GameMap
 gameType = RTS
 gameMusic = Sounds\Music\Game.ogg
 ambientLight = 0.2 0.2 0.2
-editorCameraPosition = -181.3502 44.7527 83.5937
-editorCameraDirection = 6.124633 -0.5163165
+editorCameraPosition = 27.35286 199.5657 106.5565
+editorCameraDirection = 4.737804 -0.8813479
 shadowColor = 1 1 1
 logicSystemManager = 3
 shadowTechnique = ShadowmapMedium
@@ -494,7 +494,7 @@ entity
 entity
 {
 	type = leaf
-	uin = 39
+	uin = 38
 	classPrompt = MapObject
 	position = -96.39478 -64.24072 7.201275
 	rotation = 0.07086266 -0.04525409 -0.8398159 0.5363206
@@ -504,10 +504,68 @@ entity
 entity
 {
 	type = coin
-	uin = 38
+	uin = 39
 	classPrompt = MapObject
 	position = 129.1483 -15.43721 7.038904
 	rotation = 0.9405277 0.1773745 -0.203283 -0.2064508
 	scale = 1.5 1.5 1.5
 	name = coin_1
+}
+entity
+{
+	type = Stone
+	uin = 40
+	classPrompt = MapObject
+	position = 91.59074 37.88359 1.995846
+	scale = 2.772715 2.772715 2.772715
+	name = Stone_0
+}
+entity
+{
+	type = Stone
+	uin = 41
+	classPrompt = MapObject
+	position = 111.1071 48.67545 7.461112
+	scale = 3.493819 3.493819 3.493819
+	name = Stone_1
+}
+entity
+{
+	type = stick
+	uin = 42
+	classPrompt = MapObject
+	position = 1.716172 84.22807 2.620688
+	rotation = 0.08939277 -0.03308825 0.5553651 0.8261259
+	scale = 21.72399 21.72399 21.72399
+	name = stick_0
+}
+entity
+{
+	type = bark
+	uin = 43
+	classPrompt = MapObject
+	position = -111.0428 -58.36654 5.066996
+	rotation = 0.02036493 0.04896162 0.3835006 0.922017
+	scale = 15.20237 15.20237 15.20237
+	name = bark_0
+}
+entity
+{
+	type = bark
+	uin = 44
+	classPrompt = MapObject
+	position = 24.28961 86.52435 5.444357
+	rotation = 0 0 -0.3127217 0.9498448
+	scale = 8.642394 8.642394 8.642394
+	name = bark_1
+}
+entity
+{
+	type = leaf
+	uin = 45
+	classPrompt = MapObject
+	position = 17.09656 99.89893 9.137997
+	rotation = 0.004206017 -0.1468679 0.458595 0.8764147
+	scale = 4.134801 4.134801 4.134801
+	name = leaf_3
 }
