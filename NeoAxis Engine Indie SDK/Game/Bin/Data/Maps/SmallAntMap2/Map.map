@@ -4,8 +4,8 @@ classPrompt = GameMap
 gameType = RTS
 gameMusic = Sounds\Music\Game.ogg
 ambientLight = 0.2 0.2 0.2
-editorCameraPosition = -126.0553 127.5985 101.6163
-editorCameraDirection = 5.567479 -0.7954558
+editorCameraPosition = 79.59994 36.08591 125.5021
+editorCameraDirection = 0.6561679 -0.9350288
 shadowColor = 1 1 1
 logicSystemManager = 3
 shadowTechnique = ShadowmapMedium
@@ -37,7 +37,7 @@ entity
 	verticalSize = 100
 	dataDirectory = HeightmapTerrain
 	masksSize = 1024
-	detailMapsDistance = 50
+	detailMapsDistance = 200
 	renderQueueGroup = WorldGeometry1
 	collisionMaterialName = Default
 	bottomClipHeight = -10000
@@ -49,19 +49,77 @@ entity
 	{
 		item
 		{
-			name = base
-			baseMap = Types\Base\HeightmapTerrain\DefaultLayer0Base.jpg
-			baseScale = 10
-			detailMap = Types\Base\HeightmapTerrain\DefaultLayer0Detail.jpg
-			detailScale = 2
-		}
-		item
-		{
-			name = second
+			name = Sand Golden
 			baseMap = Types\Base\HeightmapTerrain\DefaultLayer1Base.jpg
 			baseScale = 10
 			detailMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
-			detailScale = 2
+			detailScale = 25
+		}
+		item
+		{
+			name = Mud Cracked
+			baseMap = Types\Base\HeightmapTerrain\MudBase2.jpg
+			baseScale = 30
+			detailMap = Types\Base\HeightmapTerrain\MudDetailDrkGreen.jpg
+			detailScale = 75
+			normalMap = " "
+		}
+		item
+		{
+			name = Mud Wet
+			baseMap = Types\Base\HeightmapTerrain\MudBase2DARKDARKblue.jpg
+			baseScale = 10
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
+			detailScale = 10
+			normalMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
+		}
+		item
+		{
+			name = Grass
+			baseMap = Types\Base\HeightmapTerrain\DefaultLayer0Base.jpg
+			baseScale = 1
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer0Detail.jpg
+			detailScale = 50
+		}
+		item
+		{
+			name = Sand Chestnut
+			baseMap = Types\Base\HeightmapTerrain\SandDarkBase.jpg
+			baseScale = 25
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
+			detailScale = 25
+		}
+		item
+		{
+			name = Sand Beige
+			baseMap = Types\Base\HeightmapTerrain\SandDarkGreyBase.jpg
+			baseScale = 25
+			detailMap = Types\Base\HeightmapTerrain\DefaultLayer1Detail.jpg
+			detailScale = 25
+		}
+		item
+		{
+			name = Rocky Ground
+			baseMap = Types\Base\HeightmapTerrain\SandDarkGreyBase2.jpg
+			baseScale = 30
+			detailMap = Types\Base\HeightmapTerrain\RockyGroundDetail.jpg
+			detailScale = 50
+		}
+		item
+		{
+			name = Rocky Ground Dark
+			baseMap = Types\Base\HeightmapTerrain\SandDarkBase.jpg
+			baseScale = 10
+			detailMap = Types\Base\HeightmapTerrain\RockyGroundDetail.jpg
+			detailScale = 50
+		}
+		item
+		{
+			name = Rocky Ground Dark 2
+			baseMap = Types\Base\HeightmapTerrain\MudBase2.jpg
+			baseScale = 50
+			detailMap = Types\Base\HeightmapTerrain\RockyGroundDetail.jpg
+			detailScale = 50
 		}
 	}
 }
@@ -123,7 +181,7 @@ entity
 	uin = 9
 	classPrompt = HealthItem
 	respawnTime = 10
-	position = 132.6518 -111.9304 4.499239
+	position = 45.3761 -7.967726 4.348638
 }
 entity
 {
@@ -155,7 +213,7 @@ entity
 entity
 {
 	type = RTSMine
-	uin = 14
+	uin = 13
 	classPrompt = RTSMine
 	intellectShouldDeleteAfterDetach = False
 	initialFaction = GoodFaction
@@ -165,7 +223,7 @@ entity
 entity
 {
 	type = RTSDepot
-	uin = 15
+	uin = 14
 	classPrompt = RTSMine
 	intellectShouldDeleteAfterDetach = False
 	initialFaction = GoodFaction
@@ -175,7 +233,7 @@ entity
 entity
 {
 	type = ForagerAnt
-	uin = 16
+	uin = 15
 	classPrompt = ForagerAnt
 	intellectShouldDeleteAfterDetach = False
 	initialFaction = GoodFaction
@@ -185,7 +243,7 @@ entity
 entity
 {
 	type = AntColmena
-	uin = 17
+	uin = 16
 	classPrompt = RTSBuilding
 	intellectShouldDeleteAfterDetach = False
 	initialFaction = BadFaction
@@ -195,7 +253,7 @@ entity
 entity
 {
 	type = SkyDome
-	uin = 18
+	uin = 17
 	classPrompt = SkyDome
 	horizonMap = Types\Base\SkyDome\DefaultSkyDomeHorizon.png
 	color = 1 1 1
@@ -229,7 +287,7 @@ entity
 entity
 {
 	type = BuilderAnt
-	uin = 27
+	uin = 18
 	classPrompt = GenericAntCharacter
 	intellectShouldDeleteAfterDetach = False
 	initialFaction = GoodFaction
@@ -239,7 +297,7 @@ entity
 entity
 {
 	type = ForagerAnt
-	uin = 28
+	uin = 19
 	classPrompt = ForagerAnt
 	intellectShouldDeleteAfterDetach = False
 	initialFaction = GoodFaction
@@ -249,7 +307,7 @@ entity
 entity
 {
 	type = BuilderAnt
-	uin = 29
+	uin = 20
 	classPrompt = GenericAntCharacter
 	intellectShouldDeleteAfterDetach = False
 	initialFaction = BadFaction
@@ -259,7 +317,7 @@ entity
 entity
 {
 	type = WaterPlane
-	uin = 30
+	uin = 21
 	classPrompt = WaterPlane
 	size = 300 300
 	position = 0 0 0
@@ -279,7 +337,7 @@ entity
 entity
 {
 	type = mushroom
-	uin = 13
+	uin = 22
 	classPrompt = MapObject
 	position = -70.2739 102.698 3.555573
 	scale = 3.757097 3.757097 3.757097
@@ -289,7 +347,7 @@ entity
 entity
 {
 	type = mushroom
-	uin = 21
+	uin = 23
 	classPrompt = MapObject
 	position = -74.84559 94.13677 4.937165
 	rotation = 0 0 0.4297642 -0.9029411
@@ -310,7 +368,7 @@ entity
 entity
 {
 	type = mushroom
-	uin = 20
+	uin = 25
 	classPrompt = MapObject
 	position = -93.93571 102.6994 4.939233
 	rotation = 0 0 -0.8790922 -0.4766518
@@ -320,7 +378,7 @@ entity
 entity
 {
 	type = coin
-	uin = 25
+	uin = 26
 	classPrompt = MapObject
 	position = -107.8386 29.15413 2.904315
 	rotation = -0.006076984 -0.1279203 0.9762076 -0.1749806
@@ -330,7 +388,7 @@ entity
 entity
 {
 	type = mushroom
-	uin = 23
+	uin = 27
 	classPrompt = MapObject
 	position = -15.07496 3.758039 -3.048069
 	rotation = -0.06255189 -0.01193565 0.8438441 -0.5327963
@@ -340,16 +398,16 @@ entity
 entity
 {
 	type = mushroom
-	uin = 22
+	uin = 28
 	classPrompt = MapObject
-	position = 31.8218 -8.658798 4.936165
+	position = 31.8218 -8.658798 4.516912
 	rotation = 0 0 0.9991047 -0.0423054
 	name = mushroom_4
 }
 entity
 {
 	type = mushroom
-	uin = 19
+	uin = 29
 	classPrompt = MapObject
 	position = -11.21036 8.545258 2.047707
 	rotation = 0 0.1483009 0 0.9889423
@@ -359,9 +417,9 @@ entity
 entity
 {
 	type = mushroom
-	uin = 26
+	uin = 30
 	classPrompt = MapObject
-	position = 38.25978 1.680211 3.824244
+	position = 38.25978 1.680211 4.06489
 	rotation = 0 0 0.8199995 0.5723643
 	scale = 3.128169 2.797258 3.018991
 	name = mushroom_6
@@ -371,7 +429,7 @@ entity
 	type = mushroom2
 	uin = 31
 	classPrompt = MapObject
-	position = 30.27282 -32.45705 23.01048
+	position = 30.27282 -32.45705 23.23098
 	rotation = 0.006144618 -0.002761677 0.9120896 -0.4099354
 	scale = 2.5305 4.81502 1.94282
 	name = mushroom2_1
@@ -381,7 +439,7 @@ entity
 	type = mushroom2
 	uin = 32
 	classPrompt = MapObject
-	position = 17.89634 -39.21316 4.945047
+	position = 17.89634 -39.21316 5.31164
 	scale = 1.957585 1.957585 1.957585
 	name = mushroom2_2
 }
@@ -399,7 +457,7 @@ entity
 	type = mushroom
 	uin = 34
 	classPrompt = MapObject
-	position = 32.27911 -0.7691344 4.935892
+	position = 32.27911 -0.7691344 6.060139
 	rotation = 0 0 -0.9785128 -0.206186
 	scale = 1.470721 1.470721 1.470721
 	name = mushroom_7
@@ -409,7 +467,8 @@ entity
 	type = leaf
 	uin = 35
 	classPrompt = MapObject
-	position = -65.99615 62.68822 4.270821
+	position = -62.94173 58.59843 4.835217
+	rotation = 0.05413919 -0.2730925 0.0153956 -0.9603397
 	scale = 6.278426 6.278426 6.278426
 	name = leaf_0
 }

@@ -5,6 +5,7 @@ physicsModel
 	body main
 	{
 		static = True
+		position = 0 0 3
 		shape
 		{
 			type = box
@@ -15,25 +16,25 @@ physicsModel
 		shape
 		{
 			type = box
-			position = 4 3 0
+			position = 4 3 1
 			dimensions = 3 3 7
 		}
 		shape
 		{
 			type = box
-			position = -5 3 0
+			position = -5 3 1
 			dimensions = 3 3 7
 		}
 		shape
 		{
 			type = box
-			position = 4 -11 0
+			position = 4 -11 1
 			dimensions = 3 3 7
 		}
 		shape
 		{
 			type = box
-			position = -6 -11 0
+			position = -6 -11 1
 			dimensions = 3 3 7
 		}
 	}

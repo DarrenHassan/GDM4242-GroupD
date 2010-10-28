@@ -1,0 +1,8 @@
+highLevelMaterial Anthill
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Models\AntBuildings\antHill\_anthill.tga
+	}
+}
