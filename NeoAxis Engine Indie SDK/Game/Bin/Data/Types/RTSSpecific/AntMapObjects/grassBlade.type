@@ -1,0 +1,15 @@
+type grassBlade
+{
+	class = MapObject
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Models\AntMapObjects\Grassblade.mesh
+			forceMaterial = grassBladeTexture
+			collision = True
+			rotation = -0.7071068 0 0 -0.7071068
+			scale = 0.02 0.02 0.02
+		}
+	}
+}

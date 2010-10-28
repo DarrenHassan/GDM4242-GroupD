@@ -92,6 +92,7 @@ entity
 	uin = 7
 	classPrompt = GenericAntCharacter
 	intellectShouldDeleteAfterDetach = False
+	initialFaction = GoodFaction
 	position = 0 0 1.713715
 	name = WarriorAnt_0
 }

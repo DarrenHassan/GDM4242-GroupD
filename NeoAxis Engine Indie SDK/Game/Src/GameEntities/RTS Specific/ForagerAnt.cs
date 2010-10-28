@@ -263,6 +263,9 @@ namespace GameEntities.RTS_Specific
                     targetObj = ai.CurrentTask.Entity;
             }
 
+            if (GridPathFindSystem.Instance == null)
+                return false;
+
             GridPathFindSystem.Instance.RemoveObjectFromMotionMap(this);
 
             Bounds bounds = PhysicsModel.GetGlobalBounds();

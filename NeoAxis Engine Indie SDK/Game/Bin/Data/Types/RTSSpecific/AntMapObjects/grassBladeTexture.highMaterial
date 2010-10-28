@@ -1,0 +1,8 @@
+highLevelMaterial grassBladeTexture
+{
+	template = ShaderBaseMaterial
+	diffuse1Map
+	{
+		texture = Models\AntMapObjects\_Grassblade2.tga
+	}
+}
