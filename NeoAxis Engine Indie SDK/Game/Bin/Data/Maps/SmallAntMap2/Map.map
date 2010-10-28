@@ -4,8 +4,8 @@ classPrompt = GameMap
 gameType = RTS
 gameMusic = Sounds\Music\Game.ogg
 ambientLight = 0.2 0.2 0.2
-editorCameraPosition = 27.35286 199.5657 106.5565
-editorCameraDirection = 4.737804 -0.8813479
+editorCameraPosition = -145.5408 -64.7523 106.2837
+editorCameraDirection = 0.7316843 -0.7111017
 shadowColor = 1 1 1
 logicSystemManager = 3
 shadowTechnique = ShadowmapMedium
@@ -206,7 +206,7 @@ entity
 	uin = 12
 	classPrompt = RTSBuilding
 	intellectShouldDeleteAfterDetach = False
-	initialFaction = GoodFaction
+	initialFaction = BadFaction
 	position = 120.0034 -125.9964 5.242041
 	name = AntColmena_0
 }
@@ -222,38 +222,28 @@ entity
 }
 entity
 {
-	type = RTSDepot
-	uin = 14
-	classPrompt = RTSMine
-	intellectShouldDeleteAfterDetach = False
-	initialFaction = GoodFaction
-	position = 29.21083 -136.9805 6.500993
-	name = RTSDepot_0
-}
-entity
-{
 	type = ForagerAnt
-	uin = 15
+	uin = 14
 	classPrompt = ForagerAnt
 	intellectShouldDeleteAfterDetach = False
-	initialFaction = GoodFaction
+	initialFaction = BadFaction
 	position = 73.2424 -110.4801 10.00093
 	name = ForagerAnt_0
 }
 entity
 {
 	type = AntColmena
-	uin = 16
+	uin = 15
 	classPrompt = RTSBuilding
 	intellectShouldDeleteAfterDetach = False
-	initialFaction = BadFaction
+	initialFaction = GoodFaction
 	position = -111.6888 118.6748 5.241543
 	name = AntColmena_1
 }
 entity
 {
 	type = SkyDome
-	uin = 17
+	uin = 16
 	classPrompt = SkyDome
 	horizonMap = Types\Base\SkyDome\DefaultSkyDomeHorizon.png
 	color = 1 1 1
@@ -287,7 +277,7 @@ entity
 entity
 {
 	type = BuilderAnt
-	uin = 18
+	uin = 17
 	classPrompt = GenericAntCharacter
 	intellectShouldDeleteAfterDetach = False
 	initialFaction = GoodFaction
@@ -297,7 +287,7 @@ entity
 entity
 {
 	type = ForagerAnt
-	uin = 19
+	uin = 18
 	classPrompt = ForagerAnt
 	intellectShouldDeleteAfterDetach = False
 	initialFaction = GoodFaction
@@ -307,7 +297,7 @@ entity
 entity
 {
 	type = BuilderAnt
-	uin = 20
+	uin = 19
 	classPrompt = GenericAntCharacter
 	intellectShouldDeleteAfterDetach = False
 	initialFaction = BadFaction
@@ -317,7 +307,7 @@ entity
 entity
 {
 	type = WaterPlane
-	uin = 21
+	uin = 20
 	classPrompt = WaterPlane
 	size = 300 300
 	position = 0 0 0
@@ -337,7 +327,7 @@ entity
 entity
 {
 	type = mushroom
-	uin = 22
+	uin = 21
 	classPrompt = MapObject
 	position = -70.2739 102.698 3.555573
 	scale = 3.757097 3.757097 3.757097
@@ -347,7 +337,7 @@ entity
 entity
 {
 	type = mushroom
-	uin = 23
+	uin = 22
 	classPrompt = MapObject
 	position = -74.84559 94.13677 4.937165
 	rotation = 0 0 0.4297642 -0.9029411
@@ -358,7 +348,7 @@ entity
 entity
 {
 	type = mushroom2
-	uin = 24
+	uin = 23
 	classPrompt = MapObject
 	position = -82.39657 83.27029 4.817104
 	scale = 1.480736 1.480736 1.480736
@@ -368,7 +358,7 @@ entity
 entity
 {
 	type = mushroom
-	uin = 25
+	uin = 24
 	classPrompt = MapObject
 	position = -93.93571 102.6994 4.939233
 	rotation = 0 0 -0.8790922 -0.4766518
@@ -378,7 +368,7 @@ entity
 entity
 {
 	type = coin
-	uin = 26
+	uin = 25
 	classPrompt = MapObject
 	position = -107.8386 29.15413 2.904315
 	rotation = -0.006076984 -0.1279203 0.9762076 -0.1749806
@@ -388,7 +378,7 @@ entity
 entity
 {
 	type = mushroom
-	uin = 27
+	uin = 26
 	classPrompt = MapObject
 	position = -15.07496 3.758039 -3.048069
 	rotation = -0.06255189 -0.01193565 0.8438441 -0.5327963
@@ -398,7 +388,7 @@ entity
 entity
 {
 	type = mushroom
-	uin = 28
+	uin = 27
 	classPrompt = MapObject
 	position = 31.8218 -8.658798 4.516912
 	rotation = 0 0 0.9991047 -0.0423054
@@ -407,7 +397,7 @@ entity
 entity
 {
 	type = mushroom
-	uin = 29
+	uin = 28
 	classPrompt = MapObject
 	position = -11.21036 8.545258 2.047707
 	rotation = 0 0.1483009 0 0.9889423
@@ -417,7 +407,7 @@ entity
 entity
 {
 	type = mushroom
-	uin = 30
+	uin = 29
 	classPrompt = MapObject
 	position = 38.25978 1.680211 4.06489
 	rotation = 0 0 0.8199995 0.5723643
@@ -427,7 +417,7 @@ entity
 entity
 {
 	type = mushroom2
-	uin = 31
+	uin = 30
 	classPrompt = MapObject
 	position = 30.27282 -32.45705 4.523409
 	rotation = 0.006144618 -0.002761677 0.9120896 -0.4099354
@@ -437,7 +427,7 @@ entity
 entity
 {
 	type = mushroom2
-	uin = 32
+	uin = 31
 	classPrompt = MapObject
 	position = 17.89634 -39.21316 5.31164
 	scale = 1.957585 1.957585 1.957585
@@ -446,7 +436,7 @@ entity
 entity
 {
 	type = mushroom2
-	uin = 33
+	uin = 32
 	classPrompt = MapObject
 	position = 13.31807 0.8264949 4.951176
 	scale = 1.996387 1.996387 1.996387
@@ -455,7 +445,7 @@ entity
 entity
 {
 	type = mushroom
-	uin = 34
+	uin = 33
 	classPrompt = MapObject
 	position = 32.27911 -0.7691344 6.060139
 	rotation = 0 0 -0.9785128 -0.206186
@@ -465,7 +455,7 @@ entity
 entity
 {
 	type = leaf
-	uin = 35
+	uin = 34
 	classPrompt = MapObject
 	position = -62.94173 58.59843 4.835217
 	rotation = 0.05413919 -0.2730925 0.0153956 -0.9603397
@@ -475,7 +465,7 @@ entity
 entity
 {
 	type = RTSDarkness
-	uin = 36
+	uin = 35
 	classPrompt = Darkness
 	mapDimension = 300 300
 	tileSize = 10 10 9
@@ -484,7 +474,7 @@ entity
 entity
 {
 	type = leaf
-	uin = 37
+	uin = 36
 	classPrompt = MapObject
 	position = -91.16345 -72.19017 4.8018
 	rotation = 0.118576 0.2210698 -0.3195892 0.9137455
@@ -494,7 +484,7 @@ entity
 entity
 {
 	type = leaf
-	uin = 38
+	uin = 37
 	classPrompt = MapObject
 	position = -96.39478 -64.24072 7.201275
 	rotation = 0.07086266 -0.04525409 -0.8398159 0.5363206
@@ -504,7 +494,7 @@ entity
 entity
 {
 	type = coin
-	uin = 39
+	uin = 38
 	classPrompt = MapObject
 	position = 129.1483 -15.43721 7.038904
 	rotation = 0.9405277 0.1773745 -0.203283 -0.2064508
@@ -514,7 +504,7 @@ entity
 entity
 {
 	type = Stone
-	uin = 40
+	uin = 39
 	classPrompt = MapObject
 	position = 91.59074 37.88359 1.995846
 	scale = 2.772715 2.772715 2.772715
@@ -523,7 +513,7 @@ entity
 entity
 {
 	type = Stone
-	uin = 41
+	uin = 40
 	classPrompt = MapObject
 	position = 111.1071 48.67545 7.461112
 	scale = 3.493819 3.493819 3.493819
@@ -532,7 +522,7 @@ entity
 entity
 {
 	type = stick
-	uin = 42
+	uin = 41
 	classPrompt = MapObject
 	position = 1.716172 84.22807 2.620688
 	rotation = 0.08939277 -0.03308825 0.5553651 0.8261259
@@ -542,7 +532,7 @@ entity
 entity
 {
 	type = bark
-	uin = 43
+	uin = 42
 	classPrompt = MapObject
 	position = -111.0428 -58.36654 5.066996
 	rotation = 0.02036493 0.04896162 0.3835006 0.922017
@@ -552,7 +542,7 @@ entity
 entity
 {
 	type = bark
-	uin = 44
+	uin = 43
 	classPrompt = MapObject
 	position = 24.28961 86.52435 5.444357
 	rotation = 0 0 -0.3127217 0.9498448
@@ -562,10 +552,55 @@ entity
 entity
 {
 	type = leaf
-	uin = 45
+	uin = 44
 	classPrompt = MapObject
 	position = 17.09656 99.89893 9.137997
 	rotation = 0.004206017 -0.1468679 0.458595 0.8764147
 	scale = 4.134801 4.134801 4.134801
 	name = leaf_3
+}
+entity
+{
+	type = RTSMine
+	uin = 45
+	classPrompt = RTSMine
+	intellectShouldDeleteAfterDetach = False
+	position = 45.58902 110.7211 10.36755
+	name = RTSMine_1
+}
+entity
+{
+	type = RTSMine
+	uin = 46
+	classPrompt = RTSMine
+	intellectShouldDeleteAfterDetach = False
+	position = -102.3664 -49.80656 10.34324
+	name = RTSMine_2
+}
+entity
+{
+	type = RTSMine
+	uin = 47
+	classPrompt = RTSMine
+	intellectShouldDeleteAfterDetach = False
+	position = -9.673386 -56.96219 11.16235
+	name = RTSMine_3
+}
+entity
+{
+	type = RTSMine
+	uin = 48
+	classPrompt = RTSMine
+	intellectShouldDeleteAfterDetach = False
+	position = 133.9986 94.68347 7.885758
+	name = RTSMine_4
+}
+entity
+{
+	type = RTSMine
+	uin = 49
+	classPrompt = RTSMine
+	intellectShouldDeleteAfterDetach = False
+	position = 34.0531 -119.1072 7.917179
+	name = RTSMine_5
 }
