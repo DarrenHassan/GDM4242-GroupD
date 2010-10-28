@@ -1,7 +1,6 @@
 type mushroom2
 {
 	class = MapObject
-	physicsModel = Types\RTSSpecific\AntMapObjects\mushroom2Phy.physics
 	allowEditorCreate = True
 	attachedObjects
 	{
@@ -9,8 +8,8 @@ type mushroom2
 		{
 			meshName = Models\AntMapObjects\mushroomskin2.mesh
 			forceMaterial = Mushroom2Texture
+			collision = True
 			position = 0 0 6.229311
-			rotation = -0.7071068 0 0 -0.7071068
 			scale = 6 6 6
 		}
 	}

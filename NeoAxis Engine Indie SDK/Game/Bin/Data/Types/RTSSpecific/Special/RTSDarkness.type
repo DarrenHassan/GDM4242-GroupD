@@ -1,0 +1,5 @@
+type RTSDarkness
+{
+	class = Darkness
+	allowEditorCreate = True
+}

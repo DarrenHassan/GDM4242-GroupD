@@ -1,0 +1,13 @@
+type darkness_tile
+{
+	class = Dynamic
+	allowEditorCreate = True
+	attachedObjects
+	{
+		mesh
+		{
+			meshName = Utils\MaterialPreviewMeshes\Box.mesh
+			forceMaterial = Black
+		}
+	}
+}

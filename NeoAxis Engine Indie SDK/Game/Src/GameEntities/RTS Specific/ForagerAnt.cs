@@ -214,6 +214,21 @@ namespace GameEntities.RTS_Specific
         {
             base.OnTick();
 
+            // Darkness
+            if (InitialFaction != null)
+            {
+                bool badFaction = InitialFaction.Name == "BadFaction";
+                if (badFaction == false)
+                {
+                    Vec3 pos = new Vec3();
+                    pos = this.Position;
+                    float XPos = pos.X;
+                    float YPos = pos.Y;
+                    if (Darkness.Instance != null)
+                        Darkness.Instance.ClearMapPosition(XPos, YPos, 1);
+                }
+            }
+
             if (MoveEnabled)
                 TickMove();
             else

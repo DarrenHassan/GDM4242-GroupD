@@ -5,7 +5,7 @@ type AntBarrack
 	initialAI = DefaultRTSBuildingAI
 	lifeMax = 250
 	substance = Metal
-	physicsModel = Types\RTSSpecific\Units\RTSFactory\RTSFactory.physics
+	physicsModel = Types\RTSSpecific\Units\AntBuildings\AntBarrack\AntBarrackPhy.physics
 	allowEditorCreate = True
 	attachedObjects
 	{
@@ -13,6 +13,7 @@ type AntBarrack
 		{
 			meshName = Models\AntBuildings\barracks\Cube.mesh
 			forceMaterial = barrackMaterial
+			collision = True
 			position = -5 0 5
 			scale = 0.5 0.5 0.5
 		}

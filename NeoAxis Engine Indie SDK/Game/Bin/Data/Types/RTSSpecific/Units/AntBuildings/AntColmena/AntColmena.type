@@ -13,6 +13,7 @@ type AntColmena
 		{
 			meshName = Models\AntBuildings\hive\RTSHeadquaters.mesh
 			forceMaterial = AntHive
+			collision = True
 			position = 0 0 6.178773
 			rotation = 4.371139E-08 -1 4.371139E-08 1.910685E-15
 			scale = 3 3 3

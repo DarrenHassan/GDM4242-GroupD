@@ -73,6 +73,10 @@ namespace Game
         {
             base.OnAttach();
 
+            Darkness darkness = Darkness.Instance;
+            if (darkness != null)
+                darkness.cover();
+
             EngineApp.Instance.KeysAndMouseButtonUpAll();
             //GameMusic.MusicPlay("Sounds//Music//Bumps.ogg", true);
             //hudControl
